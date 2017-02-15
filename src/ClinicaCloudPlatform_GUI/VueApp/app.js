@@ -1,4 +1,4 @@
-﻿
+﻿import "babel-polyfill";
 import Vue from 'vue';
 import App from './components/App.vue';
 import store from './store/index.js';
@@ -6,11 +6,11 @@ import VueRouter from 'vue-router';
 import routes from './routes';
 
 require('./assets/scss/app.scss');
-require('./assets/css/app.css');
+require('./assets/css/app.css'); //migrate to scss
 
 require('./assets/js/bootstrap.min.js');
 //require("font-awesome-webpack");
-require('./assets/js/copilot.js');
+require('./assets/js/admin_gui.js');
 
 import Pace from 'pace-progress';
 

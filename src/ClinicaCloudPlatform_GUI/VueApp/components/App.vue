@@ -4,7 +4,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'App'
+    module.exports = {
+        name: 'App',
     }
 </script>

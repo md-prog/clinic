@@ -1,15 +1,9 @@
-﻿@*@model ClinicaCloudPlatform.Model.ViewModels.ClientState*@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title></title>
-</head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden pace-done">
-    @*<div class="my-app" asp-prerender-module="VueApp/renderOnServer" asp-prerender-data="Model"></div>*@
-    <div class="my-app"></div>
-    @*<app></app>*@
-    <script src="~/dist/bundle.client.js" asp-append-version="true"></script>
-</body>
-</html>
+﻿@{
+    ViewData["Title"] = "Main";
+}
+
+@*<div class="my-app" asp-prerender-module="VueApp/renderOnServer" asp-prerender-data="Model"></div>*@
+<div class="my-app"></div>
+@*<app></app>*@
+<script src="~/dist/bundle.client.js" asp-append-version="true"></script>
 

@@ -29,26 +29,26 @@
                             <strong>Account</strong>
                         </div>
 
-                        <a class="dropdown-item" data-toggle="tab" href="#messages" role="tab">
+                        <router-link :to="{name: 'Mailbox', params: {type: 'messages'}}" class="dropdown-item">
                             <i class="icon-envelope-letter"></i> Messages
                             <span class="tag" v-bind:class="{'tag-success': user.hasMessages, 'tag-default': !user.hasMessages}">
                                 {{ user.messageCount }}
                             </span>
-                        </a>
+                        </router-link>
 
-                        <a class="dropdown-item" data-toggle="tab" href="#notifications" role="tab">
+                        <router-link :to="{name: 'Mailbox', params: {type: 'notifications'}}" class="dropdown-item">
                             <i class="icon-bell"></i> Notifications
                             <span class="tag" v-bind:class="{'tag-success': user.hasNotifications, 'tag-default': !user.hasNotifications}">
                                 {{ user.notificationCount }}
                             </span>
-                        </a>
+                        </router-link>
 
-                        <a class="dropdown-item" data-toggle="tab" href="#tasks" role="tab">
+                        <!--<a class="dropdown-item" data-toggle="tab" href="#tasks" role="tab">
                             <i class="icon-list"></i>Tasks
                             <span class="tag" v-bind:class="{'tag-success': user.hasTasks, 'tag-default': !user.hasTasks}">
                                 {{ user.taskCount }}
                             </span>
-                        </a>
+                        </a>-->
 
                         <div class="dropdown-header text-center">
                             <strong>Settings</strong>
@@ -141,12 +141,12 @@
                             <span class="label label-success">{{ user.notificationCount }}</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">
                             <i class="icon-list" />
                             <span class="label label-success">{{ user.taskCount }}</span>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
                 <!--Right menu tabs-->
                 <div class="tab-content">
@@ -157,21 +157,21 @@
                         <div v-if="user.hasMessages">
                             <div v-for="message in user.customData.messages">
                                 <div class="message">
-                                    <router-link class="dropdown-item" :to="{name: 'MailBox', params: {messageId: message.id}}">
+                                    <router-link class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'messages'}}">
                                         <div>
                                             <small class="text-muted">{{message.from}}</small>
                                             <small class="text-muted float-right mt-q">
                                                 {{message.timeStamp | prettyDate}}
                                             </small>
                                         </div>
-                                        <div class="text-truncate font-weight-bold">{{message.text | truncate}}</div>
-                                        <div class="text-muted">{{message.text}}</div>
+                                        <div class="text-truncate font-weight-bold">{{message.subject}}</div>
+                                        <div class="text-muted">{{message.text | truncate}}</div>
                                     </router-link>
                                 </div>
                                 <hr />
                             </div>
                             <a href="#" class="dropdown-item text-center">
-                                <strong><router-link :to="{name: 'MailBox'}">View all messages</router-link></strong>
+                                <strong><router-link :to="{name: 'Mailbox', params: {type: 'messages'}}">View all messages</router-link></strong>
                             </a>
                         </div>
 
@@ -182,27 +182,27 @@
 
                             <div v-for="notification in user.customData.notifications">
                                 <div class="message">
-                                    <router-link class="dropdown-item" :to="{name: 'MailBox', params: {messageId: notification.id}}">
+                                    <router-link class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'notifications'}}">
                                         <div>
                                             <small class="text-muted">{{notification.from}}</small>
                                             <small class="text-muted float-right mt-q">
                                                 {{notification.timeStamp | prettyDate}}
                                             </small>
                                         </div>
-                                        <div class="text-truncate font-weight-bold">{{notification.text | truncate}}</div>
-                                        <div class="text-muted">{{notification.text}}</div>
+                                        <div class="text-truncate font-weight-bold">{{notification.subject}}</div>
+                                        <div class="text-muted">{{notification.text | truncate}}</div>
                                     </router-link>
                                 </div>
                                 <hr />
 
                                 <a href="#" class="dropdown-item text-center">
-                                    <strong><router-link :to="{name: 'MailBox'}">View all notifications</router-link></strong>
+                                    <strong><router-link :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications</router-link></strong>
                                 </a>
 
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane p-1" id="tasks" role="tabpanel">
+                    <!--<div class="tab-pane p-1" id="tasks" role="tabpanel">
                         <div class="header"><strong>You have {{ user.taskCount }} tasks(s)</strong></div>
                         TODO: filters on v-for to break up tasks into periods like "Today"
                         <div v-if="user.hasTasks">
@@ -220,7 +220,7 @@
                                 <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </aside>
         </div>
@@ -258,7 +258,8 @@
         //    return this.store.state;
         //},
         created: function() {
-            this.$parent.$store.dispatch('user/getUser')
+            if(typeof user === 'undefined')
+                this.$parent.$store.dispatch('user/getUser')
             //this.user.getUser();
         },
         computed: {

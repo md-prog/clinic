@@ -46,13 +46,12 @@ const routes= [
               component: ReposView,
               name: 'Repository',
               description: 'List of popular javascript repos'
+          }, { 
+              path: 'mailbox',
+              component: MailBoxView,
+              name: 'Mailbox'
           }
         ]
-    }, 
-    { 
-        path: '/mailbox',
-        component: MailBoxView,
-        name: 'MailBox'
     },
     {
         // not found handler

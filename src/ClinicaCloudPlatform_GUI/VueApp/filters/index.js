@@ -24,5 +24,5 @@ export function pluralize (time, label) {
 
 export function truncate (string)
 {
-    return string.substring(0, 15) + '...';
+    return string.substring(0, 24) + '...';
 }
