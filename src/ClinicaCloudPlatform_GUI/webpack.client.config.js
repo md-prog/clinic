@@ -44,6 +44,14 @@ module.exports = {
                 }
             },
             {
+                test: /\.(ico)$/,
+                loader: 'file-loader',
+                query: {
+                    limit: 10000,
+                    name: '[name].[ext]'
+                }
+            },
+            {
                 test: /\.css$/,
                 loaders: ["style-loader", "css-loader"],
                 exclude: /node_modules/
@@ -87,6 +95,9 @@ module.exports = {
             Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
             Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
             Util: "exports-loader?Util!bootstrap/js/dist/util",
+        }),
+        new webpack.ProvidePlugin({
+            moment: "moment"
         })
     ]
 };

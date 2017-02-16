@@ -6,13 +6,16 @@ import VueRouter from 'vue-router';
 import routes from './routes';
 
 require('./assets/scss/app.scss');
-require('./assets/css/app.css'); //migrate to scss
 
 require('./assets/js/bootstrap.min.js');
 //require("font-awesome-webpack");
 require('./assets/js/admin_gui.js');
 
 import Pace from 'pace-progress';
+import Chart from 'chart.js';
+require('daterangepicker');
+
+require('./assets/img/favicon.ico');
 
 import { domain, count, prettyDate, pluralize, truncate } from './filters'
 Vue.filter('count', count)

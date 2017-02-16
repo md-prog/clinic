@@ -4281,7 +4281,7 @@ header.navbar .navbar-brand {
     margin-right: 0;
     padding: 0.5rem 1rem;
     background-color: #1e8fc6;
-    background-image: url("../img/logo.png");
+    background-image: url("../img/logo.default.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 90px auto;
@@ -4985,8 +4985,11 @@ header.navbar .dropdown-item {
     clear: both;
 }
 
-.breadcrumb-item {
+.breadcrumb-item,
+.breadcrumb-item .router-link-active {
+    display: inline-block!important;
     float: left;
+    padding: unset!important;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -5005,7 +5008,8 @@ header.navbar .dropdown-item {
     text-decoration: none;
 }
 
-.breadcrumb-item.active {
+.breadcrumb-item.active,
+.breadcrumb-item.active .router-link-active {
     color: #9da0a8;
 }
 

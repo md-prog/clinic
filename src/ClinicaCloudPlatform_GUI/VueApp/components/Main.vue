@@ -83,20 +83,21 @@
                     <ul class="nav search-nav">
                         <li class="nav-item open" v-on:click="toggleMenu">
                             <router-link to="/" class="nav-link active">
-                                <i class="icon-speedometer"></i> Dashboard <span class="tag tag-info">NEW</span>
+                                <i class="icon-speedometer"></i> Dashboard #1<span class="tag tag-info">NEW</span>
                             </router-link>
                         </li>
                         <li class="nav-title">
                             UI Elements
                         </li>
                         <!--<li class="active pageLink" v-on:click="toggleMenu"><router-link to="/"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></router-link></li>-->
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/dashboard2" class="nav-link"><i class="icon-grid" /><span class="page">Dashboard #2</span></router-link></li>
+
                         <li class="nav-item" v-on:click="toggleMenu"><router-link to="/tables" class="nav-link"><i class="icon-grid" /><span class="page">Tables</span></router-link></li>
 
                         <li class="nav-item" v-on:click="toggleMenu"><router-link to="/tasks" class="nav-link"><i class="icon-list"></i><span class="page">Tasks</span></router-link></li>
                         <li class="nav-item" v-on:click="toggleMenu"><router-link to="/setting" class="nav-link"><i class="icon-settings"></i><span class="page">Settings</span></router-link></li>
 
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/server" class="nav-link"><i class="icon-wrench"></i><span class="page">Server</span></router-link></li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/repos" class="nav-link"><i class="icon-heart"></i><span class="page">Repos</span></router-link></li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/server" class="nav-link"><i class="icon-wrench"></i><span class="page">Server</span></router-link></li>                        
 
                         <li class="nav-item" v-on:click="toggleMenu"><router-link to="/login" class="nav-link"><i class="icon-login"></i> <span class="page">Login</span></router-link></li>
                         <li class="nav-item" v-on:click="toggleMenu"><router-link to="/404" class="nav-link"><i class="icon-loop"></i> <span class="page">404</span></router-link></li>

@@ -173,7 +173,6 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
 
 module.exports = {
   data: function () {
