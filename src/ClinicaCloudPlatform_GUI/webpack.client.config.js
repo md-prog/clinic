@@ -12,7 +12,10 @@ module.exports = {
         filename: '[name].js',
     },
     resolve: {
-        extensions: ['.js', '.json', '.css', '.scss', '.html']
+        extensions: ['.js', '.json', '.css', '.scss', '.html'],
+        alias: {
+            jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery')
+            }
     },
     module: {
         loaders: [
@@ -41,6 +44,14 @@ module.exports = {
                 query: {
                     limit: 10000,
                     name: 'img/[name]-[sha512:hash:base64:7].[ext]'
+                }
+            },
+            {
+                test: /\.(ico)$/,
+                loader: 'file-loader',
+                query: {
+                    limit: 10000,
+                    name: '[name].[ext]'
                 }
             },
             {
@@ -87,6 +98,9 @@ module.exports = {
             Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
             Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
             Util: "exports-loader?Util!bootstrap/js/dist/util",
+        }),
+        new webpack.ProvidePlugin({
+            moment: "moment"
         })
     ]
 };

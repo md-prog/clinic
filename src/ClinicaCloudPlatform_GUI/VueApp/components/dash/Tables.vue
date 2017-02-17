@@ -193,11 +193,6 @@
 </template>
 
 <script>
-//import $ from 'jquery'
-
-// Require needed datatables modules
-require('../../assets/js/plugins/datatables/jquery.dataTables.js')
-require('../../assets/js/plugins/datatables/integration/dataTables.bootstrap4.js')
 
 module.exports = {
   name: 'Tables',
@@ -218,8 +213,6 @@ module.exports = {
 
 @import url('/static/js/plugins/datatables/jquery.dataTables.min.css');
 */
-
-@import url('../../assets/js/plugins/datatables/css/dataTables.bootstrap4.scss');
 
 table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
   font-family: 'FontAwesome';

@@ -23,8 +23,8 @@ const userModule = {
             
             //dummy data
             state.user.customData.messages = [
-                {id: "1", from: "Kyle Dunn", text: "Message 1", timeStamp: "2012-04-23T18:25:43.000Z"}, 
-                {id: "2", from: "Ian Field", text: "Message 2", timeStamp: "2012-04-23T18:29:41.000Z"}
+                {id: "1", from: "Kyle Dunn", subject: "Message 1", text: "Message 1 is abc 123 def 456 ghi 789", timeStamp: "2012-04-23T18:25:43.000Z", read: true}, 
+                {id: "2", from: "Ian Field", subject: "Message 2", text: "Message 2 is abc 123 def 456 ghi 789", timeStamp: "2012-04-23T18:29:41.000Z", read: false}
             ]
 
             state.user.messageCount = 0;
@@ -45,6 +45,7 @@ const userModule = {
             if(!state.user.groups.items)
                 state.user.groups.items = [];
         }
+        
         ,
         UPDATE_CUSTOM_DATA: (state, payload) => {
             
