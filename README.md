@@ -1,3 +1,3 @@
 # ClinicaCloudPlatform
 
-Please use the dashboard
+## Please use the dashboard
