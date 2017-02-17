@@ -241,7 +241,8 @@
 
         <!-- Main Footer -->
         <footer class="app-footer">
-            <strong>Copyright &copy; {{year}} <a href="javascript:;">Ars Clinica</a>.</strong> All rights reserved.
+            <div class="copyright"><strong>Copyright &copy; {{year}} <a href="javascript:;">[organization name here]</a>.</strong> All rights reserved.</div>
+            <div class="powered-by">Powered By Clinica Cloud Platform</div>
         </footer>
     </div>
 </template>

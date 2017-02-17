@@ -4988,9 +4988,9 @@ header.navbar .dropdown-item {
 
 .breadcrumb-item,
 .breadcrumb-item .router-link-active {
-    display: inline-block!important;
+    display: inline-block !important;
     float: left;
-    padding: unset!important;
+    padding: unset !important;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -19223,4 +19223,12 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
 .pageLink.active {
     @extend .nav-link;
     @extend .active;
+}
+
+.powered-by {
+    float: right;
+}
+
+.copyright{
+    float:left;
 }
