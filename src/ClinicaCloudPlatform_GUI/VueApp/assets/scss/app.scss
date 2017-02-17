@@ -128,6 +128,7 @@
 // UI Kits
 @import "uikits/uikits";
 
+
 //from original app.css
 html {
     font-family: sans-serif;
@@ -4270,7 +4271,7 @@ header.navbar {
     position: relative;
     height: 50px;
     padding: 0;
-    background-color: #36a9e1;
+    background-color: $brand-primary;
     flex-direction: row;
 }
 
@@ -4280,7 +4281,7 @@ header.navbar .navbar-brand {
     height: 50px;
     margin-right: 0;
     padding: 0.5rem 1rem;
-    background-color: #1e8fc6;
+    background-color: darken($brand-primary, 10);
     background-image: url("../img/logo.default.png");
     background-repeat: no-repeat;
     background-position: center center;
@@ -19210,10 +19211,10 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
 
 ///vue.js nav overrides hopefully
 
-.router-link-active {
+/*.router-link-active {
     @extend .nav-link;
     @extend .active;
-}
+}*/
 
 .pageLink {
     @extend .nav-item;

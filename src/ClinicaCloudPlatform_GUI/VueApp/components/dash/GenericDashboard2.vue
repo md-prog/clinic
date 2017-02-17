@@ -1,6 +1,5 @@
 ﻿<template>
     <main class="main">
-        TODO Convert scripts to vue syntax
         <div class="container-fluid pt-2">
 
             <div class="animated fadeIn">
@@ -1085,7 +1084,14 @@
 <script>
     require('../../assets/js/plugins/gauge.min.js');
 
-    //get rid of me
-    require('../../assets/js/JUNK_sampledata/dashboard.js');
+    //i seriously broke this
+    var dashCode = require('../../assets/js/JUNK_sampledata/dashboard.js');
+
+    module.exports = {
+        name: 'Dashboard2',
+        mounted: function () {
+            dashCode.dash2Ready();
+        },
+    };
 
 </script>

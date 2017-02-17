@@ -12,7 +12,10 @@ module.exports = {
         filename: '[name].js',
     },
     resolve: {
-        extensions: ['.js', '.json', '.css', '.scss', '.html']
+        extensions: ['.js', '.json', '.css', '.scss', '.html'],
+        alias: {
+            jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery')
+            }
     },
     module: {
         loaders: [

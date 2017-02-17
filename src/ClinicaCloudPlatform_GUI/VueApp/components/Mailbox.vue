@@ -55,7 +55,7 @@
     //created: function() {
     //    store.dispatch('user/getUser')
     //},
-    }
+    };
 </script>
 
 <style>

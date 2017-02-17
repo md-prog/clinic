@@ -29,14 +29,14 @@
                             <strong>Account</strong>
                         </div>
 
-                        <router-link :to="{name: 'Mailbox', params: {type: 'messages'}}" class="dropdown-item">
+                        <router-link exact :to="{name: 'Mailbox', params: {type: 'messages'}}" class="dropdown-item">
                             <i class="icon-envelope-letter"></i> Messages
                             <span class="tag" v-bind:class="{'tag-success': user.hasMessages, 'tag-default': !user.hasMessages}">
                                 {{ user.messageCount }}
                             </span>
                         </router-link>
 
-                        <router-link :to="{name: 'Mailbox', params: {type: 'notifications'}}" class="dropdown-item">
+                        <router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}" class="dropdown-item">
                             <i class="icon-bell"></i> Notifications
                             <span class="tag" v-bind:class="{'tag-success': user.hasNotifications, 'tag-default': !user.hasNotifications}">
                                 {{ user.notificationCount }}
@@ -81,26 +81,38 @@
                     </form>
                     <!-- Sidebar Menu -->
                     <ul class="nav search-nav">
+                        <li class="nav-title">
+                            Dashboards
+                        </li>
                         <li class="nav-item open" v-on:click="toggleMenu">
-                            <router-link to="/" class="nav-link active">
+                            <router-link exact to="/" class="nav-link active">
                                 <i class="icon-speedometer"></i> Dashboard #1<span class="tag tag-info">NEW</span>
                             </router-link>
+                            </li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/dashboard2" class="nav-link"><i class="icon-grid" /><span class="page">Dashboard #2</span></router-link></li>
+
+                        <li class="nav-title">
+                            Worklists
                         </li>
                         <li class="nav-title">
-                            UI Elements
+                            Samples
                         </li>
-                        <!--<li class="active pageLink" v-on:click="toggleMenu"><router-link to="/"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></router-link></li>-->
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/dashboard2" class="nav-link"><i class="icon-grid" /><span class="page">Dashboard #2</span></router-link></li>
+                        
+                        <li class="nav-title">
+                            Settings/Admin
+                        </li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/admin/clientadmin" class="nav-link"><i class="icon-wrench"></i><span class="page">Client Admin</span></router-link></li>                        
 
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/tables" class="nav-link"><i class="icon-grid" /><span class="page">Tables</span></router-link></li>
+                        <!--<li class="active pageLink" v-on:click="toggleMenu"><router-link exact to="/"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></router-link></li>-->
+                        <li class="nav-title">
+                            Etc
+                        </li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/tables" class="nav-link"><i class="icon-grid" /><span class="page">Tables</span></router-link></li>
 
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/tasks" class="nav-link"><i class="icon-list"></i><span class="page">Tasks</span></router-link></li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/setting" class="nav-link"><i class="icon-settings"></i><span class="page">Settings</span></router-link></li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/tasks" class="nav-link"><i class="icon-list"></i><span class="page">Tasks</span></router-link></li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/setting" class="nav-link"><i class="icon-settings"></i><span class="page">Settings</span></router-link></li>
 
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/server" class="nav-link"><i class="icon-wrench"></i><span class="page">Server</span></router-link></li>                        
-
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/login" class="nav-link"><i class="icon-login"></i> <span class="page">Login</span></router-link></li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link to="/404" class="nav-link"><i class="icon-loop"></i> <span class="page">404</span></router-link></li>
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/404" class="nav-link"><i class="icon-loop"></i> <span class="page">404</span></router-link></li>
                     </ul>
                 </nav>
             </div>
@@ -115,7 +127,7 @@
                         <small>{{ $route.meta.description }}</small>
                     </h1>
                     <nav class="breadcrumb">
-                        <router-link to="/" class="breadcrumb-item"><i class="fa fa-home"></i>Home</router-link>
+                        <router-link exact to="/" class="breadcrumb-item"><i class="fa fa-home"></i>Home</router-link>
                         <span class="active breadcrumb-item">{{$route.name.toUpperCase() }}</span>
                     </nav>
                 </section>
@@ -158,7 +170,7 @@
                         <div v-if="user.hasMessages">
                             <div v-for="message in user.customData.messages">
                                 <div class="message">
-                                    <router-link class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'messages'}}">
+                                    <router-link exact class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'messages'}}">
                                         <div>
                                             <small class="text-muted">{{message.from}}</small>
                                             <small class="text-muted float-right mt-q">
@@ -172,7 +184,7 @@
                                 <hr />
                             </div>
                             <a href="#" class="dropdown-item text-center">
-                                <strong><router-link :to="{name: 'Mailbox', params: {type: 'messages'}}">View all messages</router-link></strong>
+                                <strong><router-link exact :to="{name: 'Mailbox', params: {type: 'messages'}}">View all messages</router-link></strong>
                             </a>
                         </div>
 
@@ -183,7 +195,7 @@
 
                             <div v-for="notification in user.customData.notifications">
                                 <div class="message">
-                                    <router-link class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'notifications'}}">
+                                    <router-link exact class="dropdown-item" :to="{name: 'Mailbox', params: {type: 'notifications'}}">
                                         <div>
                                             <small class="text-muted">{{notification.from}}</small>
                                             <small class="text-muted float-right mt-q">
@@ -197,7 +209,7 @@
                                 <hr />
 
                                 <a href="#" class="dropdown-item text-center">
-                                    <strong><router-link :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications</router-link></strong>
+                                    <strong><router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications</router-link></strong>
                                 </a>
 
                             </div>
@@ -236,8 +248,7 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import moment from 'moment'
-    require('hideseek')
+    import moment from 'moment'    
 
     module.exports = {
         name: 'Main',

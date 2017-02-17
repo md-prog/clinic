@@ -1,7 +1,7 @@
 ﻿import MainView from './components/Main.vue'
 import GenericDashboardView1 from './components/dash/GenericDashboard1.vue'
 import GenericDashboardView2 from './components/dash/GenericDashboard2.vue'
-import MessagesView from './components/Messages.vue'
+import ClientAdminView from './components/admin/ClientAdmin.vue'
 import TablesView from './components/dash/Tables.vue'
 import TasksView from './components/dash/Tasks.vue'
 import SettingView from './components/dash/Setting.vue'
@@ -35,6 +35,11 @@ const routes= [
               component: TasksView,
               name: 'Tasks',
               description: 'Tasks page in the form of a timeline'
+          }, {
+              path: 'admin/clientadmin',
+              component: ClientAdminView,
+              name: 'Client Admin',
+              description: 'Client Administration'
           }, {
               path: 'setting',
               component: SettingView,

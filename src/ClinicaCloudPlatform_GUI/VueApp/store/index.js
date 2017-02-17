@@ -2,13 +2,15 @@
 import Vuex from 'vuex'
 import sampleModule from './modules/sample/store'
 import userModule from './modules/user/store'
+import organizationModule from './modules/organization/store'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     modules:{
         sample: sampleModule,
-        user: userModule
+        user: userModule,
+        organization: organizationModule
     },
 
     mutations:{
