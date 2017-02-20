@@ -8,6 +8,7 @@ import SettingView from './components/dash/Setting.vue'
 import ServerView from './components/dash/Server.vue'
 import MailBoxView from './components/Mailbox.vue'
 import NotFoundView from './components/404.vue'
+import AccessioningView from './components/accessioning/Accessioning.vue'
 
 const routes= [
     {
@@ -40,6 +41,11 @@ const routes= [
               component: ClientAdminView,
               name: 'Client Admin',
               description: 'Client Administration'
+          }, {
+              path: 'accessioning/:id/:orgNameKey',
+              component: AccessioningView,
+              name: 'Accessioning',
+              description: 'Add samples to the system'
           }, {
               path: 'setting',
               component: SettingView,

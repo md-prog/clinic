@@ -10,8 +10,10 @@ namespace ClinicaCloudPlatform.Model.Models
         public Doctor Doctor1 { get; set; }
         public Doctor Doctor2 { get; set; }
         public string MRN { get; set; }
-        public ICollection<Comment> Comments { get; set; }
         public Lab OrderingLab { get; set; }
+
+        public ICollection<Case> Cases { get; set; }
+        public ICollection<Specimen> Specimens { get; set; }
 
         /*****************
         For Accessions, the following will be stored as JSON Extended data:

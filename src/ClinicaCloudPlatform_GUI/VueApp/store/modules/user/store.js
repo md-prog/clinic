@@ -2,6 +2,18 @@
 
 const userModule = {
     state: { user: {
+        href: '',
+        userName: '',
+        email: '',
+        givenName: '',
+        middleName: null,
+        surname: '',
+        fullName: '',
+        createdAt: null,
+        modifiedAt: null,
+        passwordModifiedAt: null,
+        emailVerificationToken: null,
+        status: 'DISABLED',
         customData:{
             messages:[
             ],

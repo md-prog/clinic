@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ClinicaCloudPlatform.Model.Models
+﻿namespace ClinicaCloudPlatform.Model.Models
 {
     public class ReportTemplate : _LimsBaseClass
     {
@@ -12,8 +10,6 @@ namespace ClinicaCloudPlatform.Model.Models
         public string ReportTemplateDefinition { get; set; }
 
         public bool PublicReport { get; set; }
-
-        public ICollection<CaseType> CaseTypes { get; set; }
               
         //public ICollection<ReportDocumentTypes> DocumentTypesToGenerate { get; set; }
        

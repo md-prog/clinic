@@ -2,22 +2,14 @@
 const organizationModule = {
     state: { 
         organization:{
-            name: 'Texas BioBank',
-            nameKey: 'tbb',
+            name: 'Unknown - Vuex Problem',
+            nameKey: '',
             groups:[
                 { 
-                    href: 'https://api.stormpath.com/v1/groups/3oF6051KOfFy3MU1uUl0Ji',
-                    groupName:'Client Admin',
+                    href: '',
+                    groupName:'Vuex Problem',
                     users:[
-                        {
-                            'href':'https://api.stormpath.com/v1/accounts/2JdLMXWOM3Arg1DoiL60Fl',
-                            email:'ian@arsclinica.com',
-                            fullName: 'Ian Scott Field'
-                        }
                     ],
-                    groupName:'Client User',
-                    users:[
-                    ]
                 }
             ],
             //below will come from stormpath custom data
@@ -44,7 +36,9 @@ const organizationModule = {
     },
     namespaced: true,
     mutations: {
-        LOAD_ORGANIZATION: (state, payload) => {}
+        LOAD_ORGANIZATION: (state, payload) => {
+            Object.assign(state.organization, payload)
+        }
         ,
         SAVE_ORGANIZATION: (state, payload) => {
         },

@@ -5,7 +5,6 @@ namespace ClinicaCloudPlatform.Model.Models
     public class Batch : _LimsBaseClass
     {
         public string BatchNumber { get; set; }
-        public BatchType BatchType { get; set; }
         public string BatchStatus { get; set; }
         public ICollection<TestResult> TestResults { get; set; }
         public ICollection<Specimen> Specimens { get; set; }

@@ -1,11 +1,11 @@
 ﻿<template>
-    <div>
-        <div class="pace  pace-inactive">
+    <div class="app-root">
+        <!--<div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
                 <div class="pace-progress-inner"></div>
             </div>
             <div class="pace-activity"></div>
-        </div>
+        </div>-->
         <header class="app-header navbar">
             <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">☰</button>
             <a class="navbar-brand" href="#"></a>
@@ -98,6 +98,8 @@
                             Samples
                         </li>
                         
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/accessioning/4/clinica" class="nav-link"><i class="icon-loop"></i> <span class="page">Accessioning</span></router-link></li>
+
                         <li class="nav-title">
                             Settings/Admin
                         </li>
@@ -113,6 +115,7 @@
                         <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/setting" class="nav-link"><i class="icon-settings"></i><span class="page">Settings</span></router-link></li>
 
                         <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/404" class="nav-link"><i class="icon-loop"></i> <span class="page">404</span></router-link></li>
+
                     </ul>
                 </nav>
             </div>
@@ -238,7 +241,6 @@
             </aside>
         </div>
 
-
         <!-- Main Footer -->
         <footer class="app-footer">
             <div class="copyright"><strong>Copyright &copy; {{year}} <a href="javascript:;">[organization name here]</a>.</strong> All rights reserved.</div>
@@ -273,6 +275,8 @@
         created: function() {
             if(typeof user === 'undefined')
                 this.$parent.$store.dispatch('user/getUser')
+            if(typeof organization === 'undefined')
+                this.$parent.$store.dispatch('organization/loadOrganization');
             //this.user.getUser();
         },
         computed: {

@@ -36,7 +36,7 @@ import { mapGetters, mapActions} from 'vuex';
             ...mapGetters('user', ['user']),
         },
         created: function() {
-            this.$parent.$store.dispatch('organization/loadOrganization');
+            //moved to main -- this.$parent.$store.dispatch('organization/loadOrganization');
         },
     mounted: function() {
         setupFormOverlays();
