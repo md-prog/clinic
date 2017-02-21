@@ -9,14 +9,8 @@ import Pace from 'pace-progress';
 import Chart from 'chart.js';
 
 require('./assets/scss/app.scss');
-require('hideseek')
-require('./assets/js/bootstrap.min.js');
+
 require('./assets/js/admin_gui.js');
-//require('./assets/js/plugins/daterangepicker/daterangepicker.js');
-require('bootstrap-daterangepicker')
-require('select2');
-require('datatables.net');
-require('./assets/js/plugins/datatables/integration/dataTables.bootstrap4.js');
 
 require('./assets/img/favicon.ico');
 

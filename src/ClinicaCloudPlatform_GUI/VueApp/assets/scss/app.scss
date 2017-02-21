@@ -1,12 +1,4 @@
 ﻿/*$fa-font-path: "~/../../fonts";*/
-/**
- * GenesisUI - Bootstrap 4 Admin Template
- * @version v1.7.1
- * @link https://genesisui.com
- * Copyright (c) 2017 creativeLabs Łukasz Holeczek
- * @license Commercial
- */
-// Core variables and mixins
 
 @import 'icons/simple-line-icons.scss';
 @import 'icons/font-awesome.scss';
@@ -129,16 +121,25 @@
 @import "uikits/uikits";
 
 
-//from original app.css
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: transparent;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #383e4b;
+    background-color: #f5f5f5;
     margin: 0;
+    height: 100%;
 }
 
 .content-header {
@@ -525,20 +526,6 @@ html {
 
 @-ms-viewport {
     width: device-width;
-}
-
-html {
-    -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.875rem;
-    font-weight: normal;
-    line-height: 1.5;
-    color: #383e4b;
-    background-color: #f5f5f5;
 }
 
 [tabindex="-1"]:focus {
@@ -2434,7 +2421,8 @@ pre code {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     line-height: 1.25;
-    color: #9da0a8;
+    //color: #9da0a8;
+    color: #000000 !important;
     background-color: #fff;
     background-image: none;
     background-clip: padding-box;
@@ -2449,7 +2437,8 @@ pre code {
 }
 
 .form-control:focus, .daterangepicker .input-mini:focus, .input-group > .ui-select-bootstrap > input.ui-select-search.form-control:focus {
-    color: #9da0a8;
+    //color: #9da0a8;
+    color: #000000;
     background-color: #fff;
     border-color: #a5d8f2;
     outline: none;
@@ -2462,6 +2451,7 @@ pre code {
 
 .form-control:disabled, .daterangepicker .input-mini:disabled, .input-group > .ui-select-bootstrap > input.ui-select-search.form-control:disabled, .form-control[readonly], .daterangepicker [readonly].input-mini, .input-group > .ui-select-bootstrap > input[readonly].ui-select-search.form-control {
     background-color: #e4e6eb;
+    color: #9da0a8;
     opacity: 1;
 }
 
@@ -4988,9 +4978,9 @@ header.navbar .dropdown-item {
 
 .breadcrumb-item,
 .breadcrumb-item .router-link-active {
-    display: inline-block!important;
+    display: inline-block !important;
     float: left;
-    padding: unset!important;
+    padding: unset !important;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -5614,7 +5604,7 @@ button.close {
 
 .modal {
     position: fixed;
-    top: 0;
+    top: 100px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -19223,4 +19213,33 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
 .pageLink.active {
     @extend .nav-link;
     @extend .active;
+}
+
+.powered-by {
+    float: right;
+    font-size: smaller;
+}
+
+.copyright {
+    float: left;
+}
+
+.config-info {
+    font-size: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #1c9d1a;
+    text-align: right !important;
+}
+
+.config-info-top {
+    @extend .config-info;
+    bottom: unset;
+    top: 5px;
+}
+
+//really sucky hack.  something is preventing a typical sticky footer solution...
+.container-fluid.pt-2 {
+    min-height: calc(100vh - 165px);
 }

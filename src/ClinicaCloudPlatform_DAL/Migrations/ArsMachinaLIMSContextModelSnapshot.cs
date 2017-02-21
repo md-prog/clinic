@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using ClinicaCloudPlatform.DAL.Data;
+using ClinicaCloudPlatform.Model.Models;
 
-namespace ArsMachinaLIMSDAL.Migrations
+namespace ClinicaCloudPlatform.DAL.Migrations
 {
     [DbContext(typeof(ArsMachinaLIMSContext))]
     partial class ArsMachinaLIMSContextModelSnapshot : ModelSnapshot
@@ -17,28 +19,60 @@ namespace ArsMachinaLIMSDAL.Migrations
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Accession", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("Doctor2GUID");
+                    b.Property<int?>("ClientID");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
+                    b.Property<int?>("Doctor1ID");
+
+                    b.Property<int?>("Doctor2ID");
+
+                    b.Property<int?>("FacilityID");
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
                     b.Property<string>("MRN");
 
-                    b.HasKey("GUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasIndex("Doctor2GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.ToTable("Accession");
+                    b.Property<int?>("OrderingLabID");
+
+                    b.Property<int?>("PatientID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ClientID");
+
+                    b.HasIndex("Doctor1ID");
+
+                    b.HasIndex("Doctor2ID");
+
+                    b.HasIndex("FacilityID");
+
+                    b.HasIndex("OrderingLabID");
+
+                    b.HasIndex("PatientID");
+
+                    b.ToTable("Accessions");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Batch", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
@@ -47,100 +81,74 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("BatchStatus");
 
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("Batch");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.BatchType", b =>
-                {
-                    b.Property<Guid>("GUID")
+                    b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Active");
-
-                    b.Property<bool>("AllowAddOnStartingStepOnly");
-
-                    b.Property<int>("BatchItemType");
-
-                    b.Property<string>("BatchPrefix")
-                        .HasMaxLength(4);
-
-                    b.Property<int>("BatchRestrictionType");
-
-                    b.Property<string>("BatchTypeName");
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<Guid?>("StartingStepGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasIndex("StartingStepGUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("BatchType");
+                    b.ToTable("Batches");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Case", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AccessionID");
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("AnalysisLabGUID");
+                    b.Property<int?>("AnalysisLabID");
 
                     b.Property<string>("CaseNumber");
 
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<Guid?>("ProcessingLabGUID");
-
-                    b.Property<Guid?>("ProfessionalLabGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("AnalysisLabGUID");
-
-                    b.HasIndex("ProcessingLabGUID");
-
-                    b.HasIndex("ProfessionalLabGUID");
-
-                    b.ToTable("Case");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.CaseType", b =>
-                {
-                    b.Property<Guid>("GUID")
+                    b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("CaseNumberPrefix")
-                        .HasMaxLength(4);
-
-                    b.Property<string>("CaseTypeName");
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<Guid?>("ReportTemplateGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasIndex("ReportTemplateGUID");
+                    b.Property<int?>("ProcessingLabID");
 
-                    b.ToTable("CaseType");
+                    b.Property<int?>("ProfessionalLabID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AccessionID");
+
+                    b.HasIndex("AnalysisLabID");
+
+                    b.HasIndex("ProcessingLabID");
+
+                    b.HasIndex("ProfessionalLabID");
+
+                    b.ToTable("Cases");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Client", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
@@ -149,157 +157,66 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("ClientName");
 
-                    b.Property<int>("ID");
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<Guid?>("UserGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasIndex("UserGUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Comment", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AccessionGUID");
-
                     b.Property<bool>("Active");
-
-                    b.Property<Guid?>("CaseGUID");
-
-                    b.Property<Guid?>("ClientGUID");
 
                     b.Property<string>("CommentText");
 
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUUID");
+
+                    b.Property<string>("JsonExtendedData");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("ModifiedUUID");
 
                     b.Property<string>("SecondaryIdentifier");
 
-                    b.Property<Guid?>("SpecimenGUID");
+                    b.HasKey("ID");
 
-                    b.HasKey("GUID");
-
-                    b.HasIndex("AccessionGUID");
-
-                    b.HasIndex("CaseGUID");
-
-                    b.HasIndex("ClientGUID");
-
-                    b.HasIndex("SpecimenGUID");
-
-                    b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Dashboard", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("DashboardName");
-
-                    b.Property<int>("DashboardType");
-
-                    b.Property<bool>("DefaultDashboard");
-
-                    b.Property<Guid?>("HeaderSectionGUID");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<Guid?>("LeftSectionGUID");
-
-                    b.Property<Guid?>("RightSectionGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("HeaderSectionGUID");
-
-                    b.HasIndex("LeftSectionGUID");
-
-                    b.HasIndex("RightSectionGUID");
-
-                    b.ToTable("Dashboard");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.DashboardComponent", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("ComponentAngular2CSS");
-
-                    b.Property<string>("ComponentAngular2HTMLTemplate");
-
-                    b.Property<string>("ComponentAngular2Path");
-
-                    b.Property<string>("DashboardComponentName");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("DashboardComponent");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.DashboardSection", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("DashboardSectionName");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("DashboardSection");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Department", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("DepartmentName");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<Guid?>("UserGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("UserGUID");
-
-                    b.ToTable("Department");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Doctor", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("ClientGUID");
+                    b.Property<int?>("ClientID");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("FirstName");
 
@@ -308,16 +225,22 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.HasKey("GUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasIndex("ClientGUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.ToTable("Doctor");
+                    b.HasKey("ID");
+
+                    b.HasIndex("ClientID");
+
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Facility", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
@@ -328,12 +251,24 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<Guid?>("ClientGUID");
+                    b.Property<int?>("ClientID");
 
                     b.Property<string>("Country");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
                     b.Property<string>("Name");
 
@@ -341,19 +276,25 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("StateProvince");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.HasIndex("ClientGUID");
+                    b.HasIndex("ClientID");
 
-                    b.ToTable("Facility");
+                    b.ToTable("Facilities");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Lab", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
@@ -362,23 +303,31 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("LabName");
 
-                    b.Property<Guid?>("UserGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasIndex("UserGUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("Lab");
+                    b.ToTable("Labs");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Label", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
                     b.Property<string>("BarcodeFormDefinition");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
@@ -387,77 +336,64 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<int>("LabelType");
 
-                    b.HasKey("GUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.ToTable("Label");
-                });
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Layout", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
+                    b.HasKey("ID");
 
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("Layout");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Panel", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<string>("PanelCode")
-                        .HasMaxLength(6);
-
-                    b.Property<string>("PanelDescription");
-
-                    b.Property<string>("PanelName");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("Panel");
+                    b.ToTable("Labels");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.PanelResult", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("CaseGUID");
+                    b.Property<int?>("CaseID");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<Guid?>("PanelGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasIndex("CaseGUID");
+                    b.Property<string>("PanelCode");
 
-                    b.HasIndex("PanelGUID");
+                    b.Property<string>("PanelName");
 
-                    b.ToTable("PanelResult");
+                    b.HasKey("ID");
+
+                    b.HasIndex("CaseID");
+
+                    b.ToTable("PanelResults");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Patient", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<DateTime>("DOB");
 
@@ -470,68 +406,114 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("MiddleName");
 
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
+
                     b.Property<string>("SSN");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("Patient");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Report", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("CaseGUID");
+                    b.Property<int?>("CaseID");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
+
+                    b.Property<int?>("ReportTemplateID");
 
                     b.Property<int>("ReportVersion");
 
                     b.Property<string>("ReportVersionNotes");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.HasIndex("CaseGUID");
+                    b.HasIndex("CaseID");
 
-                    b.ToTable("Report");
+                    b.HasIndex("ReportTemplateID");
+
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.ReportDocument", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
                     b.Property<byte[]>("ReportDocumentBinary");
 
                     b.Property<int>("ReportDocumentType");
 
-                    b.Property<Guid?>("ReportGUID");
+                    b.Property<int?>("ReportID");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.HasIndex("ReportGUID");
+                    b.HasIndex("ReportID");
 
                     b.ToTable("ReportDocument");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.ReportTemplate", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
                     b.Property<bool>("PublicReport");
 
@@ -539,647 +521,272 @@ namespace ArsMachinaLIMSDAL.Migrations
 
                     b.Property<string>("ReportTemplateName");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("ReportTemplate");
+                    b.ToTable("ReportTemplates");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Specimen", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AccessionID");
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("BatchGUID");
+                    b.Property<int?>("BatchID");
 
-                    b.Property<Guid?>("CaseGUID");
+                    b.Property<int?>("CaseID");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("ExternalSpecimenID");
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
+
                     b.Property<string>("SpecimenCode")
                         .HasMaxLength(7);
 
-                    b.Property<Guid?>("SpecimenGUID");
+                    b.HasKey("ID");
 
-                    b.Property<Guid?>("SpecimenTransportGUID");
+                    b.HasIndex("AccessionID");
 
-                    b.Property<Guid?>("SpecimenTypeGUID");
+                    b.HasIndex("BatchID");
 
-                    b.HasKey("GUID");
+                    b.HasIndex("CaseID");
 
-                    b.HasIndex("BatchGUID");
-
-                    b.HasIndex("CaseGUID");
-
-                    b.HasIndex("SpecimenGUID");
-
-                    b.HasIndex("SpecimenTransportGUID");
-
-                    b.HasIndex("SpecimenTypeGUID");
-
-                    b.ToTable("Specimen");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.SpecimenTransport", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<Guid?>("BatchTypeGUID");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<string>("SpecimenTransportCode")
-                        .HasMaxLength(3);
-
-                    b.Property<string>("SpecimenTransportName");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("BatchTypeGUID");
-
-                    b.ToTable("SpecimenTransport");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.SpecimenType", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<Guid?>("BatchTypeGUID");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<string>("SpecimenTypeCode")
-                        .HasMaxLength(3);
-
-                    b.Property<string>("SpecimenTypeName");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("BatchTypeGUID");
-
-                    b.ToTable("SpecimenType");
+                    b.ToTable("Specimens");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Step", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<Guid?>("LayoutGUID");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
+
+                    b.Property<int?>("WorkflowID");
 
                     b.Property<string>("WorkflowStepName");
 
-                    b.HasKey("GUID");
+                    b.HasKey("ID");
 
-                    b.HasIndex("LayoutGUID");
+                    b.HasIndex("WorkflowID");
 
-                    b.ToTable("Step");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Test", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<string>("TestCode")
-                        .HasMaxLength(6);
-
-                    b.Property<string>("TestName");
-
-                    b.Property<Guid?>("TestTypeGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("TestTypeGUID");
-
-                    b.ToTable("Test");
+                    b.ToTable("Steps");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.TestResult", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<Guid?>("BatchGUID");
+                    b.Property<int?>("BatchID");
 
-                    b.Property<Guid?>("CaseGUID");
+                    b.Property<int?>("CaseID");
 
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<Guid?>("PanelGUID");
-
-                    b.Property<Guid?>("TestGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("BatchGUID");
-
-                    b.HasIndex("CaseGUID");
-
-                    b.HasIndex("PanelGUID");
-
-                    b.HasIndex("TestGUID");
-
-                    b.ToTable("TestResult");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.TestType", b =>
-                {
-                    b.Property<Guid>("GUID")
+                    b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Active");
-
-                    b.Property<Guid?>("BatchTypeGUID");
-
-                    b.Property<Guid?>("CaseTypeGUID");
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
 
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<string>("TestTypeCode");
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("TestTypeName");
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
-                    b.HasKey("GUID");
+                    b.Property<string>("TestCode");
 
-                    b.HasIndex("BatchTypeGUID");
+                    b.Property<string>("TestName");
 
-                    b.HasIndex("CaseTypeGUID");
+                    b.HasKey("ID");
 
-                    b.ToTable("TestType");
-                });
+                    b.HasIndex("BatchID");
 
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.User", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
+                    b.HasIndex("CaseID");
 
-                    b.Property<bool>("Active");
-
-                    b.Property<bool>("AllClients");
-
-                    b.Property<string>("Credentials");
-
-                    b.Property<string>("DotNetTimeZone");
-
-                    b.Property<string>("IdentityReferenceID");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<string>("PrimaryGroupReferenceID");
-
-                    b.Property<Guid?>("PrimaryLabGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("PrimaryLabGUID");
-
-                    b.ToTable("User");
+                    b.ToTable("TestResults");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Workflow", b =>
                 {
-                    b.Property<Guid>("GUID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedUUID")
+                        .IsRequired();
+
                     b.Property<string>("JsonExtendedData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("ModifiedUUID")
+                        .IsRequired();
 
                     b.Property<string>("WorkflowName");
 
-                    b.Property<int>("WorkflowType");
+                    b.HasKey("ID");
 
-                    b.HasKey("GUID");
-
-                    b.ToTable("Workflow");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorkflowStep", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<Guid?>("StepGUID");
-
-                    b.Property<int>("StepOrder");
-
-                    b.Property<Guid?>("WorkflowGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("StepGUID");
-
-                    b.HasIndex("WorkflowGUID");
-
-                    b.ToTable("WorkflowStep");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Worklist", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<int>("WorklistType");
-
-                    b.HasKey("GUID");
-
-                    b.ToTable("Worklist");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorklistColumn", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<int>("WorklistColumnDataType");
-
-                    b.Property<int>("WorklistColumnLinkType");
-
-                    b.Property<string>("WorklistColumnName");
-
-                    b.Property<Guid?>("WorklistGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("WorklistGUID");
-
-                    b.ToTable("WorklistColumn");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorklistConfiguration", b =>
-                {
-                    b.Property<Guid>("GUID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<bool>("Default");
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<bool>("Public");
-
-                    b.Property<string>("WorklistConfigurationName");
-
-                    b.Property<Guid?>("WorklistGUID");
-
-                    b.HasKey("GUID");
-
-                    b.HasIndex("WorklistGUID");
-
-                    b.ToTable("WorklistConfiguration");
+                    b.ToTable("Workflows");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Accession", b =>
                 {
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientID");
+
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Doctor", "Doctor1")
+                        .WithMany()
+                        .HasForeignKey("Doctor1ID");
+
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Doctor", "Doctor2")
                         .WithMany()
-                        .HasForeignKey("Doctor2GUID");
-                });
+                        .HasForeignKey("Doctor2ID");
 
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.BatchType", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Batch")
-                        .WithOne("BatchType")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.BatchType", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Step", "StartingStep")
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Facility", "Facility")
                         .WithMany()
-                        .HasForeignKey("StartingStepGUID");
+                        .HasForeignKey("FacilityID");
+
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Lab", "OrderingLab")
+                        .WithMany()
+                        .HasForeignKey("OrderingLabID");
+
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Case", b =>
                 {
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
+                        .WithMany("Cases")
+                        .HasForeignKey("AccessionID");
+
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Lab", "AnalysisLab")
                         .WithMany()
-                        .HasForeignKey("AnalysisLabGUID");
+                        .HasForeignKey("AnalysisLabID");
 
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Lab", "ProcessingLab")
                         .WithMany()
-                        .HasForeignKey("ProcessingLabGUID");
+                        .HasForeignKey("ProcessingLabID");
 
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Lab", "ProfessionalLab")
                         .WithMany()
-                        .HasForeignKey("ProfessionalLabGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.CaseType", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Case")
-                        .WithOne("CaseType")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.CaseType", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.ReportTemplate")
-                        .WithMany("CaseTypes")
-                        .HasForeignKey("ReportTemplateGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Client", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithOne("Client")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Client", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.User")
-                        .WithMany("Clients")
-                        .HasForeignKey("UserGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Comment", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithMany("Comments")
-                        .HasForeignKey("AccessionGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Case")
-                        .WithMany("Comments")
-                        .HasForeignKey("CaseGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Client")
-                        .WithMany("Comments")
-                        .HasForeignKey("ClientGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Specimen")
-                        .WithMany("Comments")
-                        .HasForeignKey("SpecimenGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Dashboard", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.DashboardSection", "HeaderSection")
-                        .WithMany()
-                        .HasForeignKey("HeaderSectionGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.DashboardSection", "LeftSection")
-                        .WithMany()
-                        .HasForeignKey("LeftSectionGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.DashboardSection", "RightSection")
-                        .WithMany()
-                        .HasForeignKey("RightSectionGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Department", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.User")
-                        .WithMany("Departments")
-                        .HasForeignKey("UserGUID");
+                        .HasForeignKey("ProfessionalLabID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Doctor", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Client")
                         .WithMany("Doctors")
-                        .HasForeignKey("ClientGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithOne("Doctor1")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Doctor", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ClientID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Facility", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Client")
                         .WithMany("Facilities")
-                        .HasForeignKey("ClientGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithOne("Facility")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Facility", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Lab", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithOne("OrderingLab")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Lab", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.User")
-                        .WithMany("Labs")
-                        .HasForeignKey("UserGUID");
+                        .HasForeignKey("ClientID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.PanelResult", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Case")
                         .WithMany("PanelResults")
-                        .HasForeignKey("CaseGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Panel", "Panel")
-                        .WithMany()
-                        .HasForeignKey("PanelGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Patient", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
-                        .WithOne("Patient")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Patient", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CaseID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Report", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Case", "Case")
                         .WithMany()
-                        .HasForeignKey("CaseGUID");
+                        .HasForeignKey("CaseID");
+
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.ReportTemplate", "ReportTemplate")
+                        .WithMany()
+                        .HasForeignKey("ReportTemplateID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.ReportDocument", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Report")
                         .WithMany("ReportDocuments")
-                        .HasForeignKey("ReportGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.ReportTemplate", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Report")
-                        .WithOne("ReportTemplate")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.ReportTemplate", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReportID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Specimen", b =>
                 {
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Accession")
+                        .WithMany("Specimens")
+                        .HasForeignKey("AccessionID");
+
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Batch")
                         .WithMany("Specimens")
-                        .HasForeignKey("BatchGUID");
+                        .HasForeignKey("BatchID");
 
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Case")
                         .WithMany("Specimens")
-                        .HasForeignKey("CaseGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Specimen")
-                        .WithMany("ChildSpecimens")
-                        .HasForeignKey("SpecimenGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.SpecimenTransport", "SpecimenTransport")
-                        .WithMany()
-                        .HasForeignKey("SpecimenTransportGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.SpecimenType", "SpecimenType")
-                        .WithMany()
-                        .HasForeignKey("SpecimenTypeGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.SpecimenTransport", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.BatchType")
-                        .WithMany("SpecimenTransports")
-                        .HasForeignKey("BatchTypeGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.SpecimenType", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.BatchType")
-                        .WithMany("SpecimentTypes")
-                        .HasForeignKey("BatchTypeGUID");
+                        .HasForeignKey("CaseID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Step", b =>
                 {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.BatchType")
-                        .WithOne("FinalStep")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Step", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Layout", "Layout")
-                        .WithMany()
-                        .HasForeignKey("LayoutGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Test", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.TestType", "TestType")
-                        .WithMany()
-                        .HasForeignKey("TestTypeGUID");
+                    b.HasOne("ClinicaCloudPlatform.Model.Models.Workflow")
+                        .WithMany("Steps")
+                        .HasForeignKey("WorkflowID");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.TestResult", b =>
                 {
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Batch")
                         .WithMany("TestResults")
-                        .HasForeignKey("BatchGUID");
+                        .HasForeignKey("BatchID");
 
                     b.HasOne("ClinicaCloudPlatform.Model.Models.Case")
                         .WithMany("TestResults")
-                        .HasForeignKey("CaseGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Panel", "Panel")
-                        .WithMany()
-                        .HasForeignKey("PanelGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Test", "Test")
-                        .WithMany()
-                        .HasForeignKey("TestGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.TestType", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.BatchType")
-                        .WithMany("TestTypes")
-                        .HasForeignKey("BatchTypeGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.CaseType")
-                        .WithMany("TestTypes")
-                        .HasForeignKey("CaseTypeGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.User", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Lab", "PrimaryLab")
-                        .WithMany()
-                        .HasForeignKey("PrimaryLabGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Workflow", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.BatchType")
-                        .WithOne("BatchOperationalWorkflow")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.Workflow", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorkflowStep", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Step", "Step")
-                        .WithMany()
-                        .HasForeignKey("StepGUID");
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Workflow", "Workflow")
-                        .WithMany()
-                        .HasForeignKey("WorkflowGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorklistColumn", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Worklist")
-                        .WithMany("AvailableColumns")
-                        .HasForeignKey("WorklistGUID");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.WorklistConfiguration", b =>
-                {
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.User")
-                        .WithOne("WorklistConfiguration")
-                        .HasForeignKey("ClinicaCloudPlatform.Model.Models.WorklistConfiguration", "GUID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaCloudPlatform.Model.Models.Worklist", "Worklist")
-                        .WithMany()
-                        .HasForeignKey("WorklistGUID");
+                        .HasForeignKey("CaseID");
                 });
         }
     }

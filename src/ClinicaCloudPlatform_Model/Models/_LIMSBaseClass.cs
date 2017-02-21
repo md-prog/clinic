@@ -7,7 +7,7 @@ namespace ClinicaCloudPlatform.Model.Models
         
         public _LimsBaseClass()
         {
-            GUID = Guid.Empty;
+            ID = 0;
             //AuditLevel = AuditLevel.UserDateOnly;
             //AuditLogReturnLevel = AuditLogReturnLevel.Created;
             Active = true;
@@ -19,7 +19,7 @@ namespace ClinicaCloudPlatform.Model.Models
         /// <summary>
         /// Managed in code, expects to be persisted in DBMS as unique identifier or index
         /// </summary>
-        public Guid GUID { get; set; }
+        public int ID { get; set; }
         public bool Active { get; set; }
         public string CreatedUUID { get; set; }
         public string ModifiedUUID { get; set; }

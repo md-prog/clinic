@@ -2,7 +2,8 @@
 {
     public class PanelResult : _LimsBaseClass
     {
-        public Panel Panel { get; set; }
+        public string PanelCode { get; set; }
+        public string PanelName { get; set; }
         /*
          *JSON results         
          */

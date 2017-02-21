@@ -1,21 +1,39 @@
 ﻿import { getUser, updateCustomData} from './actions'
 
 const userModule = {
-    state: { user: {
-        customData:{
-            messages:[
-            ],
-            notifications:[
-            ],
-            tasks:[             
-            ]
-        },
-        groups:{
-            items:[
-            ]
+    state: { 
+        loaded: false,
+        user: {           
+            href: null,
+            userName: null,
+            email: null,
+            givenName: null,
+            middleName: null,
+            surname: null,
+            fullName: null,
+            createdAt: null,
+            modifiedAt: null,
+            passwordModifiedAt: null,
+            emailVerificationToken: null,
+            status: null,
+            customData:{
+                "createdAt": null,
+                "href": null,
+                "modifiedAt": null,
+                messages:[
+                ],
+                notifications:[
+                ],
+                tasks:[             
+                ]
+            },
+            groups:{
+                size: null,
+                items:[
+                ]
+            }
         }
-    }
-    },
+        },
     namespaced: true,
     mutations: {
         GET_USER: (state, payload) => {
@@ -44,6 +62,8 @@ const userModule = {
 
             if(!state.user.groups.items)
                 state.user.groups.items = [];
+
+            state.loaded = true;
         }
         
         ,
@@ -58,7 +78,8 @@ const userModule = {
     },
 
     getters: {
-        user: state => state.user
+        user: state => state.user,
+        userLoaded: state => state.loaded
     },
 }
 

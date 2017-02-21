@@ -1,25 +1,24 @@
 ﻿import { loadOrganization, saveOrganization } from './actions'
 const organizationModule = {
     state: { 
+        loaded: false,
         organization:{
-            name: 'Texas BioBank',
-            nameKey: 'tbb',
-            groups:[
-                { 
-                    href: 'https://api.stormpath.com/v1/groups/3oF6051KOfFy3MU1uUl0Ji',
-                    groupName:'Client Admin',
-                    users:[
-                        {
-                            'href':'https://api.stormpath.com/v1/accounts/2JdLMXWOM3Arg1DoiL60Fl',
-                            email:'ian@arsclinica.com',
-                            fullName: 'Ian Scott Field'
-                        }
-                    ],
-                    groupName:'Client User',
-                    users:[
-                    ]
+            "href": null,
+            "name": null,
+            "nameKey": null,
+            "groups": [
+            {
+                "name": null,
+                "users": [
+                {
+                    "href": null,
+                    "email": null,
+                    "fullName": null
                 }
+                ]
+            }
             ],
+            customData: "{}",
             //below will come from stormpath custom data
             css: ".navbar-brand:{background-color: #1e8fc6, padding:0, background-image:'http://vault.immunovault.com/img/logo.png', background-size: 220px 50px} .header .navbar{background-color: #36a9e1}",
             worklist:{
@@ -44,7 +43,10 @@ const organizationModule = {
     },
     namespaced: true,
     mutations: {
-        LOAD_ORGANIZATION: (state, payload) => {}
+        LOAD_ORGANIZATION: (state, payload) => {
+            Object.assign(state.organization, payload);
+            state.loaded = true;
+        }
         ,
         SAVE_ORGANIZATION: (state, payload) => {
         },
@@ -62,7 +64,8 @@ const organizationModule = {
     },
 
     getters: {
-        organization: state => state.organization
+        organization: state => state.organization,
+        organizationLoaded: state => state.loaded
     },
 }
 

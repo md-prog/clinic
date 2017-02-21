@@ -1,15 +1,11 @@
-﻿namespace ClinicaCloudPlatform.Model.Models
+﻿using System.Collections.Generic;
+
+namespace ClinicaCloudPlatform.Model.Models
 {
     public class Workflow : _LimsBaseClass
     {
         public string WorkflowName { get; set; }
-        public WorkflowTypes WorkflowType { get; set; }
-    }
-
-    public enum WorkflowTypes
-    {
-        Specimen,
-        Case
+        public ICollection<Step> Steps { get; set; }
     }
 
     /*
