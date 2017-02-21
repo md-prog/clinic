@@ -37,12 +37,14 @@
                             <fieldset class="form-group">
                                 <label for="clientName" class="clientNameLabel">Client Name</label>
                                 <select v-if="1==2" id="clientName" class="form-control select2-single" v-model="accessionState.accession.client">
-                                    <option v-for="client in accessionState.accession.clients" v-bind:value="{name: client.name, id: client.id}">{{client.name}}</option>
+                                    <option v-for="client in accessionState.clients" v-bind:value="{name: client.name, id: client.id}">{{client.name}}</option>
                                 </select>
                                 <multiselect v-model="accessionState.accession.client"
-                                             :options="accessionState.accession.clients" track-by="id" label="name"
+                                             :options="accessionState.clients" track-by="id" label="name"
                                              :searchable="true" :close-on-select="true"
-                                             placeholder="Select Client">
+                                             placeholder="Select Client"
+                                             @search-change="asyncGetClients(organization)"
+                                             :loading="accessionState.isLoadingClientsAsync">
                                 </multiselect>
                             </fieldset>
                             <label>{{accessionState.accession.client.name}}</label>
@@ -60,13 +62,13 @@
                                 <label for="patientName" class="patientLabel">Patient Search</label>
                                 <span class="config-info-top">To prevent duplicate entries, please search before entering a new record.</span>
                                 <select v-if="1==2" id="patientName" class="form-control select2-single require2" v-model="accessionState.accession.patient">
-                                    <option value="" v-for="patient in accessionState.accession.patients"
+                                    <option value="" v-for="patient in accessionState.patients"
                                             v-bind:value="{lastName: patient.lastName, firstName: patient.firstName, dob: patient.dob, ssn: patient.ssn}">
                                         {{'Name: ' + patient.firstName + ' ' + patient.lastName + ', DOB: ' + dateFormat(patient.dob) + ', SSN: ' + patient.ssn}}
                                     </option>
                                 </select>
                                 <multiselect v-model="accessionState.accession.patient"
-                                             :options="accessionState.accession.patients" track-by="id" label="lastName" :option-height="104"
+                                             :options="accessionState.patients" track-by="id" label="lastName" :option-height="104"
                                              :searchable="true" :close-on-select="true" :custom-label="customPatientDropdownLabel" :show-labels="false"
                                              placeholder="Select Patient" @search-change="this.patientSearched">
                                     <template slot="option" scope="props">
@@ -98,6 +100,7 @@
     //import { mapGetters, mapActions} from 'vuex';
     import axios from 'axios'
     import Multiselect from 'vue-multiselect';
+    import accessionData from './Accessioning.vue.data.js';
 
     module.exports = {
         name: "Accessioning",
@@ -111,81 +114,7 @@
         },
         data: function ()
         {
-            return{
-                accessionState:{
-                    loaded: false,
-                    isNew: false,
-                    patientsSearched: false,
-                    accession:{
-                        "id": 0,
-                        "clients": [
-                            {
-                                "id": 0,
-                                "name": ''
-                            },
-                        ],
-                        "client":{
-                            "id": 0,
-                            "name": ''
-                        },
-                        "facilities": [
-                          {
-                              "id": 0,
-                              "name": ''
-                          }
-                        ],
-                        "facility": {
-                            "id": 0,
-                            "name": ''
-                        },
-                        "patients": [
-                          {
-                              "id": 0,
-                              "lastName": '',
-                              "firstName": '',
-                              "dob": '01/01/1900',
-                              "ssn": '000-00-000'
-                          }
-                        ],
-                        "patient":{
-                            "id": 0,
-                            "lastName": '',
-                            "firstName": '',
-                            "ssn": '000-00-000',
-                            "dob": '01/01/1900'},
-                        "mrn": '',
-                        "specimens": [
-                          {
-                              "id": 0,
-                              "externalID": '',
-                              "customData": '{}'
-                          }
-                        ],
-                        "cases": [
-                          {
-                              "id": 0,
-                              "caseNumber": '',
-                              "processingLab": '',
-                              "analysisLab": '',
-                              "professionalLab": '',
-                              "customData": '{}',
-                              "panels": [
-                                {
-                                    "panelName": '',
-                                    "customData": '{}'
-                                }
-                              ],
-                              "tests": [
-                                {
-                                    "testName": '',
-                                    "customData": '{}'
-                                }
-                              ]
-                          }
-                        ]
-                    }
-                },
-            };
+            return {accessionState: accessionData.accessionState};
         },
         methods:{
             dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
@@ -197,12 +126,19 @@
                     this.accessionState.accession = response.data;
                     this.accessionState.loaded = true;
                     this.accessionState.patientsSearched = false;
-                    this.accessionState.patient.dob = moment(this.accessionState.patient.dob).format('M/D/YYYY');
+                    this.accessionState.accession.patient.dob = moment(this.accessionState.accession.patient.dob).format('M/D/YYYY'); //hack
                 }
-                    ).catch(err => {console.log(err)})
+                    ).catch(err => {console.log(err)});
             },
             patientSearched: function() {this.accessionState.patientsSearched = true;},
             newAccession: function(){},
+            asyncGetClients: function(org){
+                this.accessionState.isLoadingClientsAsync = true;
+                axios.get('api/Accessioning/Clients/' + org.orgNameKey).then( response => {
+                    this.accessionState.clients = response;
+                    this.accessionState.isLoadingClientsAsync = false;
+                }).catch(err=> {console.log(err)});
+            }
 
             //...mapActions('accession', ['loadAccession', 'newAccession'])
         },
