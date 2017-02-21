@@ -50,6 +50,11 @@
     "webpack": "~2.2.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.client.config.js"
+    "buildDev": "SET NODE_ENV=development && webpack -d --color",
+    "buildProd": "SET NODE_ENV=production && webpack -p --color"
+  },
+  "-vs-binding": {
+    "BeforeBuild": [ "buildDev" ],
+    "Clean": [ "install" ]
   }
 }
