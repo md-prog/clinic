@@ -22,7 +22,7 @@ namespace ClinicaCloudPlatform.DAL.Data
         {
             base.OnConfiguring(optionsBuilder);
             if (!injectionDone)
-                optionsBuilder.UseNpgsql("User ID=amlims;Password=P@ssw0rd;Host=arslinux1.westus.cloudapp.azure.com;Port=5432;Database=amlims_dev;Pooling=true;");
+                optionsBuilder.UseNpgsql("User ID=amlims;Password=P@ssw0rd;Host=arslinux1.westus.cloudapp.azure.com;Port=5432;Database=amlims_dev;Pooling=true;Keepalive=1;");
         }
 
         public DbSet<Accession> Accessions { get; set; }

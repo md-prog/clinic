@@ -8,3 +8,8 @@ export const loadAccession = ({ commit }, p) => {
         console.log(err);
     });
 };
+
+export const newAccession = ({ commit }, p) => {
+    commit("NEW_ACCESSION");
+    //todo: api calls to get lists, etc
+};

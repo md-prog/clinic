@@ -1,64 +1,72 @@
-﻿import { loadAccession } from './actions'
+﻿import { loadAccession, newAccession } from './actions'
+
 const accessionModule = {
     state: { 
         loaded: false,
+        isNew: false,
         accession:{
-            "accessionID": 0,
-            "clientCode": "",
+            "id": 0,
             "clients": [
-            {
-                "id": 0,
-                "name": ""
-            },
+                {
+                    "id": 0,
+                    "name": ''
+                },
             ],
-            "client":{},
+            "client":{
+                "id": 0,
+                "name": ''
+            },
             "facilities": [
               {
                   "id": 0,
-                  "name": ""
+                  "name": ''
               }
             ],
-            "facilityName": "",
+            "facility": {
+                "id": 0, 
+                "name": ''
+            },
             "patients": [
               {
                   "id": 0,
-                  "lastName": "",
-                  "firstName": "",
-                  "DOB": "",
-                  "SSN": ""
+                  "lastName": '',
+                  "firstName": '',
+                  "dob": '01/01/1900',
+                  "ssn": '000-00-000'
               }
             ],
-            "patientId":0,
-            "patientLast": "",
-            "patientFirst": "",
-            "patientDOB": "",
-            "patientSSN": "",
-            "mrn": "",
+            "patient":{
+                "id": 0, 
+                "lastName": '', 
+                "firstName": '',
+                "ssn": '000-00-000', 
+                "dob": '01/01/1900'},
+            "mrn": '',
             "specimens": [
               {
                   "id": 0,
-                  "externalID": "",
-                  "customData": null
+                  "externalID": '',
+                  "customData": '{}'
               }
             ],
             "cases": [
               {
                   "id": 0,
-                  "caseNumber": "",
-                  "processingLab": "",
-                  "analysisLab": "",
-                  "professionalLab": "",
-                  "customData": null,
+                  "caseNumber": '',
+                  "processingLab": '',
+                  "analysisLab": '',
+                  "professionalLab": '',
+                  "customData": '{}',
                   "panels": [
                     {
-                        "panelName": "",
-                        "customData": null
+                        "panelName": '',
+                        "customData": '{}'
                     }
                   ],
                   "tests": [
                     {
-                        "testName": null,
-                        "customData": null
+                        "testName": '',
+                        "customData": '{}'
                     }
                   ]
               }
@@ -70,16 +78,21 @@ const accessionModule = {
         LOAD_ACCESSION: (state, payload) => {
             Object.assign(state.accession, payload);
             state.loaded = true;
+        },
+        NEW_ACCESSION: (state) => {
+            state.isNew = true;
         }
     },
 
-    actions: {
-        loadAccession
+    actions: { //don't forget to import from ./actions       
+        loadAccession,
+        newAccession
     },
 
     getters: {
         accession: state => state.accession,
-        loaded: state => state.loaded
+        accessionLoaded: state => state.loaded,
+        isNewAccession: state => state.isNew
     },
 }
 

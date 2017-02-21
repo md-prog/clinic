@@ -1,8 +1,30 @@
 ﻿const path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+/*
+require('./assets/js/bootstrap.min.js');
+require('bootstrap-daterangepicker')
+require('select2');
+require('datatables.net');
+require('hideseek')
+require('./assets/js/plugins/datatables/integration/dataTables.bootstrap4.js');
+
+require('./assets/scss/app.scss');
+*/
 
 module.exports = {
     entry: {
+        'vendor': [
+            "jquery",
+            "tether",
+            path.join(__dirname, 'VueApp/assets/js/bootstrap.min.js'),
+            "select2",
+            "hideseek",
+            "moment",
+            "bootstrap-daterangepicker",
+            "datatables.net",
+            path.join(__dirname, 'VueApp/assets/js/plugins/datatables/integration/dataTables.bootstrap4.js')
+        ],
         'bundle.client': [
         path.join(__dirname, 'VueApp/client.js')]
     },
@@ -59,9 +81,17 @@ module.exports = {
                 loaders: ["style-loader", "css-loader"],
                 exclude: /node_modules/
             },
-            {
-                test: /\.scss$/,
-                loaders: ["style-loader", "css-loader", "sass-loader"],
+            //{
+            //    test: /\.scss$/,
+            //    loaders: ["style-loader", "css-loader", "sass-loader"],
+            //    exclude: /node_modules/
+            //},
+            { 
+                test: /\.scss$/, 
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader!sass-loader",
+                }),
                 exclude: /node_modules/
             },
               {
@@ -78,6 +108,15 @@ module.exports = {
         ]
     },
     plugins: [
+        //new webpack.optimize.OccurrenceOrderPlugin(true),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            minChunks: Infinity
+        }),
+        new ExtractTextPlugin({
+            filename: "style.css",
+            allChunks: true
+        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             "window.$": "jquery",
@@ -86,6 +125,7 @@ module.exports = {
             Tether: "tether",
             tether: "tether",
             "window.Tether": "tether",
+            moment: "moment",
             Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
             Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
             Button: "exports-loader?Button!bootstrap/js/dist/button",
@@ -98,9 +138,6 @@ module.exports = {
             Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
             Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
             Util: "exports-loader?Util!bootstrap/js/dist/util",
-        }),
-        new webpack.ProvidePlugin({
-            moment: "moment"
         })
     ]
 };

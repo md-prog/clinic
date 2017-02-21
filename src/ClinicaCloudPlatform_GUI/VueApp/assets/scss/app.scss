@@ -1,12 +1,4 @@
 ﻿/*$fa-font-path: "~/../../fonts";*/
-/**
- * GenesisUI - Bootstrap 4 Admin Template
- * @version v1.7.1
- * @link https://genesisui.com
- * Copyright (c) 2017 creativeLabs Łukasz Holeczek
- * @license Commercial
- */
-// Core variables and mixins
 
 @import 'icons/simple-line-icons.scss';
 @import 'icons/font-awesome.scss';
@@ -2429,7 +2421,8 @@ pre code {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     line-height: 1.25;
-    color: #9da0a8;
+    //color: #9da0a8;
+    color: #000000 !important;
     background-color: #fff;
     background-image: none;
     background-clip: padding-box;
@@ -2444,7 +2437,8 @@ pre code {
 }
 
 .form-control:focus, .daterangepicker .input-mini:focus, .input-group > .ui-select-bootstrap > input.ui-select-search.form-control:focus {
-    color: #9da0a8;
+    //color: #9da0a8;
+    color: #000000;
     background-color: #fff;
     border-color: #a5d8f2;
     outline: none;
@@ -2457,6 +2451,7 @@ pre code {
 
 .form-control:disabled, .daterangepicker .input-mini:disabled, .input-group > .ui-select-bootstrap > input.ui-select-search.form-control:disabled, .form-control[readonly], .daterangepicker [readonly].input-mini, .input-group > .ui-select-bootstrap > input[readonly].ui-select-search.form-control {
     background-color: #e4e6eb;
+    color: #9da0a8;
     opacity: 1;
 }
 
@@ -5609,7 +5604,7 @@ button.close {
 
 .modal {
     position: fixed;
-    top: 0;
+    top: 100px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -19222,6 +19217,7 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
 
 .powered-by {
     float: right;
+    font-size: smaller;
 }
 
 .copyright {
@@ -19235,6 +19231,12 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
     right: 5px;
     color: #1c9d1a;
     text-align: right !important;
+}
+
+.config-info-top {
+    @extend .config-info;
+    bottom: unset;
+    top: 5px;
 }
 
 //really sucky hack.  something is preventing a typical sticky footer solution...

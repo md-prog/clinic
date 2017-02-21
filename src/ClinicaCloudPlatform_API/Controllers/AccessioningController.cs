@@ -31,14 +31,14 @@ namespace ClinicaCloudPlatform.API.Controllers
                     }),
                     Client = new
                     {
-                        ClientID = acc.Client.ID,
-                        ClientName = acc.Client.ClientName
+                        ID = acc.Client.ID,
+                        Name = acc.Client.ClientName
                     },
-                    Facilities = acc.Client.Facilities.Select(f => new { f.ID, f.Name }),
+                    Facilities = acc.Client.Facilities.Select(f => new { f.ID, f.Name }), //rebind on client change...
                     Facility = new
                     {
-                        FacilityID = acc.Facility.ID,
-                        FacilityName = acc.Facility.Name
+                        ID = acc.Facility.ID,
+                        Name = acc.Facility.Name
                     },
                     Patients = pgHelper.GetPatientsByOrganization(OrgNameKey).Select(p => new
                     {

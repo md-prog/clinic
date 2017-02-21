@@ -137,7 +137,7 @@
                 <div class="container-fluid pt-2">
                     <div class="animated fadeIn">
                         <!-- Content Header (Page header) -->
-                        <router-view></router-view>
+                        <router-view :user="user" :organization="organization"></router-view>
                     </div>
                 </div>
             </main>
@@ -243,7 +243,7 @@
 
         <!-- Main Footer -->
         <footer class="app-footer">
-            <div class="copyright"><strong>Copyright &copy; {{year}} <a href="javascript:;">[organization name here]</a>.</strong> All rights reserved.</div>
+            <div class="copyright"><strong>Copyright &copy; {{year}} <a href="javascript:;">{{organization.name}}</a>.</strong> All rights reserved.</div>
             <div class="powered-by">Powered By Clinica Cloud Platform</div>
         </footer>
     </div>
@@ -273,9 +273,9 @@
         //    return this.store.state;
         //},
         created: function() {
-            if(typeof user === 'undefined')
+            if(!this.$parent.$store.state.user.userLoaded)
                 this.$parent.$store.dispatch('user/getUser')
-            if(typeof organization === 'undefined')
+            if(!this.$parent.$store.state.organizationLoaded)
                 this.$parent.$store.dispatch('organization/loadOrganization');
             //this.user.getUser();
         },
@@ -284,7 +284,8 @@
             {
                 return moment().format('YYYY');
             },
-         ...mapGetters('user', ['user'])
+         ...mapGetters('user', ['user', 'userLoaded']),
+         ...mapGetters('organization', ['organization', 'organizationLoaded'])
     },
     }
 
