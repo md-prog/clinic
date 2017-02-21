@@ -2,7 +2,7 @@
 using System.Linq;
 using ClinicaCloudPlatform.DAL.Data;
 using ClinicaCloudPlatform.Model.Models;
-
+using Microsoft.EntityFrameworkCore;
 //TODO: move to DAL
 namespace ClinicaCloudPlatform.API.Controller_Helpers
 {
@@ -21,7 +21,7 @@ namespace ClinicaCloudPlatform.API.Controller_Helpers
 
         public List<Client> GetClientsByOrganization(string OrgNameKey)
         {
-            return _context.Clients.ToList(); //need to use Microsoft.EntityFrameworkCore.Relational .FromSql extension, so pgsql can query json to filter patients by org
+            return _context.Clients.Include(c=>c.Facilities).ToList(); //need to use Microsoft.EntityFrameworkCore.Relational .FromSql extension, so pgsql can query json to filter patients by org
         }
     }
 }

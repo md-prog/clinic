@@ -19,35 +19,20 @@ namespace ClinicaCloudPlatform.API.Controllers
 
             using (var context = new ArsMachinaLIMSContext())
             {
-                var pgHelper = new Controller_Helpers.pgSqlJson(context);
 
                 retVal = context.Accessions.Where(a => a.ID == ID).Select(acc => new
                 {
                     ID = acc.ID,
-                    Clients = pgHelper.GetClientsByOrganization(OrgNameKey).Select(c => new
-                    {
-                        ID = c.ID,
-                        Name = c.ClientName
-                    }),
                     Client = new
                     {
                         ID = acc.Client.ID,
                         Name = acc.Client.ClientName
                     },
-                    Facilities = acc.Client.Facilities.Select(f => new { f.ID, f.Name }), //rebind on client change...
                     Facility = new
                     {
                         ID = acc.Facility.ID,
                         Name = acc.Facility.Name
                     },
-                    Patients = pgHelper.GetPatientsByOrganization(OrgNameKey).Select(p => new
-                    {
-                        ID = p.ID,
-                        LastName = p.LastName,
-                        FirstName = p.FirstName,
-                        DOB = p.DOB,
-                        SSN = p.SSN
-                    }),
                     Patient = new
                     {
                         ID = acc.Patient.ID,
@@ -88,5 +73,41 @@ namespace ClinicaCloudPlatform.API.Controllers
             return retVal;
         }
 
+        [HttpGet("[action]/{orgNameKey}")]
+        public dynamic Clients(string OrgNameKey)
+        {
+            using (var context = new ArsMachinaLIMSContext())
+            {
+                var pgHelper = new Controller_Helpers.pgSqlJson(context);
+                return pgHelper.GetClientsByOrganization(OrgNameKey).Select(c => new
+                {
+                    ID = c.ID,
+                    Name = c.ClientName,
+                    Facilities = c.Facilities.Select(f => new
+                    {
+                        ID = f.ID,
+                        Name = f.Name
+                    }
+                    )
+                });
+            }
+        }
+
+        [HttpGet("[action]/{orgNameKey}")]
+        public dynamic Patients(string OrgNameKey)
+        {
+            using (var context = new ArsMachinaLIMSContext())
+            {
+                var pgHelper = new Controller_Helpers.pgSqlJson(context);
+                return pgHelper.GetPatientsByOrganization(OrgNameKey).Select(p => new
+                {
+                    ID = p.ID,
+                    LastName = p.LastName,
+                    FirstName = p.FirstName,
+                    DOB = p.DOB,
+                    SSN = p.SSN
+                });
+            }
+        }
     }
 }

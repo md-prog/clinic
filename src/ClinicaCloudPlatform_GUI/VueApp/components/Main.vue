@@ -137,7 +137,7 @@
                 <div class="container-fluid pt-2">
                     <div class="animated fadeIn">
                         <!-- Content Header (Page header) -->
-                        <router-view :user="user" :organization="organization"></router-view>
+                        <router-view :user="this.user" :organization="this.organization"></router-view>
                     </div>
                 </div>
             </main>
