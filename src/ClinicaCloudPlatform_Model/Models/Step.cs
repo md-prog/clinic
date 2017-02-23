@@ -2,6 +2,6 @@
 {
     public class Step : _LimsBaseClass
     {
-        public string WorkflowStepName { get; set; }
+        public string Name { get; set; }
     }
 }

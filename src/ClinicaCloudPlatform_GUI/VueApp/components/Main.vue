@@ -43,6 +43,8 @@
                             </span>
                         </router-link>
 
+                        <a class="dropdown-item" href="/login"><i class="fa fa-lock" />Logout</a>
+
                         <!--<a class="dropdown-item" data-toggle="tab" href="#tasks" role="tab">
                             <i class="icon-list"></i>Tasks
                             <span class="tag" v-bind:class="{'tag-success': user.hasTasks, 'tag-default': !user.hasTasks}">
@@ -88,7 +90,7 @@
                             <router-link exact to="/" class="nav-link active">
                                 <i class="icon-speedometer"></i> Dashboard #1<span class="tag tag-info">NEW</span>
                             </router-link>
-                            </li>
+                        </li>
                         <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/dashboard2" class="nav-link"><i class="icon-grid" /><span class="page">Dashboard #2</span></router-link></li>
 
                         <li class="nav-title">
@@ -97,13 +99,13 @@
                         <li class="nav-title">
                             Samples
                         </li>
-                        
+
                         <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/accessioning/4/clinica" class="nav-link"><i class="icon-loop"></i> <span class="page">Accessioning</span></router-link></li>
 
                         <li class="nav-title">
                             Settings/Admin
                         </li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/admin/clientadmin" class="nav-link"><i class="icon-wrench"></i><span class="page">Client Admin</span></router-link></li>                        
+                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/admin/clientadmin" class="nav-link"><i class="icon-wrench"></i><span class="page">Client Admin</span></router-link></li>
 
                         <!--<li class="active pageLink" v-on:click="toggleMenu"><router-link exact to="/"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></router-link></li>-->
                         <li class="nav-title">
@@ -163,6 +165,7 @@
                             <span class="label label-success">{{ user.taskCount }}</span>
                         </a>
                     </li>-->
+                </ul>
                 </ul>
                 <!--Right menu tabs-->
                 <div class="tab-content">
@@ -251,7 +254,7 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import moment from 'moment'    
+    import moment from 'moment'
 
     module.exports = {
         name: 'Main',
@@ -266,28 +269,21 @@
                 event.toElement.parentElement.className = 'pageLink active';
             }
         },
-        //store: function () {
-        //    return this.$parent.$store;
-        //},
-        //state: function () {
-        //    return this.store.state;
-        //},
         created: function() {
             if(!this.$parent.$store.state.user.userLoaded)
                 this.$parent.$store.dispatch('user/getUser')
-            if(!this.$parent.$store.state.organizationLoaded)
+            if(!this.$parent.$store.state.organization.loaded)
                 this.$parent.$store.dispatch('organization/loadOrganization');
-            //this.user.getUser();
         },
         computed: {
             year: function()
             {
                 return moment().format('YYYY');
             },
-         ...mapGetters('user', ['user', 'userLoaded']),
-         ...mapGetters('organization', ['organization', 'organizationLoaded'])
-    },
-    }
+            ...mapGetters('user', ['user', 'userLoaded']),
+            ...mapGetters('organization', ['organization', 'organizationLoaded'])
+        },
+    };
 
 </script>
 

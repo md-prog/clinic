@@ -1,4 +1,6 @@
-﻿import { loadOrganization, saveOrganization } from './actions'
+﻿import { loadOrganization, saveOrganization } from './actions';
+import Vue from 'vue';
+
 const organizationModule = {
     state: { 
         loaded: false,
@@ -18,7 +20,78 @@ const organizationModule = {
                 ]
             }
             ],
-            customData: "{}",
+            /*customData:{                
+                "caseTypeDefinitions": [
+                  {
+                      "placeholder": 0
+                  }
+                ],
+                "logoUrl": "",
+                "panelDefinitions": [
+                  {
+                      "placeholder": 0
+                  }
+                ],
+                "patientAttributes": [
+                  {
+                      "placeholder": 0
+                  }
+                ],
+                "specimenAccessionSections": {
+                    "rows": [
+                      {
+                          "cols": [
+                            {
+                                "sectionName": "",
+                                "class": ""
+                            }
+                          ]
+                      }
+                    ]
+                },
+                "specimenDefinitions": [
+                  {
+                      "code": "",
+                      "type": "",
+                      "category": "",
+                      "workFlowName": "",
+                      "transports": [
+                        {
+                            "code": "",
+                            "name": ""
+                        },
+                      ],
+                      "accessionAttributes": [
+                        {
+                            "name": "",
+                            "label": "",
+                            "type": "",
+                            "options": [
+                              {
+                                  "id": "",
+                                  "name": ""
+                              },
+                            ],
+                            "section": ""
+                        },
+                        {
+                            "informationTooltip": "",
+                            "informationSource": "",
+                            "name": "",
+                            "label": "",
+                            "type": "",
+                            "options": [],
+                            "section": ""
+                        }                        
+                      ]
+                  }
+                ],
+                "testDefinitions": [
+                  {
+                      "placeholder": 0
+                  }
+                ]                
+            },*/
             //below will come from stormpath custom data
             css: ".navbar-brand:{background-color: #1e8fc6, padding:0, background-image:'http://vault.immunovault.com/img/logo.png', background-size: 220px 50px} .header .navbar{background-color: #36a9e1}",
             worklist:{
@@ -44,10 +117,10 @@ const organizationModule = {
     namespaced: true,
     mutations: {
         LOAD_ORGANIZATION: (state, payload) => {
-            Object.assign(state.organization, payload);
+            Vue.set(state.organization, "customData", payload.customData);
+            Object.assign(state.organization, payload);            
             state.loaded = true;
-        }
-        ,
+        },
         SAVE_ORGANIZATION: (state, payload) => {
         },
         //SET_ORGANIZATION: (state, payload) =>{
@@ -57,7 +130,7 @@ const organizationModule = {
 
     actions: {
         loadOrganization,
-        saveOrganization,
+        saveOrganization
         //setOrganization: function(state, organization) {
         //    state.dispatch('SET_ORGANIZATION', organization);
         //},

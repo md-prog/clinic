@@ -5,12 +5,18 @@
             isNew: false,
             isLoadingClientsAsync: false,
             isLoadingPatientsAsync: false,
-            patientsSearched: false,
+            patientsSearched: false,           
             accession: {
                 "id": 0,
                 "client": {
                     "id": 0,
-                    "name": ''
+                    "name": '',
+                    "facilities": [
+                        {
+                            "id": 0,
+                            "name": ''
+                        },
+                    ],
                 },
                 "facility": {
                     "id": 0,
@@ -26,9 +32,23 @@
                 "mrn": '',
                 "specimens": [
                   {
+                      attributesAreSet: false,
                       "id": 0,
-                      "externalID": '',
-                      "customData": '{}'
+                      "externalSpecimenID": '',
+                      "code": "",
+                      "parentSpecimenId": 0,
+                      "type": "",
+                      "transport": "",
+                      "collectionDate": "01/01/1900",
+                      "receivedDate": "01/01/1900",
+                      "customData": {
+                          "attributes": [
+                              {
+                                  "name": "",
+                                  "value": ""
+                              }
+                          ],
+                        }
                   }
                 ],
                 "cases": [
@@ -38,17 +58,17 @@
                       "processingLab": '',
                       "analysisLab": '',
                       "professionalLab": '',
-                      "customData": '{}',
+                      "customData": {},
                       "panels": [
                         {
                             "panelName": '',
-                            "customData": '{}'
+                            "customData": {}
                         }
                       ],
                       "tests": [
                         {
                             "testName": '',
-                            "customData": '{}'
+                            "customData": {}
                         }
                       ]
                   }
@@ -60,10 +80,11 @@
                     "name": '',
                     "facilities": [
                         {
-                          "id": 0,
-                          "name": ''
+                            "id": 0,
+                            "name": ''
                         }],
-                }],
+                },
+            ],
             patients: [
                   {
                       "id": 0,
@@ -71,7 +92,7 @@
                       "firstName": '',
                       "dob": '01/01/1900',
                       "ssn": '000-00-000'
-                  }
+                  },
             ],
         }
     };

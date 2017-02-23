@@ -9,9 +9,10 @@ using ClinicaCloudPlatform.Model.Models;
 namespace ClinicaCloudPlatform.DAL.Migrations
 {
     [DbContext(typeof(ArsMachinaLIMSContext))]
-    partial class ArsMachinaLIMSContextModelSnapshot : ModelSnapshot
+    [Migration("20170222204527_next6")]
+    partial class next6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -656,10 +657,6 @@ namespace ClinicaCloudPlatform.DAL.Migrations
 
                     b.Property<int?>("CaseID");
 
-                    b.Property<string>("Category");
-
-                    b.Property<string>("Code");
-
                     b.Property<DateTime>("CollectionDate");
 
                     b.Property<DateTime>("CreatedDate")
@@ -689,9 +686,14 @@ namespace ClinicaCloudPlatform.DAL.Migrations
 
                     b.Property<DateTime>("ReceivedDate");
 
-                    b.Property<string>("Transport");
+                    b.Property<string>("SpecimenCategory");
 
-                    b.Property<string>("Type");
+                    b.Property<string>("SpecimenCode")
+                        .HasMaxLength(7);
+
+                    b.Property<string>("SpecimenTransport");
+
+                    b.Property<string>("SpecimenType");
 
                     b.HasKey("ID");
 

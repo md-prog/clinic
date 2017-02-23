@@ -64,6 +64,7 @@
 --reference:C:\Users\ifield\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\ifield\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\Models\Accession.cs
+C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\Models\Barcode.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\Models\Batch.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\Models\Case.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\Models\Client.cs
