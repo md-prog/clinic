@@ -21,8 +21,10 @@ namespace ClinicaCloudPlatform.Model.Models
         /// </summary>
         public int ID { get; set; }
         public bool Active { get; set; }
-        public string CreatedUUID { get; set; }
-        public string ModifiedUUID { get; set; }
+        public string CreatedHref { get; set; }
+        public string CreatedFullName { get; set; }
+        public string ModifiedHref { get; set; }
+        public string ModifiedFullName { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 

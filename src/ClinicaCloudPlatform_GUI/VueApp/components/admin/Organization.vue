@@ -24,6 +24,8 @@
     </div>
 </template>
 <script>
+
+//continue using vuex for organization as it does have a global presence.  remember not to use v-model for two-way bindable fields.
 import { mapGetters, mapActions} from 'vuex';
     
     module.exports = {
@@ -34,9 +36,6 @@ import { mapGetters, mapActions} from 'vuex';
             },
             ...mapGetters('organization', ['organization']),
             ...mapGetters('user', ['user']),
-        },
-        created: function() {
-            //moved to main -- this.$parent.$store.dispatch('organization/loadOrganization');
         },
     mounted: function() {
         setupFormOverlays();

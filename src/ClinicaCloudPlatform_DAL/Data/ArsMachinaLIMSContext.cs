@@ -48,6 +48,7 @@ namespace ClinicaCloudPlatform.DAL.Data
             base.OnModelCreating(modelBuilder);
             BaseMap(modelBuilder.Entity<Accession>());
             BaseMap(modelBuilder.Entity<Batch>());
+            BaseMap(modelBuilder.Entity<Barcode>());
             BaseMap(modelBuilder.Entity<Case>());
             BaseMap(modelBuilder.Entity<Client>());
             BaseMap(modelBuilder.Entity<Doctor>());
@@ -66,8 +67,7 @@ namespace ClinicaCloudPlatform.DAL.Data
             BaseMap(modelBuilder.Entity<Workflow>());
             //BaseMap(modelBuilder.Entity<WorklistConfiguration>());
             
-            //data type/field/prop restrictions
-            modelBuilder.Entity<Specimen>().Property(p => p.SpecimenCode).HasMaxLength(7);
+            //data type/field/prop restrictions            
 
             modelBuilder.Entity<Accession>().HasOne<Doctor>(a => a.Doctor1).WithMany();
             modelBuilder.Entity<Accession>().HasOne<Doctor>(a => a.Doctor2).WithMany();
@@ -96,8 +96,10 @@ namespace ClinicaCloudPlatform.DAL.Data
             entityBuilder.Property(x => x.ID).ValueGeneratedOnAdd();
             entityBuilder.Property(x => x.CreatedDate).ValueGeneratedOnAdd();
             entityBuilder.Property(x => x.ModifiedDate).ValueGeneratedOnAddOrUpdate();
-            entityBuilder.Property(x => x.CreatedUUID).IsRequired(true);
-            entityBuilder.Property(x => x.ModifiedUUID).IsRequired(true);
+            entityBuilder.Property(x => x.CreatedHref).IsRequired(true);
+            entityBuilder.Property(x => x.ModifiedHref).IsRequired(true);
+            entityBuilder.Property(x => x.CreatedFullName).IsRequired(true);
+            entityBuilder.Property(x => x.ModifiedFullName).IsRequired(true);
             entityBuilder.Property(x => x.JsonExtendedData).ForNpgsqlHasColumnType("jsonb");
         }
     }

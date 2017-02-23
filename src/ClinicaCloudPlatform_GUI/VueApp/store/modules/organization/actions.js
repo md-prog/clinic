@@ -6,7 +6,8 @@ export const loadOrganization = ({ commit }) => {
     }).catch( err => {
         console.log(err);
     });
-}
+
+};
 
 export const saveOrganization = ({ commit }, organization) => {
     axios.post('/api/Organization/Save/', JSON.parse(organization)).then( response  => {
@@ -15,4 +16,4 @@ export const saveOrganization = ({ commit }, organization) => {
         console.log(err);
     });
 
-}
+};

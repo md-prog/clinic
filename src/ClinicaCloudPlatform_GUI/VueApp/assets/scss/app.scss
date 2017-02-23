@@ -2818,7 +2818,7 @@ fieldset[disabled] a.btn {
 .show > .btn-primary.dropdown-toggle,
 .show > .dropdown-toggle.fc-today-button {
     color: #fff;
-    background-color: #1e8fc6;
+    background-color: #1c89be; // #e16e36; orang..
     background-image: none;
     border-color: #1c89be;
 }
@@ -9398,6 +9398,10 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 
 .font-weight-bold {
     font-weight: bold;
+}
+
+.font-size-larger {
+    font-size: larger;
 }
 
 .font-italic {
@@ -19242,4 +19246,23 @@ nav.sidebar-nav .form-control:-ms-input-placeholder, nav.sidebar-nav .daterangep
 //really sucky hack.  something is preventing a typical sticky footer solution...
 .container-fluid.pt-2 {
     min-height: calc(100vh - 165px);
+}
+
+.form-group-100 {
+    @extend .form-group;
+    width: 100%;
+}
+
+.btn-primary-deselected{
+    @extend .btn-primary;
+    background-color:  #9da0a8;
+    border-color: #9da0a8;
+}
+
+.multiselect__tag{
+    background-color: #36a9e1;
+}
+
+.multiselect__option--highlight{
+    background-color: #36a9e1;
 }

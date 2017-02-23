@@ -26,7 +26,12 @@ namespace ClinicaCloudPlatform.API.Controllers
                     Client = new
                     {
                         ID = acc.Client.ID,
-                        Name = acc.Client.ClientName
+                        Name = acc.Client.ClientName,
+                        Facilities = acc.Client.Facilities.Select(f => new
+                        {
+                            ID = f.ID,
+                            Name = f.Name
+                        })
                     },
                     Facility = new
                     {
@@ -41,11 +46,28 @@ namespace ClinicaCloudPlatform.API.Controllers
                         DOB = acc.Patient.DOB,
                         SSN = acc.Patient.SSN
                     },
+                    Doctor1 = new
+                    {
+                        ID = acc.Doctor1.ID,
+                        LastName = acc.Doctor1.LastName,
+                        FirstName = acc.Doctor1.FirstName
+                    },
+                    Doctor2 = new
+                    {
+                        ID = acc.Doctor2.ID,
+                        LastName = acc.Doctor2.LastName,
+                        FirstName = acc.Doctor2.FirstName
+                    },
                     MRN = acc.MRN,
                     Specimens = acc.Specimens.Select(s => new
                     {
                         ID = s.ID,
-                        ExternalID = s.ExternalSpecimenID,
+                        Code = s.Code,
+                        ExternalSpecimenID = s.ExternalSpecimenID,
+                        Type = s.Type,
+                        Transport = s.Transport,
+                        CollectionDate = s.CollectionDate,
+                        ReceivedDate = s.ReceivedDate,
                         CustomData = s.JsonExtendedData,
                     }),
                     Cases = acc.Cases.Select(c => new
@@ -106,6 +128,21 @@ namespace ClinicaCloudPlatform.API.Controllers
                     FirstName = p.FirstName,
                     DOB = p.DOB,
                     SSN = p.SSN
+                });
+            }
+        }
+
+        [HttpGet("[action]/{orgNameKey}")]
+        public dynamic Doctors(string OrgNameKey)
+        {
+            using (var context = new ArsMachinaLIMSContext())
+            {
+                var pgHelper = new Controller_Helpers.pgSqlJson(context);
+                return pgHelper.GetDoctorsByOrganization(OrgNameKey).Select(p => new
+                {
+                    ID = p.ID,
+                    LastName = p.LastName,
+                    FirstName = p.FirstName
                 });
             }
         }

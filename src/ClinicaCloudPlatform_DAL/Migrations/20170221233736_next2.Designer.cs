@@ -9,9 +9,10 @@ using ClinicaCloudPlatform.Model.Models;
 namespace ClinicaCloudPlatform.DAL.Migrations
 {
     [DbContext(typeof(ArsMachinaLIMSContext))]
-    partial class ArsMachinaLIMSContextModelSnapshot : ModelSnapshot
+    [Migration("20170221233736_next2")]
+    partial class next2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -74,41 +75,6 @@ namespace ClinicaCloudPlatform.DAL.Migrations
                     b.HasIndex("PatientID");
 
                     b.ToTable("Accessions");
-                });
-
-            modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Barcode", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CreatedFullName")
-                        .IsRequired();
-
-                    b.Property<string>("CreatedHref")
-                        .IsRequired();
-
-                    b.Property<string>("JsonExtendedData")
-                        .HasAnnotation("Npgsql:ColumnType", "jsonb");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("ModifiedFullName")
-                        .IsRequired();
-
-                    b.Property<string>("ModifiedHref")
-                        .IsRequired();
-
-                    b.Property<string>("Number");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Barcode");
                 });
 
             modelBuilder.Entity("ClinicaCloudPlatform.Model.Models.Batch", b =>
@@ -656,12 +622,6 @@ namespace ClinicaCloudPlatform.DAL.Migrations
 
                     b.Property<int?>("CaseID");
 
-                    b.Property<string>("Category");
-
-                    b.Property<string>("Code");
-
-                    b.Property<DateTime>("CollectionDate");
-
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd();
 
@@ -685,13 +645,8 @@ namespace ClinicaCloudPlatform.DAL.Migrations
                     b.Property<string>("ModifiedHref")
                         .IsRequired();
 
-                    b.Property<int>("ParentSpecimenID");
-
-                    b.Property<DateTime>("ReceivedDate");
-
-                    b.Property<string>("Transport");
-
-                    b.Property<string>("Type");
+                    b.Property<string>("SpecimenCode")
+                        .HasMaxLength(7);
 
                     b.HasKey("ID");
 
