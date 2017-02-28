@@ -6,13 +6,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace ClinicaCloudPlatform
 {
     public class Startup
     {
         public Startup(IHostingEnvironment env)
-        {            
+        {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -36,7 +39,13 @@ namespace ClinicaCloudPlatform
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
+
             services.AddCors();
             var connectionString = Configuration["DbContextSettings:ConnectionString"];
             services.AddDbContext<DAL.Data.ArsMachinaLIMSContext>(options => options.UseNpgsql(connectionString));

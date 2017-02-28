@@ -62,7 +62,7 @@ $spacers: (
 //
 // Settings for the `<body>` element.
 
-$body-bg:                    #f5f5f5;
+$body-bg:                    #f5f5f5 !default;
 $body-color:                 $gray-dark;
 
 // Typography

@@ -5,34 +5,20 @@
             isNew: false,
             isLoadingClientsAsync: false,
             isLoadingPatientsAsync: false,
-            patientsSearched: false,           
+            patientsSearched: false,
             accession: {
                 "id": 0,
-                "client": {
-                    "id": 0,
-                    "name": '',
-                    "facilities": [
-                        {
-                            "id": 0,
-                            "name": ''
-                        },
-                    ],
-                },
-                "facility": {
-                    "id": 0,
-                    "name": ''
-                },
-                "patient": {
-                    "id": 0,
-                    "lastName": '',
-                    "firstName": '',
-                    "ssn": '000-00-000',
-                    "dob": '01/01/1900'
-                },
+                "guid": "00000000-0000-0000-0000-000000000000",
+                "clientId": 0,
+                "facilityId": 0,
+                "patientId": 0,
                 "mrn": '',
+                "orderingLabId": 0,
+                "createdDate": "02/27/2017",
                 "specimens": [
                   {
                       attributesAreSet: false,
+                      "guid": "00000000-0000-0000-0000-000000000000",
                       "id": 0,
                       "externalSpecimenID": '',
                       "code": "",
@@ -48,25 +34,32 @@
                                   "value": ""
                               }
                           ],
-                        }
+                      }
                   }
                 ],
                 "cases": [
                   {
+                      "guid": "00000000-0000-0000-0000-000000000000",
                       "id": 0,
                       "caseNumber": '',
-                      "processingLab": '',
-                      "analysisLab": '',
-                      "professionalLab": '',
+                      "type": "",
+                      "processingLabID": 0,
+                      "analysisLab": 0,
+                      "professionalLabID": 0,
                       "customData": {},
-                      "panels": [
+                      "specimenGuids": ["00000000-0000-0000-0000-000000000000", ],
+                      "panelResults": [
                         {
+                            "id": 0,
+                            "guid": "00000000-0000-0000-0000-000000000000",
                             "panelName": '',
                             "customData": {}
                         }
                       ],
-                      "tests": [
+                      "testResults": [
                         {
+                            "id": 0,
+                            "guid": "00000000-0000-0000-0000-000000000000",
                             "testName": '',
                             "customData": {}
                         }
