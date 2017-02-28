@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="accessioningMain" class="container-fluid pt-2">
+    <div id="accessioningMain" class="container-fluid p-lg-1 p-md-0 p-sm-0">
         <div id="loadingModal" tabindex="-1" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-info" role="document">
                 <div class="modal-content">
@@ -13,97 +13,127 @@
                 </div>
             </div>
         </div>
-        <div v-if="accessionState.loaded || accessionState.isNew" class="animated fadeIn">
+        <div v-if="loaded || isNew">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <span v-if="accessionState.isNew" class="font-weight-bold font-size-larger">New <span class="accessionLabel">Accession</span></span>
-                            <span v-else class="font-weight-bold font-size-larger"><span class="accessionLabel">Accession</span> {{accessionState.accession.id}}</span>
-                        </div>
-                        <div class="card-block">
-                            <span class="config-info">
-                                Labels on this screen can be overridden by organization CSS.<br />
-                                Each section can also be hidden by JSON, but defaults must often be specified (e.g. default client).
-                            </span>
+                <div class="col-lg-2 col-md-2 col-sm-auto">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div v-if="isNew" class="card card-inverse card-primary">
+                                <div class="card-block">
+                                    <i class="icon-chemistry font-2xl mr-1 float-left"></i>
+                                    <div class="text-uppercase font-weight-bold font-xs">New <span class="accessionLabel">Accession</span></div>
+                                </div>
+                            </div>
+                            <div v-else class="card card-inverse card-primary">
+                                <div class="card-block">
+                                    <i class="icon-chemistry font-2xl mr-1 float-left"></i>
+                                    <div class="text-uppercase font-weight-bold font-xs"><span class="accessionLabel">Accession</span> ID {{accessionState.accession.id}}</div>
+                                    {{accessionState.accession.createdDate | prettyDate}}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card card-inverse card-primary">
+                                <div class="card-block card-compact">
+                                    <i class="fa fa-print font-2xl mr-1 float-left"></i>
+                                    <ul>
+                                        <li>
+                                            <a href="#printTravelDoc">Print Accession</a>
+                                        </li>
+                                        <li>
+                                            <a href="#printLabels">Print Labels</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            <button type="button" class="btn btn-warning" v-on:click="saveAccession"><i class="fa fa-save"></i> Save and Launch</button>
+                        </div>
+                        <!--<div class="col-sm-auto">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-save" v-on:click="saveAccession"></i> Save</button>
+                        </div>-->
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5 col-sm-auto">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-header-primary">
                             <span class="clientDetailsLabel">Client/Source Details</span>
                         </div>
                         <div class="card-block">
                             <fieldset class="form-group">
                                 <label for="clientName" class="clientLabel">Client</label>
-                                <multiselect id="clientName" v-model="accessionState.accession.client"
+                                <multiselect id="clientName"
                                              :options="accessionState.clients" track-by="id" label="name"
                                              :searchable="true" :close-on-select="true"
-                                             placeholder="Select..."
-                                             @search-change="asyncGetClients(organization)"
-                                             :loading="accessionState.isLoadingClientsAsync">
+                                             placeholder="Type to Search..."
+                                             v-on:select="clientChanged"
+                                             v-bind:value="client">
                                 </multiselect>
-                                <label for="clientName" class="facilityLabel">Facility</label>
-                                <multiselect id="facilityName" v-model="accessionState.accession.facility"
-                                             :options="accessionState.accession.client.facilities" track-by="id" label="name"
+                                <label for="facilityName" class="facilityLabel">Facility</label>
+                                <multiselect id="facilityName"
+                                             :options="this.facilities" track-by="id" label="name"
                                              :searchable="true" :close-on-select="true"
+                                             v-on:select="faciltyChanged"
+                                             v-bind:value="facility"
+                                             :loading="this.accessionState.isLoadingClientsAsync"
                                              placeholder="Select...">
                                 </multiselect>
                             </fieldset>
-                            <label>{{accessionState.accession.client.name}}</label>
-                            <label>{{accessionState.accession.client.id}}</label>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-5 col-sm-auto">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-header-primary">
                             <span class="patientDetailsLabel">Patient/Subject Details</span>
                         </div>
                         <div class="card-block">
                             <div class="form-group">
+                                <!--v-if="typeof(this.patient) != 'undefined'">-->
                                 <label for="patientName" class="patientLabel">Patient</label>
-                                <span class="config-info-top">To prevent duplicate entries, please search before entering a new record.</span>
-                                <multiselect id="patientName" v-model="accessionState.accession.patient"
+                                <div class="float-right"><small>To prevent duplicate entries, please search before entering a new record.</small></div>
+                                <multiselect id="patientName"
                                              :options="accessionState.patients" track-by="id" label="lastName" :option-height="104"
                                              :searchable="true" :close-on-select="true" :custom-label="customPatientDropdownLabel" :show-labels="false"
-                                             placeholder="Select..."
-                                             @search-change="asyncGetPatients(organization)"
-                                             :loading="accessionState.isLoadingPatientsAsync">
+                                             placeholder="Type to Search..."
+                                             v-on:select="patientChanged"
+                                             v-bind:value="patient">
+                                    <!--v-on:search-change="asyncGetPatients(organization)"
+                                    :loading="this.accessionState.isLoadingPatientsAsync"-->
                                     <template slot="option" scope="props">
                                         <div>{{props.option.lastName}}, {{props.option.firstName}}<br />DOB: {{props.option.dob | prettyDate}}<br />SSN: {{props.option.ssn}}</div>
                                     </template>
                                 </multiselect>
                                 <div class="row">
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-lg-6 col-sm-auto">
                                         <label for="firstNameField">First Name</label>
-                                        <input id="firstNameField" type="text" v-model="accessionState.accession.patient.firstName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
+                                        <input id="firstNameField" type="text" v-model="patient.firstName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-lg-6 col-sm-auto">
                                         <label for="lastNameField">Last Name</label>
-                                        <input id="lastNameField" type="text" v-model="accessionState.accession.patient.lastName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
+                                        <input id="lastNameField" type="text" v-model="this.patient.lastName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
                                     </div>
-
-
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-lg-4 col-sm-auto">
                                         <label for="ssnField">SSN</label>
-                                        <input id="ssnField" type="text" v-model="accessionState.accession.patient.ssn" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
+                                        <input id="ssnField" type="text" v-model="this.patient.ssn" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
                                     </div>
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-lg-4 col-sm-auto">
                                         <label for="dobField">DOB</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
-                                            <input id="dobField" type="datetime" v-model="accessionState.accession.patient.dob" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
+                                            <input id="dobField" type="datetime" v-model="this.patient.dob" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-lg-4 col-sm-auto">
                                         <label for="mrnField">MRN</label>
                                         <input id="mrnField" type="text" v-model="accessionState.accession.mrn" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
                                     </div>
@@ -112,17 +142,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-header-primary">
                             <span class="specimensLabel">Specimens</span>
                         </div>
                         <div class="card-block">
-                            <div class="col-sm-12">
-                                <table id="specimenList" role="grid" class="table table-striped">
+                            <div class="table-responsive">
+                                <table id="specimenList" role="grid" class="table table-striped table-condensed">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -141,26 +170,30 @@
                                             <td>{{specimen.transport}}</td>
                                             <td>{{specimen.collectionDate}}</td>
                                             <td>
-                                                <a v-bind:href="'#collapse'+specimen.id" data-toggle="collapse" data-parent="specimenAccordion"
+                                                <a v-bind:href="'#collapse'+specimen.guid" data-toggle="collapse" data-parent="specimenAccordion"
                                                    v-on:click="setSpecimenAttributes(specimen)">Click</a>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary float-right" @clicked="addSpecimen"><i class="fa fa-plus-circle"></i> Add Specimen</button>
+                            <button class="btn btn-primary float-right" @v-on:click="addSpecimen"><i class="fa fa-plus-circle"></i> Add Specimen</button>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
                     <div class="panel-group card" id="specimenAccordian">
                         <div v-for="specimen in accessionState.accession.specimens" class="panel panel-default">
-                            <div v-bind:id="'collapse'+specimen.id" class="panel-collapse collapse in">
-                                <div class="panel-heading card-header">
+                            <div v-bind:id="'collapse'+specimen.guid" class="panel-collapse collapse in">
+                                <div class="panel-heading card-header card-header-primary">
                                     <div class="panel-title">
                                         <span class="specimenLabel">Specimen</span> {{specimen.externalSpecimenID}} Details
-                                        <div id="copySpecimenAttributes" class="btn-group float-sm-right" data-toggle="buttons">
+                                        <div id="copySpecimenAttributes" class="btn-group float-right" data-toggle="buttons">
                                             <label class="btn btn-primary btn-sm">
                                                 <input type="checkbox" autocomplete="off" name="true" /> Same as previous
                                             </label>
@@ -172,7 +205,7 @@
                                     <div v-for="row in organization.customData.specimenAccessionSections.rows" class="row">
                                         <div v-for="col in row.cols" v-bind:class="col.class">
                                             <div class="card">
-                                                <div class="card-header">
+                                                <div class="card-header card-header-primary">
                                                     {{col.sectionName}}
                                                 </div>
                                                 <div class="card-block">
@@ -195,14 +228,14 @@
                                                             </label>
                                                         </div>
                                                         <multiselect v-if="att.type=='single-large'"
-                                                                     v-bind:id="specimen.id+'_'+att.name+'_'+att.type"
+                                                                     v-bind:id="specimen.guid+'_'+att.name+'_'+att.type"
                                                                      deselect-label="Can't remove this value" track-by="id" label="name"
                                                                      placeholder="Select one" :options="att.options" :searchable="false" :allow-empty="false"
                                                                      v-bind:value="currentSpecimenAttributeValue(specimen, att.name, true)"
                                                                      v-on:input="updateSpecimenAttributeFromMultiSelect">
                                                         </multiselect><!--"-->
                                                         <multiselect v-if="att.type=='multiple-large'"
-                                                                     v-bind:id="specimen.id+'_'+att.name+'_'+att.type"
+                                                                     v-bind:id="specimen.guid+'_'+att.name+'_'+att.type"
                                                                      deselect-label="Can't remove this value" track-by="id" label="name"
                                                                      placeholder="Select one or more" :options="att.options" :searchable="true"
                                                                      :multiple="true" :allow-empty="false"
@@ -233,6 +266,7 @@
     import accessionData from './Accessioning.vue.data.js';
     import filter from '../../assets/js/setFilter.js';
     import objectMerge from 'object-merge';
+    import debounce from 'lodash/debounce';
 
     //require('../../assets/js/selectMany.js');
 
@@ -253,20 +287,49 @@
         methods:{
 
             loadAccession: function(id, orgNameKey){
-                axios.get('/api/Accessioning/Get/' + id + '/' + orgNameKey).then( response  =>
-                {
+                var vm = this;
+                axios.all([
+                    axios.get('/api/Accessioning/' + id + '/' + orgNameKey),
+                    axios.get('/api/Accessioning/Clients/' + orgNameKey),
+                    axios.get('/api/Accessioning/Patients/' + orgNameKey)
+                ]).then(axios.spread(function (accResponse, clientResponse, patientResponse) {
+                    //...  this callback will be executed only when both requests are complete.
+                    //console.log('User', userResponse.data);
+                    //console.log('Repositories', reposResponse.data);
+                    //}));
+                    //axios.get('/api/Accessioning/' + id + '/' + orgNameKey).then( response  =>
+                    //{
                     //var tempAccession = Object.assign({},this.accessionState.accession, response.data); //this should do a non-destructive assignment - wrong
                     //this.accessionState.accession = tempAccession;
-                    this.$set(this.accessionState, "accession", objectMerge(this.accessionState.accession, response.data));
-                    this.accessionState.loaded = true;
-                    this.accessionState.patientsSearched = false;
-                    this.accessionState.accession.patient.dob = moment(this.accessionState.accession.patient.dob).format('M/D/YYYY'); //hack
+                    //this.$set(this.accessionState, "accession", objectMerge(this.accessionState.accession, response.data.accession));
+                    //this.$set(this.accessionState, "client", objectMerge(this.accessionState.client, response.data.client));
+                    //this.$set(this.accessionState, "patient", objectMerge(this.accessionState.patient, response.data.patient));
+                    //this.$set(this.accessionState, "facility", objectMerge(this.accessionState.facility, response.data.facility));
+                    //this.$set(this.accessionState.patient, 'dob', moment(this.accessionState.patient.dob).format('M/D/YYYY')); //hack
+                    //objectMerge(this.accessionState.accession, response.data.accession);
+                    //this.accessionState.accession = response.data.accession;
+                    Object.assign(vm.accessionState.accession, accResponse.data.accession);
+                    Object.assign(vm.accessionState.clients, clientResponse.data);
+                    Object.assign(vm.accessionState.patients, patientResponse.data);
+                    //vm.getPatient(accResponse.data.accession.patientId, orgNameKey);
+                    //vm.getClient(accResponse.data.accession.clientId, orgNameKey);
+                    vm.$set(vm.accessionState, 'loaded', true);
+                    vm.$set(vm.accessionState, 'patientsSearched', false);
                 }
-                    ).catch(err => {console.log(err)});
+                    )).catch(err => {console.log(err)});
             },
 
-            newAccession: function(){},
+            saveAccession: function(){
+                //this.$set(this.accessionState.accession, 'facility', this.accessionState.client.);
+                axios.post('/api/accessioning', {
+                    accession: this.accessionState.accession,
+                    orgCustomData: this.organization.customData,
+                    userFullName: this.user.fullName,
+                    userHref: this.user.href});
+            },
 
+            newAccession: function(){this.$set(this.accessionState,'isNew', true);},
+            //debounce(
             asyncGetClients: function(org){
                 this.accessionState.isLoadingClientsAsync = true;
                 axios.get('/api/Accessioning/Clients/' + org.nameKey).then( response => {
@@ -274,13 +337,27 @@
                     this.accessionState.isLoadingClientsAsync = false;
                 }).catch(err=> {console.log(err)});
             },
-
+            //, 500),
+            //debounce(
             asyncGetPatients: function(org){
                 this.accessionState.isLoadingPatientAsync = true;
                 this.accessionState.patientsSearched = true;
                 axios.get('/api/Accessioning/Patients/' + org.nameKey).then( response => {
                     Object.assign(this.accessionState.patients, response.data);
                     this.accessionState.isLoadingPatientsAsync = false;
+                }).catch(err=> {console.log(err)});
+            },
+            //, 500),
+
+            getPatient: function(org, id){
+                axios.get('/api/Accessioning/Patients/' + org.nameKey + '/' + id).then( response => {
+                    this.accessionState.patients.push(response.data);
+                }).catch(err=> {console.log(err)});
+            },
+
+            getClient: function(org, id){
+                axios.get('/api/Accessioning/Clients/' + org.nameKey + '/' + id).then( response => {
+                    this.accessionState.clients.push(response.data);
                 }).catch(err=> {console.log(err)});
             },
 
@@ -332,12 +409,12 @@
 
             updateSpecimenAttributeFromMultiSelect: function (value, id){
                 var idParams = id.split('_');
-                var specimenId = idParams[0];
+                var specimenGuid = idParams[0];
                 var attributeName = idParams[1];
                 var attributeType = idParams[2];
 
                 var multiple = attributeType == 'multiple-large' || attributeType == 'multiple-small';
-                var specimen = this.accessionState.accession.specimens.find(function(s){return s.id == specimenId});
+                var specimen = this.accessionState.accession.specimens.find(function(s){return s.guid == specimenGuid});
 
                 this.updateSpecimenAttribute(specimen, attributeName, value, multiple);
             },
@@ -365,10 +442,43 @@
 
             customPatientDropdownLabel: function ({id, firstName, lastName, dob, ssn}) {
                 return 'Name: ' + firstName + ' ' + lastName + ', DOB: ' + this.dateFormat(dob) + ', SSN: ' + ssn},
+
+    clientChanged: function(value, dropDownId){
+        this.$set(this.accessionState.accession, 'clientId', value.id);
+        this.$set(this.accessionState.accession, 'facilityId', value.facilities[0].id);
+    },
+    faciltyChanged: function(value, dropDownId){
+        this.$set(this.accessionState.accession, 'facilityId', value.id);
+    },
+    patientChanged: function(value, dropDownId){
+        this.$set(this.accessionState.accession, 'patientId', value.id);
+    }
     },
     computed: {
-        loaded: function() { return this.accessionState.loaded;} //for the watcher below
-        //isNew: function() {return this.accessionState.isNew},
+            loaded: function() { return this.accessionState.loaded;},
+            isNew: function() { return this.accessionState.isNew;},
+            patient: function() {
+                var pId = this.accessionState.accession.patientId;
+                var pat = this.accessionState.patients.find(function (p) {return p.id == pId;});
+                return pat;
+            },
+            client: function () {
+                var cId = this.accessionState.accession.clientId;
+                var cli = this.accessionState.clients.find(function (c) {return c.id == cId;});
+                return cli;
+            },
+            facility: function () {
+                var fId = this.accessionState.accession.facilityId;
+                return this.facilities.find(function (f) {return f.id == fId;});
+            },
+            facilities: function() {
+                var facilities = [{id:0, name:""}];
+                var cId = this.accessionState.accession.clientId;
+                var cli = this.accessionState.clients.find(function (c) {return c.id == cId;});
+                if(typeof(cli)!='undefined')
+                    facilities = cli.facilities;
+                return facilities;
+            }
     },
     created: function() {
         if (typeof this.$route.params.id === 'undefined')
@@ -382,14 +492,21 @@
             loaded: function() {
                 if (this.loaded)
                 {
-                    this.$nextTick(function() { hideModal(); });
+                    var vm = this;
+                    this.$nextTick(function() { postLoadActions(vm); });
                 }
-            }
+            },
     },
     mounted: function() {
         setupFormOverlays();
     }
     };
+
+    function postLoadActions(vm)
+    {
+        hideModal();
+        //$("#clientName").value = vm.client;
+    }
 
     function setupFormOverlays(){
         if(modalActive)

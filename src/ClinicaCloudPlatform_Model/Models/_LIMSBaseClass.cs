@@ -7,7 +7,7 @@ namespace ClinicaCloudPlatform.Model.Models
         
         public _LimsBaseClass()
         {
-            ID = 0;
+            Id = 0;
             //AuditLevel = AuditLevel.UserDateOnly;
             //AuditLogReturnLevel = AuditLogReturnLevel.Created;
             Active = true;
@@ -19,7 +19,9 @@ namespace ClinicaCloudPlatform.Model.Models
         /// <summary>
         /// Managed in code, expects to be persisted in DBMS as unique identifier or index
         /// </summary>
-        public int ID { get; set; }
+        //public int Id { get; set; }
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
         public bool Active { get; set; }
         public string CreatedHref { get; set; }
         public string CreatedFullName { get; set; }
@@ -31,7 +33,7 @@ namespace ClinicaCloudPlatform.Model.Models
         /// <summary>
         /// Use to store extended data (or majority of object) as JSON column/document
         /// </summary>
-        public string JsonExtendedData { get; set; }
+        public string CustomData { get; set; }
 
         //public static JsonSchema JsonExtendedDataSchema { get; }
 
@@ -42,10 +44,10 @@ namespace ClinicaCloudPlatform.Model.Models
         //{
         //    get
         //    {
-        //        var retVal = new List<Audit>();
+        //        var retVal = new IEnumerable<Audit>();
         //        if (AuditLogReturnLevel != AuditLogReturnLevel.None)
         //        {
-        //            //retval = list od json diffs from db
+        //            //retval = IEnumerable od json diffs from db
         //            //TODO - use https://github.com/FxKu/audit to handle auditing 
         //            switch (AuditLogReturnLevel)
         //            {
@@ -53,7 +55,7 @@ namespace ClinicaCloudPlatform.Model.Models
         //                case AuditLogReturnLevel.LastModified:
         //                case AuditLogReturnLevel.FullHistory:
         //                default:
-        //                    retVal = new List<Audit>();
+        //                    retVal = new IEnumerable<Audit>();
         //                    break;
         //            }
         //        }

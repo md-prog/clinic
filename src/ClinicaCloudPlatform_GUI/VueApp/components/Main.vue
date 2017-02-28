@@ -45,15 +45,8 @@
 
                         <a class="dropdown-item" href="/login"><i class="fa fa-lock" />Logout</a>
 
-                        <!--<a class="dropdown-item" data-toggle="tab" href="#tasks" role="tab">
-                            <i class="icon-list"></i>Tasks
-                            <span class="tag" v-bind:class="{'tag-success': user.hasTasks, 'tag-default': !user.hasTasks}">
-                                {{ user.taskCount }}
-                            </span>
-                        </a>-->
-
                         <div class="dropdown-header text-center">
-                            <strong>Settings</strong>
+                            <strong>Setting</strong>
                         </div>
 
                         <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{{ user.messageCount }}</span></a>
@@ -69,61 +62,9 @@
         </header>
 
         <div class="app-body">
-            <div class="sidebar">
-                <nav class="sidebar-nav open">
-                    <form>
-                        <div class="form-group p-h mb-0">
-                            <input type="text" name="search" id="search" class="search form-control" data-toggle="hideseek" placeholder="Search Menus" data-list=".search-nav">
-                            <!--<span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>-->
-                        </div>
-                    </form>
-                    <!-- Sidebar Menu -->
-                    <ul class="nav search-nav">
-                        <li class="nav-title">
-                            Dashboards
-                        </li>
-                        <li class="nav-item open" v-on:click="toggleMenu">
-                            <router-link exact to="/" class="nav-link active">
-                                <i class="icon-speedometer"></i> Dashboard #1<span class="tag tag-info">NEW</span>
-                            </router-link>
-                        </li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/dashboard2" class="nav-link"><i class="icon-grid" /><span class="page">Dashboard #2</span></router-link></li>
 
-                        <li class="nav-title">
-                            Worklists
-                        </li>
-                        <li class="nav-title">
-                            Samples
-                        </li>
-
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/accessioning/4/clinica" class="nav-link"><i class="icon-loop"></i> <span class="page">Accessioning</span></router-link></li>
-
-                        <li class="nav-title">
-                            Settings/Admin
-                        </li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/admin/clientadmin" class="nav-link"><i class="icon-wrench"></i><span class="page">Client Admin</span></router-link></li>
-
-                        <!--<li class="active pageLink" v-on:click="toggleMenu"><router-link exact to="/"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></router-link></li>-->
-                        <li class="nav-title">
-                            Etc
-                        </li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/tables" class="nav-link"><i class="icon-grid" /><span class="page">Tables</span></router-link></li>
-
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/tasks" class="nav-link"><i class="icon-list"></i><span class="page">Tasks</span></router-link></li>
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/setting" class="nav-link"><i class="icon-settings"></i><span class="page">Settings</span></router-link></li>
-
-                        <li class="nav-item" v-on:click="toggleMenu"><router-link exact to="/404" class="nav-link"><i class="icon-loop"></i> <span class="page">404</span></router-link></li>
-
-                    </ul>
-                </nav>
-            </div>
-
-
-
+            <Sidebar name="rightSidebar"></Sidebar>
+            
             <!-- Main content -->
             <main class="main">
                 <section class="content-header">
@@ -136,7 +77,7 @@
                         <span class="active breadcrumb-item">{{$route.name.toUpperCase() }}</span>
                     </nav>
                 </section>
-                <div class="container-fluid pt-2">
+                <div class="container-fluid pt-lg-1 pt-md-1 pt-sm-0 main-fill">
                     <div class="animated fadeIn">
                         <!-- Content Header (Page header) -->
                         <router-view :user="this.user" :organization="this.organization"></router-view>
@@ -165,7 +106,6 @@
                             <span class="label label-success">{{ user.taskCount }}</span>
                         </a>
                     </li>-->
-                </ul>
                 </ul>
                 <!--Right menu tabs-->
                 <div class="tab-content">
@@ -215,38 +155,21 @@
                                 <hr />
 
                                 <a href="#" class="dropdown-item text-center">
-                                    <strong><router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications</router-link></strong>
+                                    <strong>
+                                    <router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications
+                                        </router-link></strong>
                                 </a>
 
                             </div>
                         </div>
-                    </div>
-                    <!--<div class="tab-pane p-1" id="tasks" role="tabpanel">
-                        <div class="header"><strong>You have {{ user.taskCount }} tasks(s)</strong></div>
-                        TODO: filters on v-for to break up tasks into periods like "Today"
-                        <div v-if="user.hasTasks">
-                            <div class="callout callout-info m-0 py-1">
-                                <div class="callout m-0 py-h text-muted text-center bg-faded text-uppercase">
-                                    <small>
-                                        <b>Today</b>
-                                    </small>
-                                </div>
-                                <div>
-                                    Meeting with
-                                    <strong>Lucas</strong>
-                                </div>
-                                <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                                <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
-                            </div>
-                        </div>
-                    </div>-->
+                    </div>                    
                 </div>
             </aside>
         </div>
 
         <!-- Main Footer -->
         <footer class="app-footer">
-            <div class="copyright"><strong>Copyright &copy; {{year}} <a href="javascript:;">{{organization.name}}</a>.</strong> All rights reserved.</div>
+            <div class="copyright">Copyright &copy; {{year}} <strong><a href="javascript:;">{{organization.name}}</a></strong>.  All rights reserved.</div>
             <div class="powered-by">Powered By Clinica Cloud Platform</div>
         </footer>
     </div>
@@ -254,10 +177,12 @@
 
 <script>
     import { mapGetters, mapActions } from 'vuex';
-    import moment from 'moment'
+    import moment from 'moment';
+    import Sidebar from './main/Sidebar.vue';
 
     module.exports = {
         name: 'Main',
+        components: {'Sidebar': Sidebar},
         methods: {
             changeloading: function () {
                 this.store.dispatch('TOGGLE_SEARCHING');
@@ -283,7 +208,7 @@
             ...mapGetters('user', ['user', 'userLoaded']),
             ...mapGetters('organization', ['organization', 'organizationLoaded'])
         },
-    };
+        };
 
 </script>
 

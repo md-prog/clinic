@@ -23,7 +23,7 @@ namespace ClinicaCloudPlatform.Model.Models
         - Case References
         - Specimen References
 
-        JSON Schema for above should be stored/exposed as JsonExtendedDataSchema and data as JsonExtendedData
+        JSON Schema for above should be stored/exposed as JsonExtendedDataSchema and data as CustomData
         *****************/
 
     }

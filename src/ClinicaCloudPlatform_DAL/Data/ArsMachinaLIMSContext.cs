@@ -1,12 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ClinicaCloudPlatform.Model.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Linq;
+using System;
 
 namespace ClinicaCloudPlatform.DAL.Data
 {
     public class ArsMachinaLIMSContext : DbContext
     {
         bool injectionDone = false;
+        string userFullName = "";
+        string userHref = "";
+
+        public ArsMachinaLIMSContext(DbContextOptions<ArsMachinaLIMSContext> options, string UserFullName, string UserHref)
+            : base(options)
+        {
+            userFullName = UserFullName;
+            userHref = UserHref;
+        }
+
+        public ArsMachinaLIMSContext(string UserFullName, string UserHref)
+            : base()
+        {
+            userFullName = UserFullName;
+            userHref = UserHref;
+        }
 
         public ArsMachinaLIMSContext()
         {
@@ -22,7 +40,7 @@ namespace ClinicaCloudPlatform.DAL.Data
         {
             base.OnConfiguring(optionsBuilder);
             if (!injectionDone)
-                optionsBuilder.UseNpgsql("User ID=amlims;Password=P@ssw0rd;Host=arslinux1.westus.cloudapp.azure.com;Port=5432;Database=amlims_dev;Pooling=true;Keepalive=1;");
+                optionsBuilder.UseNpgsql("User Id=amlims;Password=P@ssw0rd;Host=arslinux1.westus.cloudapp.azure.com;Port=5432;Database=amlims_dev;Pooling=true;Keepalive=1;");
         }
 
         public DbSet<Accession> Accessions { get; set; }
@@ -66,7 +84,7 @@ namespace ClinicaCloudPlatform.DAL.Data
             //BaseMap(modelBuilder.Entity<User>());
             BaseMap(modelBuilder.Entity<Workflow>());
             //BaseMap(modelBuilder.Entity<WorklistConfiguration>());
-            
+
             //data type/field/prop restrictions            
 
             modelBuilder.Entity<Accession>().HasOne<Doctor>(a => a.Doctor1).WithMany();
@@ -86,21 +104,47 @@ namespace ClinicaCloudPlatform.DAL.Data
 
             modelBuilder.Entity<Report>().HasMany<ReportDocument>(a => a.ReportDocuments);
             modelBuilder.Entity<Report>().HasOne<ReportTemplate>(a => a.ReportTemplate);
-        
+
             modelBuilder.Entity<Workflow>().HasMany<Step>(a => a.Steps);
+        }        
+
+        public override int SaveChanges()
+        {
+            //foreach(var entity in ChangeTracker.Entries())
+            //{
+            //    if(entity is ITypeSequenced && entity.State == EntityState.Added)
+            //        Functions.Sequencing.GetFormattedSequence<ITypeSequenced>(entity... //nvm, need metatadata from organization customdata
+            //}
+            foreach (var entity in ChangeTracker.Entries<_LimsBaseClass>().Where(e => e.State == EntityState.Added))
+            {
+                ((_LimsBaseClass)entity.Entity).CreatedDate = DateTime.UtcNow;
+                ((_LimsBaseClass)entity.Entity).CreatedFullName = userFullName;
+                ((_LimsBaseClass)entity.Entity).CreatedHref = userHref;
+                ((_LimsBaseClass)entity.Entity).ModifiedDate = DateTime.UtcNow;
+                ((_LimsBaseClass)entity.Entity).ModifiedFullName = userFullName;
+                ((_LimsBaseClass)entity.Entity).ModifiedHref = userHref;
+            }
+            foreach (var entity in ChangeTracker.Entries<_LimsBaseClass>().Where(e => e.State == EntityState.Modified))
+            {
+                ((_LimsBaseClass)entity.Entity).ModifiedDate = DateTime.UtcNow;
+                ((_LimsBaseClass)entity.Entity).ModifiedFullName = userFullName;
+                ((_LimsBaseClass)entity.Entity).ModifiedHref = userHref;
+            }
+            return base.SaveChanges();
         }
 
         protected void BaseMap<T>(EntityTypeBuilder<T> entityBuilder) where T : _LimsBaseClass
         {
-            entityBuilder.HasKey(x => x.ID);
-            entityBuilder.Property(x => x.ID).ValueGeneratedOnAdd();
-            entityBuilder.Property(x => x.CreatedDate).ValueGeneratedOnAdd();
-            entityBuilder.Property(x => x.ModifiedDate).ValueGeneratedOnAddOrUpdate();
+            entityBuilder.HasKey(x => x.Id);
+            entityBuilder.Property(x => x.Id).ValueGeneratedOnAdd();
+            //entityBuilder.Property(x => x.CreatedDate).ValueGeneratedOnAdd();
+            //entityBuilder.Property(x => x.ModifiedDate).ValueGeneratedOnAddOrUpdate();
             entityBuilder.Property(x => x.CreatedHref).IsRequired(true);
             entityBuilder.Property(x => x.ModifiedHref).IsRequired(true);
             entityBuilder.Property(x => x.CreatedFullName).IsRequired(true);
             entityBuilder.Property(x => x.ModifiedFullName).IsRequired(true);
-            entityBuilder.Property(x => x.JsonExtendedData).ForNpgsqlHasColumnType("jsonb");
+            entityBuilder.Property(x => x.Guid).IsRequired(true);
+            entityBuilder.Property(x => x.CustomData).ForNpgsqlHasColumnType("jsonb");
         }
     }
 }

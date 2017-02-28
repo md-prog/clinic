@@ -1,11 +1,11 @@
 ﻿import Main from './components/Main.vue'
-import GenericDashboard1 from './components/dash/GenericDashboard1.vue'
-import GenericDashboard2 from './components/dash/GenericDashboard2.vue'
+import GenericDashboard1 from './components/main/GenericDashboard1.vue'
+import GenericDashboard2 from './components/main/GenericDashboard2.vue'
 import ClientAdmin from './components/admin/ClientAdmin.vue'
-import Tables from './components/dash/Tables.vue'
-import Tasks from './components/dash/Tasks.vue'
-import Setting from './components/dash/Setting.vue'
-import Server from './components/dash/Server.vue'
+import Tables from './components/main/Tables.vue'
+import Tasks from './components/main/Tasks.vue'
+import Setting from './components/main/Setting.vue'
+import Server from './components/main/Server.vue'
 import MailBox from './components/Mailbox.vue'
 import NotFound from './components/404.vue'
 import Accessioning from './components/accessioning/Accessioning.vue'
@@ -14,7 +14,7 @@ const routes= [
     {
         path: '/',
         component: Main,
-        name: 'Main',        
+        name: 'Main',         
         children: [
           {
               path: '',
@@ -22,6 +22,26 @@ const routes= [
               name: 'Dashboard1',
               description: 'Generic example 1'
           }, {
+              path: 'samplelist/catalog',
+              component: NotFound,
+              name: 'Sample Catalog',
+              description: ''
+          }, {
+              path: 'samplelist/inventory',
+              component: NotFound,
+              name: 'Sample Inventory',
+              description: ''
+          }, {
+              path: 'worklist/samples',
+              component: NotFound,
+              name: 'Sample Worklist',
+              description: ''
+          }, {
+              path: 'worklist/cases',
+              component: NotFound,
+              name: 'Case Worklist',
+              description: ''
+          },{
               path: 'dashboard2',
               component: GenericDashboard2,
               name: 'Dashboard2',

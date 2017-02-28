@@ -1,4 +1,4 @@
-// Core Admin Variables
+//$rembase: 14px;
 
 $enable-sidebar-nav-rounded: false;
 
@@ -37,7 +37,10 @@ $vimeo: #aad450;
 
 // Navbar
 
-$navbar-height:                     50px;
+$navbar-brand-bg:                   darken($brand-primary,10%);
+$navbar-color:                      #fff;
+$navbar-bg:                         $brand-primary;
+/*$navbar-height:                     50px;
 $navbar-bg:                         $brand-primary;
 $navbar-border:                     0;
 $navbar-brand-width:                220px;
@@ -49,7 +52,7 @@ $navbar-brand-border:               0;
 $navbar-color:                      #fff;
 $navbar-hover-color:                darken($navbar-color, 10%);
 $navbar-active-color:               darken($navbar-color, 20%);
-$navbar-disabled-color:             lighter($navbar-color, 20%);
+$navbar-disabled-color:             lighter($navbar-color, 20%);*/
 
 // Sidebar
 
@@ -151,21 +154,21 @@ $card-icon-color:                   $body-color;
 
 //Tags
 
-$tag-default-bg:            $gray-light !default;
-$tag-primary-bg:            $brand-primary !default;
-$tag-success-bg:            $brand-success !default;
-$tag-info-bg:               $brand-info !default;
-$tag-warning-bg:            $brand-warning !default;
-$tag-danger-bg:             $brand-danger !default;
+$tag-default-bg:            $gray-light;
+$tag-primary-bg:            $brand-primary;
+$tag-success-bg:            $brand-success;
+$tag-info-bg:               $brand-info;
+$tag-warning-bg:            $brand-warning;
+$tag-danger-bg:             $brand-danger;
 
-$tag-color:                 #fff !default;
-$tag-link-hover-color:      #fff !default;
-$tag-font-size:             75% !default;
-$tag-font-weight:           bold !default;
-$tag-padding-x:             .4em !default;
-$tag-padding-y:             .25em !default;
+$tag-color:                 #fff;
+$tag-link-hover-color:      #fff;
+$tag-font-size:             75%;
+$tag-font-weight:           bold;
+$tag-padding-x:             .4em;
+$tag-padding-y:             .25em;
 
-$tag-pill-padding-x:        .6em !default;
+$tag-pill-padding-x:        .6em;
 // Use a higher than normal value to ensure completely rounded edges when
 // customizing padding or font-size on labels.
-$tag-pill-border-radius:    10rem !default;
+$tag-pill-border-radius:    10rem;

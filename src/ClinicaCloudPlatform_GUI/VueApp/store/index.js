@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import sampleModule from './modules/sample/store'
 import userModule from './modules/user/store'
 import organizationModule from './modules/organization/store'
-import accessionModule from './modules/accession/store'
+//import accessionModule from './modules/accession/store'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,7 @@ const store = new Vuex.Store({
         sample: sampleModule,
         user: userModule,
         organization: organizationModule,
-        accession: accessionModule
+        //accession: accessionModule
     },
 
     mutations:{
