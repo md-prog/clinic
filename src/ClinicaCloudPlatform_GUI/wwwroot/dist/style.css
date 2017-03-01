@@ -21104,6 +21104,150 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
 
+.modal-open {
+  overflow: hidden; }
+
+.modal {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0; }
+
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(0, -25%); }
+
+.modal.show .modal-dialog {
+  transform: translate(0, 0); }
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px; }
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0; }
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000; }
+
+.modal-backdrop.fade {
+  opacity: 0; }
+
+.modal-backdrop.show {
+  opacity: 0.5; }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #e4e6eb; }
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5; }
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 15px; }
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px;
+  border-top: 1px solid #e4e6eb; }
+
+.modal-footer > :not(:first-child) {
+  margin-left: .25rem; }
+
+.modal-footer > :not(:last-child) {
+  margin-right: .25rem; }
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll; }
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 30px auto; }
+  .modal-sm {
+    max-width: 300px; } }
+
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 800px; } }
+
+.modal-primary .modal-content {
+  border-color: #375E97; }
+
+.modal-primary .modal-header {
+  color: #fff;
+  background-color: #375E97; }
+
+.modal-secondary .modal-content {
+  border-color: #ddd; }
+
+.modal-secondary .modal-header {
+  color: #fff;
+  background-color: #ddd; }
+
+.modal-success .modal-content {
+  border-color: #79a952; }
+
+.modal-success .modal-header {
+  color: #fff;
+  background-color: #79a952; }
+
+.modal-info .modal-content {
+  border-color: #3996d8; }
+
+.modal-info .modal-header {
+  color: #fff;
+  background-color: #3996d8; }
+
+.modal-warning .modal-content {
+  border-color: #D9831F; }
+
+.modal-warning .modal-header {
+  color: #fff;
+  background-color: #D9831F; }
+
+.modal-danger .modal-content {
+  border-color: #763626; }
+
+.modal-danger .modal-header {
+  color: #fff;
+  background-color: #763626; }
+
 .powered-by {
   float: right;
   font-size: smaller; }
@@ -21134,9 +21278,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   background-color: #9da0a8;
   border-color: #9da0a8; }
 
-/*multiselect{
-    max-width:300px;
-}*/
+.multiselect__input {
+  width: 100%; }
+
 .multiselect__tag {
   background-color: #375E97; }
 

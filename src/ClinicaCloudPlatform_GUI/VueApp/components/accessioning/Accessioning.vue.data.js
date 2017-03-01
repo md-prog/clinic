@@ -4,8 +4,6 @@
             loaded: false,
             isNew: false,
             isLoadingClientsAsync: false,
-            isLoadingPatientsAsync: false,
-            patientsSearched: false,
             accession: {
                 "id": 0,
                 "guid": "00000000-0000-0000-0000-000000000000",
@@ -77,15 +75,6 @@
                             "name": ''
                         }],
                 },
-            ],
-            patients: [
-                  {
-                      "id": 0,
-                      "lastName": '',
-                      "firstName": '',
-                      "dob": '01/01/1900',
-                      "ssn": '000-00-000'
-                  },
-            ],
+            ]            
         }
     };

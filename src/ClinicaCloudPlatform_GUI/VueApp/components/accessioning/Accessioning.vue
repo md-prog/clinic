@@ -51,8 +51,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-auto">
-                            <button type="button" class="btn btn-warning" v-on:click="saveAccession"><i class="fa fa-save"></i> Save and Launch</button>
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-warning float-right" v-on:click="saveAccession"><i class="fa fa-save"></i> Save and Launch</button>
                         </div>
                         <!--<div class="col-sm-auto">
                             <button type="button" class="btn btn-primary"><i class="fa fa-save" v-on:click="saveAccession"></i> Save</button>
@@ -88,59 +88,12 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-auto">
-                    <div class="card">
-                        <div class="card-header card-header-primary">
-                            <span class="patientDetailsLabel">Patient/Subject Details</span>
-                        </div>
-                        <div class="card-block">
-                            <div class="form-group">
-                                <!--v-if="typeof(this.patient) != 'undefined'">-->
-                                <label for="patientName" class="patientLabel">Patient</label>
-                                <div class="float-right"><small>To prevent duplicate entries, please search before entering a new record.</small></div>
-                                <multiselect id="patientName"
-                                             :options="accessionState.patients" track-by="id" label="lastName" :option-height="104"
-                                             :searchable="true" :close-on-select="true" :custom-label="customPatientDropdownLabel" :show-labels="false"
-                                             placeholder="Type to Search..."
-                                             v-on:select="patientChanged"
-                                             v-bind:value="patient">
-                                    <!--v-on:search-change="asyncGetPatients(organization)"
-                                    :loading="this.accessionState.isLoadingPatientsAsync"-->
-                                    <template slot="option" scope="props">
-                                        <div>{{props.option.lastName}}, {{props.option.firstName}}<br />DOB: {{props.option.dob | prettyDate}}<br />SSN: {{props.option.ssn}}</div>
-                                    </template>
-                                </multiselect>
-                                <div class="row">
-                                    <div class="form-group col-lg-6 col-sm-auto">
-                                        <label for="firstNameField">First Name</label>
-                                        <input id="firstNameField" type="text" v-model="patient.firstName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
-                                    </div>
-                                    <div class="form-group col-lg-6 col-sm-auto">
-                                        <label for="lastNameField">Last Name</label>
-                                        <input id="lastNameField" type="text" v-model="this.patient.lastName" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-4 col-sm-auto">
-                                        <label for="ssnField">SSN</label>
-                                        <input id="ssnField" type="text" v-model="this.patient.ssn" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
-                                    </div>
-                                    <div class="form-group col-lg-4 col-sm-auto">
-                                        <label for="dobField">DOB</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </span>
-                                            <input id="dobField" type="datetime" v-model="this.patient.dob" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-4 col-sm-auto">
-                                        <label for="mrnField">MRN</label>
-                                        <input id="mrnField" type="text" v-model="accessionState.accession.mrn" class="form-control" v-bind:disabled="!accessionState.patientsSearched" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Patient v-if="this.loaded && this.organization.href != null" 
+                             :patientId="accessionState.accession.patientId" 
+                             :mrn="accessionState.accession.mrn" 
+                             :organization="this.organization" 
+                             v-on:new="patient_changed" 
+                             v-on:changed="patient_changed" />
                 </div>
             </div>
             <div class="row">
@@ -268,13 +221,17 @@
     import objectMerge from 'object-merge';
     import debounce from 'lodash/debounce';
 
+    import Patient from './Patient.vue';
+
+    const uuidV1 = require('uuid/v1');
     //require('../../assets/js/selectMany.js');
 
     module.exports = {
         name: "Accessioning",
         //template: "accessioningMain",
         components: {
-            Multiselect
+            Multiselect,
+            Patient
         },
         props: {
             user: Object,
@@ -285,36 +242,39 @@
             return {accessionState: accessionData.accessionState};
         },
         methods:{
+            
+            //component event handlers
+
+            patient_changed: function(patientId)
+            {
+                this.$set(this.accessionState.accession, 'patientId', patientId);
+            },
+
+            //state
+            
+            clientChanged: function(value, dropDownId){
+                this.$set(this.accessionState.accession, 'clientId', value.id);
+                this.$set(this.accessionState.accession, 'facilityId', value.facilities[0].id);
+            },
+            faciltyChanged: function(value, dropDownId){
+                this.$set(this.accessionState.accession, 'facilityId', value.id);
+            },
+
+            //general
+
+            dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
+
+            //accession data
 
             loadAccession: function(id, orgNameKey){
                 var vm = this;
                 axios.all([
                     axios.get('/api/Accessioning/' + id + '/' + orgNameKey),
-                    axios.get('/api/Accessioning/Clients/' + orgNameKey),
-                    axios.get('/api/Accessioning/Patients/' + orgNameKey)
-                ]).then(axios.spread(function (accResponse, clientResponse, patientResponse) {
-                    //...  this callback will be executed only when both requests are complete.
-                    //console.log('User', userResponse.data);
-                    //console.log('Repositories', reposResponse.data);
-                    //}));
-                    //axios.get('/api/Accessioning/' + id + '/' + orgNameKey).then( response  =>
-                    //{
-                    //var tempAccession = Object.assign({},this.accessionState.accession, response.data); //this should do a non-destructive assignment - wrong
-                    //this.accessionState.accession = tempAccession;
-                    //this.$set(this.accessionState, "accession", objectMerge(this.accessionState.accession, response.data.accession));
-                    //this.$set(this.accessionState, "client", objectMerge(this.accessionState.client, response.data.client));
-                    //this.$set(this.accessionState, "patient", objectMerge(this.accessionState.patient, response.data.patient));
-                    //this.$set(this.accessionState, "facility", objectMerge(this.accessionState.facility, response.data.facility));
-                    //this.$set(this.accessionState.patient, 'dob', moment(this.accessionState.patient.dob).format('M/D/YYYY')); //hack
-                    //objectMerge(this.accessionState.accession, response.data.accession);
-                    //this.accessionState.accession = response.data.accession;
+                    axios.get('/api/Accessioning/Clients/' + orgNameKey)
+                ]).then(axios.spread(function (accResponse, clientResponse) {
                     Object.assign(vm.accessionState.accession, accResponse.data.accession);
-                    Object.assign(vm.accessionState.clients, clientResponse.data);
-                    Object.assign(vm.accessionState.patients, patientResponse.data);
-                    //vm.getPatient(accResponse.data.accession.patientId, orgNameKey);
-                    //vm.getClient(accResponse.data.accession.clientId, orgNameKey);
+                    Object.assign(vm.accessionState.clients, clientResponse.data);                   
                     vm.$set(vm.accessionState, 'loaded', true);
-                    vm.$set(vm.accessionState, 'patientsSearched', false);
                 }
                     )).catch(err => {console.log(err)});
             },
@@ -337,29 +297,16 @@
                     this.accessionState.isLoadingClientsAsync = false;
                 }).catch(err=> {console.log(err)});
             },
-            //, 500),
-            //debounce(
-            asyncGetPatients: function(org){
-                this.accessionState.isLoadingPatientAsync = true;
-                this.accessionState.patientsSearched = true;
-                axios.get('/api/Accessioning/Patients/' + org.nameKey).then( response => {
-                    Object.assign(this.accessionState.patients, response.data);
-                    this.accessionState.isLoadingPatientsAsync = false;
-                }).catch(err=> {console.log(err)});
-            },
-            //, 500),
 
-            getPatient: function(org, id){
-                axios.get('/api/Accessioning/Patients/' + org.nameKey + '/' + id).then( response => {
-                    this.accessionState.patients.push(response.data);
-                }).catch(err=> {console.log(err)});
-            },
+            //client data
 
             getClient: function(org, id){
                 axios.get('/api/Accessioning/Clients/' + org.nameKey + '/' + id).then( response => {
                     this.accessionState.clients.push(response.data);
                 }).catch(err=> {console.log(err)});
             },
+
+            //specimen data
 
             addSpecimen: function(){},
 
@@ -437,31 +384,15 @@
                     value = value[0];
                 return value;
             },
-
-            dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
-
-            customPatientDropdownLabel: function ({id, firstName, lastName, dob, ssn}) {
-                return 'Name: ' + firstName + ' ' + lastName + ', DOB: ' + this.dateFormat(dob) + ', SSN: ' + ssn},
-
-    clientChanged: function(value, dropDownId){
-        this.$set(this.accessionState.accession, 'clientId', value.id);
-        this.$set(this.accessionState.accession, 'facilityId', value.facilities[0].id);
-    },
-    faciltyChanged: function(value, dropDownId){
-        this.$set(this.accessionState.accession, 'facilityId', value.id);
-    },
-    patientChanged: function(value, dropDownId){
-        this.$set(this.accessionState.accession, 'patientId', value.id);
-    }
-    },
-    computed: {
+        },
+        computed: {
             loaded: function() { return this.accessionState.loaded;},
             isNew: function() { return this.accessionState.isNew;},
-            patient: function() {
-                var pId = this.accessionState.accession.patientId;
-                var pat = this.accessionState.patients.find(function (p) {return p.id == pId;});
-                return pat;
-            },
+            //patient: function() {
+            //    var pId = this.accessionState.accession.patientId;
+            //    var pat = this.accessionState.patients.find(function (p) {return p.id == pId;});
+            //    return pat;
+            //},
             client: function () {
                 var cId = this.accessionState.accession.clientId;
                 var cli = this.accessionState.clients.find(function (c) {return c.id == cId;});
