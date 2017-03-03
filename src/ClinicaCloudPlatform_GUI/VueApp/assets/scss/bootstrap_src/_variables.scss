@@ -146,6 +146,10 @@ $spacers: (
     x: 0,
     y: 0
   ),
+  0-5: (
+    x: ($spacer-x * .125),
+    y: ($spacer-y * .125)
+  ),
   1: (
     x: ($spacer-x * .25),
     y: ($spacer-y * .25)

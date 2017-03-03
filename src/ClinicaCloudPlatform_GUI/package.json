@@ -9,6 +9,11 @@
     "bootstrap-daterangepicker": "^2.1.25",
     "chart.js": "^2.3.0",
     "datatables.net": "^1.10.13",
+    "datatables.net-buttons": "^1.2.4",
+    "datatables.net-bs": "1.10.13",
+    "datatables.net-responsive": "2.1.1",
+    "datatables.net-buttons-bs": "1.2.4",
+    "datatables.net-responsive-bs": "2.1.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.46",
     "hideseek": "^0.7.1",
     "jquery": "^3.1.1",
@@ -19,13 +24,14 @@
     "pace-progress": "^1.0.2",
     "select2": "^4.0.3",
     "tether": "^1.4.0",
+    "urlencode": "^1.1.0",
     "uuid": "^3.0.1",
-    "vue": "2.1.10",
+    "vue": "2.2.1",
     "vue-multiselect": "^2.0.0-beta.13",
     "vue-router": "2.2.1",
     "vue-select": "github:sagalbot/vue-select",
-    "vue-server-renderer": "2.1.10",
-    "vue-template-compiler": "^2.1.10",
+    "vue-server-renderer": "2.2.1",
+    "vue-template-compiler": "2.2.1",
     "vuex": "2.1.2"
   },
   "devDependencies": {
@@ -35,6 +41,8 @@
     "babel-preset-stage-2": "^6.13.0",
     "chart.js": "2.3.0",
     "css-loader": "^0.23.1",
+    "es6-promise": "^4.0.5",
+    "es6-shims": "^1.1.0",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.0",
     "hideseek": "^0.7.0",
@@ -46,10 +54,12 @@
     "sass-loader": "^5.0.1",
     "style-loader": "^0.13.1",
     "to-string-loader": "^1.1.5",
+    "ts-loader": "^2.0.1",
+    "typings": "^2.1.0",
     "url-loader": "^0.5.7",
     "vue-date-picker": "1.0.2",
-    "vue-loader": "11.0.0",
-    "webpack": "~2.2.1"
+    "vue-loader": "11.1.4",
+    "webpack": "2.2.1"
   },
   "scripts": {
     "buildDev": "SET NODE_ENV=development && webpack -d --color",
@@ -58,9 +68,6 @@
   "-vs-binding": {
     "BeforeBuild": [
       "buildDev"
-    ],
-    "Clean": [
-      "install"
     ]
   }
 }

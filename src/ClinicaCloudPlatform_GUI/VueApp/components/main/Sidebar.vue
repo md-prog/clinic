@@ -13,7 +13,20 @@
                 </div>
             </form>
             <!-- Sidebar Menu -->
-            <ul class="nav search-nav">
+            <div v-for="route in this.$router.options.routes">
+                <ul class="nav search-nav">
+                    <li class="nav-title">
+                        <a>{{ route.name }}</a>
+                    </li>
+                    <li v-for="childRoute in route.children" class="nav-item">                        
+                        <router-link tag="a" :to="route.path + childRoute.path" class="nav-link">
+                            <i v-bind:class="childRoute.meta == null ? defaultRouteIconClasses : childRoute.meta.iconClass"></i>
+                            {{childRoute.name }}
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+            <!--<ul class="nav search-nav">
 
                 <li class="nav-title">
                     Catalog/Worklists
@@ -79,12 +92,15 @@
                         <i class="icon-grid" /><span class="page">Dashboard #2</span>
                     </router-link>
                 </li>
-            </ul>
+            </ul>-->
         </nav>
     </div>
 </template>
 <script>
     module.exports = {
-        name: 'Sidebar'
+        name: 'Sidebar',
+        computed: {
+            defaultRouteIconClasses: function () { return "fa fa-list"; }
+        }
     };
 </script>
