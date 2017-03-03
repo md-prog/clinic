@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ClinicaCloudPlatform.Model.ApiModels
+﻿namespace ClinicaCloudPlatform.Model.ApiModels
 {
     public class Facility : _ApiModelBaseClass
     {

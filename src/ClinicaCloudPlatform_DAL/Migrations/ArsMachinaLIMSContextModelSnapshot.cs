@@ -2,9 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using ClinicaCloudPlatform.DAL.Data;
-using ClinicaCloudPlatform.Model.Models;
 
 namespace ClinicaCloudPlatform.DAL.Migrations
 {

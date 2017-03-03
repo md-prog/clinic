@@ -9,83 +9,112 @@ import Server from './components/main/Server.vue'
 import MailBox from './components/Mailbox.vue'
 import NotFound from './components/404.vue'
 import Accessioning from './components/accessioning/Accessioning.vue'
+import Worklist from './components/list/Worklist.vue'
 
 const routes= [
     {
         path: '/',
         component: Main,
-        name: 'Main',         
+        name: 'Dashboards',   
         children: [
           {
               path: '',
               component: GenericDashboard1,
               name: 'Dashboard1',
-              description: 'Generic example 1'
-          }, {
-              path: 'samplelist/catalog',
-              component: NotFound,
-              name: 'Sample Catalog',
-              description: ''
-          }, {
-              path: 'samplelist/inventory',
-              component: NotFound,
-              name: 'Sample Inventory',
-              description: ''
-          }, {
-              path: 'worklist/samples',
-              component: NotFound,
-              name: 'Sample Worklist',
-              description: ''
-          }, {
-              path: 'worklist/cases',
-              component: NotFound,
-              name: 'Case Worklist',
-              description: ''
-          },{
-              path: 'dashboard2',
-              component: GenericDashboard2,
-              name: 'Dashboard2',
-              description: 'Simple and advance table examples'
-          }, {
-              path: 'tables',
-              component: Tables,
-              name: 'Tables',
-              description: 'Simple and advance table examples'
-          }, {
-              path: 'tasks',
-              component: Tasks,
-              name: 'Tasks',
-              description: 'Tasks page in the form of a timeline'
-          }, {
-              path: 'admin/clientadmin',
-              component: ClientAdmin,
-              name: 'Client Admin',
-              description: 'Client Administration'
-          }, {
-              path: 'accessioning/:id/:orgNameKey',
-              component: Accessioning,
-              name: 'Edit Accession',
-              description: 'Edit sample/accession'
-          }, {
-              path: 'accessioning',
-              component: Accessioning,
-              name: 'New Accession',
-              description: 'Add sample/accession to the system'
-          }, {
-              path: 'setting',
-              component: Setting,
-              name: 'Settings',
-              description: 'User settings page'
-          }, {
-              path: 'server',
-              component: Server,
-              name: 'Servers',
-              description: 'List of our servers'
-          }, {
-              path: 'mailbox',
-              component: MailBox,
-              name: 'Mailbox'
+              description: 'Generic example 1',
+              meta: {title: 'Dashboard'}
           }
+        ]
+    },
+    {
+        path: '/',
+        component: Main,
+        name: 'Sample Management',
+        description: '',
+        meta: {title: 'Sample Management'},
+        children: [
+            {
+                path: 'accessioning/:id/:orgNameKey',
+                component: Accessioning,
+                name: 'Edit Accession',
+                description: 'Edit sample/accession',
+                meta: {
+                    title: 'Accessioning',
+                    showInNavMenu: false
+                }
+            }, {
+                path: 'accessioning',
+                component: Accessioning,
+                name: 'New Accession',
+                description: 'Add sample/accession to the system',
+                meta: {
+                    title: 'Accessioning'
+                }            
+            }
+        ]
+    },
+    {
+        path: '/',
+        component: Main,
+        name: 'Lists',
+        description: '',
+        meta: {title: 'Lists'},
+        children: [
+        {
+            path: 'list/worklist/catalog',
+            component: Worklist,
+            name: 'Specimen Catalog',
+            description: '',
+            meta: {title: 'Catalog'}
+        }, {
+            path: 'list/worklist/inventory',
+            component: Worklist,
+            name: 'Specimen Inventory',
+            description: '',
+            meta: {
+                title: 'Inventory',
+                iconClass: "icon-chemistry"
+            }
+        }, {
+            path: 'list/worklist/specimens',
+            component: Worklist,
+            name: 'Specimen Worklist',
+            description: '',
+            meta: {title: 'Worklist'}
+        }, {
+            path: 'list/worklist/cases',
+            component: Worklist,
+            name: 'Case Worklist',
+            description: '',
+            meta: {title: 'Worklist'}
+        }
+        ]
+    },
+    {
+        path: '/',
+        component: Main,
+        name: 'Tools',
+        description: '',
+        meta: {title: 'Tools'},
+        children: [
+     {
+         path: 'admin/clientadmin',
+         component: ClientAdmin,
+         name: 'Client Admin',
+         description: 'Client Administration',
+         meta: {title: 'Client Admin'}
+     }, {
+         path: 'setting',
+         component: Setting,
+         name: 'Settings',
+         description: 'User settings page',
+         meta: {title: 'Settings'}
+     }, {
+         path: 'mailbox',
+         component: MailBox,
+         name: 'Mailbox',
+         meta: {title: 'Mailbox'}
+     }
         ]
     },
     {

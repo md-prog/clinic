@@ -23,7 +23,12 @@ module.exports = {
             "moment",
             "bootstrap-daterangepicker",
             "datatables.net",
-            path.join(__dirname, 'VueApp/assets/js/plugins/datatables/integration/dataTables.bootstrap4.js')
+            "datatables.net-bs",
+            "datatables.net-buttons",
+            "datatables.net-responsive",
+            "datatables.net-buttons-bs",
+            "datatables.net-responsive-bs",        
+            'datatables.net-buttons/js/buttons.colVis.js'
         ],
         'bundle.client': [
         path.join(__dirname, 'VueApp/client.js')]
@@ -49,6 +54,9 @@ module.exports = {
           //    test: /tether\.js$/,
           //    loader: "expose-loader?Tether"
           //},
+          {
+              test: /\.tsx?$/, loaders: ['ts-loader'], exclude: /node_modules/
+          },
           {
               test: /\.js$/,
               loader: 'babel-loader',

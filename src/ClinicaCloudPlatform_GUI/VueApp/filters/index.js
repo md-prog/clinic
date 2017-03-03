@@ -14,6 +14,11 @@ export function prettyDate (date) {
   return a.toDateString()
 }
 
+export function localeDate (date) {
+    var a = new Date(date)
+    return a.toLocaleString();
+}
+
 export function pluralize (time, label) {
   if (time === 1) {
     return time + label

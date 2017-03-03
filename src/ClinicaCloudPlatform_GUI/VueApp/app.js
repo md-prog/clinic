@@ -14,16 +14,17 @@ require('./assets/js/admin_gui.js');
 
 require('./assets/img/favicon.ico');
 
-import { domain, count, prettyDate, pluralize, truncate } from './filters'
-Vue.filter('count', count)
-Vue.filter('domain', domain)
-Vue.filter('prettyDate', prettyDate)
-Vue.filter('pluralize', pluralize)
-Vue.filter('truncate', truncate)
+import { domain, count, prettyDate, localeDate, pluralize, truncate } from './filters';
+Vue.filter('count', count);
+Vue.filter('domain', domain);
+Vue.filter('prettyDate', prettyDate);
+Vue.filter('localeDate', localeDate);
+Vue.filter('pluralize', pluralize);
+Vue.filter('truncate', truncate);
 
 // Routing logic
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 var router = new VueRouter({
     routes: routes,
@@ -32,7 +33,11 @@ var router = new VueRouter({
         return savedPosition || { x: 0, y: 0 }
     },
     linkActiveClass: ''
-})
+});
+
+router.afterEach(route => {
+    document.title = route.meta.title;
+});
 
 const app = new Vue({
     store: store, 

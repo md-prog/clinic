@@ -16,6 +16,44 @@ namespace ClinicaCloudPlatform.API.Controllers
     [Route("api/[controller]")]
     public partial class AccessioningController : Controller
     {
+        [HttpGet("{orgNameKey}")]
+        public dynamic Get(string OrgNameKey)
+        {
+            using (var context = new ArsMachinaLIMSContext())
+            {
+                //EF at its crappiest
+                return context.Accessions
+                    .Include(a => a.Client)
+                    .ThenInclude(c => c.Facilities)
+                    .Include(a => a.Patient)
+                    .Include(a => a.Doctor1)
+                    .Include(a => a.Doctor2)
+                    .Include(a => a.Facility)
+                    .Include(a => a.OrderingLab)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.Specimens)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.PanelResults)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.TestResults)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.ProcessingLab)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.ProfessionalLab)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.AnalysisLab)
+                    .Include(a => a.Cases)
+                    .ThenInclude(c => c.Specimens)
+                    .Include(a => a.Specimens)
+                    .Select(a => Mapping.Accession.GetAccessionApiModel(a, new Mapping.AccessionMapOptions()
+                    {
+                        IncludeCases = true,
+                        IncludeSpecimens = true
+                    })).ToList();
+                //return accessions.Select(a => GetAccessionApiModel(a));
+            }
+        }
+
         [HttpGet("{Id}/{orgNameKey}")]
         public dynamic Get(int Id, string OrgNameKey)
         {
@@ -47,46 +85,12 @@ namespace ClinicaCloudPlatform.API.Controllers
                     .Include(a => a.Specimens)
                     .First(a => a.Id == Id);
 
-                var accession = new Accession()
-                {
-                    Id = DbAcc.Id,
-                    ClientId = DbAcc.Client.Id,
-                    FacilityId = DbAcc.Facility.Id,
-                    PatientId = DbAcc.Patient.Id,
-                    Doctor1Id = DbAcc.Doctor1?.Id ?? 0,
-                    Doctor2Id = DbAcc.Doctor2?.Id ?? 0,
-                    MRN = DbAcc.MRN,
-                    Specimens = DbAcc.Specimens.Select(s => new Specimen
+                Accession accession = Mapping.Accession.GetAccessionApiModel(DbAcc,
+                    new Mapping.AccessionMapOptions()
                     {
-                        Id = s.Id,
-                        Code = s.Code,
-                        ExternalSpecimenId = s.ExternalSpecimenID,
-                        Type = s.Type,
-                        Transport = s.Transport,
-                        CollectionDate = s.CollectionDate,
-                        ReceivedDate = s.ReceivedDate,
-                        CustomData = s.CustomData,
-                    }),
-                    Cases = DbAcc.Cases.Select(c => new Case
-                    {
-                        Id = c.Id,
-                        CaseNumber = c.CaseNumber,
-                        ProcessingLabId = c.ProcessingLab?.Id ?? 0,
-                        AnalysisLabId = c.AnalysisLab?.Id ?? 0,
-                        ProfessionalLabId = c.ProcessingLab?.Id ?? 0,
-                        SpecimenGuids = c.Specimens.Select(s => s.Guid),
-                        PanelResults = c.PanelResults.Select(p => new PanelResult
-                        {
-                            PanelName = p.PanelName,
-                            CustomData = p.CustomData
-                        }),
-                        TestResults = c.TestResults.Select(t => new TestResult
-                        {
-                            TestName = t.TestName,
-                            CustomData = t.CustomData
-                        })
-                    })
-                };
+                        IncludeCases = true,
+                        IncludeSpecimens = true
+                    });
 
                 var patient = new Patient()
                 {
@@ -172,50 +176,5 @@ namespace ClinicaCloudPlatform.API.Controllers
             }
         }
 
-        [HttpGet("[action]/{orgNameKey}/{ClientId}")]
-        public dynamic Clients(string OrgNameKey, int ClientId)
-        {
-            foreach (dynamic client in Clients(OrgNameKey))
-            {
-                if (client.Id == ClientId) ;
-                return client;
-            }
-            return null;
-        }
-
-        [HttpGet("[action]/{orgNameKey}")]
-        public dynamic Clients(string OrgNameKey)
-        {
-            using (var context = new ArsMachinaLIMSContext())
-            {
-                var pgHelper = new DAL.Data.Functions.PostgreSQL(context);
-                return pgHelper.GetClientsByOrganization(OrgNameKey).Select(c => new
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Facilities = c.Facilities.Select(f => new
-                    {
-                        Id = f.Id,
-                        Name = f.Name
-                    }
-                    )
-                });
-            }
-        }
-
-        [HttpGet("[action]/{orgNameKey}")]
-        public dynamic Doctors(string OrgNameKey)
-        {
-            using (var context = new ArsMachinaLIMSContext())
-            {
-                var pgHelper = new DAL.Data.Functions.PostgreSQL(context);
-                return pgHelper.GetDoctorsByOrganization(OrgNameKey).Select(p => new
-                {
-                    Id = p.Id,
-                    LastName = p.LastName,
-                    FirstName = p.FirstName
-                });
-            }
-        }
     }
 }

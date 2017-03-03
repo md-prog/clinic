@@ -78,9 +78,9 @@
                     </nav>
                 </section>
                 <div class="container-fluid pt-lg-1 pt-md-1 pt-sm-0 main-fill">
-                    <div class="animated fadeIn">
+                    <div v-if="this.organization != null" class="animated fadeIn">
                         <!-- Content Header (Page header) -->
-                        <router-view :user="this.user" :organization="this.organization"></router-view>
+                        <router-view v-if="this.organization.customData != null" :user="this.user" :organization="this.organization"></router-view>
                     </div>
                 </div>
             </main>

@@ -9,6 +9,8 @@ namespace ClinicaCloudPlatform.API.Controllers
 {
     public partial class AccessioningController
     {
+        
+
         private static void ProcessSpecimens(string UserFullName, string UserHref, Accession accession,
             ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
@@ -38,7 +40,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbSpec.Category = specimen.Category;
                 dbSpec.Code = specimen.Code;
                 dbSpec.CollectionDate = specimen.CollectionDate;
-                dbSpec.CustomData = specimen.CustomData;
+                dbSpec.CustomData = specimen.CustomData.ToString();
                 dbSpec.ExternalSpecimenID = specimen.ExternalSpecimenId;
                 dbSpec.ParentSpecimenID = specimen.ParentSpecimenId;
                 dbSpec.ReceivedDate = specimen.ReceivedDate;
@@ -58,12 +60,12 @@ namespace ClinicaCloudPlatform.API.Controllers
             foreach (Case _case in accession.Cases)
             {
                 var dbCase = context.Cases
-                    .Include(c=>c.Specimens)
-                    .Include(c=>c.ProcessingLab)
-                    .Include(c=>c.ProfessionalLab)
-                    .Include(c=>c.AnalysisLab)
-                    .Include(c=>c.PanelResults)
-                    .Include(c=>c.TestResults)
+                    .Include(c => c.Specimens)
+                    .Include(c => c.ProcessingLab)
+                    .Include(c => c.ProfessionalLab)
+                    .Include(c => c.AnalysisLab)
+                    .Include(c => c.PanelResults)
+                    .Include(c => c.TestResults)
                     .FirstOrDefault(c => c.Id == _case.Id);
 
                 //get custom case type definition from organization custom data (stormpath json)
@@ -115,7 +117,7 @@ namespace ClinicaCloudPlatform.API.Controllers
 
                 if (dbCase.PanelResults == null)
                     dbCase.PanelResults = new List<Model.Models.PanelResult>();
-                foreach(var presult in _case.PanelResults)
+                foreach (var presult in _case.PanelResults)
                 {
                     var existingResult = dbCase.PanelResults.FirstOrDefault(pr => pr.Guid == presult.Guid);
                     if (existingResult == null)
@@ -126,7 +128,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     }
                     existingResult.PanelCode = presult.PanelCode;
                     existingResult.PanelName = presult.PanelName;
-                    existingResult.CustomData = presult.CustomData;
+                    existingResult.CustomData = presult.CustomData.ToString();
                 }
 
                 dbCase.ProcessingLab = context.Find<Model.Models.Lab>(_case.ProcessingLabId);
@@ -149,7 +151,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     }
                     existingResult.TestCode = tresult.TestCode;
                     existingResult.TestName = tresult.TestName;
-                    existingResult.CustomData = tresult.CustomData;
+                    existingResult.CustomData = tresult.CustomData.ToString();
                 }
 
                 dbCase.Type = _case.Type;
