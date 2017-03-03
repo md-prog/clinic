@@ -203,34 +203,6 @@ namespace ClinicaCloudPlatform.API.Controllers
             }
         }
 
-        [HttpGet("[action]/{orgNameKey}/{PatientId}")]
-        public dynamic Patients(string OrgNameKey, int PatientId)
-        {
-            foreach (dynamic patient in Patients(OrgNameKey))
-            {
-                if (patient.Id == PatientId) ;
-                    return patient;
-            }
-            return null;
-        }
-
-        [HttpGet("[action]/{orgNameKey}")]
-        public dynamic Patients(string OrgNameKey)
-        {
-            using (var context = new ArsMachinaLIMSContext())
-            {
-                var pgHelper = new DAL.Data.Functions.PostgreSQL(context);
-                return pgHelper.GetPatientsByOrganization(OrgNameKey).Select(p => new
-                {
-                    Id = p.Id,
-                    LastName = p.LastName,
-                    FirstName = p.FirstName,
-                    DOB = p.DOB,
-                    SSN = p.SSN
-                });
-            }
-        }
-
         [HttpGet("[action]/{orgNameKey}")]
         public dynamic Doctors(string OrgNameKey)
         {
