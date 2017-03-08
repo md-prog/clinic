@@ -14,7 +14,7 @@ namespace ClinicaCloudPlatform.API.Controllers
         public class WorklistOptions
         {
             public bool IncludeCases { get; set; }
-            public bool IncludeSpecimens { get; set; }
+            public bool IncludeSpecimens { get; set; }            
         }
 
         [HttpGet("{orgNameKey}/{Start}/{End}/{Options}")]

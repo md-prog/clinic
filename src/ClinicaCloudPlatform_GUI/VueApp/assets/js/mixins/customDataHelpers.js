@@ -2,9 +2,6 @@
 
 Vue.mixin({
     methods: {
-        getSpecimenTypes: function () {
-            return Array.from(new Set(this.organization.customData.specimenDefinitions.map(function (spec) { return spec.type }))); //set should de-dup .. maybe
-        },
 
         getSpecimenAttributesBySection: function (sectionName, specimenType) {
             var attr = new Array();
@@ -105,6 +102,17 @@ Vue.mixin({
             if ((expectsSingle || originallySingle) && Array.isArray(newVal))
                 newVal = newVal[0];
             return newVal;
+        }
+    },
+    computed:{
+        organizationSpecimenTypes: function () {
+            return Array.from(new Set(this.organization.customData.specimenDefinitions.map(function (spec) { return spec.type }))); //set should de-dup .. maybe
+        },
+        organizationUsesCases: function() {
+            return false; //todo
+        },
+        organizationUsesSpecimens: function(){
+            return true; //todo
         }
     }
 });

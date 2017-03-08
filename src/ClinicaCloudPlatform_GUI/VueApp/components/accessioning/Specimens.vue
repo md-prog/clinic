@@ -10,7 +10,7 @@
                                 <i class="fa fa-plus-circle"></i> Add Specimen
                             </button>
                             <div class="dropdown-menu" aria-labelledby="addSpecBtn">
-                                <div class="dropdown-item" v-for="type in getSpecimenTypes()" v-on:click="addSpecimen(type)">{{type}}</div>
+                                <div class="dropdown-item" v-for="type in organizationSpecimenTypes" v-on:click="addSpecimen(type)">{{type}}</div>
                             </div>
                         </div>
                     </div>

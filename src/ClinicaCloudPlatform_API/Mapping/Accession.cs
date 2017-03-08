@@ -23,6 +23,7 @@ namespace ClinicaCloudPlatform.API.Mapping
                 Doctor1Id = DbAcc.Doctor1?.Id ?? 0,
                 Doctor2Id = DbAcc.Doctor2?.Id ?? 0,
                 MRN = DbAcc.MRN,
+                OrderingLabId = DbAcc.OrderingLab.Id,
                 Specimens = !Options.IncludeSpecimens ? null : DbAcc.Specimens.Select(s => new Model.ApiModels.Specimen
                 {
                     Id = s.Id,

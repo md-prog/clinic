@@ -24,11 +24,44 @@
                                     <div class="text-uppercase font-weight-bold font-xs">New <span class="accessionLabel">Accession</span></div>
                                 </div>
                             </div>
-                            <div v-else class="card card-inverse card-primary">
+                            <div v-else class="card card-inverse card-primary pb-1">
                                 <div class="card-block">
+                                    <!--<div class="row p-0 m-0">
+                                        <div class="col-sm-3">
+                                            <div class="row p-0 m-0">
+                                                <div class="col-sm-12"><i class="icon-chemistry font-2xl"></i></div>
+                                            </div>
+                                            <div class="row p-0 m-o">
+                                                <div class="col-sm-12">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-save"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <div class="dropdown-item" v-on:click="saveAccession">Save and Launch</div>
+                                                            <div class="dropdown-item" v-on:click="saveAccession">Save and Hold</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col=sm-9">
+                                            <div class="text-uppercase font-weight-bold font-xs"><span class="accessionLabel">Accession</span> ID { {accessionState.accession.id} }</div>
+                                            { {accessionState.accession.createdDate | prettyDate} }
+                                        </div>
+                                    </div>-->
                                     <i class="icon-chemistry font-2xl mr-1 float-left"></i>
                                     <div class="text-uppercase font-weight-bold font-xs"><span class="accessionLabel">Accession</span> ID {{accessionState.accession.id}}</div>
                                     {{accessionState.accession.createdDate | prettyDate}}
+                                    <div class="dropdown bottom-right-0 mt-1">
+                                            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-save"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <div class="dropdown-item" v-on:click="saveAccession">Save and Launch</div>
+                                                <div class="dropdown-item" v-on:click="saveAccession">Save and Hold</div>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -36,28 +69,24 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-inverse card-primary">
-                                <div class="card-block card-compact">
+                                <div class="card-block">
                                     <i class="fa fa-print font-2xl mr-1 float-left"></i>
-                                    <ul>
-                                        <li>
-                                            <a href="#printTravelDoc">Print Accession</a>
-                                        </li>
-                                        <li>
-                                            <a href="#printLabels">Print Labels</a>
-                                        </li>
-                                    </ul>
+                                    <div>
+                                        <div class="font-sm text-white" v-on:click="printTravelDoc">Print Accession</div>
+                                        <div class="font-sm text-white" v-on:click="printLabels">Print Labels</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-sm-12">
                             <button type="button" class="btn btn-warning float-right" v-on:click="saveAccession"><i class="fa fa-save"></i> Save and Launch</button>
                         </div>
-                        <!--<div class="col-sm-auto">
+                        <div class="col-sm-auto">
                             <button type="button" class="btn btn-primary"><i class="fa fa-save" v-on:click="saveAccession"></i> Save</button>
-                        </div>-->
-                    </div>
+                        </div>
+                    </div>-->
                 </div>
                 <div class="col-lg-5 col-sm-auto">
                     <div class="card">
@@ -98,10 +127,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <Specimens 
-                              :specimens="accessionState.accession.specimens" 
-                              :organization="organization"
-                              v-on:changed="specimens_changed">
+                    <Specimens :specimens="accessionState.accession.specimens"
+                               :organization="organization"
+                               v-on:changed="specimens_changed">
                     </Specimens>
                 </div>
             </div>

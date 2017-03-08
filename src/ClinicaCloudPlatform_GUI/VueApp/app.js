@@ -35,9 +35,9 @@ var router = new VueRouter({
     linkActiveClass: ''
 });
 
-router.afterEach(route => {
-    document.title = route.meta.title;
-});
+//router.afterEach(route => {
+//    document.title = route.meta.title;
+//});
 
 const app = new Vue({
     store: store, 
