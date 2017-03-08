@@ -64,7 +64,7 @@
         <div class="app-body">
 
             <Sidebar name="rightSidebar"></Sidebar>
-            
+
             <!-- Main content -->
             <main class="main">
                 <section class="content-header">
@@ -156,13 +156,15 @@
 
                                 <a href="#" class="dropdown-item text-center">
                                     <strong>
-                                    <router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}">View all notifications
-                                        </router-link></strong>
+                                        <router-link exact :to="{name: 'Mailbox', params: {type: 'notifications'}}">
+                                            View all notifications
+                                        </router-link>
+                                    </strong>
                                 </a>
 
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </aside>
         </div>
@@ -192,14 +194,45 @@
                 window.$('li.pageLink').removeClass('active');
                 // Add it to the item that was clicked
                 event.toElement.parentElement.className = 'pageLink active';
+            },
+            postOrgLoadActions: function(vm){
+                window.document.title = vm.organization.name + ' - ' + vm.$route.meta.title;
+            },
+            startOrgWatcher: function(vm){
+                vm.$parent.$store.watch(
+                    function(state){
+                        return state.organization.loaded;
+                    }, 
+                    function() {if(vm.organizationLoaded)
+                        vm.$nextTick(function() {vm.postOrgLoadActions(vm);})}
+                    );
             }
         },
-        created: function() {
-            if(!this.$parent.$store.state.user.userLoaded)
-                this.$parent.$store.dispatch('user/getUser')
-            if(!this.$parent.$store.state.organization.loaded)
-                this.$parent.$store.dispatch('organization/loadOrganization');
+        watch:{
+            '$route': function () {
+                if(this.organizationLoaded)
+                    this.postOrgLoadActions(this);
+                else
+                this.startOrgWatcher(this);
+            },
         },
+        created: function() {
+            var vm = this;
+            if(!this.userLoaded)
+                this.$parent.$store.dispatch('user/getUser');
+            if(!this.organizationLoaded)
+                this.$parent.$store.dispatch('organization/loadOrganization');
+            this.startOrgWatcher(this);
+        },
+        //watch:{
+        //    organization: function() {
+        //        if (this.organization.organizationLoaded)
+        //        {
+        //            var vm = this;
+        //            vm.$nextTick(function() { vm.postLoadActions(vm); });
+        //        }
+        //    },
+        //},
         computed: {
             year: function()
             {

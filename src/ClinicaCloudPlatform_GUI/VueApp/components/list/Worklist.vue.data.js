@@ -9,7 +9,7 @@ module.exports = {
                 includeSpecimens: true
             }
         },
-        clients: [{ id: 0, name: "" }]
+        //clients: [{ id: 0, name: "" }]
     },
     worklist:
         {

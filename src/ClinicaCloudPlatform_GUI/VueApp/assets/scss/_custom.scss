@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: $font-family-base;
-    font-size: 0.875rem;
+    font-size: $font-size-base;
     font-weight: normal;
     line-height: 1.5;
     color: $brand-primary;
@@ -1451,6 +1451,7 @@ nav.top-nav ul.nav li.nav-item:hover > ul {
 
 .content-header {
     position: relative;
+    margin: 15px 5px;
     padding: 15px 15px 0 15px;
     border-left: 1px $navbar-default-bg;
     border-top: 1px darken($navbar-default-bg,10);
@@ -1844,9 +1845,9 @@ nav.top-nav ul.nav li.nav-item:hover > ul {
 
 .sidebar ul.nav li.nav-title {
     padding: 0.95rem 1rem;
-    font-size: 11px;
-    font-weight: 600;
-    color: $brand-warning;
+    font-size: .9 * $font-size-base;
+    font-weight: 550;
+    color: lighten($brand-warning, 20);
     text-transform: uppercase;
 }
 
@@ -6511,12 +6512,14 @@ table.dataTable thead .sorting_desc_disabled {
 }*/
 
 .label-black {
+    display:inline-block!important; //override flex
     color: #000;
 }
 
 .wrap-unset {
+    text-wrap:avoid;
     white-space: normal !important;
-    overflow-wrap: break-word;
+    overflow-wrap:break-word;
 }
 
 .card-no-outer-border {
@@ -6532,3 +6535,30 @@ table.dataTable thead .sorting_desc_disabled {
     background: $brand-primary !important;
     color: #fff;
 }
+
+/*.table-header-primary-3d > td {
+    font-size: 13px;
+    padding: 16px 4px !important;
+    text-align: center;
+    width: auto !important;
+    font-weight: 600 !important;
+}
+
+.table-header-primary-3d {
+    background: $brand-primary;
+    color: #fff;
+    background: -moz-linear-gradient(top, $brand-primary 0%, #000 100%);
+    background: -webkit-linear-gradient(top, $brand-primary 0%, #000 100%);
+    background: linear-gradient(to bottom, $brand-primary 0%, #000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#375E97', endColorstr='#000000',GradientType=0 );
+}*/
+
+/*btn-primary-3d {
+    @extend .btn-primary;
+    background: $brand-primary;
+    color: #fff!important;
+    background: -moz-linear-gradient(top, $brand-primary 0%, #000 100%)!important;
+    background: -webkit-linear-gradient(top, $brand-primary 0%, #000 100%)!important;
+    background: linear-gradient(to bottom, $brand-primary 0%, #000 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#375E97', endColorstr='#000000',GradientType=0 )!important;
+}*/

@@ -34,5 +34,10 @@ namespace ClinicaCloudPlatform.DAL.Data.Functions
         {
             return _context.Doctors.ToList(); //need to use Microsoft.EntityFrameworkCore.Relational .FromSql extension, so pgsql can query json to filter patients by org
         }
+
+        public List<Lab> GetLabsByOrganization(string OrgNameKey)
+        {
+            return _context.Labs.ToList(); //need to use Microsoft.EntityFrameworkCore.Relational .FromSql extension, so pgsql can query json to filter patients by org
+        }
     }
 }

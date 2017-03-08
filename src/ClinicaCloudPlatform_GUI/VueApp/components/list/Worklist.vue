@@ -3,27 +3,26 @@
         <table id="worklistTable" class="nowrap table table-bordered table-condensed table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>
                     <th>Created</th>
-                    <th>Client</th>
-                    <th>Specimens</th>
-                    <th></th>
+                    <th>Client</th>-->
+                    <th class="accessionLabel">Accession</th>
+                    <th class="specimenLabel">Specimen</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="row in worklist">
                     <td>
-                        <router-link :to="{ name: 'Edit Accession', params: { id: row.id, orgNameKey: organization.nameKey }}">
-                            Edit <span class="accessionLabel">Accession</span> {{row.id}}
-                        </router-link>
+                        <WorklistAccessionDetail :organization="organization" :accession="row" :labs="state.labs" :clients="state.clients" :patients="state.patients" :doctors="state.doctors">
+                        </WorklistAccessionDetail>
+                        <!--<router-link :to="{ name: 'Edit Accession', params: { id: row.id, orgNameKey: organization.nameKey }}">
+                            Edit <span class="accessionLabel">Accession</span> { {row.id} }
+                        </router-link>-->
                     </td>
-                    <td>{{row.createdDate}}</td>
-                    <td>{{lookup('client', row.clientId)}}</td>
                     <td>
                         <WorklistSpecimens :organization="organization" :specimens="row.specimens">
                         </WorklistSpecimens>
                     </td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -36,12 +35,19 @@
 
     import axios from 'axios';
     import WorklistSpecimens from './WorklistSpecimens.vue';
+    import WorklistAccessionDetail from './WorklistAccessionDetail.vue';
+    import WorklistCaseDetail from './WorklistCaseDetail.vue';
+
+    import customDataHelpersMixin from '../../assets/js/mixins/customDataHelpers.js';
 
     module.exports = {
         name: "Worklist",
         components: {
-            WorklistSpecimens
+            WorklistSpecimens,
+            WorklistAccessionDetail,
+            WorklistCaseDetail
         },
+        mixins: [customDataHelpersMixin],
         props: {
             organization: Object
         },
@@ -66,11 +72,11 @@
                             ],
                             columnDefs: [
                                 {
-                                    "targets": 1,
-                                    "data": "createdDate",
-                                    "render": function ( data, type, full, meta ) {
-                                        return vm.$options.filters.localeDate(data);
-                                    }
+                                    //"targets": 1,
+                                    //"data": "createdDate",
+                                    //"render": function ( data, type, full, meta ) {
+                                    //    return vm.$options.filters.localeDate(data);
+                                    //}
                                 }
                             ]
                         }
@@ -79,35 +85,39 @@
                         .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
                 });
             },
-            lookup: function(type, value){
-                switch(type){
-                    case "client":
-                    default:
-                        var client = this.state.clients.find(function(c) {return c.id == value;});
-                        if(typeof(client)!='undefined')
-                            return client.name;
-                        else
-                            return 'Unknown';
-                        break;
-                }
-            },
+
             loadData: function(org, config){
                 var vm = this;
                 var worklistUrl = '/api/Worklist/' + org.nameKey + '/' + config.start + '/' + config.end + '/' + urlencode(JSON.stringify(config.options));
 
                 axios.all([
                     axios.get(worklistUrl),
-                    axios.get('/api/Client/' + org.nameKey)
-                ]).then(axios.spread(function (worklistResponse, clientResponse) {
+                    axios.get('/api/Client/' + org.nameKey),
+                    axios.get('/api/Lab/' + org.nameKey),
+                    axios.get('/api/Doctor/' + org.nameKey),
+                    axios.get('/api/Patient/' + org.nameKey),
+                ]).then(axios.spread(function (worklistResponse, clientResponse, labResponse, doctorResponse, patientResponse) {
+                    
+                    vm.$set(vm, 'worklist', worklistResponse.data);
                     vm.$set(vm.state, 'clients', clientResponse.data);
-                    vm.$set(vm, 'worklist', worklistResponse.data)
+                    vm.$set(vm.state, 'labs', clientResponse.data);
+                    vm.$set(vm.state, 'doctors', clientResponse.data);
+                    vm.$set(vm.state, 'patients', clientResponse.data);
                     //apply after last data load
                     vm.applyDataTables();
                 }
                     )).catch(err => {console.log(err)});
-            },
+            }, 
+            setWorklistConfig: function(org)
+            {
+                this.state.config.start = Date.now() -30;
+                this.state.config.end = Date.now();
+                this.state.config.options.includeCases = this.organizationUsesCases;
+                this.state.config.options.includeSpecimens = this.organizationUsesSpecimens;
+            }
         },
         created: function() {
+            this.setWorklistConfig(this.organization);
             this.loadData(this.organization, this.state.config);
         }
     }
