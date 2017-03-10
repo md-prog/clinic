@@ -2,67 +2,83 @@
     <div class="card">
         <div class="card-header card-header-primary">
             <span class="patientDetailsLabel">Patient/Subject Details</span>
+            <div class="float-right text-white"><small>To prevent duplicate entries, please search before entering a new record.</small></div>
         </div>
         <div class="card-block">
             <div class="form-group">
                 <!--v-if="typeof(this.patient) != 'undefined'">-->
-                <label for="patientName" class="patientLabel">Patient</label>
-                <div class="float-right"><small>To prevent duplicate entries, please search before entering a new record.</small></div>
-                <multiselect v-if="patientState.patient.id !=0" id="patientName"
-                             :options="patientState.patients"
+                <label for="patientName" class="patientLabel labelAbove">Patient</label>               
+                <multiselect id="patientName"
+                             :options="this.computedProp_patients"
                              track-by="id"
-                             label="lastName"
+                             label="fullName"
                              :option-height="104"
                              :searchable="true"
                              :custom-label="customPatientDropdownLabel"
-                             :show-labels="false"                             
+                             :show-labels="false"
                              :internal-search="true"
                              :clear-on-select="true"
                              :close-on-select="true"
                              :allow-empty="false"
-                             :options-limit="100"
-                             :limit="5"
-                             :limit-text="limitText"
                              placeholder="Type to Search..."
                              v-on:input="patientChanged"
                              v-on:search-change="patientSearched"
                              v-model="patientState.patient">
-                    <span slot="noResult">No Patients Found.  <button class="btn btn-primary btn-sm" v-on:click="newPatient">New Patient</button></span>
+                    <span slot="noResult">No Patients Found.  <button class="btn btn-info btn-sm" v-on:click="newPatient">New Patient</button></span>
                     <template slot="option" scope="props">
                         <div :id="props.option.id">{{props.option.lastName}}, {{props.option.firstName}}<br />DOB: {{props.option.dob | prettyDate}}<br />SSN: {{props.option.ssn}}</div>
                     </template>
                 </multiselect>
                 <div class="row">
                     <div class="form-group col-lg-6 col-sm-auto">
-                        <label for="firstNameField">First Name</label>
-                        <input id="firstNameField" type="text" v-model="patientState.patient.firstName" class="form-control" v-bind:disabled="!patientState.patientsSearched" />
+                        <label for="firstNameField" class="labelAbove">First Name</label>
+                        <input id="firstNameField" type="text" v-model="patientState.patient.firstName" class="form-control"
+                               v-bind:disabled="!this.allowEditSave" />
                     </div>
                     <div class="form-group col-lg-6 col-sm-auto">
-                        <label for="lastNameField">Last Name</label>
-                        <input id="lastNameField" type="text" v-model="patientState.patient.lastName" class="form-control" v-bind:disabled="!patientState.patientsSearched" />
+                        <label for="lastNameField" class="labelAbove">Last Name</label>
+                        <input id="lastNameField" type="text" v-model="patientState.patient.lastName" class="form-control"
+                               v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-4 col-sm-auto">
-                        <label for="ssnField">SSN</label>
-                        <input id="ssnField" type="text" v-model="patientState.patient.ssn" class="form-control" v-bind:disabled="!patientState.patientsSearched" />
+                        <label for="ssnField" class="labelAbove">SSN</label>
+                        <input id="ssnField" type="text" v-model="patientState.patient.ssn" class="form-control"
+                               v-bind:disabled="!this.allowEditSave" />
                     </div>
                     <div class="form-group col-lg-4 col-sm-auto">
-                        <label for="dobField">DOB</label>
+                        <label for="dobField" class="labelAbove">DOB</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            <input id="dobField" type="datetime" v-model="patientState.patient.dob" class="form-control" v-bind:disabled="!patientState.patientsSearched" />
+                            <input id="dobField" type="text" v-model="patientState.patient.dobString" class="form-control"
+                                   v-bind:disabled="!this.allowEditSave" />
                         </div>
                     </div>
                     <div class="form-group col-lg-4 col-sm-auto">
-                        <label for="mrnField">MRN</label>
-                        <input id="mrnField" type="text" v-model="mrn" class="form-control" v-bind:disabled="!patientState.patientsSearched" />
+                        <label for="mrnField" class="labelAbove">MRN</label>
+                        <input id="mrnField" type="text" v-model="patientState.mrn" class="form-control"
+                               v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12"><button v-if="patientState.patientsSearched" class="btn btn-primary float-right"><i class="fa fa-save"></i> Save Patient</button></div>
+                    <div class="col-sm-6">
+                        <button
+                                class="btn btn-info float-left"
+                                v-on:click="uploadDocument('PatientConsent')">
+                            <i class="fa fa-paperclip"></i>
+                            Attach Consent
+                        </button>
+                    </div>
+                    <div class="col-sm-6">
+                    <button v-if="this.allowEditSave" 
+                            class="btn btn-info float-right"
+                            v-on:click="savePatient">
+                        <i class="fa fa-save"></i> 
+                        Save Patient</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +89,7 @@
     import patientData from './Patient.vue.data.js';
     import Multiselect from 'vue-multiselect';
     import axios from 'axios';
-    import debounce from 'lodash/debounce';
+    //import debounce from 'lodash/debounce';
 
     const uuidV1 = require('uuid/v1');
 
@@ -87,83 +103,119 @@
             return {patientState: patientData.patientState};
         },
         props: {
-            patientId: Number,
-            mrn: String,
-            organization: Object
+            prop_patientId: Number,
+            prop_mrn: String,
+            prop_user: Object,
+            prop_organization: Object,
+            prop_patients: Array
+        },
+        computed: {
+            computedProp_patients: //moved to controller
+            {
+                get: function() {
+                    var vm = this;
+                    return vm.prop_patients.map(function(p) { 
+                        var patient_ext = {dobString: vm.getDobString(p.dob)};
+                        return Object.assign(p, patient_ext);
+                    });
+                }
+            }
+        },
+        created: function()
+        {
+            if(this.prop_patientId > 0){
+                this.setPatient(this.prop_organization, this.prop_patientId, this.prop_mrn);
+            }
+            else
+                this.newPatient();
+
+        },
+        beforeMount: function()
+        {
+            //$('#dobField').daterangepicker({
+            //    "singleDatePicker": true,
+            //    "timePicker": false,
+            //    locale: {
+            //        format: 'MM/DD/YYYY'
+            //    }
+            //});
         },
         methods: {
-            customPatientDropdownLabel: function ({id, firstName, lastName, dob, ssn}) {
-                return 'Name: ' + firstName + ' ' + lastName + ', DOB: ' + this.dateFormat(dob) + ', SSN: ' + ssn},
+            customPatientDropdownLabel: function (patient) {
+                if(patient.id == -1)
+                    return "Type to Search";
+                else
+                    return 'Name: ' + patient.firstName + ' ' + patient.lastName + ', DOB: ' + this.dateFormat(patient.dob) + ', SSN: ' + patient.ssn;
+            },
 
-    dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
+            allowEditSave:function(){
+                return patientState.patientsSearched;
+            },
 
-    limitText: function(count) {
-        return `and ${count} additional Patients`;
-    },
+            dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
 
-    patientSearched: function (searchQuery, id) {        
-        //if(searchQuery.length > 1)
-        //    this.getPatients(this.organization, searchQuery);
-        this.patientState.patientsSearched = true;
-    },
+            limitText: function(count) {
+                return `and ${count} additional Patients`;
+            },
 
-    patientChanged: function (value, dropDownId) {
-        this.patientId = value.id;
-        this.$emit('changed', value.id);
-        //this.$set(this.accessionState.accession, 'patientId', value.id);
-    },
+            patientSearched: function (searchQuery, id) {
+                this.patientState.patientsSearched = true;
+            },
 
-    newPatient: function () {
-        this.patientState.patient = {
-            "id": -1,
-            "guid": uuidV1(),
-            "lastName": '',
-            "firstName": '',
-            "dob": '01/01/1900',
-            "ssn": '000-00-000'
-        };
-        this.patientId = -1;
-        this.$emit('new', -1);
-    },
+            patientChanged: function (value, dropDownId, doReload) {
+                this.$emit('changed', value.id, doReload);
+            },
 
-    getPatients: //debounce(
-        function (org) {
-            this.patientState.isLoading = true;
-            axios.get('/api/Patient/' + org.nameKey).then(response => {
-                
-                this.$set(this.patientState, 'patients', response.data);
+            getDobString: function(dob){            
+                var dobDt = new Date(dob);
+                return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
+            },
 
+            newPatient: function () {
+                this.patientState.patient = {
+                    "id": -1,
+                    "guid": uuidV1(),
+                    "lastName": '',
+                    "firstName": '',
+                    "fullName": '',
+                    "dob": '',
+                    "dobString": '',
+                    "ssn": ''
+                };
+                this.patientState.mrn = "";
+                this.$emit('new', -1);
+            },
+
+            setPatient: function(org, patientId, mrn)
+            {
+                var currentPatient = this.computedProp_patients.find(function(p){return p.id == patientId});
+                if(currentPatient != null){
+                    this.$set(this.patientState, 'patient', currentPatient);                    
+                    //done in compute - this.$set(this.patientState.patient, 'dobString', this.getDobString(this.patientState.patient.dob));
+                    this.$set(this.patientState, 'mrn', mrn);
+                }
+                else
+                    this.newPatient();
+            },
+
+            savePatient: function()
+            {   
                 var vm = this;
-                var currentPatientInList = this.patientState.patients.find(function(p){return p.id == vm.patientState.patient.ID});
-                
-                if(this.patientState.patient.id != 0 && typeof(currentPatientInList) === 'undefined')
-                    this.patientState.patients.push(this.patientState.patient);
-                
-                this.patientState.isLoading = false;
-            }).catch(err=> { console.log(err) });
-        }, //500),
+                vm.$set(vm.patientState.patient, 'dob', new Date(vm.patientState.patient.dobString).toJSON());  
+                //vm.$delete(vm.patientState.patient, 'dobString');
+                axios.post('/api/patient', {
+                    patient: vm.patientState.patient,                   
+                    orgCustomData: vm.prop_organization.customData,
+                    userFullName: vm.prop_user.fullName,
+                    userHref: vm.prop_user.href}).then(response=>{
+                        vm.$set(vm.patientState.patient, 'id', response.data.id);
+                        vm.$set(vm.patientState.patient, 'guid', response.data.guid);
+                        this.patientChanged(vm.patientState.patient, response.data.id, true);
+                    });
+            }
 
-    getPatient: function (org, id) {
-        this.patientState.isLoading = true;
-        axios.get('/api/Patient/' + org.nameKey + '/' + id).then(response => {
-            Object.assign(this.patientState.patient, response.data);
-            this.patientState.patients.push(response.data);
-            this.patientState.isLoading = false;
-        }).catch(err=> { console.log(err) });
-    },
+        },
 
-    },
-    created: function()
-    {        
-        if(this.patientId > 0){
-            this.getPatient(this.organization, this.patientId);
-        }
-        else
-            this.newPatient();
-
-        this.getPatients(this.organization);
-
-    }
     };
 
 </script>

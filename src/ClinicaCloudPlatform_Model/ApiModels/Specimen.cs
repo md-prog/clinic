@@ -4,11 +4,11 @@ namespace ClinicaCloudPlatform.Model.ApiModels
 {
     public class Specimen : _ApiModelBaseClass
     {
-        public int ParentSpecimenId { get; set; }
+        public Guid ParentSpecimenGuid { get; set; }
         public string ExternalSpecimenId { get; set; }
         public string Code { get; set; }
-        public string Type { get; set; }
-        public string Transport { get; set; }
+        public SpecimenType Type { get; set; }
+        public SpecimenTransport Transport { get; set; }
         public string Category { get; set; }
         public DateTime CollectionDate { get; set; }
         public DateTime ReceivedDate { get; set; }
@@ -16,5 +16,17 @@ namespace ClinicaCloudPlatform.Model.ApiModels
         /*
          * JSON contains specimen data fields 
          */
+    }
+
+    public class SpecimenType
+    {
+        public string Type { get; set; } //'type' is already used all over in gui
+        public string Code { get; set; }
+    }
+
+    public class SpecimenTransport
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
     }
 }

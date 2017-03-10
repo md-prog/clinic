@@ -136,9 +136,8 @@ namespace ClinicaCloudPlatform.DAL.Data
         protected void BaseMap<T>(EntityTypeBuilder<T> entityBuilder) where T : _LimsBaseClass
         {
             entityBuilder.HasKey(x => x.Id);
+            entityBuilder.Property(x => x.Id).UseNpgsqlSerialColumn<int>();
             entityBuilder.Property(x => x.Id).ValueGeneratedOnAdd();
-            //entityBuilder.Property(x => x.CreatedDate).ValueGeneratedOnAdd();
-            //entityBuilder.Property(x => x.ModifiedDate).ValueGeneratedOnAddOrUpdate();
             entityBuilder.Property(x => x.CreatedHref).IsRequired(true);
             entityBuilder.Property(x => x.ModifiedHref).IsRequired(true);
             entityBuilder.Property(x => x.CreatedFullName).IsRequired(true);

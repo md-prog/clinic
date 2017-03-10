@@ -9,9 +9,10 @@ using ClinicaCloudPlatform.Model.Models;
 namespace ClinicaCloudPlatform.DAL.Migrations
 {
     [DbContext(typeof(ArsMachinaLIMSContext))]
-    partial class ArsMachinaLIMSContextModelSnapshot : ModelSnapshot
+    [Migration("20170310165151_npgsqlchg4")]
+    partial class npgsqlchg4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -710,7 +711,7 @@ namespace ClinicaCloudPlatform.DAL.Migrations
                     b.Property<string>("ModifiedHref")
                         .IsRequired();
 
-                    b.Property<Guid>("ParentSpecimenGuid");
+                    b.Property<int>("ParentSpecimenID");
 
                     b.Property<DateTime>("ReceivedDate");
 

@@ -9,7 +9,7 @@ namespace ClinicaCloudPlatform.API.Controllers
     [Route("api/[controller]")]
     public class LabController : Controller
     {
-        [HttpGet("{orgNameKey}/{ClientId}")]
+        [HttpGet("{orgNameKey}/{labId}")]
         public dynamic Labs(string OrgNameKey, int LabId)
         {
             foreach (dynamic lab in Labs(OrgNameKey))
