@@ -28,9 +28,10 @@ namespace ClinicaCloudPlatform.API.Mapping
                 {
                     Id = s.Id,
                     Code = s.Code,
+                    ParentSpecimenGuid = s.ParentSpecimenGuid,
                     ExternalSpecimenId = s.ExternalSpecimenID,
-                    Type = s.Type,
-                    Transport = s.Transport,
+                    Type = new Model.ApiModels.SpecimenType() { Type = s.Type, Code = s.TypeCode },
+                    Transport = new Model.ApiModels.SpecimenTransport() { Name = s.Transport, Code = s.TransportCode },
                     CollectionDate = s.CollectionDate,
                     ReceivedDate = s.ReceivedDate,
                     CustomData = JObject.Parse(s.CustomData ?? "{}"),

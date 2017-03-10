@@ -1,6 +1,6 @@
 ﻿<template>
     <div id="worklistTableWrapper" class="table-responsive">
-        <table id="worklistTable" class="nowrap table table-bordered table-condensed table-hover">
+        <table id="worklistTable" class="nowrap table table-bordered table-condensed table-hover table-primary">
             <thead>
                 <tr>
                     <!--<th>ID</th>

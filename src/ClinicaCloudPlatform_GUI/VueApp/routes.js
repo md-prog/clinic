@@ -10,6 +10,7 @@ import MailBox from './components/Mailbox.vue'
 import NotFound from './components/404.vue'
 import Accessioning from './components/accessioning/Accessioning.vue'
 import Worklist from './components/list/Worklist.vue'
+import SpecimenTrackingDashboard from './components/tracking/SpecimenTrackingDashboard.vue'
 
 const routes= [
     {
@@ -50,7 +51,16 @@ const routes= [
                 meta: {
                     title: 'Accessioning'
                 }            
-            }
+            },{
+                path: 'tracking/specimen/dashboard',
+                component: SpecimenTrackingDashboard,
+                name: 'Specimen Tracking',
+                description: 'Track and review specimen status/location',
+                meta: {
+                    title: 'Specimen Tracking Dashboard'
+                }            
+            },
+
         ]
     },
     {

@@ -9,11 +9,11 @@ namespace ClinicaCloudPlatform.API.Controllers
 {
     public partial class AccessioningController
     {
-        
-
         private static void ProcessSpecimens(string UserFullName, string UserHref, Accession accession,
             ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
+            if (accession.Specimens.Count() > 0 && dbAcc.Specimens == null)
+                dbAcc.Specimens = new List<Model.Models.Specimen>();
             foreach (var specimen in accession.Specimens)
             {
                 var dbSpec = context.Find<Model.Models.Specimen>(specimen.Id);
@@ -25,27 +25,17 @@ namespace ClinicaCloudPlatform.API.Controllers
                     dbAcc.Specimens.Add(dbSpec);
                 }
 
-                /* hopefully EF will do this
-                dbSpec.Category = (string)ChangeDetection.GetChangedValue(specimen.Category, dbSpec.Category, ref changed);
-                dbSpec.Code = (string)ChangeDetection.GetChangedValue(specimen.Code, dbSpec.Code, ref changed);
-                dbSpec.CollectionDate = (DateTime)ChangeDetection.GetChangedValue(specimen.CollectionDate, dbSpec.CollectionDate, ref changed);
-                dbSpec.CustomData = (string)ChangeDetection.GetChangedValue(specimen.CustomData, dbSpec.CustomData, ref changed);
-                dbSpec.ExternalSpecimenId = (string)ChangeDetection.GetChangedValue(specimen.ExternalSpecimenId, dbSpec.ExternalSpecimenId, ref changed);
-                dbSpec.ParentSpecimenId = (int)ChangeDetection.GetChangedValue(specimen.ParentSpecimenId, dbSpec.ParentSpecimenId, ref changed);
-                dbSpec.ReceivedDate = (DateTime)ChangeDetection.GetChangedValue(specimen.ReceivedDate, dbSpec.ReceivedDate, ref changed);
-                dbSpec.Transport = (string)ChangeDetection.GetChangedValue(specimen.Transport, dbSpec.Transport, ref changed);
-                dbSpec.Type = (string)ChangeDetection.GetChangedValue(specimen.Type, dbSpec.Type, ref changed);
-                */
-
                 dbSpec.Category = specimen.Category;
                 dbSpec.Code = specimen.Code;
                 dbSpec.CollectionDate = specimen.CollectionDate;
                 dbSpec.CustomData = specimen.CustomData.ToString();
                 dbSpec.ExternalSpecimenID = specimen.ExternalSpecimenId;
-                dbSpec.ParentSpecimenID = specimen.ParentSpecimenId;
+                dbSpec.ParentSpecimenGuid = specimen.ParentSpecimenGuid;
                 dbSpec.ReceivedDate = specimen.ReceivedDate;
-                dbSpec.Transport = specimen.Transport;
-                dbSpec.Type = specimen.Type;
+                dbSpec.Transport = specimen.Transport.Name;
+                dbSpec.TransportCode = specimen.Transport.Code;
+                dbSpec.Type = specimen.Type.Type;
+                dbSpec.TypeCode = specimen.Type.Code;
 
                 if (!(context.Entry(dbSpec).State == Microsoft.EntityFrameworkCore.EntityState.Unchanged))
                 {
@@ -57,6 +47,9 @@ namespace ClinicaCloudPlatform.API.Controllers
 
         private static void ProcessCases(string UserFullName, string UserHref, Accession accession, dynamic orgCustomData, ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
+            if (accession.Cases.Count() > 0 && dbAcc.Cases == null)
+                dbAcc.Cases = new List<Model.Models.Case>();
+
             foreach (Case _case in accession.Cases)
             {
                 var dbCase = context.Cases

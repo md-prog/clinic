@@ -2,7 +2,10 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using ClinicaCloudPlatform.Model.ApiModels;
+using System;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,6 +36,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     Id = p.Id,
                     LastName = p.LastName,
                     FirstName = p.FirstName,
+                    MiddleName = p.MiddleName,
+                    FullName = string.Format("{0} {1} {2}", p.FirstName, p.MiddleName, p.LastName),
                     DOB = p.DOB,
                     SSN = p.SSN
                 });
@@ -74,6 +79,40 @@ namespace ClinicaCloudPlatform.API.Controllers
                 jPatientsToRemove.ForEach(t => t.Remove());
 
                 return (dynamic)result;
+            }
+        }
+
+        [HttpPost("")]
+        public SaveResponseGeneric Save([FromBody]dynamic PatientState)
+        {
+            Patient patient;
+            var pJson = ((JObject)PatientState);
+            try { patient = JsonConvert.DeserializeObject<Patient>(pJson.GetValue("patient").ToString()); }
+            catch (Exception ex) { throw new FormatException("Error casting request body as Patient, did JSON change?", ex); }
+
+            var userFullName = PatientState.userFullName.ToString();
+            var userHref = PatientState.userHref.ToString();
+
+            using (var context = new ArsMachinaLIMSContext(userFullName, userHref))
+            {
+                var dbPatient = context.Find<Model.Models.Patient>(patient.Id);
+                if (dbPatient == null)
+                {
+                    dbPatient = new Model.Models.Patient();
+                    dbPatient.CreatedFullName = userFullName;
+                    dbPatient.CreatedHref = userHref;
+                    context.Patients.Add(dbPatient);
+                }
+
+                dbPatient.LastName = patient.LastName;
+                dbPatient.MiddleName = patient.MiddleName;
+                dbPatient.FirstName = patient.FirstName;
+                dbPatient.SSN = patient.SSN;
+                dbPatient.DOB = patient.DOB;
+
+                context.SaveChanges();
+                
+                return new SaveResponseGeneric() { Guid = dbPatient.Guid, Id = dbPatient.Id };
             }
         }
     }

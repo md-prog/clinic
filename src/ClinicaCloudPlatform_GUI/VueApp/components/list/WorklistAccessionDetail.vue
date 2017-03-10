@@ -1,16 +1,18 @@
 ﻿<template>
     <div class="container-fluid pl-0 pr-0">
         <div class="card card-accent-primary card-compact">
-            <div class="card-header card-compact">
-                <span class="accessionLabel">Accession</span> # {{accession.id}} - {{accession.createdDate | localeDate}}
+            <div class="card-header card-compact">                
+                <router-link class="page-link bg-gray-light" :to="{ name: 'Edit Accession', params: { id: accession.id, orgNameKey: organization.nameKey }}">
+                    <i class="fa fa-edit"></i> Edit <span class="accessionLabel">Accession</span> # {{accession.id}} - {{accession.createdDate | localeDate}}
+                </router-link>                 
             </div>
             <div class="card-block card-compact">
                 <div class="row m-0">
                     <!--v-bind:class="col.class"-->
-                    <div class="col-sm-auto m-0 p-0">
+                    <div class="col-sm-6 m-0 p-0">
                         <div class="card card-compact card-no-outer-border">
-                            <div class="card-header card-compact">General</div>
-                            <div class="card-block card-compact wrap-unset">
+                            <div class="card-header">General</div>
+                            <div class="card-block wrap-unset">
                                 <div class="row m-0">
                                     <div class="col-sm-auto mr-1">
                                         <label v-bind:for="'accLab' + accession.id + accession.orderingLabId" class="label-black">
@@ -38,10 +40,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-auto m-0 p-0">
+                    <div class="col-sm-6 m-0 p-0">
                         <div class="card card-compact card-no-outer-border">
-                            <div class="card-header card-compact">Specimens/Cases</div>
-                            <div class="card-block card-compact wrap-unset">
+                            <div class="card-header">Specimens/Cases</div>
+                            <div class="card-block wrap-unset">
                                 <div class="row m-0">
                                     <div class="col-sm-auto mr-1">
                                         <label v-bind:for="'accSpecimenCount' + accession.id" class="label-black">
@@ -62,7 +64,7 @@
                                     </div>
                                     <div class="col-sm-auto" v-bind:id="'accCaseCount' + accession.id">
                                         <div class="m-0 p-0">
-                                            "N/A"
+                                            N/A
                                         </div>
                                     </div>
                                 </div>
