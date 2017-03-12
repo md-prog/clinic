@@ -44,7 +44,7 @@
                                         </td>
                                         <td v-else>{{specimen.externalSpecimenID}}</td>
                                         <td v-if="specimen === currentSpecimen">
-                                            <input type="text" />
+                                            <input type="text" placeholder="[Auto-generated if empty]"/>
                                         </td>
                                         <td v-else></td>
                                         <td v-if="specimen === currentSpecimen">
@@ -62,7 +62,7 @@
                                                          v-model="specimen.type">
                                             </multiselect>
                                         </td>
-                                        <td v-else>{{specimen.type.name}}</td>
+                                        <td v-else>{{specimen.type.type}}</td>
                                         <td v-if="specimen === currentSpecimen">
                                             <multiselect placeholder="Select Transport"
                                                          track-by="code"

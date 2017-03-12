@@ -1,7 +1,7 @@
 ﻿<template>
     <div class="container-fluid pl-0">
         <div class="card card-accent-primary card-compact">
-            <div class="card-header bg-gray-light">Specimen # {{specimen.id}} - {{specimen.type.type}} {{specimen.transport == null || specimen.transport.name == null ? '' : '| ' + specimen.transport.name}}</div>
+            <div class="card-header bg-gray-lightest font-weight-bold">Specimen # {{specimen.id}} - {{specimen.type.type}} {{specimen.transport == null || specimen.transport.name == null ? '' : '| ' + specimen.transport.name}}</div>
             <div class="card-block">
                 <div v-for="row in organization.customData.specimenAccessionSections.rows" class="row m-0">
                     <!--v-bind:class="col.class"-->

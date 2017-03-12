@@ -60476,7 +60476,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "card card-accent-primary card-compact"
   }, [_c('div', {
-    staticClass: "card-header bg-gray-light"
+    staticClass: "card-header bg-gray-lightest font-weight-bold"
   }, [_vm._v("Specimen # " + _vm._s(_vm.specimen.id) + " - " + _vm._s(_vm.specimen.type.type) + " " + _vm._s(_vm.specimen.transport == null || _vm.specimen.transport.name == null ? '' : '| ' + _vm.specimen.transport.name))]), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, _vm._l((_vm.organization.customData.specimenAccessionSections.rows), function(row) {
@@ -60539,7 +60539,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "card-header card-compact"
   }, [_c('router-link', {
-    staticClass: "page-link bg-gray-light",
+    staticClass: "page-link bg-gray-light font-weight-bold",
     attrs: {
       "to": {
         name: 'Edit Accession',
@@ -60731,7 +60731,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })]) : _c('td', [_vm._v(_vm._s(specimen.externalSpecimenID))]), _vm._v(" "), (specimen === _vm.currentSpecimen) ? _c('td', [_c('input', {
       attrs: {
-        "type": "text"
+        "type": "text",
+        "placeholder": "Auto-generated"
       }
     })]) : _c('td'), _vm._v(" "), (specimen === _vm.currentSpecimen) ? _c('td', [_c('multiselect', {
       attrs: {
@@ -60757,7 +60758,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           specimen.type = $$v
         }
       }
-    })], 1) : _c('td', [_vm._v(_vm._s(specimen.type.name))]), _vm._v(" "), (specimen === _vm.currentSpecimen) ? _c('td', [_c('multiselect', {
+    })], 1) : _c('td', [_vm._v(_vm._s(specimen.type.type))]), _vm._v(" "), (specimen === _vm.currentSpecimen) ? _c('td', [_c('multiselect', {
       attrs: {
         "placeholder": "Select Transport",
         "track-by": "code",
@@ -63221,8 +63222,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "patientDetailsLabel"
   }, [_vm._v("Patient/Subject Details")]), _vm._v(" "), _c('div', {
-    staticClass: "float-right text-white"
-  }, [_c('small', [_vm._v("To prevent duplicate entries, please search before entering a new record.")])])])
+    staticClass: "float-right text-white config-info"
+  }, [_vm._v("To prevent duplicate entries, please search before entering a new record.")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "input-group-addon"

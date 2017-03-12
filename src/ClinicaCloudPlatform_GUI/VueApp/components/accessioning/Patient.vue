@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header card-header-primary">
             <span class="patientDetailsLabel">Patient/Subject Details</span>
-            <div class="float-right text-white"><small>To prevent duplicate entries, please search before entering a new record.</small></div>
+            <div class="float-right text-white config-info">To prevent duplicate entries, please search before entering a new record.</div>
         </div>
         <div class="card-block">
             <div class="form-group">
