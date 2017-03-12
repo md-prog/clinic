@@ -13,7 +13,7 @@ body {
     font-size: $font-size-base;
     font-weight: normal;
     line-height: 1.5;
-    color: $brand-primary;
+    color: $gray-darker;
     background-color: unset !important;
     background: lighten($brand-primary,60) !important;
     margin: 0;
@@ -6340,19 +6340,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 }
 
 .config-info {
-    font-size: 10px;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    color: $brand-info;
-    text-align: right !important;
+    font-size: .7rem;
 }
 
-.config-info-top {
-    @extend .config-info;
-    bottom: unset;
-    top: 5px;
-}
 
 @media (min-width: 768px) {
     //really sucky hack.  something is preventing a typical sticky footer solution...
@@ -6404,6 +6394,10 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     background: $brand-warning !important;
     content: attr(data-deselect);
     color: #fff;
+}
+
+input[type="text"] {
+    padding-left: .3rem;
 }
 
 .copyright a {
@@ -6548,9 +6542,9 @@ table.dataTable thead .sorting_desc_disabled {
     float:right;
 }*/
 
-.bg-gray-light {
-    background-color: $gray-light;
-    color: #fff;
+.bg-gray-lightest {
+    background-color: $gray-lightest;
+    color: #000;
 }
 
 .label-black {
@@ -6573,9 +6567,14 @@ table.dataTable thead .sorting_desc_disabled {
     margin-left: 3px;
 }
 
+th{
+    font-weight: 600;
+    font-size: .9rem;
+}
+
 .table-gray thead th {
-    background: $gray-light !important;
-    color: #fff;
+    background: $gray-lightest !important;
+    color: #000;
 }
 
 .table-primary thead th {
@@ -6611,8 +6610,10 @@ table.dataTable thead .sorting_desc_disabled {
 }*/
 .labelAbove {
     min-width: 100%;
-    background-color: $gray-light;
-    color: #fff;
+    background-color: $gray-lightest;
+    color: #000;
+    font-size: .9rem;
+    font-weight:600;
     padding-left: .3rem;
 }
 

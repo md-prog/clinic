@@ -17287,7 +17287,7 @@ body {
   font-size: 0.8125;
   font-weight: normal;
   line-height: 1.5;
-  color: #375E97;
+  color: #222222;
   background-color: unset !important;
   background: white !important;
   margin: 0;
@@ -22098,17 +22098,8 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .copyright {
   float: left; }
 
-.config-info, .config-info-top {
-  font-size: 10px;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: #3996d8;
-  text-align: right !important; }
-
-.config-info-top {
-  bottom: unset;
-  top: 5px; }
+.config-info {
+  font-size: .7rem; }
 
 @media (min-width: 768px) {
   .main-fill {
@@ -22148,6 +22139,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   background: #D9831F !important;
   content: attr(data-deselect);
   color: #fff; }
+
+input[type="text"] {
+  padding-left: .3rem; }
 
 .copyright a {
   color: #ddd; }
@@ -22248,9 +22242,9 @@ table.dataTable thead .sorting_desc_disabled {
 /*.dt-buttons{
     float:right;
 }*/
-.bg-gray-light {
-  background-color: #808080;
-  color: #fff; }
+.bg-gray-lightest {
+  background-color: #f7f7f9;
+  color: #000; }
 
 .label-black {
   display: inline-block !important;
@@ -22268,9 +22262,13 @@ table.dataTable thead .sorting_desc_disabled {
   margin-right: 3px;
   margin-left: 3px; }
 
+th {
+  font-weight: 600;
+  font-size: .9rem; }
+
 .table-gray thead th {
-  background: #808080 !important;
-  color: #fff; }
+  background: #f7f7f9 !important;
+  color: #000; }
 
 .table-primary thead th {
   background: #375E97 !important;
@@ -22303,8 +22301,9 @@ table.dataTable thead .sorting_desc_disabled {
 }*/
 .labelAbove {
   min-width: 100%;
-  background-color: #808080;
-  color: #fff;
+  background-color: #f7f7f9;
+  color: #000;
+  font-weight: 600;
   padding-left: .3rem; }
 
 .cursor-pointer {
