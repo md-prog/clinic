@@ -14,10 +14,12 @@ require('./assets/js/admin_gui.js');
 
 require('./assets/img/favicon.ico');
 
-import { domain, count, prettyDate, localeDate, pluralize, truncate } from './filters';
+import { domain, count, prettyDate, localeDate, MMDDYYYY, MMDDYYYYhhmm, pluralize, truncate } from './filters';
 Vue.filter('count', count);
 Vue.filter('domain', domain);
 Vue.filter('prettyDate', prettyDate);
+Vue.filter('MMDDYYYY', MMDDYYYY);
+Vue.filter('MMDDYYYYhhmm', MMDDYYYYhhmm);
 Vue.filter('localeDate', localeDate);
 Vue.filter('pluralize', pluralize);
 Vue.filter('truncate', truncate);

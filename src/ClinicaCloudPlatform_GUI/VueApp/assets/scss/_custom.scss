@@ -1292,7 +1292,7 @@ header.navbar {
 }
 
 header.navbar .navbar-brand {
-    display: inline-block;
+    display: none;
     width: 220px;
     height: 50px;
     margin-right: 0;
@@ -6441,7 +6441,7 @@ input[type="text"] {
         padding: .2rem .2rem;
         margin-bottom: .2rem !important;
 
-        .page-link{
+        .page-link {
             margin: -0.2rem -0.2rem;
             padding: .4rem .4rem;
             border: none;
@@ -6454,7 +6454,6 @@ input[type="text"] {
 
     .card-footer {
     }
-
 }
 
 .form-group label {
@@ -6549,6 +6548,8 @@ table.dataTable thead .sorting_desc_disabled {
 
 .label-black {
     display: inline-block !important; //override flex
+    font-weight: 600;
+    font-size: .9rem;
     color: #000;
 }
 
@@ -6567,7 +6568,7 @@ table.dataTable thead .sorting_desc_disabled {
     margin-left: 3px;
 }
 
-th{
+th {
     font-weight: 600;
     font-size: .9rem;
 }
@@ -6613,10 +6614,32 @@ th{
     background-color: $gray-lightest;
     color: #000;
     font-size: .9rem;
-    font-weight:600;
+    font-weight: 600;
     padding-left: .3rem;
 }
 
 .cursor-pointer {
     cursor: pointer !important;
+}
+
+.datefield {
+    padding: 0.3em;
+    border: inset 1px #CCC;
+}
+
+.datefield * {
+    display: inline-block;
+}
+
+.datefield input {
+    width: 2em;
+    border: none;
+}
+
+.datefield input#year {
+    width: 3em;
+}
+
+.datefield input:focus {
+    outline: none;
 }

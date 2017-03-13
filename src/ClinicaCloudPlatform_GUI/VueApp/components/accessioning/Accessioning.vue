@@ -47,7 +47,7 @@
                                                         data-toggle="dropdown"
                                                         aria-haspopup="true"
                                                         aria-expanded="false">
-                                                    <i class="fa fa-print font-2xl float-left"></i>
+                                                    <i class="fa fa-save font-2xl float-left"></i>
                                                     Save
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="saveAccessionDropdown">
@@ -66,7 +66,7 @@
                                                         data-toggle="dropdown"
                                                         aria-haspopup="true"
                                                         aria-expanded="false">
-                                                    <i class="fa fa-save font-2xl float-left"></i>
+                                                    <i class="fa fa-print font-2xl float-left"></i>
                                                     Print
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="printDropdown">
@@ -88,7 +88,7 @@
                         </div>
                         <div class="card-block">
                             <div class="form-group">
-                                <label for="clientName" class="clientLabel labelAbove">Client</label>
+                                <label for="clientName" class="clientLabel labelAbove">Institution</label>
                                 <multiselect v-if="accessionState.loaded" id="clientName"
                                              :options="accessionState.clients" track-by="id" label="name"
                                              :searchable="true" :close-on-select="true"
@@ -290,13 +290,17 @@
 
                 $("#loadingModal").modal("hide");
 
-                //tried this in patient component beforeMount - try again later
-                $('#dobField').daterangepicker({
+                $('.dateOnlyPicker').daterangepicker({
                     "singleDatePicker": true,
                     "timePicker": false,
                     locale: {
                         format: 'M/D/YYYY'
                     }
+                });
+
+                $('.dateTimePicker').daterangepicker({
+                    "singleDatePicker": true,
+                    "timePicker": true,
                 });
 
             },

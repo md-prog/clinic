@@ -11,7 +11,7 @@
                 <section class="content-header">
                     <h1>
                         {{$route.name.toUpperCase() }}
-                        <small>{{ $route.meta.description }}</small>
+                        <small>{{ $route.description }}</small>
                     </h1>
                     <nav class="breadcrumb">
                         <router-link exact to="/" class="breadcrumb-item"><i class="fa fa-home"></i>Home</router-link>
@@ -25,7 +25,7 @@
                 </div>
             </main>
 
-            <SecondarySidebar name="rightSidebar" :user="this.user" :organization="this.organization"></SecondarySidebar>
+            <SecondarySidebar name="rightSidebar" :user="this.user" :organization="this.organization" :historyItems="[]"></SecondarySidebar>
         </div>
 
         <AppFooter name="footer" :organization="this.organization"></AppFooter>
@@ -41,6 +41,8 @@
     import Navbar from './main/Navbar.vue';
     import AppFooter from './main/AppFooter.vue';
 
+    import organizationStyleMixin from '../assets/js/mixins/organizationStyle.js';
+
     module.exports = {
         name: 'Main',
         components: {
@@ -49,9 +51,12 @@
             'SecondarySidebar': SecondarySidebar,
             'AppFooter': AppFooter
         },
+        mixins: [organizationStyleMixin],
         methods: {
             postOrgLoadActions: function(vm){
                 window.document.title = vm.organization.name + ' - ' + vm.$route.meta.title;
+                this.setLogo(vm);
+                this.setCSS(vm);
             },
             startOrgWatcher: function(vm){
                 vm.$parent.$store.watch(
@@ -75,8 +80,9 @@
             var vm = this;
             if(!this.userLoaded)
                 this.$parent.$store.dispatch('user/getUser');
-            if(!this.organizationLoaded)
+            if(!this.organizationLoaded){
                 this.$parent.$store.dispatch('organization/loadOrganization');
+            }
             this.startOrgWatcher(this);
         },
         computed: {

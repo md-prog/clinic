@@ -1,15 +1,16 @@
 ﻿import Main from './components/Main.vue'
-import GenericDashboard1 from './components/main/GenericDashboard1.vue'
-import GenericDashboard2 from './components/main/GenericDashboard2.vue'
+//import GenericDashboard1 from './components/main/GenericDashboard1.vue'
+//import GenericDashboard2 from './components/main/GenericDashboard2.vue'
 import ClientAdmin from './components/admin/ClientAdmin.vue'
 import Tables from './components/main/Tables.vue'
 import Tasks from './components/main/Tasks.vue'
 import Setting from './components/main/Setting.vue'
-import Server from './components/main/Server.vue'
+//import Server from './components/main/Server.vue'
 import MailBox from './components/Mailbox.vue'
 import NotFound from './components/404.vue'
 import Accessioning from './components/accessioning/Accessioning.vue'
 import Worklist from './components/list/Worklist.vue'
+import DashboardContainer from './components/dash/DashboardContainer.vue'
 import SpecimenTrackingDashboard from './components/tracking/SpecimenTrackingDashboard.vue'
 
 const routes= [
@@ -18,12 +19,21 @@ const routes= [
         component: Main,
         name: 'Dashboards',   
         children: [
+            {
+                path: '',
+                redirect: 'dashboard/user',
+                meta: {
+                    showInNavMenu: false
+                }
+            },
           {
-              path: '',
-              component: GenericDashboard1,
-              name: 'Dashboard1',
-              description: 'Generic example 1',
-              meta: {title: 'Dashboard'}
+              path: 'dashboard/user/:id?',
+              component: DashboardContainer,
+              name: 'My Dashboard',
+              meta: {
+                  title: 'My Dashboard',
+                  iconClass: 'fa fa-th-large'
+              }
           }
         ]
     },
@@ -41,7 +51,9 @@ const routes= [
                 description: 'Edit sample/accession',
                 meta: {
                     title: 'Accessioning',
-                    showInNavMenu: false
+                    showInNavMenu: false,                    
+                    hasHistoryItems: true,
+                    historyItemName: 'Accessions'
                 }
             }, {
                 path: 'accessioning',
@@ -49,15 +61,19 @@ const routes= [
                 name: 'New Accession',
                 description: 'Add sample/accession to the system',
                 meta: {
-                    title: 'Accessioning'
+                    title: 'Accessioning',
+                    iconClass: 'fa fa-plus',
+                    hasHistoryItems: true,
+                    historyItemName: 'Accessions'
                 }            
             },{
-                path: 'tracking/specimen/dashboard',
+                path: 'dashboard/specimentracking',
                 component: SpecimenTrackingDashboard,
                 name: 'Specimen Tracking',
                 description: 'Track and review specimen status/location',
                 meta: {
-                    title: 'Specimen Tracking Dashboard'
+                    title: 'Specimen Tracking Dashboard',
+                    iconClass: 'fa fa-map-marker'
                 }            
             },
 
@@ -75,7 +91,10 @@ const routes= [
             component: Worklist,
             name: 'Specimen Catalog',
             description: '',
-            meta: {title: 'Catalog'}
+            meta: {
+                title: 'Catalog',
+                iconClass: 'fa fa-shopping-cart'
+            }
         }, {
             path: 'list/worklist/inventory',
             component: Worklist,
@@ -90,7 +109,9 @@ const routes= [
             component: Worklist,
             name: 'Specimen Worklist',
             description: '',
-            meta: {title: 'Worklist'}
+            meta: {title: 'Worklist',
+                iconClass: 'fa fa-tasks'
+            }
         }, {
             path: 'list/worklist/cases',
             component: Worklist,

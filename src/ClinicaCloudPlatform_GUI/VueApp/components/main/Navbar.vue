@@ -38,13 +38,13 @@
 
                     <a class="dropdown-item" href="/login"><i class="fa fa-lock" />Logout</a>
 
-                    <div class="dropdown-header text-center">
+                    <!--<div class="dropdown-header text-center">
                         <strong>Setting</strong>
-                    </div>
+                    </div>-->
 
-                    <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{{ user.messageCount }}</span></a>
-                    <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{{ user.messageCount }}</span></a>
-                    <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{{ user.messageCount }}</span></a>
+                    <!--<a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{ { user.messageCount }}</span></a>
+                    <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{ { user.messageCount }}</span></a>
+                    <a class="dropdown-item" href="#"><i class="icon-envelope-letter"></i> Messages<span class="tag tag-default">{ { user.messageCount }}</span></a>-->
 
                 </div>
             </li>

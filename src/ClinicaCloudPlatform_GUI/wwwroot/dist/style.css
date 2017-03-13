@@ -18548,7 +18548,7 @@ header.navbar {
   flex-direction: row; }
 
 header.navbar .navbar-brand {
-  display: inline-block;
+  display: none;
   width: 220px;
   height: 50px;
   margin-right: 0;
@@ -22248,6 +22248,8 @@ table.dataTable thead .sorting_desc_disabled {
 
 .label-black {
   display: inline-block !important;
+  font-weight: 600;
+  font-size: .9rem;
   color: #000; }
 
 .wrap-unset {
@@ -22303,11 +22305,29 @@ th {
   min-width: 100%;
   background-color: #f7f7f9;
   color: #000;
+  font-size: .9rem;
   font-weight: 600;
   padding-left: .3rem; }
 
 .cursor-pointer {
   cursor: pointer !important; }
+
+.datefield {
+  padding: 0.3em;
+  border: inset 1px #CCC; }
+
+.datefield * {
+  display: inline-block; }
+
+.datefield input {
+  width: 2em;
+  border: none; }
+
+.datefield input#year {
+  width: 3em; }
+
+.datefield input:focus {
+  outline: none; }
 
 /*.router-link-active {
     @extend .nav-link;
