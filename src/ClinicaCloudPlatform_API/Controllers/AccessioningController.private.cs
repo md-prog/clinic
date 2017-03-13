@@ -12,8 +12,9 @@ namespace ClinicaCloudPlatform.API.Controllers
         private static void ProcessSpecimens(string UserFullName, string UserHref, Accession accession,
             ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
-            if (accession.Specimens.Count() > 0 && dbAcc.Specimens == null)
-                dbAcc.Specimens = new List<Model.Models.Specimen>();
+
+            dbAcc.Specimens = new List<Model.Models.Specimen>();
+
             foreach (var specimen in accession.Specimens)
             {
                 var dbSpec = context.Find<Model.Models.Specimen>(specimen.Id);
@@ -47,8 +48,7 @@ namespace ClinicaCloudPlatform.API.Controllers
 
         private static void ProcessCases(string UserFullName, string UserHref, Accession accession, dynamic orgCustomData, ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
-            if (accession.Cases.Count() > 0 && dbAcc.Cases == null)
-                dbAcc.Cases = new List<Model.Models.Case>();
+            dbAcc.Cases = new List<Model.Models.Case>();
 
             foreach (Case _case in accession.Cases)
             {

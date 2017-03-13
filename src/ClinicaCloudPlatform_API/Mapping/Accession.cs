@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace ClinicaCloudPlatform.API.Mapping
@@ -15,6 +16,7 @@ namespace ClinicaCloudPlatform.API.Mapping
             return new Model.ApiModels.Accession()
             {
                 Id = DbAcc.Id,
+                Guid = DbAcc.Guid,
                 CreatedDate = DbAcc.CreatedDate,
                 CreatedFullName = DbAcc.CreatedFullName,
                 ClientId = DbAcc.Client.Id,
@@ -27,6 +29,7 @@ namespace ClinicaCloudPlatform.API.Mapping
                 Specimens = !Options.IncludeSpecimens ? null : DbAcc.Specimens.Select(s => new Model.ApiModels.Specimen
                 {
                     Id = s.Id,
+                    Guid = s.Guid,
                     Code = s.Code,
                     ParentSpecimenGuid = s.ParentSpecimenGuid,
                     ExternalSpecimenId = s.ExternalSpecimenID,
@@ -39,6 +42,7 @@ namespace ClinicaCloudPlatform.API.Mapping
                 Cases = !Options.IncludeCases ? null : DbAcc.Cases.Select(c => new Model.ApiModels.Case
                 {
                     Id = c.Id,
+                    Guid = c.Guid,
                     CaseNumber = c.CaseNumber,
                     ProcessingLabId = c.ProcessingLab?.Id ?? 0,
                     AnalysisLabId = c.AnalysisLab?.Id ?? 0,

@@ -7,9 +7,9 @@
         <div class="card-block">
             <div class="form-group">
                 <!--v-if="typeof(this.patient) != 'undefined'">-->
-                <label for="patientName" class="patientLabel labelAbove">Patient</label>               
+                <label for="patientName" class="patientLabel labelAbove">Patient</label>
                 <multiselect id="patientName"
-                             :options="this.computedProp_patients"
+                             :options="this.prop_patients"
                              track-by="id"
                              label="fullName"
                              :option-height="104"
@@ -49,12 +49,10 @@
                     </div>
                     <div class="form-group col-lg-4 col-sm-auto">
                         <label for="dobField" class="labelAbove">DOB</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                            <input id="dobField" type="text" v-model="patientState.patient.dobString" class="form-control"
-                                   v-bind:disabled="!this.allowEditSave" />
+                        <div id="dobField" class="datefield text-nowrap">
+                            <input id="month" type="text" maxlength="2" placeholder="MM" v-model.number="computedDobMonth" v-bind:disabled="!this.allowEditSave" />/
+                            <input id="day" type="text" maxlength="2" placeholder="DD" v-model.number="computedDobDay" v-bind:disabled="!this.allowEditSave" /> /
+                            <input id="year" type="text" maxlength="4" placeholder="YYYY" v-model.number="computedDobYear" v-bind:disabled="!this.allowEditSave" />
                         </div>
                     </div>
                     <div class="form-group col-lg-4 col-sm-auto">
@@ -65,19 +63,19 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <button
-                                class="btn btn-info float-left"
+                        <button class="btn btn-info float-left"
                                 v-on:click="uploadDocument('PatientConsent')">
                             <i class="fa fa-paperclip"></i>
                             Attach Consent
                         </button>
                     </div>
                     <div class="col-sm-6">
-                    <button v-if="this.allowEditSave" 
-                            class="btn btn-info float-right"
-                            v-on:click="savePatient">
-                        <i class="fa fa-save"></i> 
-                        Save Patient</button>
+                        <button v-if="this.allowEditSave"
+                                class="btn btn-info float-right"
+                                v-on:click="savePatient">
+                            <i class="fa fa-save"></i>
+                            Save Patient
+                        </button>
                     </div>
                 </div>
             </div>
@@ -110,16 +108,61 @@
             prop_patients: Array
         },
         computed: {
-            computedProp_patients: //moved to controller
-            {
-                get: function() {
+            computedDobDay:{
+                get: function(){
                     var vm = this;
-                    return vm.prop_patients.map(function(p) { 
-                        var patient_ext = {dobString: vm.getDobString(p.dob)};
-                        return Object.assign(p, patient_ext);
-                    });
+                    if(vm.prop_patientId < 1)
+                        return '';
+                    return new Date(vm.patientState.patient.dob).getDate();
+                },
+                set: function(value){
+                    var vm = this;
+                    var tempDob = new Date(vm.patientState.patient.dob);
+                    tempDob.setDate(value);
+                    vm.$set(vm.patientState.patient, 'dob', tempDob);
                 }
-            }
+            },
+
+            computedDobMonth:{
+                get: function(){
+                    var vm = this;
+                    if(vm.prop_patientId < 1)
+                        return '';
+                    return new Date(vm.patientState.patient.dob).getMonth() + 1;
+                },
+                set: function(value){
+                    var vm = this;
+                    var tempDob = new Date(vm.patientState.patient.dob);
+                    tempDob.setMonth(value - 1);
+                    vm.$set(vm.patientState.patient, 'dob', tempDob);
+                }
+            },
+
+            computedDobYear:{
+                get: function(){
+                    var vm = this;
+                    if(vm.prop_patientId < 1)
+                        return '';
+                    return new Date(vm.patientState.patient.dob).getFullYear();
+                },
+                set: function(value){
+                    var vm = this;
+                    var tempDob = new Date(vm.patientState.patient.dob);
+                    tempDob.setFullYear(value);
+                    vm.$set(vm.patientState.patient, 'dob', tempDob);
+                }
+            },
+
+            //computedProp_patients:
+            //{
+            //    get: function() {
+            //        var vm = this;
+            //        return vm.prop_patients.map(function(p) {
+            //            var patient_ext = {dobString: vm.getDobString(p.dob)};
+            //            return Object.assign(p, patient_ext);
+            //        });
+            //    }
+            //}
         },
         created: function()
         {
@@ -152,7 +195,9 @@
                 return patientState.patientsSearched;
             },
 
-            dateFormat: function(date) {return this.$options.filters.prettyDate(date)},
+            dateFormat: function(date) {
+                return this.$options.filters.MMDDYYYY(date)
+            },
 
             limitText: function(count) {
                 return `and ${count} additional Patients`;
@@ -166,10 +211,10 @@
                 this.$emit('changed', value.id, doReload);
             },
 
-            getDobString: function(dob){            
-                var dobDt = new Date(dob);
-                return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
-            },
+            //getDobString: function(dob){
+            //    var dobDt = new Date(dob);
+            //    return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
+            //},
 
             newPatient: function () {
                 this.patientState.patient = {
@@ -179,7 +224,7 @@
                     "firstName": '',
                     "fullName": '',
                     "dob": '',
-                    "dobString": '',
+                    //"dobString": '',
                     "ssn": ''
                 };
                 this.patientState.mrn = "";
@@ -188,9 +233,9 @@
 
             setPatient: function(org, patientId, mrn)
             {
-                var currentPatient = this.computedProp_patients.find(function(p){return p.id == patientId});
+                var currentPatient = this.prop_patients.find(function(p){return p.id == patientId});
                 if(currentPatient != null){
-                    this.$set(this.patientState, 'patient', currentPatient);                    
+                    this.$set(this.patientState, 'patient', currentPatient);
                     //done in compute - this.$set(this.patientState.patient, 'dobString', this.getDobString(this.patientState.patient.dob));
                     this.$set(this.patientState, 'mrn', mrn);
                 }
@@ -199,12 +244,12 @@
             },
 
             savePatient: function()
-            {   
+            {
                 var vm = this;
-                vm.$set(vm.patientState.patient, 'dob', new Date(vm.patientState.patient.dobString).toJSON());  
+                //vm.$set(vm.patientState.patient, 'dob', new Date(vm.patientState.patient.dobString).toJSON());
                 //vm.$delete(vm.patientState.patient, 'dobString');
                 axios.post('/api/patient', {
-                    patient: vm.patientState.patient,                   
+                    patient: vm.patientState.patient,
                     orgCustomData: vm.prop_organization.customData,
                     userFullName: vm.prop_user.fullName,
                     userHref: vm.prop_user.href}).then(response=>{

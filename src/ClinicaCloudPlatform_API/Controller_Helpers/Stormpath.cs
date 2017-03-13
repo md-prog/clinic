@@ -25,11 +25,11 @@ namespace ClinicaCloudPlatform.API.Controller_Helpers
         }
 
         public IOrganization GetOrganization()
-        {
-            var subDomain = string.Empty;
-
+        {       
             var host = _contextAccessor.HttpContext.Request.Host.Host;
-            var orgNameKey = (new string[] { string.Empty, "www", "localhost" }).Contains(subDomain) ? "clinica" : subDomain;
+            var subDomain = host.Split('.')[0];
+            var orgNameKey = (new string[] { string.Empty, "cloud", "www", "localhost" })
+                .Contains(subDomain) ? "clinica" : subDomain;
 
             return _stormpathClient.GetOrganizationByNameKeyAsync(orgNameKey).Result;
         }

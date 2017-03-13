@@ -1,4 +1,5 @@
 ﻿import Vue from 'vue';
+const uuidV1 = require('uuid/v1');
 
 Vue.mixin({
     methods: {
@@ -25,7 +26,7 @@ Vue.mixin({
 
             var vueVm = this;
             var specAttributes = vueVm.organization.customData.specimenDefinitions.filter(
-                function (s) { return s.code === specimen.code; })[0].accessionAttributes;
+                function (s) { return s.code === specimen.type.code; })[0].accessionAttributes;
 
             for(let attribute of specAttributes) {
 
@@ -42,7 +43,7 @@ Vue.mixin({
                 }
 
                 if (typeof specimen.customData.attributes.find(function (a) { return a.name === attribute.name; }) === "undefined") {
-                    if (attribute.type === 'multiple-large' || attribute.type === 'multiple-small')
+                    if (attribute.type === 'multiple-large' || attribute.type === 'multiple-small' || attribute.type==='civic-gene-api')
                         specimen.customData.attributes.push({ name: attribute.name, value: [{ id: "", name: "" }] });
                     else
                         specimen.customData.attributes.push({ name: attribute.name, value: { id: "", name: "" } });
@@ -54,14 +55,22 @@ Vue.mixin({
             this.$nextTick(function () { this.toolTips(); });
         },
 
+        updateSpecimenAttributeFromText: function(event){
+            var idParams = event.target.id.split('_');
+            var specimenGuid = idParams[0];
+            var attributeName = idParams[1];
+            var attributeType = idParams[2];
+            this.updateSpecimenAttribute(this.currentSpecimen, attributeName, event.target.value, false);
+        },
+
         updateSpecimenAttributeFromMultiSelect: function (value, id) {
             var idParams = id.split('_');
             var specimenGuid = idParams[0];
             var attributeName = idParams[1];
             var attributeType = idParams[2];
 
-            var multiple = attributeType === 'multiple-large' || attributeType === 'multiple-small';
-            var specimen = this.specimens.find(function (s) { return s.guid === specimenGuid });
+            var multiple = attributeType === 'multiple-large' || attributeType === 'multiple-small' || attributeType === 'civic-gene-api';
+            var specimen = this.currentSpecimen; //this.specimens.find(function (s) { return s.guid === specimenGuid });
 
             this.updateSpecimenAttribute(specimen, attributeName, value, multiple);
         },
@@ -89,10 +98,10 @@ Vue.mixin({
             var originallySingle = false;
             var value = null;
             
-            if(typeof(specimen.customData.attributes) !== 'undefined')
+            if(typeof specimen.customData.attributes !== 'undefined')
             {
                 var attributeOnSpecimen = specimen.customData.attributes.find(function (a) { return a.name === attributeName });
-                if(typeof(attributeOnSpecimen.value) !== 'undefined')
+                if(typeof attributeOnSpecimen !== 'undefined' && typeof attributeOnSpecimen.value !== 'undefined')
                     value = attributeOnSpecimen.value;
             }
             if (!Array.isArray(value)){
