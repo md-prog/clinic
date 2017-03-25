@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div v-if="specimens.length > 0" class="card-block">
-                    <div class="table-responsive">
+                    <div class="no-more-tables">
                         <table id="specimenList" role="grid" class="table table-striped table-condensed table-gray">
                             <thead>
                                 <tr>
@@ -38,19 +38,19 @@
                                             {{specimen === currentSpecimen ? 'Done' : 'Click to View/Edit'}}
                                         </button>
                                     </td>
-                                    <td>{{specimen.id}}</td>
+                                    <td data-title="Specimen #">{{specimen.id}}</td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="ID" v-if="specimen === currentSpecimen">
                                         <input type="text" v-model="specimen.externalSpecimenID" />
                                     </td>
-                                    <td v-else>{{specimen.externalSpecimenID}}</td>
+                                    <td data-title="ID" v-else>{{specimen.externalSpecimenID}}</td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="Barcode" v-if="specimen === currentSpecimen">
                                         <input type="text" placeholder="[Auto-generated if empty]" />
                                     </td>
-                                    <td v-else></td>
+                                    <td data-title="Barcode" v-else></td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="Type" v-if="specimen === currentSpecimen">
                                         <multiselect placeholder="Select Type"
                                                      track-by="code"
                                                      label="type"
@@ -65,9 +65,9 @@
                                                      v-model="specimen.type">
                                         </multiselect>
                                     </td>
-                                    <td v-else>{{specimen.type.type}}</td>
+                                    <td data-title="Type" v-else>{{specimen.type.type}}</td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="Transport" v-if="specimen === currentSpecimen">
                                         <multiselect placeholder="Select Transport"
                                                      track-by="code"
                                                      label="name"
@@ -82,20 +82,20 @@
                                                      v-model="specimen.transport">
                                         </multiselect>
                                     </td>
-                                    <td v-else>{{specimen.transport.name}}</td>
+                                    <td data-title="Transport" v-else>{{specimen.transport.name}}</td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="Collected" v-if="specimen === currentSpecimen">
                                         <!--NOTE v-model is computed property here, in case anything weird...-->
                                         <input type="text" v-model.lazy="currentSpecimen.collectionDate" class="dateTimePicker" />
                                     </td>
-                                    <td v-else>{{specimen.collectionDate | localeDate}}</td>
+                                    <td data-title="Collected" v-else>{{specimen.collectionDate | localeDate}}</td>
 
-                                    <td v-if="specimen === currentSpecimen">
+                                    <td data-title="Qty" v-if="specimen === currentSpecimen">
                                         <input type="number" value="2" />
                                     </td>
-                                    <td v-else><button class="btn btn-info btn-sm">2 like this - show all</button></td>
+                                    <td data-title="Qty" v-else><button class="btn btn-info btn-sm">2 like this - show all</button></td>
                                 </tr>
-                                <tr v-if="specimen === currentSpecimen">
+                                <tr class="ignore-no-more-tables" v-if="specimen === currentSpecimen">
                                     <td colspan="9" class="bg-faded">
                                         <div class="ml-1 mb-1 text-center">
                                             <span class="specimenLabel">Specimen</span>:
@@ -161,14 +161,13 @@
                                                                                      v-on:input="updateSpecimenAttributeFromMultiSelect">
                                                                         </multiselect>
 
-                                                                        <multiselect v-if="att.type==='civic-gene-api'"
-                                                                                     v-bind:id="specimen.guid+'_'+att.name+'_multiple-large'"
-                                                                                     track-by="id" label="name"
-                                                                                     placeholder="Select one or more" :options="genes" :searchable="true"
-                                                                                     :multiple="true" :allow-empty="true"
-                                                                                     v-bind:value="currentSpecimenAttributeValue(specimen, att.name, false)"
-                                                                                     v-on:input="updateSpecimenAttributeFromMultiSelect">
-                                                                        </multiselect>
+                                                                        <CivicGeneSelectionPlugin 
+                                                                                v-if="att.type==='civic-gene-api'"                   
+                                                                                :prop_id="specimen.guid+'_'+att.name+'_multiple-large'"
+                                                                                :prop_value="currentSpecimenAttributeValue(specimen, att.name, false)" 
+                                                                                :prop_genes="civicGenesCache"
+                                                                                v-on:genesChanged="updateSpecimenAttributeFromMultiSelect"
+                                                                                v-on:genesRetrieved="cacheCivicGenes"></CivicGeneSelectionPlugin>
 
                                                                         <span v-if="att.informationTooltip != null" class="input-group-addon-clean-small-icon"
                                                                               data-toggle="tooltip" data-placement="top" v-bind:title="att.informationToolTip">
@@ -196,195 +195,6 @@
     </div>
 </template>
 
-<script>
+<script  src="./Specimens.vue.js">
 
-    import specimenData from './Specimens.vue.data.js';
-    import Multiselect from 'vue-multiselect';
-    import axios from 'axios';
-    import debounce from 'lodash/debounce';
-
-    import customDataHelpersMixin from '../../assets/js/mixins/customDataHelpers.js';
-
-    //hack for now
-    import civicGenomeAPIMixin from '../../assets/js/mixins/civicGenomeAPI.js';
-
-    const uuidV1 = require('uuid/v1');
-
-    module.exports =
-    {
-        name: "Specimens",
-        components: {
-            Multiselect
-        },
-        mixins: [
-            customDataHelpersMixin,
-            civicGenomeAPIMixin
-        ],
-        props: {
-            specimens: Array,
-            organization: Object
-        },
-        data: function ()
-        {
-            return {specimensState: specimenData.specimensState};
-        },
-        created: function()
-        {
-            if(this.genes.length < 1)
-                this.getGenes();
-        },
-        computed:
-            {
-                currentSpecimen:{
-                    get: function(){
-                        var vm = this;
-                        var spec = null;
-                        if(vm.specimensState.editingSpecimenGuid === '' || vm.specimensState.editingSpecimenGuid === null)
-                            return spec;
-                        spec = vm.specimens.find(function(s){
-                            return s.guid === vm.specimensState.editingSpecimenGuid;
-                        });
-                        if(typeof spec !== 'undefined')
-                        {
-                            var cD = new Date(spec.collectionDate);
-                            //function... filter?
-                            spec.collectionDate = this.$options.filters.MMDDYYYYhhmm(spec.collectionDate);
-                        }
-                        return spec;
-                    },
-                    set: function(value)
-                    {
-                        var vm = this;
-                        var index = vm.specimens.findIndex(function(s){
-                            return s.guid = value.guid;
-                        });
-                        value.collectionDate = new Date(value.collectionDate).toJSON();
-                        vm.specimens.$set(index, value);
-                    }
-                },
-                //currentSpecimenType:{
-                //    get: function() {
-                //        var vm = this;
-                //        if(vm.currentSpecimen === null)
-                //            return null;
-                //        return {type: vm.currentSpecimen.type, code: vm.currentSpecimen.code};
-                //    },
-                //    set: function(value)
-                //    {
-                //        var vm = this;
-                //        if(vmcurrentSpecimen === null)
-                //            return;
-                //        vm.$set(vm.currentSpecimen, 'type', value.type);
-                //        vm.$set(vm.currentSpecimen, 'code', value.code);
-                //    }
-                //}
-            },
-        beforeMount: function() {
-
-        },
-        mounted: function(){
-            //console.log(this.genes);
-            this.toolTips();
-        },
-
-        methods:{
-
-            //not working!
-            toolTips: function() {this.$nextTick(function(){$('[data-toggle="tooltip"]').tooltip();});},
-
-            //component event
-            changed: function() {this.$emit('changed', this.specimens);},
-
-            currentSpecimenTypeTransportChanged: function(){
-                var spec = this.currentSpecimen;
-                var type = this.organizationSpecimenTypes.find(function(t){return t.code === spec.type.code;});
-                var transport = this.getSpecimenTransports(type.code).find(function(t){return t.code === spec.transport.code;});
-                if(transport === null)
-                    spec.code = type.code;
-                else
-                    spec.code = type.code + '-' + transport.code;
-            },
-
-            addSpecimen: function(type){
-                var newSpec = {
-                    guid: uuidV1(),
-                    id: -1,
-                    parentSpecimenGuid: '00000000-0000-0000-0000-000000000000',
-                    type: {type: type.type, code: type.code},
-                    code: type.code, //temp
-                    transport: {name: null, code: null},
-                    externalSpecimenID: null,
-                    customData: {},
-                    collectionDate: new Date((new Date()-1)).toJSON(),
-                    receivedDate: new Date().toJSON(),
-                    category: null
-                    //attributesAreSet: false
-                }
-
-                this.setSpecimenAttributes(newSpec);
-
-                this.specimens.push(newSpec);
-
-                this.$set(this.specimensState, 'editingSpecimenGuid', newSpec.guid);
-
-                this.$nextTick(function() {
-                    this.setExpandedSpecimen(true);
-                });
-            },
-
-            copySpecimenFromPrevious: function(specimen){
-
-            },
-
-            specimenClicked: function(specimen){
-                var expand = false;
-                if(specimen.guid === this.specimensState.editingSpecimenGuid){
-                    this.$set(this.specimensState, 'editingSpecimenGuid', '');
-                }
-                else{
-                    this.$set(this.specimensState, 'editingSpecimenGuid', specimen.guid);
-                    this.setSpecimenAttributes(specimen);
-                    expand = true;
-                }
-                this.$nextTick(function() {
-                    this.setExpandedSpecimen(expand);}
-                    );
-            },
-
-            setExpandedSpecimen: function(expandCurrent){
-                var vm = this;
-                this.specimens.forEach(function(s){
-                    var specCollapse = $('#collapse'+s.guid);
-                    var isShown = specCollapse._isShown;
-                    if(s == vm.currentSpecimen && expandCurrent && !isShown)
-                        specCollapse.collapse('show');
-                    else if(isShown)
-                        specCollapse.collapse('hide');
-                });
-
-                //do this while we're here
-                $('.dateTimePicker').daterangepicker({
-                    "singleDatePicker": true,
-                    "timePicker": true,
-                    "timePicker24Hour": true,
-                    locale: {
-                        format: 'MM/DD/YYYY h:mm'
-                    }
-                });
-            }
-
-            //expandCurrentSpecimen: function(){
-            //    $('#collapse'+this.currentSpecimen.guid).collapse('show');
-            //},
-
-            //collapseNonCurrentSpecimens: function() {
-            //    var vm = this;
-            //    this.specimens.forEach(function(s){
-            //        if(vm.currentSpecimen === null || s.guid !== vm.currentSpecimen.guid)
-            //            $('#collapse'+s.guid).collapse('hide');
-            //    });
-            //}
-
-        }
-    }
 </script>

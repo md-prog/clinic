@@ -38,13 +38,23 @@ export function localeDate (date) {
     return a.toLocaleString();
 }
 
-export function pluralize (time, label) {
-    if (time === 1) {
-        return time + label
-    }
-
-    return time + label + 's'
+export function localeDateOrTimeToday (date) {
+    var a = new Date(date);    
+    var todayDate = new Date().toLocaleDateString();
+    if(isNaN(a.getTime()))
+        return '';
+    if(a.toLocaleDateString() !== todayDate)
+        return todayDate;
+    return a.toLocaleTimeString();
 }
+
+//export function pluralize (time, label) { //see vue2-filters
+//    if (time === 1) {
+//        return time + label
+//    }
+
+//    return time + label + 's'
+//}
 
 export function truncate (string)
 {

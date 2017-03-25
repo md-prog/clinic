@@ -1,6 +1,9 @@
 ﻿const path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SplitByPathPlugin = require('webpack-split-by-path');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const glob = require('glob');
 /*
 require('./assets/js/bootstrap.min.js');
 require('bootstrap-daterangepicker')
@@ -27,7 +30,7 @@ module.exports = {
             "datatables.net-buttons",
             "datatables.net-responsive",
             "datatables.net-buttons-bs",
-            "datatables.net-responsive-bs",        
+            "datatables.net-responsive-bs",
             'datatables.net-buttons/js/buttons.colVis.js'
         ],
         'bundle.client': [
@@ -42,7 +45,7 @@ module.exports = {
         extensions: ['.js', '.json', '.css', '.scss', '.html'],
         alias: {
             jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery')
-            }
+        }
     },
     module: {
         loaders: [
@@ -94,8 +97,8 @@ module.exports = {
             //    loaders: ["style-loader", "css-loader", "sass-loader"],
             //    exclude: /node_modules/
             //},
-            { 
-                test: /\.scss$/, 
+            {
+                test: /\.scss$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader!sass-loader",
@@ -119,8 +122,18 @@ module.exports = {
         //new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
-            minChunks: Infinity
-        }),
+            minChunks(module, count) {
+                var resource = module.resource;
+                return resource && resource.indexOf('node_modules') >= 0;
+            }
+            }),
+        //new webpack.optimize.CommonsChunkPlugin({
+        //    name: 'accessioning',
+        //    minChunks(module, count) {
+        //        var resource = module.resource;
+        //        return resource && resource.indexOf('accessioning') >= 0;
+        //    }
+        //    }),
         new ExtractTextPlugin({
             filename: "style.css",
             allChunks: true
@@ -145,6 +158,23 @@ module.exports = {
             Scrollspy: "exports-loader?Scrollspy!bootstrap/js/dist/scrollspy",
             Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
             Util: "exports-loader?Util!bootstrap/js/dist/util",
-        })
+        }),
+        new WebpackCleanupPlugin(
+            { exclude: ["img/**/*"] }
+            )
+        //new SplitByPathPlugin([
+        //    {
+        //        name: 'accessioning',
+        //        path: path.join(__dirname, 'VueApp/components/accessioning')
+        //    },
+        //    {
+        //        name: 'entities',
+        //        path: path.join(__dirname, 'VueApp/components/entities')
+        //    },
+        //    {
+        //        name: 'worklist',
+        //        path: path.join(__dirname, 'VueApp/components/list')
+        //    }
+        //]),
     ]
 };

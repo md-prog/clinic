@@ -143,6 +143,7 @@
   // Negative margin for spacing, position for bringing hovered/focused/actived
   // element above the siblings.
   > .btn {
+      font-size: $font-size-base;
     position: relative;
     // Vertically stretch the button and center its content
     flex: 1;
