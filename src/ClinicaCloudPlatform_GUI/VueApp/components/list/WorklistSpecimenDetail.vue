@@ -92,27 +92,6 @@
     </div>
 </template>
 
-<script>
+<script src="./WorklistSpecimenDetail.vue.js">
 
-    import specimenState from './WorklistSpecimenDetail.vue.data.js';
-
-    import customDataHelpersMixin from '../../assets/js/mixins/customDataHelpers.js';
-
-    module.exports = {
-        name: "WorklistSpecimenDetail",
-        props:{
-            organization: Object,
-            specimen: Object
-        },
-        components: {},
-        mixins: [customDataHelpersMixin],
-        data: function ()
-        {
-            return {
-                //specimen: specimenState.specimen,
-                options: specimenState.options
-            };
-        },
-        methods:{}
-    }
 </script>

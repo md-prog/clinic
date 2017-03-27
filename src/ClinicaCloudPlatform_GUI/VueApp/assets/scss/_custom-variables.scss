@@ -56,10 +56,10 @@ $navbar-disabled-color:             lighter($navbar-color, 20%);*/
 
 // Sidebar
 
-$sidebar-width:                     220px;
-$mobile-sidebar-width:              220px;
+$sidebar-width:                     15rem;
+$sidebar-mobile-width:              10rem;
 $sidebar-padding:                   0;
-$sidebar-compact-width:             50px;
+$sidebar-compact-width:             14rem;
 $sidebar-compact-height:            $sidebar-compact-width;
 $sidebar-color:                     #fff;
 $sidebar-bg:                        $gray-dark;
@@ -118,7 +118,7 @@ $top-nav-hover-color:               #fff;
 $top-nav-hover-bg:                  $brand-primary;
 $top-nav-active-color:              #fff;
 $top-nav-active-bg:                 $brand-primary;
-$top-nav-height:                    $navbar-height - 15px;
+$top-nav-height:                    $navbar-height - 1rem;
 
 // Breadcrumb
 
@@ -126,7 +126,7 @@ $breadcrumb-borders:                0;
 
 // Aside
 
-$aside-menu-width:                  250px;
+$aside-menu-width:                  15rem;
 $aside-menu-color:                  $gray-dark;
 $aside-menu-bg:                     #fff;
 $aside-menu-borders: (
@@ -142,10 +142,14 @@ $aside-menu-nav-padding-x:          1rem;
 
 // Footer
 
-$footer-height:                     50px;
+$footer-height:                     2rem;
 $footer-bg:                         $gray-dark;
 $footer-color:                      #fff;
 $footer-borders:                    0;
+
+// Header
+
+$header-height:                     3.5rem;
 
 // Cards
 

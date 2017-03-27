@@ -3,6 +3,8 @@ import Vue from 'vue';
 import App from './components/App.vue';
 import store from './store/index.js';
 import VueRouter from 'vue-router';
+import Vue2Filters from 'vue2-filters';
+
 import routes from './routes';
 
 import Pace from 'pace-progress';
@@ -14,7 +16,7 @@ require('./assets/js/admin_gui.js');
 
 require('./assets/img/favicon.ico');
 
-import { domain, count, prettyDate, localeDate, MMDDYYYY, MMDDYYYYhhmm, pluralize, truncate } from './filters';
+import { domain, count, prettyDate, localeDate, MMDDYYYY, MMDDYYYYhhmm, localeDateOrTimeToday, pluralize, truncate } from './filters';
 Vue.filter('count', count);
 Vue.filter('domain', domain);
 Vue.filter('prettyDate', prettyDate);
@@ -23,6 +25,7 @@ Vue.filter('MMDDYYYYhhmm', MMDDYYYYhhmm);
 Vue.filter('localeDate', localeDate);
 Vue.filter('pluralize', pluralize);
 Vue.filter('truncate', truncate);
+Vue.filter('localeDateOrTimeToday', localeDateOrTimeToday);
 
 // Routing logic
 
@@ -36,6 +39,8 @@ var router = new VueRouter({
     },
     linkActiveClass: ''
 });
+
+Vue.use(Vue2Filters);
 
 //router.afterEach(route => {
 //    document.title = route.meta.title;

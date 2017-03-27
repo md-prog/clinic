@@ -41,15 +41,15 @@
 //   }
 //
 //   .sidebar {
-//     left: -$mobile-sidebar-width !important;
-//     width: $mobile-sidebar-width !important;
+//     left: -$sidebar-mobile-width !important;
+//     width: $sidebar-mobile-width !important;
 //
 //     ul.nav {
-//       width: $mobile-sidebar-width !important;
+//       width: $sidebar-mobile-width !important;
 //     }
 //
 //     .sidebar-footer {
-//       margin-left: -$mobile-sidebar-width;
+//       margin-left: -$sidebar-mobile-width;
 //     }
 //   }
 //
@@ -86,7 +86,7 @@
 //     }
 //
 //     .main {
-//       margin-left: $mobile-sidebar-width !important;
+//       margin-left: $sidebar-mobile-width !important;
 //     }
 //   }
 // }

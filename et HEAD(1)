@@ -1,0 +1,35 @@
+[33m002f868[m HEAD@{0}: reset: moving to 002f8684858926768e2b1bf25d4e36b04a1fbc3a
+[33m15705c9[m HEAD@{1}: checkout: moving from master to org_customization
+[33m15705c9[m HEAD@{2}: checkout: moving from accessioning_cont4 to master
+[33m002f868[m HEAD@{3}: checkout: moving from master to accessioning_cont4
+[33m15705c9[m HEAD@{4}: checkout: moving from accessioning_cont4 to master
+[33m002f868[m HEAD@{5}: checkout: moving from master to accessioning_cont4
+[33m15705c9[m HEAD@{6}: reset: moving to 15705c9309c374039787e3f846cda932e669b431
+[33m21f3db3[m HEAD@{7}: checkout: moving from accessioning_cont4 to master
+[33m002f868[m HEAD@{8}: commit: improvements in accessioning and specialization of worklists
+[33m206264d[m HEAD@{9}: commit: hopeful webpack fix for missing css
+[33m9e201b2[m HEAD@{10}: commit: working new accessions, add patient, add specimen... gui tweaks, etc
+[33mee060f1[m HEAD@{11}: commit: vue.js webpack loader fix for case keyword
+[33m7b7f66a[m HEAD@{12}: commit: list routes... still need to parameterize.  vue components as datatable columns for accession, specimen
+[33mcf5d95f[m HEAD@{13}: commit: potential build fix
+[33m9d05586[m HEAD@{14}: commit: accessioning cant and worklist start
+[33m2355d61[m HEAD@{15}: commit: patient async search fail - vue-multiselect bug.  try with a later release.
+[33m9bdc966[m HEAD@{16}: commit: accessioning save
+[33m0638e32[m HEAD@{17}: commit: fix npm build task
+[33m21f3db3[m HEAD@{18}: checkout: moving from master to accessioning_cont4
+[33m21f3db3[m HEAD@{19}: reset: moving to 21f3db3d56d4d182d6ae393ab142ec03002c5e4a
+[33md113a8e[m HEAD@{20}: checkout: moving from accessioning_cont3 to master
+[33mb18d6cc[m HEAD@{21}: commit: fighting javascript
+[33md113a8e[m HEAD@{22}: checkout: moving from master to accessioning_cont3
+[33md113a8e[m HEAD@{23}: merge d113a8e2dfc90e7670b3e4c53e881a0ac8fc68f9: Fast-forward
+[33m0fa78c9[m HEAD@{24}: checkout: moving from accessioning_cont2 to master
+[33m49b9a99[m HEAD@{25}: commit: npm changes for build
+[33m0fa78c9[m HEAD@{26}: checkout: moving from master to accessioning_cont2
+[33m0fa78c9[m HEAD@{27}: commit (merge): Merge branch 'master' of https://arsclinica.visualstudio.com/_git/ClinicaCloudPlatform
+[33m63e95c6[m HEAD@{28}: commit: git problem
+[33m0c7b8a4[m HEAD@{29}: checkout: moving from accessioning_cont2 to master
+[33m0c7b8a4[m HEAD@{30}: checkout: moving from master to accessioning_cont2
+[33m0c7b8a4[m HEAD@{31}: checkout: moving from accesioning_cont to master
+[33m6a506b6[m HEAD@{32}: commit: fix for deployment, etc
+[33m0c7b8a4[m HEAD@{33}: checkout: moving from master to accesioning_cont
+[33m0c7b8a4[m HEAD@{34}: clone: from https://arsclinica.visualstudio.com/_git/ClinicaCloudPlatform

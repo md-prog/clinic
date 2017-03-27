@@ -260,13 +260,13 @@ app-root {
 
     .sidebar {
         position: fixed;
-        width: $mobile-sidebar-width;
+        width: $sidebar-mobile-width;
         height: 100%;
-        margin-left: - $mobile-sidebar-width;
+        margin-left: - $sidebar-mobile-width;
 
         .sidebar-nav,
         .nav {
-            width: $mobile-sidebar-width !important;
+            width: $sidebar-mobile-width !important;
         }
     }
 
@@ -281,7 +281,7 @@ app-root {
     .sidebar-mobile-show {
 
         .sidebar {
-            width: $mobile-sidebar-width;
+            width: $sidebar-mobile-width;
             margin-left: 0;
 
             .sidebar-nav {
@@ -290,8 +290,8 @@ app-root {
         }
 
         .main {
-            margin-right: - $mobile-sidebar-width !important;
-            margin-left: $mobile-sidebar-width !important;
+            margin-right: - $sidebar-mobile-width !important;
+            margin-left: $sidebar-mobile-width !important;
         }
     }
 }
