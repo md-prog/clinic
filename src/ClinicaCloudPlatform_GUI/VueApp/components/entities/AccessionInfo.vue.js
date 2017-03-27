@@ -16,10 +16,6 @@ module.exports = {
     },
     components: {},
     mixins: [customDataHelpersMixin, worklistLookupMixin],
-    data: function ()
-    {
-
-    },
     methods:{
         loadLookupData: function(){
             axios.all([
