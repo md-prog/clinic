@@ -19,14 +19,16 @@
                                       :custom-label="customPatientDropdownLabel"
                                       :show-labels="false"
                                       :internal-search="true"
-                                      :clear-on-select="true"
                                       :close-on-select="true"
-                                      :allow-empty="false"
+                                      :allow-empty="true"
                                       placeholder="Type to Search..."
-                                      v-on:input="patientChanged"
-                                      v-on:search-change="patientSearched"
+                                      @input="patientChanged"
+                                      @close="listTouched"
+                                      @select="selectedFromList"
                                       v-model="patientState.patient">
-                            <span slot="noResult">No Patients Found.  <button class="btn btn-info btn-sm" v-on:click="newPatient">New Patient</button></span>
+                          <span slot="noResult">No Patients Found. </span>
+                          <span slot="afterList">
+                            <button class="btn btn-info btn-sm" v-on:click="addNewPatient" @mouseenter="mouseEvent" @mouseleave="mouseLeave">New Patient</button></span>
                             <template slot="option" scope="props">
                                 <div :id="props.option.id">{{props.option.lastName}}, {{props.option.firstName}}<br />DOB: {{props.option.dob | prettyDate}}<br />SSN: {{props.option.ssn}}</div>
                             </template>
