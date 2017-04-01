@@ -9,7 +9,7 @@
                 <!--v-if="typeof(this.patient) != 'undefined'">-->
                 <label for="patientName" class="patientLabel labelAbove">Patient</label>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-12">
                         <multiselect id="patientName"
                                       :options="this.prop_patients"
                                       track-by="id"
@@ -34,24 +34,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-6 col-sm-auto">
+                    <div class="form-group col-lg-6 col-auto">
                         <label for="firstNameField" class="labelAbove">First Name</label>
                         <input id="firstNameField" type="text" v-model="patientState.patient.firstName" class="form-control"
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
-                    <div class="form-group col-lg-6 col-sm-auto">
+                    <div class="form-group col-lg-6 col-auto">
                         <label for="lastNameField" class="labelAbove">Last Name</label>
                         <input id="lastNameField" type="text" v-model="patientState.patient.lastName" class="form-control"
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-lg-4 col-sm-auto">
+                    <div class="form-group col-lg-4 col-auto">
                         <label for="ssnField" class="labelAbove">SSN</label>
                         <input id="ssnField" type="text" v-model="patientState.patient.ssn" class="form-control"
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
-                    <div class="form-group col-lg-4 col-sm-auto">
+                    <div class="form-group col-lg-4 col-auto">
                         <label for="dobField" class="labelAbove">DOB</label>
                         <div id="dobField" class="datefield text-nowrap">
                             <input id="month" type="text" maxlength="2" placeholder="MM" v-model.number="computedDobMonth" v-bind:disabled="!this.allowEditSave" />/
@@ -59,21 +59,21 @@
                             <input id="year" type="text" maxlength="4" placeholder="YYYY" v-model.number="computedDobYear" v-bind:disabled="!this.allowEditSave" />
                         </div>
                     </div>
-                    <div class="form-group col-lg-4 col-sm-auto">
+                    <div class="form-group col-lg-4 col-auto">
                         <label for="mrnField" class="labelAbove">MRN</label>
                         <input id="mrnField" type="text" v-model="patientState.mrn" class="form-control"
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-sm-auto">
+                    <div class="col-lg-6 col-auto">
                         <button class="btn btn-info w-100"
                                 v-on:click="uploadDocument('PatientConsent')">
                             <i class="fa fa-paperclip"></i>
                             Attach Consent
                         </button>
                     </div>
-                    <div class="col-sm-6 col-sm-auto">
+                    <div class="col-lg-6 col-auto">
                         <button v-if="this.allowEditSave"
                                 class="btn btn-info w-100"
                                 v-on:click="savePatient">
@@ -89,3 +89,5 @@
 <script src="./Patient.vue.js">
 
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style> <!--not pulled in with the js import from node package for some reason.  put this at a top-level?-->

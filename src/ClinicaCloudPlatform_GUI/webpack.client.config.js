@@ -4,16 +4,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const glob = require('glob');
-/*
-require('./assets/js/bootstrap.min.js');
-require('bootstrap-daterangepicker')
-require('select2');
-require('datatables.net');
-require('hideseek')
-require('./assets/js/plugins/datatables/integration/dataTables.bootstrap4.js');
-
-require('./assets/scss/app.scss');
-*/
 
 module.exports = {
     entry: {
@@ -119,21 +109,14 @@ module.exports = {
         ]
     },
     plugins: [
-        //new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
+            //minChunks: Infinity,
             minChunks(module, count) {
                 var resource = module.resource;
                 return resource && resource.indexOf('node_modules') >= 0;
             }
             }),
-        //new webpack.optimize.CommonsChunkPlugin({
-        //    name: 'accessioning',
-        //    minChunks(module, count) {
-        //        var resource = module.resource;
-        //        return resource && resource.indexOf('accessioning') >= 0;
-        //    }
-        //    }),
         new ExtractTextPlugin({
             filename: "style.css",
             allChunks: true
@@ -162,19 +145,5 @@ module.exports = {
         new WebpackCleanupPlugin(
             { exclude: ["img/**/*"] }
             )
-        //new SplitByPathPlugin([
-        //    {
-        //        name: 'accessioning',
-        //        path: path.join(__dirname, 'VueApp/components/accessioning')
-        //    },
-        //    {
-        //        name: 'entities',
-        //        path: path.join(__dirname, 'VueApp/components/entities')
-        //    },
-        //    {
-        //        name: 'worklist',
-        //        path: path.join(__dirname, 'VueApp/components/list')
-        //    }
-        //]),
     ]
 };

@@ -1,44 +1,36 @@
 ﻿<template>
-    <div class="container-fluid m-0 p-0">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <ScanLookup v-on:scan="scanLookup"></ScanLookup>
+            <div class="col-lg-3 col-12"></div>
+            <div class="col-lg-6 col-12">
+                <ScanLookup v-on:scanLookup="scanLookup"></ScanLookup>
             </div>
-            <div class="col-sm-3">Dashboard config here</div>
+            <div class="col-lg-3 col-12">Dashboard config here</div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                Left Features here
+        <div class="row mt-1">
+            <div class="col-lg-2 col-md-3 col-12">
+                Left here
             </div>
-            <div class="col-sm-9">
+            <div class="col-lg-5 col-md-5 col-12">
                 <div class="row">
+                    <div class="col-12">
+                        <SpecimenStatus 
+                            v-if="dashboardPlugins.indexOf('SpecimenStatus') >= 0 && typeof dashboardState.currentSpecimen !== 'undefined'" 
+                            :specimen="dashboardState.currentSpecimen">
+                        </SpecimenStatus>
+                    </div>
                 </div>
                 <div class="row"></div>
                 <div class="row"></div>
                 <div class="row"></div>
             </div>
+            <div class="col-lg-5 col-md-4 col-12">
+                Right here
+            </div>
         </div>
     </div>
 </template>
 
-<script>
-    import ScanLookup from '../tools/ScanLookup.vue';
+<script src="./SpecimenTrackingDashboard.vue.js">
 
-    module.exports = {
-        name:'SpecimenTrackingDashboard',
-        components: {
-            ScanLookup
-        },
-        props:{
-            organization: Object,
-            user: Object,
-        },
-        methods:{
-            scanLookup: function(action, value)
-            {
-
-            }
-        }
-    };
 </script>

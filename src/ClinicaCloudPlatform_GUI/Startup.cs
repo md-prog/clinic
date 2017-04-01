@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using Stormpath.AspNetCore;
 using ClinicaCloudPlatform.API.Controllers;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Razor;
+using MvcConfig;
 
 namespace ClinicaCloudPlatform.GUI
 {
@@ -35,6 +37,12 @@ namespace ClinicaCloudPlatform.GUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddStormpath();
+
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new CustomViewLocationExpander());
+            });
+
             services.AddMvc()
                 .AddApplicationPart(typeof(AccessioningController).GetTypeInfo().Assembly) //plugin....
                 .AddControllersAsServices();

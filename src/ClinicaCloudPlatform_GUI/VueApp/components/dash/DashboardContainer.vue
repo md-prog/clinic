@@ -1,7 +1,7 @@
 ﻿<template>
 
     <section class='content'>
-        <div class="row"><div class="col-sm-12"><h2>Coming Soon!</h2></div></div>
+        <div class="row"><div class="col-12"><h2>Coming Soon!</h2></div></div>
     </section>
 
 </template>

@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="row">
-        <div v-for="specimen in specimens" class="col-sm-12">
+        <div v-for="specimen in specimens" class="col-12">
             <WorklistSpecimenDetail :organization="organization" :specimen="specimen"></WorklistSpecimenDetail>                        
         </div>
     </div>

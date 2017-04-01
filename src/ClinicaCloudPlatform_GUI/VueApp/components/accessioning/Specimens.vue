@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header card-header-primary">
                     <span class="specimensLabel">Specimens</span><div class="dropdown float-right">
@@ -104,7 +104,7 @@
                                             | Code: {{specimen.code}}
                                         </div>
                                         <div v-bind:id="'collapse'+specimen.guid" class="row collapse m-0 p-0" role="tabpanel" v-bind:aria-labelledby="'heading'+specimen.guid">
-                                            <div v-if="specimen.attributesAreSet" class="col-sm-12">
+                                            <div v-if="specimen.attributesAreSet" class="col-12">
                                                 <div v-for="row in organization.customData.specimenAccessionSections.rows" class="row">
                                                     <div v-for="col in row.cols" v-bind:class="col.class">
                                                         <div class="card">

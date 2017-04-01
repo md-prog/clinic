@@ -1,12 +1,12 @@
 webpackJsonp([0],{
 
-/***/ 265:
+/***/ 272:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _app = __webpack_require__(289);
+var _app = __webpack_require__(296);
 
 //import 'bootstrap'
 //require('./assets/style/app.css')
@@ -17,7 +17,7 @@ _app.app.$mount('.my-app');
 
 /***/ }),
 
-/***/ 289:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30,49 +30,49 @@ exports.store = exports.app = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-__webpack_require__(336);
+__webpack_require__(346);
 
 var _vue = __webpack_require__(51);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _App = __webpack_require__(625);
+var _App = __webpack_require__(636);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _index = __webpack_require__(312);
+var _index = __webpack_require__(324);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _vueRouter = __webpack_require__(676);
+var _vueRouter = __webpack_require__(689);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _vue2Filters = __webpack_require__(688);
+var _vue2Filters = __webpack_require__(702);
 
 var _vue2Filters2 = _interopRequireDefault(_vue2Filters);
 
-var _routes = __webpack_require__(311);
+var _routes = __webpack_require__(323);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _paceProgress = __webpack_require__(594);
+var _paceProgress = __webpack_require__(605);
 
 var _paceProgress2 = _interopRequireDefault(_paceProgress);
 
-var _chart = __webpack_require__(338);
+var _chart = __webpack_require__(348);
 
 var _chart2 = _interopRequireDefault(_chart);
 
-var _filters = __webpack_require__(308);
+var _filters = __webpack_require__(320);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(577);
+__webpack_require__(588);
 
-__webpack_require__(290);
+__webpack_require__(297);
 
-__webpack_require__(579);
+__webpack_require__(590);
 
 _vue2.default.filter('count', _filters.count);
 _vue2.default.filter('domain', _filters.domain);
@@ -113,7 +113,7 @@ exports.store = _index2.default;
 
 /***/ }),
 
-/***/ 290:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -258,7 +258,7 @@ function init(url) {
 
 /***/ }),
 
-/***/ 291:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -270,7 +270,47 @@ module.exports = function (set, fn) {
 
 /***/ }),
 
-/***/ 292:
+/***/ 299:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+    accessionState: {
+        loaded: false,
+        isNew: false,
+        isLoadingClientsAsync: false,
+        accession: {},
+        accessionTemplate: {
+            "id": 0,
+            "guid": "00000000-0000-0000-0000-000000000000",
+            "clientId": 0,
+            "facilityId": 0,
+            "patientId": 0,
+            "mrn": '',
+            "orderingLabId": 0,
+            "specimens": [],
+            "cases": []
+        },
+        clients: [{
+            "id": 0,
+            "name": '',
+            "facilities": [{
+                "id": 0,
+                "name": ''
+            }]
+        }],
+        labs: [{
+            "id": 0,
+            "name": ''
+        }]
+    }
+};
+
+/***/ }),
+
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -284,15 +324,15 @@ var _vueMultiselect = __webpack_require__(79);
 
 var _vueMultiselect2 = _interopRequireDefault(_vueMultiselect);
 
-var _AccessioningVueData = __webpack_require__(293);
+var _AccessioningVueData = __webpack_require__(299);
 
 var _AccessioningVueData2 = _interopRequireDefault(_AccessioningVueData);
 
-var _setFilter = __webpack_require__(291);
+var _setFilter = __webpack_require__(298);
 
 var _setFilter2 = _interopRequireDefault(_setFilter);
 
-var _objectMerge = __webpack_require__(610);
+var _objectMerge = __webpack_require__(621);
 
 var _objectMerge2 = _interopRequireDefault(_objectMerge);
 
@@ -300,11 +340,11 @@ var _debounce = __webpack_require__(152);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-var _Patient = __webpack_require__(629);
+var _Patient = __webpack_require__(640);
 
 var _Patient2 = _interopRequireDefault(_Patient);
 
-var _Specimens = __webpack_require__(630);
+var _Specimens = __webpack_require__(641);
 
 var _Specimens2 = _interopRequireDefault(_Specimens);
 
@@ -604,53 +644,40 @@ module.exports = {
 
 /***/ }),
 
-/***/ 293:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    accessionState: {
+    patientState: {
         loaded: false,
         isNew: false,
-        isLoadingClientsAsync: false,
-        accession: {},
-        accessionTemplate: {
+        isLoading: false,
+        patientsSearched: false,
+        mrn: "",
+        patient: {
             "id": 0,
-            "guid": "00000000-0000-0000-0000-000000000000",
-            "clientId": 0,
-            "facilityId": 0,
-            "patientId": 0,
-            "mrn": '',
-            "orderingLabId": 0,
-            "specimens": [],
-            "cases": []
-        },
-        clients: [{
-            "id": 0,
-            "name": '',
-            "facilities": [{
-                "id": 0,
-                "name": ''
-            }]
-        }],
-        labs: [{
-            "id": 0,
-            "name": ''
-        }]
+            "lastName": '',
+            "firstName": '',
+            "fullName": '',
+            "dob": '',
+            "dobString": '',
+            "ssn": ''
+        }
     }
 };
 
 /***/ }),
 
-/***/ 294:
+/***/ 302:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _PatientVueData = __webpack_require__(295);
+var _PatientVueData = __webpack_require__(301);
 
 var _PatientVueData2 = _interopRequireDefault(_PatientVueData);
 
@@ -820,44 +847,33 @@ module.exports = {
 
 /***/ }),
 
-/***/ 295:
+/***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    patientState: {
+    specimensState: {
         loaded: false,
         isNew: false,
-        isLoading: false,
-        patientsSearched: false,
-        mrn: "",
-        patient: {
-            "id": 0,
-            "lastName": '',
-            "firstName": '',
-            "fullName": '',
-            "dob": '',
-            "dobString": '',
-            "ssn": ''
-        }
+        isLoading: false
     }
 };
 
 /***/ }),
 
-/***/ 296:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-var _SpecimensVueData = __webpack_require__(297);
+var _SpecimensVueData = __webpack_require__(303);
 
 var _SpecimensVueData2 = _interopRequireDefault(_SpecimensVueData);
 
-var _CivicGeneSelection = __webpack_require__(646);
+var _CivicGeneSelection = __webpack_require__(658);
 
 var _CivicGeneSelection2 = _interopRequireDefault(_CivicGeneSelection);
 
@@ -1040,29 +1056,27 @@ module.exports = {
 
 /***/ }),
 
-/***/ 297:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    specimensState: {
-        loaded: false,
-        isNew: false,
-        isLoading: false
+    accessionInfoState: {
+        options: {}
     }
 };
 
 /***/ }),
 
-/***/ 298:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _AccessionInfoVueData = __webpack_require__(299);
+var _AccessionInfoVueData = __webpack_require__(305);
 
 var _AccessionInfoVueData2 = _interopRequireDefault(_AccessionInfoVueData);
 
@@ -1070,7 +1084,7 @@ var _customDataHelpers = __webpack_require__(60);
 
 var _customDataHelpers2 = _interopRequireDefault(_customDataHelpers);
 
-var _worklistLookup = __webpack_require__(310);
+var _worklistLookup = __webpack_require__(322);
 
 var _worklistLookup2 = _interopRequireDefault(_worklistLookup);
 
@@ -1088,7 +1102,6 @@ module.exports = {
     },
     components: {},
     mixins: [_customDataHelpers2.default, _worklistLookup2.default],
-    data: function data() {},
     methods: {
         loadLookupData: function loadLookupData() {
             axios.all([axios.get('/api/Client/' + org.nameKey), axios.get('/api/Lab/' + org.nameKey), axios.get('/api/Doctor/' + org.nameKey), axios.get('/api/Patient/' + org.nameKey)]).then(axios.spread(function (clientResponse, labResponse, doctorResponse, patientResponse) {
@@ -1105,27 +1118,35 @@ module.exports = {
 
 /***/ }),
 
-/***/ 299:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    accessionInfoState: {
-        options: {}
-    }
+    worklistState: {
+        config: {
+            start: '01-01-2017',
+            end: '03-01-2017',
+            options: {
+                includeCases: false,
+                includeSpecimens: true
+            }
+        }
+    },
+    worklist: {}
 };
 
 /***/ }),
 
-/***/ 300:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-var _WorklistVueData = __webpack_require__(301);
+var _WorklistVueData = __webpack_require__(307);
 
 var _WorklistVueData2 = _interopRequireDefault(_WorklistVueData);
 
@@ -1133,15 +1154,15 @@ var _axios = __webpack_require__(40);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _WorklistSpecimens = __webpack_require__(638);
+var _WorklistSpecimens = __webpack_require__(649);
 
 var _WorklistSpecimens2 = _interopRequireDefault(_WorklistSpecimens);
 
-var _AccessionInfo = __webpack_require__(634);
+var _AccessionInfo = __webpack_require__(645);
 
 var _AccessionInfo2 = _interopRequireDefault(_AccessionInfo);
 
-var _WorklistCaseDetail = __webpack_require__(636);
+var _WorklistCaseDetail = __webpack_require__(647);
 
 var _WorklistCaseDetail2 = _interopRequireDefault(_WorklistCaseDetail);
 
@@ -1152,7 +1173,7 @@ var _customDataHelpers2 = _interopRequireDefault(_customDataHelpers);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //rename to worklist..
-var urlencode = __webpack_require__(620);
+var urlencode = __webpack_require__(631);
 
 module.exports = {
     name: "Worklist",
@@ -1222,35 +1243,27 @@ module.exports = {
 
 /***/ }),
 
-/***/ 301:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    worklistState: {
-        config: {
-            start: '01-01-2017',
-            end: '03-01-2017',
-            options: {
-                includeCases: false,
-                includeSpecimens: true
-            }
-        }
-    },
-    worklist: {}
+    caseState: {
+        options: {}
+    }
 };
 
 /***/ }),
 
-/***/ 302:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _WorklistCaseDetailVueData = __webpack_require__(303);
+var _WorklistCaseDetailVueData = __webpack_require__(309);
 
 var _WorklistCaseDetailVueData2 = _interopRequireDefault(_WorklistCaseDetailVueData);
 
@@ -1279,27 +1292,27 @@ module.exports = {
 
 /***/ }),
 
-/***/ 303:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    caseState: {
+    specimenState: {
         options: {}
     }
 };
 
 /***/ }),
 
-/***/ 304:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _WorklistSpecimenDetailVueData = __webpack_require__(305);
+var _WorklistSpecimenDetailVueData = __webpack_require__(311);
 
 var _WorklistSpecimenDetailVueData2 = _interopRequireDefault(_WorklistSpecimenDetailVueData);
 
@@ -1328,31 +1341,31 @@ module.exports = {
 
 /***/ }),
 
-/***/ 305:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    specimenState: {
+    specimensState: {
         options: {}
     }
 };
 
 /***/ }),
 
-/***/ 306:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _WorklistSpecimensVueData = __webpack_require__(307);
+var _WorklistSpecimensVueData = __webpack_require__(313);
 
 var _WorklistSpecimensVueData2 = _interopRequireDefault(_WorklistSpecimensVueData);
 
-var _WorklistSpecimenDetail = __webpack_require__(637);
+var _WorklistSpecimenDetail = __webpack_require__(648);
 
 var _WorklistSpecimenDetail2 = _interopRequireDefault(_WorklistSpecimenDetail);
 
@@ -1371,21 +1384,207 @@ module.exports = {
 
 /***/ }),
 
-/***/ 307:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    specimensState: {
-        options: {}
+    specimenHistory: { //load from specimen customdata
+        timeStamp: '2012-04-23T18:25:43.511Z',
+        userFullName: 'UnknownUser',
+        laboratory: 'Default Laboratory',
+        department: 'Accessioning',
+        location: 'Station 1',
+        workflowStep: 'Recieved'
+    },
+    currentWorkflow: { //load from specimen customdata
+        name: 'Default Workflow',
+        currentStep: 'Received',
+        currentStepTat: 4,
+        laboratory: 'Default Laboratory',
+        department: 'Accessioning',
+        location: 'Station 1',
+        userFullName: 'Unknown User',
+        stepStarted: '2017-03-28T18:25:43.511Z',
+        lastUpdated: '2017-03-28T18:25:43.511Z',
+        available: true,
+        steps: ['Received', 'Stored']
+    },
+    allWorkFlows: null //load from organization per specimen
+};
+
+/***/ }),
+
+/***/ 316:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _SpecimenStatusVueData = __webpack_require__(315);
+
+var _SpecimenStatusVueData2 = _interopRequireDefault(_SpecimenStatusVueData);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+    name: 'SpecimenStatus',
+    props: {
+        specimen: Object,
+        organization: Object
+    },
+    data: function data() {
+        return {
+            specimenHistory: _SpecimenStatusVueData2.default.specimenHistory,
+            currentWorkflow: _SpecimenStatusVueData2.default.currentWorkflow
+        };
+    },
+    methods: {
+        getDueDate: function getDueDate(tatHours, started) {
+            var startDate = new Date(started);
+            var retVal = new Date();
+            retVal.setDate(startDate.getDate() + tatHours / 24);
+            return retVal;
+        },
+        getWorkflowOnTimeStatus: function getWorkflowOnTimeStatus(due) {
+            var dueDate = new Date(due).getDate();
+            var today = new Date().getDate();
+            var dayDifference = dueDate - today;
+            if (dayDifference >= 1) return 'bg-success';else if (dayDifference > 0) return 'bg-warning';else return 'bg-danger';
+        },
+        getWorkflowPercent: function getWorkflowPercent(steps, currentStep) {
+            var retVal = 0;
+            var count = steps.length;
+            var stepValue = steps.indexOf(currentStep) + 1;
+            if (stepValue > 0) retVal = stepValue / count * 100;
+            return retVal;
+        }
     }
 };
 
 /***/ }),
 
-/***/ 308:
+/***/ 317:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+module.exports = {
+    name: 'ScanLookup',
+    data: function data() {
+        return {
+            currentAction: {
+                name: 'scan',
+                label: 'Scan Specimen'
+            },
+            actions: [{
+                name: 'scan',
+                label: 'Scan Specimen'
+            }, {
+                name: 'lookup',
+                label: 'Enter Alternate ID'
+            }],
+            value: ''
+        };
+    },
+    mounted: function mounted() {
+        $('.focusDefault').focus();
+    },
+    methods: {
+        scanLookup: function scanLookup(event) {
+            var vm = this;
+            vm.$emit('scanLookup', vm.currentAction.name, vm.value);
+            vm.$set(vm, 'value', '');
+        },
+        setAction: function setAction(action) {
+            this.$set(this, 'currentAction', action);
+            $('.focusDefault').focus();
+        }
+    }
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+
+/***/ 318:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+    dashboardState: {}
+};
+
+/***/ }),
+
+/***/ 319:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _ScanLookup = __webpack_require__(659);
+
+var _ScanLookup2 = _interopRequireDefault(_ScanLookup);
+
+var _SpecimenStatus = __webpack_require__(657);
+
+var _SpecimenStatus2 = _interopRequireDefault(_SpecimenStatus);
+
+var _SpecimenTrackingDashboardVueData = __webpack_require__(318);
+
+var _SpecimenTrackingDashboardVueData2 = _interopRequireDefault(_SpecimenTrackingDashboardVueData);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+    name: 'SpecimenTrackingDashboard',
+    components: {
+        ScanLookup: _ScanLookup2.default,
+        SpecimenStatus: _SpecimenStatus2.default
+    },
+    props: {
+        prop_organization: Object,
+        prop_user: Object
+    },
+    data: function data() {
+        return {
+            dashboardState: _SpecimenTrackingDashboardVueData2.default.dashboardState
+        };
+    },
+    computed: {
+        dashboardPlugins: {
+            get: function get() {
+                return ['SpecimenStatus']; //todo org-->user custom data parse
+            }
+        }
+    },
+    methods: {
+        scanLookup: function scanLookup(action, value) {
+            var vm = this;
+            switch (action) {
+                case 'scan':
+                    vm.$set(this.dashboardState, 'currentSpecimen', this.lookupSpecimenByBarcode(value));
+                    break;
+                case 'lookup':
+                default:
+                    break;
+            }
+        },
+
+        lookupSpecimenByBarcode: function lookupSpecimenByBarcode(specimenBarcodeValue) {
+            return new Object(); //todo api
+        }
+    }
+};
+
+/***/ }),
+
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1459,7 +1658,7 @@ function truncate(string) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1517,7 +1716,7 @@ _vue2.default.mixin({
 
 /***/ }),
 
-/***/ 310:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1551,7 +1750,7 @@ _vue2.default.mixin({
 
 /***/ }),
 
-/***/ 311:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1561,47 +1760,47 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Main = __webpack_require__(627);
+var _Main = __webpack_require__(638);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _ClientAdmin = __webpack_require__(631);
+var _ClientAdmin = __webpack_require__(642);
 
 var _ClientAdmin2 = _interopRequireDefault(_ClientAdmin);
 
-var _Tables = __webpack_require__(644);
+var _Tables = __webpack_require__(655);
 
 var _Tables2 = _interopRequireDefault(_Tables);
 
-var _Tasks = __webpack_require__(645);
+var _Tasks = __webpack_require__(656);
 
 var _Tasks2 = _interopRequireDefault(_Tasks);
 
-var _Setting = __webpack_require__(642);
+var _Setting = __webpack_require__(653);
 
 var _Setting2 = _interopRequireDefault(_Setting);
 
-var _Mailbox = __webpack_require__(626);
+var _Mailbox = __webpack_require__(637);
 
 var _Mailbox2 = _interopRequireDefault(_Mailbox);
 
-var _ = __webpack_require__(624);
+var _ = __webpack_require__(635);
 
 var _2 = _interopRequireDefault(_);
 
-var _Accessioning = __webpack_require__(628);
+var _Accessioning = __webpack_require__(639);
 
 var _Accessioning2 = _interopRequireDefault(_Accessioning);
 
-var _Worklist = __webpack_require__(635);
+var _Worklist = __webpack_require__(646);
 
 var _Worklist2 = _interopRequireDefault(_Worklist);
 
-var _DashboardContainer = __webpack_require__(633);
+var _DashboardContainer = __webpack_require__(644);
 
 var _DashboardContainer2 = _interopRequireDefault(_DashboardContainer);
 
-var _SpecimenTrackingDashboard = __webpack_require__(648);
+var _SpecimenTrackingDashboard = __webpack_require__(660);
 
 var _SpecimenTrackingDashboard2 = _interopRequireDefault(_SpecimenTrackingDashboard);
 
@@ -1741,7 +1940,7 @@ exports.default = routes;
 
 /***/ }),
 
-/***/ 312:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1759,15 +1958,15 @@ var _vuex = __webpack_require__(65);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _store = __webpack_require__(317);
+var _store = __webpack_require__(329);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _store3 = __webpack_require__(315);
+var _store3 = __webpack_require__(327);
 
 var _store4 = _interopRequireDefault(_store3);
 
-var _store5 = __webpack_require__(313);
+var _store5 = __webpack_require__(325);
 
 var _store6 = _interopRequireDefault(_store5);
 
@@ -1797,7 +1996,7 @@ exports.default = store;
 
 /***/ }),
 
-/***/ 313:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1829,7 +2028,7 @@ exports.default = organizationModule;
 
 /***/ }),
 
-/***/ 314:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1868,7 +2067,7 @@ var saveOrganization = exports.saveOrganization = function saveOrganization(_ref
 
 /***/ }),
 
-/***/ 315:
+/***/ 327:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1878,7 +2077,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _actions = __webpack_require__(314);
+var _actions = __webpack_require__(326);
 
 var _vue = __webpack_require__(51);
 
@@ -1932,7 +2131,7 @@ exports.default = organizationModule;
 
 /***/ }),
 
-/***/ 316:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1973,7 +2172,7 @@ var updateCustomData = exports.updateCustomData = function updateCustomData(_ref
 
 /***/ }),
 
-/***/ 317:
+/***/ 329:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1983,7 +2182,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _actions = __webpack_require__(316);
+var _actions = __webpack_require__(328);
 
 var userModule = {
     state: {
@@ -2062,7 +2261,7 @@ exports.default = userModule;
 
 /***/ }),
 
-/***/ 318:
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2092,7 +2291,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 319:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2110,7 +2309,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 320:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2173,7 +2372,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 321:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2218,23 +2417,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _vuex = __webpack_require__(65);
 
-var _Sidebar = __webpack_require__(643);
+var _Sidebar = __webpack_require__(654);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
-var _SecondarySidebar = __webpack_require__(641);
+var _SecondarySidebar = __webpack_require__(652);
 
 var _SecondarySidebar2 = _interopRequireDefault(_SecondarySidebar);
 
-var _Navbar = __webpack_require__(640);
+var _Navbar = __webpack_require__(651);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _AppFooter = __webpack_require__(639);
+var _AppFooter = __webpack_require__(650);
 
 var _AppFooter2 = _interopRequireDefault(_AppFooter);
 
-var _organizationStyle = __webpack_require__(309);
+var _organizationStyle = __webpack_require__(321);
 
 var _organizationStyle2 = _interopRequireDefault(_organizationStyle);
 
@@ -2294,13 +2493,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ 322:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Organization = __webpack_require__(632);
+var _Organization = __webpack_require__(643);
 
 var _Organization2 = _interopRequireDefault(_Organization);
 
@@ -2336,7 +2535,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 323:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2404,7 +2603,7 @@ var setupFormOverlays = function setupFormOverlays() {
 
 /***/ }),
 
-/***/ 324:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2431,13 +2630,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ 325:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _moment = __webpack_require__(1);
+var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -2463,7 +2662,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 326:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2538,7 +2737,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 327:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2665,7 +2864,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 328:
+/***/ 340:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2675,7 +2874,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vueDatePicker = __webpack_require__(649);
+var _vueDatePicker = __webpack_require__(661);
 
 var _vueDatePicker2 = _interopRequireDefault(_vueDatePicker);
 
@@ -2776,7 +2975,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-__webpack_require__(1);
+__webpack_require__(0);
 exports.default = {
   name: 'Settings',
   computed: {
@@ -2795,7 +2994,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 329:
+/***/ 341:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2850,7 +3049,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 330:
+/***/ 342:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3064,7 +3263,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 331:
+/***/ 343:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3074,7 +3273,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moment = __webpack_require__(1);
+var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -3149,7 +3348,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 332:
+/***/ 344:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3227,184 +3426,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 333:
+/***/ 577:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-module.exports = {
-    name: 'ScanLookup',
-    data: function data() {
-        return {
-            currentAction: {
-                name: 'scan',
-                label: 'Scan Specimen'
-            },
-            actions: [{
-                name: 'scan',
-                label: 'Scan Specimen'
-            }, {
-                name: 'lookup',
-                label: 'Enter Alternate ID'
-            }],
-            value: ''
-        };
-    },
-    mounted: function mounted() {
-        $('.focusDefault').focus();
-    },
-    methods: {
-        scanLookup: function scanLookup(event) {
-            var vm = this;
-            vm.$emit('scanLookup', vm.currentAction.name, vm.value);
-            vm.$set(vm, 'value', '');
-        },
-        setAction: function setAction(action) {
-            this.$set(this, 'currentAction', action);
-            $('.focusDefault').focus();
-        }
-    }
-};
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
-
-/***/ }),
-
-/***/ 334:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _ScanLookup = __webpack_require__(647);
-
-var _ScanLookup2 = _interopRequireDefault(_ScanLookup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = {
-    name: 'SpecimenTrackingDashboard',
-    components: {
-        ScanLookup: _ScanLookup2.default
-    },
-    props: {
-        organization: Object,
-        user: Object
-    },
-    methods: {
-        scanLookup: function scanLookup(action, value) {}
-    }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-
-/***/ 567:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 568:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n.datetime-picker input {\r\n  height: 4em !important;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 569:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Using the bootstrap style, but overriding the font to not draw in\r\n   the Glyphicons Halflings font as an additional requirement for sorting icons.\r\n\r\n   An alternative to the solution active below is to use the jquery style\r\n   which uses images, but the color on the images does not match adminlte.\r\n\r\n@import url('/static/js/plugins/datatables/jquery.dataTables.min.css');\r\n*/\ntable.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {\r\n  font-family: 'FontAwesome';\n}\ntable.dataTable thead .sorting:after {\r\n  content: \"\\F0DC\";\n}\ntable.dataTable thead .sorting_asc:after {\r\n  content: \"\\F0DD\";\n}\ntable.dataTable thead .sorting_desc:after {\r\n  content: \"\\F0DE\";\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 570:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 571:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
+exports = module.exports = __webpack_require__(26)();
 // imports
 
 
@@ -3416,55 +3441,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /***/ }),
 
-/***/ 572:
+/***/ 578:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\ntable.nowrap th {\n    white-space: nowrap !important;\n}\ntable.nowrap td {\n    white-space: nowrap !important;\n}\ntable td {\n    vertical-align: top;\n}\n.dataTables_wrapper .row {\n    margin-top: 0px !important;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 573:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n.timeline-footer a.btn {\n  margin-right: 10px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 574:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
-// imports
-
-
-// module
-exports.push([module.i, "\n.user-panel {\n    height: 4em;\n}\nhr.visible-xs-block {\n    width: 100%;\n    background-color: rgba(0, 0, 0, 0.17);\n    height: 1px;\n    border-color: transparent;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 575:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(30)();
+exports = module.exports = __webpack_require__(26)();
 // imports
 
 
@@ -3476,21 +3456,126 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 
-/***/ 577:
+/***/ 580:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Using the bootstrap style, but overriding the font to not draw in\r\n   the Glyphicons Halflings font as an additional requirement for sorting icons.\r\n\r\n   An alternative to the solution active below is to use the jquery style\r\n   which uses images, but the color on the images does not match adminlte.\r\n\r\n@import url('/static/js/plugins/datatables/jquery.dataTables.min.css');\r\n*/\ntable.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {\r\n  font-family: 'FontAwesome';\n}\ntable.dataTable thead .sorting:after {\r\n  content: \"\\F0DC\";\n}\ntable.dataTable thead .sorting_asc:after {\r\n  content: \"\\F0DD\";\n}\ntable.dataTable thead .sorting_desc:after {\r\n  content: \"\\F0DE\";\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 581:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.timeline-footer a.btn {\n  margin-right: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 582:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.datetime-picker input {\r\n  height: 4em !important;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 583:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.user-panel {\n    height: 4em;\n}\nhr.visible-xs-block {\n    width: 100%;\n    background-color: rgba(0, 0, 0, 0.17);\n    height: 1px;\n    border-color: transparent;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 584:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\ntable.nowrap th {\n    white-space: nowrap !important;\n}\ntable.nowrap td {\n    white-space: nowrap !important;\n}\ntable td {\n    vertical-align: top;\n}\n.dataTables_wrapper .row {\n    margin-top: 0px !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 586:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 587:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(26)();
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 588:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 578:
+/***/ 589:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo-2wgUBz5.png";
 
 /***/ }),
 
-/***/ 579:
+/***/ 590:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "favicon.ico";
@@ -3681,442 +3766,37 @@ _vue2.default.mixin({
 
 /***/ }),
 
-/***/ 624:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(685)
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(318),
-  /* template */
-  __webpack_require__(673),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\404.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] 404.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d66b7486", Component.options)
-  } else {
-    hotAPI.reload("data-v-d66b7486", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 625:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(319),
-  /* template */
-  __webpack_require__(667),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\App.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-96021bf4", Component.options)
-  } else {
-    hotAPI.reload("data-v-96021bf4", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 626:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(677)
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(320),
-  /* template */
-  __webpack_require__(650),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\Mailbox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Mailbox.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1af05ece", Component.options)
-  } else {
-    hotAPI.reload("data-v-1af05ece", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 627:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(684)
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(321),
-  /* template */
-  __webpack_require__(670),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\Main.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Main.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b139a0b8", Component.options)
-  } else {
-    hotAPI.reload("data-v-b139a0b8", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 628:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(680)
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(292),
-  /* template */
-  __webpack_require__(658),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\accessioning\\Accessioning.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Accessioning.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4da0d858", Component.options)
-  } else {
-    hotAPI.reload("data-v-4da0d858", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 629:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(294),
-  /* template */
-  __webpack_require__(666),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\accessioning\\Patient.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Patient.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-91458d42", Component.options)
-  } else {
-    hotAPI.reload("data-v-91458d42", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 630:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(296),
-  /* template */
-  __webpack_require__(660),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\accessioning\\Specimens.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Specimens.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d660145", Component.options)
-  } else {
-    hotAPI.reload("data-v-5d660145", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 631:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(681)
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(322),
-  /* template */
-  __webpack_require__(661),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\admin\\ClientAdmin.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ClientAdmin.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a867329", Component.options)
-  } else {
-    hotAPI.reload("data-v-6a867329", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 632:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(323),
-  /* template */
-  __webpack_require__(653),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\admin\\Organization.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Organization.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-34769b9e", Component.options)
-  } else {
-    hotAPI.reload("data-v-34769b9e", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 633:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(324),
-  /* template */
-  __webpack_require__(654),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\dash\\DashboardContainer.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] DashboardContainer.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3701550f", Component.options)
-  } else {
-    hotAPI.reload("data-v-3701550f", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 634:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(6)(
-  /* script */
-  __webpack_require__(298),
-  /* template */
-  __webpack_require__(652),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\entities\\AccessionInfo.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] AccessionInfo.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1f1d12e2", Component.options)
-  } else {
-    hotAPI.reload("data-v-1f1d12e2", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
 /***/ 635:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(682)
+__webpack_require__(691)
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(300),
+  __webpack_require__(330),
   /* template */
-  __webpack_require__(664),
+  __webpack_require__(663),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\list\\Worklist.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\404.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Worklist.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] 404.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-765e9c36", Component.options)
+    hotAPI.createRecord("data-v-1ed481bd", Component.options)
   } else {
-    hotAPI.reload("data-v-765e9c36", Component.options)
+    hotAPI.reload("data-v-1ed481bd", Component.options)
   }
 })()}
 
@@ -4128,30 +3808,30 @@ module.exports = Component.exports
 /***/ 636:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(302),
+  __webpack_require__(331),
   /* template */
-  __webpack_require__(663),
+  __webpack_require__(672),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\list\\WorklistCaseDetail.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] WorklistCaseDetail.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-710624e6", Component.options)
+    hotAPI.createRecord("data-v-3f092e06", Component.options)
   } else {
-    hotAPI.reload("data-v-710624e6", Component.options)
+    hotAPI.reload("data-v-3f092e06", Component.options)
   }
 })()}
 
@@ -4163,30 +3843,34 @@ module.exports = Component.exports
 /***/ 637:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+
+/* styles */
+__webpack_require__(700)
+
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(304),
+  __webpack_require__(332),
   /* template */
-  __webpack_require__(659),
+  __webpack_require__(687),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\list\\WorklistSpecimenDetail.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\Mailbox.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] WorklistSpecimenDetail.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Mailbox.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-54eb603e", Component.options)
+    hotAPI.createRecord("data-v-95d7e6ce", Component.options)
   } else {
-    hotAPI.reload("data-v-54eb603e", Component.options)
+    hotAPI.reload("data-v-95d7e6ce", Component.options)
   }
 })()}
 
@@ -4198,30 +3882,34 @@ module.exports = Component.exports
 /***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+
+/* styles */
+__webpack_require__(696)
+
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(306),
+  __webpack_require__(333),
   /* template */
-  __webpack_require__(669),
+  __webpack_require__(678),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\list\\WorklistSpecimens.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\Main.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] WorklistSpecimens.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Main.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9c300a94", Component.options)
+    hotAPI.createRecord("data-v-5ea073a4", Component.options)
   } else {
-    hotAPI.reload("data-v-9c300a94", Component.options)
+    hotAPI.reload("data-v-5ea073a4", Component.options)
   }
 })()}
 
@@ -4233,30 +3921,34 @@ module.exports = Component.exports
 /***/ 639:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+
+/* styles */
+__webpack_require__(699)
+
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(325),
+  __webpack_require__(300),
   /* template */
-  __webpack_require__(674),
+  __webpack_require__(686),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\AppFooter.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\accessioning\\Accessioning.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] AppFooter.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Accessioning.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f68dcc9e", Component.options)
+    hotAPI.createRecord("data-v-7fa4cfd4", Component.options)
   } else {
-    hotAPI.reload("data-v-f68dcc9e", Component.options)
+    hotAPI.reload("data-v-7fa4cfd4", Component.options)
   }
 })()}
 
@@ -4268,30 +3960,34 @@ module.exports = Component.exports
 /***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+
+/* styles */
+__webpack_require__(698)
+
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(326),
+  __webpack_require__(302),
   /* template */
-  __webpack_require__(672),
+  __webpack_require__(684),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\Navbar.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\accessioning\\Patient.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Navbar.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Patient.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cf978c6a", Component.options)
+    hotAPI.createRecord("data-v-73927d5f", Component.options)
   } else {
-    hotAPI.reload("data-v-cf978c6a", Component.options)
+    hotAPI.reload("data-v-73927d5f", Component.options)
   }
 })()}
 
@@ -4303,9 +3999,9 @@ module.exports = Component.exports
 /***/ 641:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(327),
+  __webpack_require__(304),
   /* template */
   __webpack_require__(671),
   /* scopeId */
@@ -4313,20 +4009,20 @@ var Component = __webpack_require__(6)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\SecondarySidebar.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\accessioning\\Specimens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SecondarySidebar.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Specimens.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c4224d7a", Component.options)
+    hotAPI.createRecord("data-v-3d4b7576", Component.options)
   } else {
-    hotAPI.reload("data-v-c4224d7a", Component.options)
+    hotAPI.reload("data-v-3d4b7576", Component.options)
   }
 })()}
 
@@ -4340,32 +4036,32 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(678)
+__webpack_require__(690)
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(328),
+  __webpack_require__(334),
   /* template */
-  __webpack_require__(651),
+  __webpack_require__(662),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\Setting.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\admin\\ClientAdmin.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Setting.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] ClientAdmin.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1ec4ebb6", Component.options)
+    hotAPI.createRecord("data-v-07f7af29", Component.options)
   } else {
-    hotAPI.reload("data-v-1ec4ebb6", Component.options)
+    hotAPI.reload("data-v-07f7af29", Component.options)
   }
 })()}
 
@@ -4377,30 +4073,30 @@ module.exports = Component.exports
 /***/ 643:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(329),
+  __webpack_require__(335),
   /* template */
-  __webpack_require__(655),
+  __webpack_require__(673),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\Sidebar.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\admin\\Organization.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Sidebar.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Organization.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4129bd9e", Component.options)
+    hotAPI.createRecord("data-v-452cdf9e", Component.options)
   } else {
-    hotAPI.reload("data-v-4129bd9e", Component.options)
+    hotAPI.reload("data-v-452cdf9e", Component.options)
   }
 })()}
 
@@ -4412,34 +4108,30 @@ module.exports = Component.exports
 /***/ 644:
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(679)
-
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(330),
+  __webpack_require__(336),
   /* template */
-  __webpack_require__(657),
+  __webpack_require__(665),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\Tables.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\dash\\DashboardContainer.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Tables.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] DashboardContainer.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4c3529a0", Component.options)
+    hotAPI.createRecord("data-v-3195910f", Component.options)
   } else {
-    hotAPI.reload("data-v-4c3529a0", Component.options)
+    hotAPI.reload("data-v-3195910f", Component.options)
   }
 })()}
 
@@ -4451,34 +4143,30 @@ module.exports = Component.exports
 /***/ 645:
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(683)
-
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(331),
+  __webpack_require__(306),
   /* template */
-  __webpack_require__(665),
+  __webpack_require__(685),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\main\\Tasks.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\entities\\AccessionInfo.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Tasks.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] AccessionInfo.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7c6f53a3", Component.options)
+    hotAPI.createRecord("data-v-7465ba8f", Component.options)
   } else {
-    hotAPI.reload("data-v-7c6f53a3", Component.options)
+    hotAPI.reload("data-v-7465ba8f", Component.options)
   }
 })()}
 
@@ -4490,30 +4178,34 @@ module.exports = Component.exports
 /***/ 646:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+
+/* styles */
+__webpack_require__(697)
+
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(332),
+  __webpack_require__(308),
   /* template */
-  __webpack_require__(656),
+  __webpack_require__(679),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\plugins\\externaldata\\CivicGeneSelection.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\list\\Worklist.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] CivicGeneSelection.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Worklist.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-49409e3d", Component.options)
+    hotAPI.createRecord("data-v-643fede5", Component.options)
   } else {
-    hotAPI.reload("data-v-49409e3d", Component.options)
+    hotAPI.reload("data-v-643fede5", Component.options)
   }
 })()}
 
@@ -4525,30 +4217,30 @@ module.exports = Component.exports
 /***/ 647:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(333),
+  __webpack_require__(310),
   /* template */
-  __webpack_require__(668),
+  __webpack_require__(681),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\tools\\ScanLookup.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\list\\WorklistCaseDetail.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ScanLookup.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] WorklistCaseDetail.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-96376114", Component.options)
+    hotAPI.createRecord("data-v-6b9a60e6", Component.options)
   } else {
-    hotAPI.reload("data-v-96376114", Component.options)
+    hotAPI.reload("data-v-6b9a60e6", Component.options)
   }
 })()}
 
@@ -4560,30 +4252,65 @@ module.exports = Component.exports
 /***/ 648:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(334),
+  __webpack_require__(312),
   /* template */
-  __webpack_require__(662),
+  __webpack_require__(666),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\source\\clinicacloudplatform\\src\\clinicacloudplatform_gui\\VueApp\\components\\tracking\\SpecimenTrackingDashboard.vue"
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\list\\WorklistSpecimenDetail.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SpecimenTrackingDashboard.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] WorklistSpecimenDetail.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6f9f3a88", Component.options)
+    hotAPI.createRecord("data-v-33019c3e", Component.options)
   } else {
-    hotAPI.reload("data-v-6f9f3a88", Component.options)
+    hotAPI.reload("data-v-33019c3e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 649:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(314),
+  /* template */
+  __webpack_require__(667),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\list\\WorklistSpecimens.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] WorklistSpecimens.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-35dc3eb6", Component.options)
+  } else {
+    hotAPI.reload("data-v-35dc3eb6", Component.options)
   }
 })()}
 
@@ -4595,390 +4322,494 @@ module.exports = Component.exports
 /***/ 650:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "content"
-  }, [_c('div', {
-    staticClass: "center-block"
-  }, [_c('div', {
-    staticClass: "col-auto"
-  }, [(_vm.user.hasMessages) ? _c('div', {
-    staticClass: "card"
-  }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("\n                    Mailbox " + _vm._s(_vm.user.fullName) + "\n                ")]), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_c('table', {
-    staticClass: "table table-striped"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.user.customData.messages), function(message) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(_vm._f("prettyDate")(message.timeStamp)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.from))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.text))])])
-  }))])])]) : _c('div', {
-    staticClass: "card card-inverse card-info text-center"
-  }, [_c('div', {
-    staticClass: "card-block"
-  }, [_vm._v("\n                    No messages.\n                    "), _c('footer', [_vm._v("TODO:  Figure out why this only shows messages when opened by router link from main.  Hint: use vue tools in chrome, vuex shows an uncommitted getUser....")])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Date")]), _vm._v(" "), _c('th', [_vm._v("From")]), _vm._v(" "), _c('th', [_vm._v("Subject")]), _vm._v(" "), _c('th', [_vm._v("Message")])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(337),
+  /* template */
+  __webpack_require__(676),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\AppFooter.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] AppFooter.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
   module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1af05ece", module.exports)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-599d449e", Component.options)
+  } else {
+    hotAPI.reload("data-v-599d449e", Component.options)
   }
-}
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
 /***/ 651:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', {
-    staticClass: "text-center"
-  }, [_vm._v("Settings")]), _vm._v(" "), _c('section', {
-    staticClass: "content"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "card box-info"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_c('div', {
-    staticClass: "input-group"
-  }, [_vm._m(1), _vm._v(" "), _c('datepicker', {
-    attrs: {
-      "readonly": true,
-      "format": "MMM/D/YYYY",
-      "id": "dateInput",
-      "width": "100%"
-    }
-  })], 1), _vm._v(" "), _c('br'), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('br'), _vm._v(" "), _c('h4', [_vm._v("With icons")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('br'), _vm._v(" "), _c('h4', [_vm._v("With border indicator")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('h4', [_vm._v("Select Options")]), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(9)])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-header with-border"
-  }, [_c('h3', {
-    staticClass: "card-title"
-  }, [_vm._v("Inputs")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "input-group-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-calendar"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v("@")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "placeholder": "Username",
-      "type": "text"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v("$")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v(".00")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('span', {
-    staticClass: "input-group-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-envelope"
-  })]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "placeholder": "Email",
-      "type": "email"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "input-group-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-check"
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group has-success"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": "inputSuccess"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-check"
-  }), _vm._v(" Input with success")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "id": "inputSuccess",
-      "placeholder": "Enter ...",
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Help block with success")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group has-error"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": "inputError"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-times-circle-o"
-  }), _vm._v(" Input with error")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "id": "inputError",
-      "placeholder": "Enter ...",
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Help block with error")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Select")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control"
-  }, [_c('option', [_vm._v("option 1")]), _vm._v(" "), _c('option', [_vm._v("option 2")]), _vm._v(" "), _c('option', [_vm._v("option 3")]), _vm._v(" "), _c('option', [_vm._v("option 4")]), _vm._v(" "), _c('option', [_vm._v("option 5")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Select Multiple")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control",
-    attrs: {
-      "multiple": ""
-    }
-  }, [_c('option', [_vm._v("option 1")]), _vm._v(" "), _c('option', [_vm._v("option 2")]), _vm._v(" "), _c('option', [_vm._v("option 3")]), _vm._v(" "), _c('option', [_vm._v("option 4")]), _vm._v(" "), _c('option', [_vm._v("option 5")])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(338),
+  /* template */
+  __webpack_require__(688),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\Navbar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Navbar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
   module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1ec4ebb6", module.exports)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fb7b146a", Component.options)
+  } else {
+    hotAPI.reload("data-v-fb7b146a", Component.options)
   }
-}
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
 /***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid pl-0 pr-0"
-  }, [_c('div', {
-    staticClass: "card card-accent-primary card-compact"
-  }, [_c('div', {
-    staticClass: "card-header card-compact"
-  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('router-link', {
-    staticClass: "page-link bg-gray-light font-weight-bold",
-    attrs: {
-      "to": {
-        name: 'Edit Accession',
-        params: {
-          id: _vm.accession.id,
-          orgNameKey: _vm.organization.nameKey
-        }
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-edit"
-  }), _vm._v(" Edit "), _c('span', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")]), _vm._v(" # " + _vm._s(_vm.accession.id) + " - " + _vm._s(_vm._f("localeDate")(_vm.accession.createdDate)) + "\n            ")]) : _c('div', {
-    staticClass: "font-weight-bold"
-  }, [_vm._v("\n                Samples Received on " + _vm._s(_vm._f("localeDate")(_vm.accession.createdDate)) + "\n            ")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "card-block card-compact"
-  }, [_c('div', {
-    staticClass: "row m-0"
-  }, [_c('div', {
-    staticClass: "col-sm-6 m-0 p-0"
-  }, [_c('div', {
-    staticClass: "card card-compact card-no-outer-border"
-  }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("General")]), _vm._v(" "), _c('div', {
-    staticClass: "card-block wrap-unset"
-  }, [_c('div', {
-    staticClass: "row m-0"
-  }, [_c('div', {
-    staticClass: "col-sm-auto mr-1"
-  }, [_c('label', {
-    staticClass: "label-black",
-    attrs: {
-      "for": 'accClient' + _vm.accession.id + _vm.accession.clientId
-    }
-  }, [_vm._m(0), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-auto",
-    attrs: {
-      "id": 'accClient' + _vm.accession.id + _vm.accession.clientId
-    }
-  }, [_c('div', {
-    staticClass: "m-0 p-0"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.lookup('client', _vm.accession.clientId, this.labs).name) + "\n                                    ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "row m-0"
-  }, [_c('div', {
-    staticClass: "col-sm-auto mr-1"
-  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('label', {
-    staticClass: "label-black",
-    attrs: {
-      "for": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
-    }
-  }, [_c('strong', [_vm._v("Received At")]), _vm._v(":\n                                    ")]) : _c('label', {
-    staticClass: "label-black",
-    attrs: {
-      "for": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
-    }
-  }, [_c('strong', [_vm._v("Location")]), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-auto",
-    attrs: {
-      "id": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
-    }
-  }, [_c('div', {
-    staticClass: "m-0 p-0"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.lookup('lab', _vm.accession.orderingLabId, this.labs).name) + "\n                                        "), (_vm.$route.name === 'Specimen Catalog') ? _c('small', [_vm._v("(San Diego, CA)")]) : _vm._e()])])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6 m-0 p-0"
-  }, [_c('div', {
-    staticClass: "card card-compact card-no-outer-border"
-  }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("Specimens/Cases")]), _vm._v(" "), _c('div', {
-    staticClass: "card-block wrap-unset"
-  }, [_c('div', {
-    staticClass: "row m-0"
-  }, [_c('div', {
-    staticClass: "col-sm-auto mr-1"
-  }, [_c('label', {
-    staticClass: "label-black",
-    attrs: {
-      "for": 'accSpecimenCount' + _vm.accession.id
-    }
-  }, [_vm._m(1), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-auto",
-    attrs: {
-      "id": 'accSpecimenCount' + _vm.accession.id
-    }
-  }, [_c('div', {
-    staticClass: "m-0 p-0"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.accession.specimens.length) + "\n                                    ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "row m-0"
-  }, [_c('div', {
-    staticClass: "col-sm-auto mr-1"
-  }, [_c('label', {
-    staticClass: "label-black",
-    attrs: {
-      "for": 'accCaseCount' + _vm.accession.id
-    }
-  }, [_vm._m(2), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-auto",
-    attrs: {
-      "id": 'accCaseCount' + _vm.accession.id
-    }
-  }, [_c('div', {
-    staticClass: "m-0 p-0"
-  }, [_vm._v("\n                                        N/A\n                                    ")])])])])])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('strong', [_c('span', {
-    staticClass: "clientLabel"
-  }, [_vm._v("Institution")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('strong', [_c('span', {
-    staticClass: "specimensLabel"
-  }, [_vm._v("Specimens")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('strong', [_c('span', {
-    staticClass: "casesLabel"
-  }, [_vm._v("Cases")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(339),
+  /* template */
+  __webpack_require__(680),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\SecondarySidebar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SecondarySidebar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
   module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1f1d12e2", module.exports)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68621543", Component.options)
+  } else {
+    hotAPI.reload("data-v-68621543", Component.options)
   }
-}
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 
 /***/ 653:
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(695)
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(340),
+  /* template */
+  __webpack_require__(675),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\Setting.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Setting.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4856ce25", Component.options)
+  } else {
+    hotAPI.reload("data-v-4856ce25", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 654:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(341),
+  /* template */
+  __webpack_require__(669),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\Sidebar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Sidebar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-37246531", Component.options)
+  } else {
+    hotAPI.reload("data-v-37246531", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 655:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(693)
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(342),
+  /* template */
+  __webpack_require__(668),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\Tables.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Tables.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-364365a0", Component.options)
+  } else {
+    hotAPI.reload("data-v-364365a0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 656:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(694)
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(343),
+  /* template */
+  __webpack_require__(670),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\main\\Tasks.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Tasks.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-39a997a3", Component.options)
+  } else {
+    hotAPI.reload("data-v-39a997a3", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 657:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(316),
+  /* template */
+  __webpack_require__(677),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\plugins\\dashboardCards\\SpecimenStatus.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SpecimenStatus.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a1a07b0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a1a07b0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 658:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(344),
+  /* template */
+  __webpack_require__(682),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\plugins\\externaldata\\CivicGeneSelection.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CivicGeneSelection.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6bdcda3d", Component.options)
+  } else {
+    hotAPI.reload("data-v-6bdcda3d", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 659:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(317),
+  /* template */
+  __webpack_require__(674),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\tools\\ScanLookup.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ScanLookup.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-465b9376", Component.options)
+  } else {
+    hotAPI.reload("data-v-465b9376", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 660:
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(319),
+  /* template */
+  __webpack_require__(683),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Source\\ClinicaCloudPlatform\\src\\ClinicaCloudPlatform_GUI\\VueApp\\components\\tracking\\SpecimenTrackingDashboard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SpecimenTrackingDashboard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-734d7e88", Component.options)
+  } else {
+    hotAPI.reload("data-v-734d7e88", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 662:
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "card"
+    staticClass: "container-fluid pt-2"
+  }, [_vm._v("\n    WIP (isn't it all?)\n    "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "tab-content"
   }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("\n        " + _vm._s(_vm.user.fullName) + " - " + _vm._s(_vm.organization.name) + "\n        "), _vm._m(0)]), _vm._v(" "), _vm._m(1)])
+    staticClass: "tab-pane p-1 active",
+    attrs: {
+      "id": "organization",
+      "role": "tabpanel"
+    }
+  }, [_c('Organization')], 1), _vm._v(" "), _c('div', {
+    staticClass: "tab-pane p-1",
+    attrs: {
+      "id": "users",
+      "role": "tabpanel"
+    }
+  }, [_vm._v("...")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-actions"
+  return _c('ul', {
+    staticClass: "nav nav-tabs",
+    attrs: {
+      "role": "tablist"
+    }
+  }, [_c('li', {
+    staticClass: "nav-item"
   }, [_c('a', {
+    staticClass: "nav-link active",
     attrs: {
-      "href": "https://github.com/digitalBush/jquery.maskedinput"
+      "data-toggle": "tab",
+      "href": "#organization",
+      "role": "tab",
+      "aria-controls": "organization"
     }
-  }, [_c('small', {
-    staticClass: "text-muted"
-  }, [_vm._v("docs")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-block"
-  }, [_c('fieldset', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Multiple Select / Tags")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control select2-multiple",
+  }, [_vm._v("Organization")])]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    staticClass: "nav-link active",
     attrs: {
-      "id": "select2",
-      "multiple": ""
+      "data-toggle": "tab",
+      "href": "#users",
+      "role": "tab",
+      "aria-controls": "users"
     }
-  }, [_c('option', [_vm._v("Option 1")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "selected": ""
-    }
-  }, [_vm._v("Option 2")]), _vm._v(" "), _c('option', [_vm._v("Option 3")]), _vm._v(" "), _c('option', [_vm._v("Option 4")]), _vm._v(" "), _c('option', [_vm._v("Option 5")])]), _vm._v(" "), _c('input', {
-    staticClass: "demo",
-    attrs: {
-      "id": "demo",
-      "name": "demo"
-    }
-  })])])
+  }, [_vm._v("Users")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-34769b9e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-07f7af29", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 654:
+/***/ 663:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container container-table"
+  }, [_c('div', {
+    staticClass: "row vertical-10p"
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('img', {
+    staticClass: "center-block logo",
+    attrs: {
+      "src": __webpack_require__(589)
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "text-center col-6 col-offset-3"
+  }, [_c('h1', [_vm._v("You are lost.")]), _vm._v(" "), _c('h4', [_vm._v("This page doesn't exist.")]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "exact": "",
+      "to": "/"
+    }
+  }, [_vm._v("Take me home.")])], 1)])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1ed481bd", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 665:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4989,105 +4820,207 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-12"
+    staticClass: "col-12"
   }, [_c('h2', [_vm._v("Coming Soon!")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-3701550f", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3195910f", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 655:
+/***/ 666:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "sidebar"
-  }, [_c('nav', {
-    staticClass: "sidebar-nav open"
-  }, [_vm._m(0), _vm._v(" "), _vm._l((this.$router.options.routes), function(route) {
+    staticClass: "container-fluid pl-0"
+  }, [_c('div', {
+    staticClass: "card card-accent-primary card-compact"
+  }, [_c('div', {
+    staticClass: "card-header bg-gray-lightest font-weight-bold"
+  }, [_vm._v("\n            Specimen # " + _vm._s(_vm.specimen.id) + " - " + _vm._s(_vm.specimen.type.type) + " " + _vm._s(_vm.specimen.transport == null || _vm.specimen.transport.name == null ? '' : '| ' + _vm.specimen.transport.name) + "\n            "), (_vm.$route.name === 'Specimen Catalog') ? _c('div', {
+    staticClass: "float-right"
+  }, [_vm._v("\n                " + _vm._s('USD ' + _vm.currentSpecimenAttributeValue(_vm.specimen, 'cost', false) !== '' ? _vm.currentSpecimenAttributeValue(_vm.specimen, 'cost', false) : '40') + "\n                "), _c('button', {
+    staticClass: "btn btn-info btn-sm"
+  }, [_vm._v("Purchase Specimen")])]) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "card-block"
+  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('div', {
+    staticClass: "row m-0"
+  }, [_vm._m(0), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
+    staticClass: "col-3 m-0 p-0"
+  }, [_vm._m(1), _vm._v(" "), _vm._m(2)]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
+    staticClass: "col-3 m-0 p-0"
+  }, [_vm._m(3), _vm._v(" "), _vm._m(4)]) : _vm._e(), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('div', {
+    staticClass: "col-5 m-0 p-0"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._m(6), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
+    staticClass: "col-auto"
+  }, [_vm._v("\n                            Building 2 Refrigerator 5 Top Shelf\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
+    staticClass: "col-auto"
+  }, [_vm._v("\n                            Logistics Irvine Station 2\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(7), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
+    staticClass: "col-auto"
+  }, [_vm._v("\n                            Mary Smith 3/14/2017 9:26\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
+    staticClass: "col-auto"
+  }, [_vm._v("\n                            John Williams 3/12/2017 13:10\n                        ")]) : _vm._e()])])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.organization.customData.specimenAccessionSections.rows), function(row) {
     return _c('div', {
-      staticClass: "p-0 m-0"
-    }, [_c('ul', {
-      staticClass: "nav search-nav"
-    }, [_c('li', {
-      staticClass: "nav-title"
-    }, [_c('a', [_vm._v(_vm._s(route.name))])]), _vm._v(" "), _vm._l((route.children), function(childRoute) {
-      return (childRoute.meta == null || childRoute.meta.showInNavMenu == null || childRoute.meta.showInNavMenu == true) ? _c('li', {
-        staticClass: "nav-item"
-      }, [_c('router-link', {
-        staticClass: "nav-link",
-        attrs: {
-          "tag": "a",
-          "to": route.path + childRoute.path
-        }
-      }, [_c('i', {
-        class: childRoute.meta == null || childRoute.meta.iconClass == null ? _vm.defaultRouteIconClasses : childRoute.meta.iconClass
-      }), _vm._v("\n                            " + _vm._s(childRoute.name) + "\n                        ")])], 1) : _vm._e()
-    })], 2)])
-  })], 2)])
+      staticClass: "row m-0"
+    }, _vm._l((row.cols), function(col) {
+      return _c('div', {
+        class: col.class + ' m-0 p-0'
+      }, [_c('div', {
+        staticClass: "card card-compact card-no-outer-border"
+      }, [_c('div', {
+        staticClass: "card-header"
+      }, [_vm._v(_vm._s(col.sectionName))]), _vm._v(" "), _c('div', {
+        staticClass: "card-block wrap-unset"
+      }, _vm._l((_vm.getSpecimenAttributesBySection(col.sectionName, _vm.specimen.type.code)), function(att) {
+        return _c('div', {
+          staticClass: "row m-0"
+        }, [_c('div', {
+          staticClass: "col-auto mr-1"
+        }, [_c('label', {
+          staticClass: "label-black",
+          attrs: {
+            "for": 'attValue' + _vm.specimen.id + att.name
+          }
+        }, [_c('strong', [_vm._v(_vm._s(att.label))]), _vm._v(":")])]), _vm._v(" "), _c('div', {
+          staticClass: "col-auto",
+          attrs: {
+            "id": 'attValue' + _vm.specimen.id + att.name
+          }
+        }, [(Array.isArray(_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false))) ? _c('div', {
+          staticClass: "row m-0 p-0"
+        }, _vm._l((_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false)), function(value) {
+          return _c('div', {
+            staticClass: "col-12 m-0 p-0"
+          }, [_vm._v("\n                                            " + _vm._s(value.name) + "\n                                        ")])
+        })) : _c('div', {
+          staticClass: "m-0 p-0"
+        }, [_vm._v("\n                                        " + _vm._s(_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false).name) + "\n                                    ")])])])
+      }))])])
+    }))
+  })], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', [_c('h5', [_vm._v("Main Menu")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group p-h mb-0 ml-h mr-h"
-  }, [_c('input', {
-    staticClass: "search form-control",
+  return _c('div', {
+    staticClass: "col-2 m-0 p-0"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Workflow Status:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12 text-warning"
+  }, [_vm._v("Received (0)")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar bg-warning",
+    staticStyle: {
+      "width": "20%"
+    },
     attrs: {
-      "type": "text",
-      "name": "search",
-      "id": "search",
-      "data-toggle": "hideseek",
-      "placeholder": "Search Menu",
-      "data-list": ".search-nav"
+      "aria-valuenow": "20",
+      "aria-valuemin": "0",
+      "aria-valuemax": "100"
     }
-  })])])
+  })])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12 text-success"
+  }, [_vm._v("Archived (-1)")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar bg-success",
+    staticStyle: {
+      "width": "100%"
+    },
+    attrs: {
+      "aria-valuenow": "100",
+      "aria-valuemin": "0",
+      "aria-valuemax": "100"
+    }
+  })])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-2 m-0 p-0"
+  }, [_c('div', {
+    staticStyle: {
+      "width": "20px"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-auto"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Location: ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-auto"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Last Contact: ")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-4129bd9e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-33019c3e", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 656:
+/***/ 667:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('multiselect', {
-    attrs: {
-      "id": "geneSelect",
-      "track-by": "id",
-      "label": "name",
-      "placeholder": "Select one or more",
-      "options": _vm.genes,
-      "searchable": true,
-      "multiple": true,
-      "allow-empty": true,
-      "value": _vm.prop_value
-    },
-    on: {
-      "changed": _vm.genesChanged
-    }
-  })
+  return _c('div', {
+    staticClass: "row"
+  }, _vm._l((_vm.specimens), function(specimen) {
+    return _c('div', {
+      staticClass: "col-12"
+    }, [_c('WorklistSpecimenDetail', {
+      attrs: {
+        "organization": _vm.organization,
+        "specimen": specimen
+      }
+    })], 1)
+  }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-49409e3d", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-35dc3eb6", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 657:
+/***/ 668:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -5109,7 +5042,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-12"
+    staticClass: "col-12"
   }, [_c('table', {
     staticClass: "table table-bordered table-striped dataTable",
     attrs: {
@@ -5211,7 +5144,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-6"
+    staticClass: "col-6"
   }, [_c('div', {
     staticClass: "dataTables_length",
     attrs: {
@@ -5369,435 +5302,125 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-4c3529a0", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-364365a0", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 658:
+/***/ 669:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container-fluid p-lg-1 p-md-0 p-sm-0",
-    attrs: {
-      "id": "accessioningMain"
-    }
-  }, [_c('div', {
-    staticClass: "modal",
-    attrs: {
-      "id": "loadingModal",
-      "tabindex": "-1",
-      "role": "dialog",
-      "aria-labelledby": "myModalLabel",
-      "aria-hidden": "true"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog modal-info",
-    attrs: {
-      "role": "document"
-    }
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_c('div', {
-    staticClass: "modal-header"
-  }, [_vm._v("\n                    Stand By\n                ")]), _vm._v(" "), _c('div', {
-    staticClass: "modal-body text-center"
-  }, [_c('h4', [_c('i', {
-    staticClass: "fa fa-spinner fa-spin"
-  }), _vm._v(" " + _vm._s(_vm.accessionState.currentAction) + "\n                        "), _c('span', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")]), _vm._v(" "), (_vm.accessionState.currentAction != 'New') ? _c('span', [_vm._v(" ID " + _vm._s(_vm.$route.params.id))]) : _vm._e()])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
-  })])])]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('div', [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xl-2 col-sm-3"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('div', {
-    staticClass: "card card-inverse card-primary"
-  }, [_c('div', {
-    staticClass: "card-block"
-  }, [(_vm.accessionState.isNew) ? _c('div', {
-    staticClass: "row"
-  }, [_vm._m(0)]) : _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('i', {
-    staticClass: "icon-chemistry font-2xl mr-1 float-left"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "text-uppercase font-weight-bold font-xs"
-  }, [_c('span', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")]), _vm._v(" ID " + _vm._s(_vm.accessionState.accession.id))]), _vm._v("\n                                        " + _vm._s(_vm._f("prettyDate")(_vm.accessionState.accession.createdDate)) + "\n                                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('div', {
-    staticClass: "dropdown w-100 mt-1"
-  }, [_c('button', {
-    staticClass: "btn btn-info dropdown-toggle w-100",
-    attrs: {
-      "enabled": _vm.validateSave(),
-      "type": "button",
-      "id": "saveAccessionDropdown",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-save font-2xl float-left"
-  }), _vm._v("\n                                                Save\n                                            ")]), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-menu dropdown-menu-right",
-    attrs: {
-      "aria-labelledby": "saveAccessionDropdown"
-    }
-  }, [_c('div', {
-    staticClass: "dropdown-item-info",
-    on: {
-      "click": _vm.saveAccession
-    }
-  }, [_vm._v("Save and Launch")]), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-item-info",
-    on: {
-      "click": _vm.saveAccession
-    }
-  }, [_vm._v("Save and Hold")])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('div', {
-    staticClass: "dropdown w-100 mt-1"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-menu dropdown-menu-right",
-    attrs: {
-      "aria-labelledby": "printDropdown"
-    }
-  }, [_c('div', {
-    staticClass: "dropdown-item-info",
-    on: {
-      "click": _vm.printAccession
-    }
-  }, [_vm._v("Print "), _c('span', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")])]), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-item-info",
-    on: {
-      "click": _vm.printLabels
-    }
-  }, [_vm._v("Print Labels")])])])])])])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xl-5 col-sm-9"
-  }, [_c('div', {
-    staticClass: "card"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "clientLabel labelAbove",
-    attrs: {
-      "for": "clientName"
-    }
-  }, [_vm._v("Institution")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
-    attrs: {
-      "id": "clientName",
-      "options": _vm.accessionState.clients,
-      "track-by": "id",
-      "label": "name",
-      "searchable": true,
-      "close-on-select": true,
-      "placeholder": "Type to Search..."
-    },
-    model: {
-      value: (_vm.client),
-      callback: function($$v) {
-        _vm.client = $$v
-      }
-    }
-  }) : _vm._e(), _vm._v(" "), _c('label', {
-    staticClass: "facilityLabel labelAbove",
-    attrs: {
-      "for": "facilityName"
-    }
-  }, [_vm._v("Facility")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
-    attrs: {
-      "id": "facilityName",
-      "options": this.facilities,
-      "track-by": "id",
-      "label": "name",
-      "searchable": true,
-      "close-on-select": true,
-      "placeholder": "Select..."
-    },
-    model: {
-      value: (_vm.facility),
-      callback: function($$v) {
-        _vm.facility = $$v
-      }
-    }
-  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "labLabel labelAbove",
-    attrs: {
-      "for": "labName"
-    }
-  }, [_vm._v("Received At")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
-    attrs: {
-      "id": "labName",
-      "options": _vm.accessionState.labs,
-      "track-by": "id",
-      "label": "name",
-      "searchable": true,
-      "close-on-select": true,
-      "placeholder": "Type to Search..."
-    },
-    model: {
-      value: (_vm.lab),
-      callback: function($$v) {
-        _vm.lab = $$v
-      }
-    }
-  }) : _vm._e()], 1)])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xl-5 col-sm-12"
-  }, [(_vm.accessionState.loaded && _vm.organization.href != null) ? _c('Patient', {
-    attrs: {
-      "prop_patientId": _vm.accessionState.isNew ? 0 : _vm.accessionState.accession.patientId,
-      "prop_mrn": _vm.accessionState.isNew ? '' : _vm.accessionState.accession.mrn,
-      "prop_organization": this.organization,
-      "prop_user": this.user,
-      "prop_patients": this.accessionState.patients
-    },
-    on: {
-      "new": _vm.patient_changed,
-      "changed": _vm.patient_changed
-    }
-  }) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [(_vm.accessionState.loaded) ? _c('Specimens', {
-    attrs: {
-      "specimens": _vm.accessionState.accession.specimens,
-      "organization": _vm.organization
-    },
-    on: {
-      "changed": _vm.specimens_changed
-    }
-  }) : _vm._e()], 1)])]) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('i', {
-    staticClass: "icon-chemistry font-2xl mr-1 float-left"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "text-uppercase font-weight-bold font-xs"
-  }, [_vm._v("New "), _c('span', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "btn btn-info dropdown-toggle w-100",
-    attrs: {
-      "type": "button",
-      "id": "printDropdown",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-print font-2xl float-left"
-  }), _vm._v("\n                                                Print\n                                            ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-header card-header-primary"
-  }, [_c('span', {
-    staticClass: "clientDetailsLabel"
-  }, [_vm._v("Accession Details")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-4da0d858", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 659:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid pl-0"
-  }, [_c('div', {
-    staticClass: "card card-accent-primary card-compact"
-  }, [_c('div', {
-    staticClass: "card-header bg-gray-lightest font-weight-bold"
-  }, [_vm._v("\n            Specimen # " + _vm._s(_vm.specimen.id) + " - " + _vm._s(_vm.specimen.type.type) + " " + _vm._s(_vm.specimen.transport == null || _vm.specimen.transport.name == null ? '' : '| ' + _vm.specimen.transport.name) + "\n            "), (_vm.$route.name === 'Specimen Catalog') ? _c('div', {
-    staticClass: "float-right"
-  }, [_vm._v("\n                " + _vm._s('USD ' + _vm.currentSpecimenAttributeValue(_vm.specimen, 'cost', false) !== '' ? _vm.currentSpecimenAttributeValue(_vm.specimen, 'cost', false) : '40') + "\n                "), _c('button', {
-    staticClass: "btn btn-info btn-sm"
-  }, [_vm._v("Purchase Specimen")])]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('div', {
-    staticClass: "row m-0"
-  }, [_vm._m(0), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
-    staticClass: "col-sm-3 m-0 p-0"
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2)]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
-    staticClass: "col-sm-3 m-0 p-0"
-  }, [_vm._m(3), _vm._v(" "), _vm._m(4)]) : _vm._e(), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-5 m-0 p-0"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_vm._m(6), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_vm._v("\n                            Building 2 Refrigerator 5 Top Shelf\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_vm._v("\n                            Logistics Irvine Station 2\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_vm._m(7), _vm._v(" "), (_vm.specimen.id % 2 === 0) ? _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_vm._v("\n                            Mary Smith 3/14/2017 9:26\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.specimen.id % 2 !== 0) ? _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_vm._v("\n                            John Williams 3/12/2017 13:10\n                        ")]) : _vm._e()])])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.organization.customData.specimenAccessionSections.rows), function(row) {
+    staticClass: "sidebar"
+  }, [_c('nav', {
+    staticClass: "sidebar-nav open"
+  }, [_vm._m(0), _vm._v(" "), _vm._l((this.$router.options.routes), function(route) {
     return _c('div', {
-      staticClass: "row m-0"
-    }, _vm._l((row.cols), function(col) {
-      return _c('div', {
-        class: col.class + ' m-0 p-0'
-      }, [_c('div', {
-        staticClass: "card card-compact card-no-outer-border"
-      }, [_c('div', {
-        staticClass: "card-header"
-      }, [_vm._v(_vm._s(col.sectionName))]), _vm._v(" "), _c('div', {
-        staticClass: "card-block wrap-unset"
-      }, _vm._l((_vm.getSpecimenAttributesBySection(col.sectionName, _vm.specimen.type.code)), function(att) {
-        return _c('div', {
-          staticClass: "row m-0"
-        }, [_c('div', {
-          staticClass: "col-sm-auto mr-1"
-        }, [_c('label', {
-          staticClass: "label-black",
-          attrs: {
-            "for": 'attValue' + _vm.specimen.id + att.name
-          }
-        }, [_c('strong', [_vm._v(_vm._s(att.label))]), _vm._v(":")])]), _vm._v(" "), _c('div', {
-          staticClass: "col-sm-auto",
-          attrs: {
-            "id": 'attValue' + _vm.specimen.id + att.name
-          }
-        }, [(Array.isArray(_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false))) ? _c('div', {
-          staticClass: "row m-0 p-0"
-        }, _vm._l((_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false)), function(value) {
-          return _c('div', {
-            staticClass: "col-sm-12 m-0 p-0"
-          }, [_vm._v("\n                                            " + _vm._s(value.name) + "\n                                        ")])
-        })) : _c('div', {
-          staticClass: "m-0 p-0"
-        }, [_vm._v("\n                                        " + _vm._s(_vm.currentSpecimenAttributeValue(_vm.specimen, att.name, false).name) + "\n                                    ")])])])
-      }))])])
-    }))
-  })], 2)])])
+      staticClass: "p-0 m-0"
+    }, [_c('ul', {
+      staticClass: "nav search-nav"
+    }, [_c('li', {
+      staticClass: "nav-title"
+    }, [_c('a', [_vm._v(_vm._s(route.name))])]), _vm._v(" "), _vm._l((route.children), function(childRoute) {
+      return (childRoute.meta == null || childRoute.meta.showInNavMenu == null || childRoute.meta.showInNavMenu == true) ? _c('li', {
+        staticClass: "nav-item"
+      }, [_c('router-link', {
+        staticClass: "nav-link",
+        attrs: {
+          "tag": "a",
+          "to": route.path + childRoute.path
+        }
+      }, [_c('i', {
+        class: childRoute.meta == null || childRoute.meta.iconClass == null ? _vm.defaultRouteIconClasses : childRoute.meta.iconClass
+      }), _vm._v("\n                            " + _vm._s(childRoute.name) + "\n                        ")])], 1) : _vm._e()
+    })], 2)])
+  })], 2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-2 m-0 p-0"
-  }, [_c('label', {
-    staticClass: "label-black"
-  }, [_vm._v("Workflow Status:")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12 text-warning"
-  }, [_vm._v("Received (0)")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('div', {
-    staticClass: "progress"
-  }, [_c('div', {
-    staticClass: "progress-bar bg-warning",
-    staticStyle: {
-      "width": "20%"
-    },
+  return _c('form', [_c('h5', [_vm._v("Main Menu")]), _vm._v(" "), _c('div', {
+    staticClass: "form-group p-h mb-0 ml-h mr-h"
+  }, [_c('input', {
+    staticClass: "search form-control",
     attrs: {
-      "aria-valuenow": "20",
-      "aria-valuemin": "0",
-      "aria-valuemax": "100"
+      "type": "text",
+      "name": "search",
+      "id": "search",
+      "data-toggle": "hideseek",
+      "placeholder": "Search Menu",
+      "data-list": ".search-nav"
     }
-  })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12 text-success"
-  }, [_vm._v("Archived (-1)")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('div', {
-    staticClass: "progress"
-  }, [_c('div', {
-    staticClass: "progress-bar bg-success",
-    staticStyle: {
-      "width": "100%"
-    },
-    attrs: {
-      "aria-valuenow": "100",
-      "aria-valuemin": "0",
-      "aria-valuemax": "100"
-    }
-  })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-2 m-0 p-0"
-  }, [_c('div', {
-    staticStyle: {
-      "width": "20px"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_c('label', {
-    staticClass: "label-black"
-  }, [_vm._v("Location: ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-auto"
-  }, [_c('label', {
-    staticClass: "label-black"
-  }, [_vm._v("Last Contact: ")])])
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-54eb603e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-37246531", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 660:
+/***/ 670:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "center-block"
+  }, [_c('h1', {
+    staticClass: "text-center"
+  }, [_vm._v("Tasks")]), _vm._v(" "), _c('ul', {
+    staticClass: "timeline"
+  }, [_c('li', {
+    staticClass: "time-label"
+  }, [_c('span', {
+    staticClass: "bg-green"
+  }, [_vm._v(_vm._s(_vm.today))])]), _vm._v(" "), _vm._l((_vm.timeline), function(line) {
+    return _c('li', [_c('i', {
+      class: 'fa ' + line.icon + ' bg-' + line.color
+    }), _vm._v(" "), _c('div', {
+      staticClass: "timeline-item"
+    }, [_c('span', {
+      staticClass: "time"
+    }, [_c('i', {
+      staticClass: "fa fa-clock-o"
+    }), _vm._v(" " + _vm._s(line.time))]), _vm._v(" "), _c('h3', {
+      staticClass: "timeline-header"
+    }, [_vm._v(_vm._s(line.title))]), _vm._v(" "), (line.body) ? _c('div', {
+      staticClass: "timeline-body",
+      domProps: {
+        "innerHTML": _vm._s(line.body)
+      }
+    }) : _vm._e(), _vm._v(" "), (line.buttons) ? _c('div', {
+      staticClass: "timeline-footer"
+    }, _vm._l((line.buttons), function(btn) {
+      return _c('a', {
+        class: 'btn btn-' + btn.type + ' btn-xs'
+      }, [_vm._v(_vm._s(btn.message))])
+    })) : _vm._e()])])
+  })], 2)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-39a997a3", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 671:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-12"
+    staticClass: "col-12"
   }, [_c('div', {
     staticClass: "card"
   }, [_c('div', {
@@ -6010,7 +5633,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-labelledby": 'heading' + specimen.guid
       }
     }, [(specimen.attributesAreSet) ? _c('div', {
-      staticClass: "col-sm-12"
+      staticClass: "col-12"
     }, _vm._l((_vm.organization.customData.specimenAccessionSections.rows), function(row) {
       return _c('div', {
         staticClass: "row"
@@ -6197,565 +5820,13 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-5d660145", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3d4b7576", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 661:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid pt-2"
-  }, [_vm._v("\n    WIP (isn't it all?)\n    "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "tab-content"
-  }, [_c('div', {
-    staticClass: "tab-pane p-1 active",
-    attrs: {
-      "id": "organization",
-      "role": "tabpanel"
-    }
-  }, [_c('Organization')], 1), _vm._v(" "), _c('div', {
-    staticClass: "tab-pane p-1",
-    attrs: {
-      "id": "users",
-      "role": "tabpanel"
-    }
-  }, [_vm._v("...")])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "nav nav-tabs",
-    attrs: {
-      "role": "tablist"
-    }
-  }, [_c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    staticClass: "nav-link active",
-    attrs: {
-      "data-toggle": "tab",
-      "href": "#organization",
-      "role": "tab",
-      "aria-controls": "organization"
-    }
-  }, [_vm._v("Organization")])]), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    staticClass: "nav-link active",
-    attrs: {
-      "data-toggle": "tab",
-      "href": "#users",
-      "role": "tab",
-      "aria-controls": "users"
-    }
-  }, [_vm._v("Users")])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-6a867329", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 662:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid m-0 p-0"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-3"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6"
-  }, [_c('ScanLookup', {
-    on: {
-      "scan": _vm.scanLookup
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-3"
-  }, [_vm._v("Dashboard config here")])]), _vm._v(" "), _vm._m(0)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-3"
-  }, [_vm._v("\n            Left Features here\n        ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-9"
-  }, [_c('div', {
-    staticClass: "row"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  })])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-6f9f3a88", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 663:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid pl-0"
-  }, [_c('div', {
-    staticClass: "card card-accent-primary card-compact"
-  }, [_c('div', {
-    staticClass: "card-header card-compact"
-  }, [_c('span', {
-    staticClass: "caseLabel"
-  }, [_vm._v("Case")]), _vm._v(" # " + _vm._s(_vm._case.id) + " - " + _vm._s(_vm._case.type))]), _vm._v(" "), _c('div', {
-    staticClass: "card-block card-compact"
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-710624e6", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 664:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "table-responsive",
-    attrs: {
-      "id": "worklistTableWrapper"
-    }
-  }, [_c('table', {
-    staticClass: "nowrap table table-bordered table-condensed table-hover table-primary",
-    attrs: {
-      "id": "worklistTable"
-    }
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.worklist), function(row) {
-    return _c('tr', [_c('td', [_c('AccessionInfo', {
-      attrs: {
-        "organization": _vm.organization,
-        "accession": row,
-        "labs": _vm.state.labs,
-        "clients": _vm.state.clients,
-        "patients": _vm.state.patients,
-        "doctors": _vm.state.doctors
-      }
-    })], 1), _vm._v(" "), _c('td', [_c('WorklistSpecimens', {
-      attrs: {
-        "organization": _vm.organization,
-        "specimens": row.specimens
-      }
-    })], 1)])
-  }))])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', {
-    staticClass: "accessionLabel"
-  }, [_vm._v("Accession")]), _vm._v(" "), _c('th', {
-    staticClass: "specimenLabel"
-  }, [_vm._v("Specimen")])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-765e9c36", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 665:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "content"
-  }, [_c('div', {
-    staticClass: "center-block"
-  }, [_c('h1', {
-    staticClass: "text-center"
-  }, [_vm._v("Tasks")]), _vm._v(" "), _c('ul', {
-    staticClass: "timeline"
-  }, [_c('li', {
-    staticClass: "time-label"
-  }, [_c('span', {
-    staticClass: "bg-green"
-  }, [_vm._v(_vm._s(_vm.today))])]), _vm._v(" "), _vm._l((_vm.timeline), function(line) {
-    return _c('li', [_c('i', {
-      class: 'fa ' + line.icon + ' bg-' + line.color
-    }), _vm._v(" "), _c('div', {
-      staticClass: "timeline-item"
-    }, [_c('span', {
-      staticClass: "time"
-    }, [_c('i', {
-      staticClass: "fa fa-clock-o"
-    }), _vm._v(" " + _vm._s(line.time))]), _vm._v(" "), _c('h3', {
-      staticClass: "timeline-header"
-    }, [_vm._v(_vm._s(line.title))]), _vm._v(" "), (line.body) ? _c('div', {
-      staticClass: "timeline-body",
-      domProps: {
-        "innerHTML": _vm._s(line.body)
-      }
-    }) : _vm._e(), _vm._v(" "), (line.buttons) ? _c('div', {
-      staticClass: "timeline-footer"
-    }, _vm._l((line.buttons), function(btn) {
-      return _c('a', {
-        class: 'btn btn-' + btn.type + ' btn-xs'
-      }, [_vm._v(_vm._s(btn.message))])
-    })) : _vm._e()])])
-  })], 2)])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-7c6f53a3", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 666:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "patientLabel labelAbove",
-    attrs: {
-      "for": "patientName"
-    }
-  }, [_vm._v("Patient")]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-12"
-  }, [_c('multiselect', {
-    attrs: {
-      "id": "patientName",
-      "options": this.prop_patients,
-      "track-by": "id",
-      "label": "fullName",
-      "option-height": 104,
-      "searchable": true,
-      "custom-label": _vm.customPatientDropdownLabel,
-      "show-labels": false,
-      "internal-search": true,
-      "clear-on-select": true,
-      "close-on-select": true,
-      "allow-empty": false,
-      "placeholder": "Type to Search..."
-    },
-    on: {
-      "input": _vm.patientChanged,
-      "search-change": _vm.patientSearched
-    },
-    scopedSlots: _vm._u([
-      ["option", function(props) {
-        return [_c('div', {
-          attrs: {
-            "id": props.option.id
-          }
-        }, [_vm._v(_vm._s(props.option.lastName) + ", " + _vm._s(props.option.firstName)), _c('br'), _vm._v("DOB: " + _vm._s(_vm._f("prettyDate")(props.option.dob))), _c('br'), _vm._v("SSN: " + _vm._s(props.option.ssn))])]
-      }]
-    ]),
-    model: {
-      value: (_vm.patientState.patient),
-      callback: function($$v) {
-        _vm.patientState.patient = $$v
-      }
-    }
-  }, [_c('span', {
-    slot: "noResult"
-  }, [_vm._v("No Patients Found.  "), _c('button', {
-    staticClass: "btn btn-info btn-sm",
-    on: {
-      "click": _vm.newPatient
-    }
-  }, [_vm._v("New Patient")])])])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "form-group col-lg-6 col-sm-auto"
-  }, [_c('label', {
-    staticClass: "labelAbove",
-    attrs: {
-      "for": "firstNameField"
-    }
-  }, [_vm._v("First Name")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.patientState.patient.firstName),
-      expression: "patientState.patient.firstName"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "firstNameField",
-      "type": "text",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.patientState.patient.firstName)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.patientState.patient.firstName = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group col-lg-6 col-sm-auto"
-  }, [_c('label', {
-    staticClass: "labelAbove",
-    attrs: {
-      "for": "lastNameField"
-    }
-  }, [_vm._v("Last Name")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.patientState.patient.lastName),
-      expression: "patientState.patient.lastName"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "lastNameField",
-      "type": "text",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.patientState.patient.lastName)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.patientState.patient.lastName = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "form-group col-lg-4 col-sm-auto"
-  }, [_c('label', {
-    staticClass: "labelAbove",
-    attrs: {
-      "for": "ssnField"
-    }
-  }, [_vm._v("SSN")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.patientState.patient.ssn),
-      expression: "patientState.patient.ssn"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "ssnField",
-      "type": "text",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.patientState.patient.ssn)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.patientState.patient.ssn = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group col-lg-4 col-sm-auto"
-  }, [_c('label', {
-    staticClass: "labelAbove",
-    attrs: {
-      "for": "dobField"
-    }
-  }, [_vm._v("DOB")]), _vm._v(" "), _c('div', {
-    staticClass: "datefield text-nowrap",
-    attrs: {
-      "id": "dobField"
-    }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.computedDobMonth),
-      expression: "computedDobMonth",
-      modifiers: {
-        "number": true
-      }
-    }],
-    attrs: {
-      "id": "month",
-      "type": "text",
-      "maxlength": "2",
-      "placeholder": "MM",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.computedDobMonth)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.computedDobMonth = _vm._n($event.target.value)
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
-    }
-  }), _vm._v("/\n                        "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.computedDobDay),
-      expression: "computedDobDay",
-      modifiers: {
-        "number": true
-      }
-    }],
-    attrs: {
-      "id": "day",
-      "type": "text",
-      "maxlength": "2",
-      "placeholder": "DD",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.computedDobDay)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.computedDobDay = _vm._n($event.target.value)
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
-    }
-  }), _vm._v(" /\n                        "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.number",
-      value: (_vm.computedDobYear),
-      expression: "computedDobYear",
-      modifiers: {
-        "number": true
-      }
-    }],
-    attrs: {
-      "id": "year",
-      "type": "text",
-      "maxlength": "4",
-      "placeholder": "YYYY",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.computedDobYear)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.computedDobYear = _vm._n($event.target.value)
-      },
-      "blur": function($event) {
-        _vm.$forceUpdate()
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group col-lg-4 col-sm-auto"
-  }, [_c('label', {
-    staticClass: "labelAbove",
-    attrs: {
-      "for": "mrnField"
-    }
-  }, [_vm._v("MRN")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.patientState.mrn),
-      expression: "patientState.mrn"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "mrnField",
-      "type": "text",
-      "disabled": !this.allowEditSave
-    },
-    domProps: {
-      "value": (_vm.patientState.mrn)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.patientState.mrn = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-6 col-sm-auto"
-  }, [_c('button', {
-    staticClass: "btn btn-info w-100",
-    on: {
-      "click": function($event) {
-        _vm.uploadDocument('PatientConsent')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-paperclip"
-  }), _vm._v("\n                        Attach Consent\n                    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-6 col-sm-auto"
-  }, [(this.allowEditSave) ? _c('button', {
-    staticClass: "btn btn-info w-100",
-    on: {
-      "click": _vm.savePatient
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-save"
-  }), _vm._v("\n                        Save Patient\n                    ")]) : _vm._e()])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-header card-header-primary"
-  }, [_c('span', {
-    staticClass: "patientDetailsLabel"
-  }, [_vm._v("Patient/Subject Details")]), _vm._v(" "), _c('div', {
-    staticClass: "float-right text-white config-info"
-  }, [_vm._v("To prevent duplicate entries, please search before entering a new record.")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-91458d42", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 667:
+/***/ 672:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6765,13 +5836,65 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-96021bf4", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3f092e06", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 668:
+/***/ 673:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-header"
+  }, [_vm._v("\n        " + _vm._s(_vm.user.fullName) + " - " + _vm._s(_vm.organization.name) + "\n        "), _vm._m(0)]), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card-actions"
+  }, [_c('a', {
+    attrs: {
+      "href": "https://github.com/digitalBush/jquery.maskedinput"
+    }
+  }, [_c('small', {
+    staticClass: "text-muted"
+  }, [_vm._v("docs")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card-block"
+  }, [_c('fieldset', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Multiple Select / Tags")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control select2-multiple",
+    attrs: {
+      "id": "select2",
+      "multiple": ""
+    }
+  }, [_c('option', [_vm._v("Option 1")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "selected": ""
+    }
+  }, [_vm._v("Option 2")]), _vm._v(" "), _c('option', [_vm._v("Option 3")]), _vm._v(" "), _c('option', [_vm._v("Option 4")]), _vm._v(" "), _c('option', [_vm._v("Option 5")])]), _vm._v(" "), _c('input', {
+    staticClass: "demo",
+    attrs: {
+      "id": "demo",
+      "name": "demo"
+    }
+  })])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-452cdf9e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 674:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6828,40 +5951,317 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-96376114", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-465b9376", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 669:
+/***/ 675:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c('div', [_c('h1', {
+    staticClass: "text-center"
+  }, [_vm._v("Settings")]), _vm._v(" "), _c('section', {
+    staticClass: "content"
+  }, [_c('div', {
     staticClass: "row"
-  }, _vm._l((_vm.specimens), function(specimen) {
-    return _c('div', {
-      staticClass: "col-sm-12"
-    }, [_c('WorklistSpecimenDetail', {
-      attrs: {
-        "organization": _vm.organization,
-        "specimen": specimen
-      }
-    })], 1)
-  }))
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('div', {
+    staticClass: "card box-info"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "card-block"
+  }, [_c('div', {
+    staticClass: "input-group"
+  }, [_vm._m(1), _vm._v(" "), _c('datepicker', {
+    attrs: {
+      "readonly": true,
+      "format": "MMM/D/YYYY",
+      "id": "dateInput",
+      "width": "100%"
+    }
+  })], 1), _vm._v(" "), _c('br'), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('br'), _vm._v(" "), _c('h4', [_vm._v("With icons")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('br'), _vm._v(" "), _c('h4', [_vm._v("With border indicator")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('h4', [_vm._v("Select Options")]), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(9)])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card-header with-border"
+  }, [_c('h3', {
+    staticClass: "card-title"
+  }, [_vm._v("Inputs")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-calendar"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "input-group"
+  }, [_c('span', {
+    staticClass: "input-group-addon"
+  }, [_vm._v("@")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "placeholder": "Username",
+      "type": "text"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "input-group"
+  }, [_c('span', {
+    staticClass: "input-group-addon"
+  }, [_vm._v("$")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "input-group-addon"
+  }, [_vm._v(".00")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "input-group"
+  }, [_c('span', {
+    staticClass: "input-group-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-envelope"
+  })]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "placeholder": "Email",
+      "type": "email"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "input-group-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-check"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group has-success"
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "inputSuccess"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-check"
+  }), _vm._v(" Input with success")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "id": "inputSuccess",
+      "placeholder": "Enter ...",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Help block with success")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group has-error"
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "inputError"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times-circle-o"
+  }), _vm._v(" Input with error")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "id": "inputError",
+      "placeholder": "Enter ...",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Help block with error")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Select")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control"
+  }, [_c('option', [_vm._v("option 1")]), _vm._v(" "), _c('option', [_vm._v("option 2")]), _vm._v(" "), _c('option', [_vm._v("option 3")]), _vm._v(" "), _c('option', [_vm._v("option 4")]), _vm._v(" "), _c('option', [_vm._v("option 5")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Select Multiple")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control",
+    attrs: {
+      "multiple": ""
+    }
+  }, [_c('option', [_vm._v("option 1")]), _vm._v(" "), _c('option', [_vm._v("option 2")]), _vm._v(" "), _c('option', [_vm._v("option 3")]), _vm._v(" "), _c('option', [_vm._v("option 4")]), _vm._v(" "), _c('option', [_vm._v("option 5")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4856ce25", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 676:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('footer', {
+    staticClass: "app-footer"
+  }, [_c('div', {
+    staticClass: "copyright"
+  }, [_vm._v("Copyright © " + _vm._s(_vm.year) + " "), _c('strong', [_c('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, [_vm._v(_vm._s(_vm.organization.name))])]), _vm._v(".  All rights reserved.")]), _vm._v(" "), _c('div', {
+    staticClass: "powered-by"
+  }, [_vm._v("Powered By Clinica Cloud Platform")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-9c300a94", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-599d449e", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 670:
+/***/ 677:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-header"
+  }, [_vm._v("\n        Specimen " + _vm._s(this.specimen.externalId === '' ? '# ' + this.specimen.id : this.specimen.externalId) + " Status\n        "), (_vm.currentWorkflow.available) ? _c('div', {
+    staticClass: "tag tag-info float-right"
+  }, [_vm._v("Available")]) : _vm._e(), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-sm btn-info"
+  }, [_vm._v("Edit")])]), _vm._v(" "), _c('div', {
+    staticClass: "card-block p-0 text-nowrap"
+  }, [_c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    class: 'progress-bar ' + this.getWorkflowOnTimeStatus(this.getDueDate(this.currentWorkflow.currentStepTat, this.currentWorkflow.stepStarted)),
+    style: ('width:' + this.getWorkflowPercent(_vm.currentWorkflow.steps, _vm.currentWorkflow.currentStep) + '%'),
+    attrs: {
+      "aria-valuenow": _vm.getWorkflowPercent(_vm.currentWorkflow.steps, _vm.currentWorkflow.currentStep),
+      "aria-valuemin": "0",
+      "aria-valuemax": "100"
+    }
+  }, [_vm._v(_vm._s(_vm.currentWorkflow.currentStep) + " " + _vm._s(_vm._f("localeDate")(_vm.currentWorkflow.stepStarted)))])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-6 col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm.currentWorkflow.name) + "\n                        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm.currentWorkflow.laboratory) + "\n                        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm.currentWorkflow.department) + "\n                        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm.currentWorkflow.location) + "\n                        ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm._f("localeDate")(_vm.getDueDate(_vm.currentWorkflow.currentStepTat, _vm.currentWorkflow.stepStarted))) + "\n                        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm._f("localeDate")(_vm.currentWorkflow.lastUpdated)) + "\n                        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_vm._v("\n                            " + _vm._s(_vm.currentWorkflow.userFullName) + "\n                        ")])])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Workflow:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "labLabel label-black"
+  }, [_vm._v("Laboratory:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "departmentLabel label-black"
+  }, [_vm._v("Department:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "locationLabel label-black"
+  }, [_vm._v("Location:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Due:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("Updated:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-auto col-12"
+  }, [_c('label', {
+    staticClass: "label-black"
+  }, [_vm._v("User:")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5a1a07b0", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 678:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6925,13 +6325,61 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-b139a0b8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5ea073a4", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 671:
+/***/ 679:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "table-responsive",
+    attrs: {
+      "id": "worklistTableWrapper"
+    }
+  }, [_c('table', {
+    staticClass: "nowrap table table-bordered table-condensed table-hover table-primary",
+    attrs: {
+      "id": "worklistTable"
+    }
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.worklist), function(row) {
+    return _c('tr', [_c('td', [_c('AccessionInfo', {
+      attrs: {
+        "organization": _vm.organization,
+        "accession": row,
+        "labs": _vm.state.labs,
+        "clients": _vm.state.clients,
+        "patients": _vm.state.patients,
+        "doctors": _vm.state.doctors
+      }
+    })], 1), _vm._v(" "), _c('td', [_c('WorklistSpecimens', {
+      attrs: {
+        "organization": _vm.organization,
+        "specimens": row.specimens
+      }
+    })], 1)])
+  }))])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")]), _vm._v(" "), _c('th', {
+    staticClass: "specimenLabel"
+  }, [_vm._v("Specimen")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-643fede5", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 680:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7117,13 +6565,877 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-c4224d7a", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-68621543", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 672:
+/***/ 681:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid pl-0"
+  }, [_c('div', {
+    staticClass: "card card-accent-primary card-compact"
+  }, [_c('div', {
+    staticClass: "card-header card-compact"
+  }, [_c('span', {
+    staticClass: "caseLabel"
+  }, [_vm._v("Case")]), _vm._v(" # " + _vm._s(_vm._case.id) + " - " + _vm._s(_vm._case.type))]), _vm._v(" "), _c('div', {
+    staticClass: "card-block card-compact"
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6b9a60e6", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 682:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('multiselect', {
+    attrs: {
+      "id": "geneSelect",
+      "track-by": "id",
+      "label": "name",
+      "placeholder": "Select one or more",
+      "options": _vm.genes,
+      "searchable": true,
+      "multiple": true,
+      "allow-empty": true,
+      "value": _vm.prop_value
+    },
+    on: {
+      "changed": _vm.genesChanged
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6bdcda3d", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 683:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-3 col-12"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-6 col-12"
+  }, [_c('ScanLookup', {
+    on: {
+      "scanLookup": _vm.scanLookup
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-3 col-12"
+  }, [_vm._v("Dashboard config here")])]), _vm._v(" "), _c('div', {
+    staticClass: "row mt-1"
+  }, [_c('div', {
+    staticClass: "col-lg-2 col-md-3 col-12"
+  }, [_vm._v("\n            Left here\n        ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-5 col-md-5 col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [(_vm.dashboardPlugins.indexOf('SpecimenStatus') >= 0 && typeof _vm.dashboardState.currentSpecimen !== 'undefined') ? _c('SpecimenStatus', {
+    attrs: {
+      "specimen": _vm.dashboardState.currentSpecimen
+    }
+  }) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-5 col-md-4 col-12"
+  }, [_vm._v("\n            Right here\n        ")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-734d7e88", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 684:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "card-block"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "patientLabel labelAbove",
+    attrs: {
+      "for": "patientName"
+    }
+  }, [_vm._v("Patient")]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('multiselect', {
+    attrs: {
+      "id": "patientName",
+      "options": this.prop_patients,
+      "track-by": "id",
+      "label": "fullName",
+      "option-height": 104,
+      "searchable": true,
+      "custom-label": _vm.customPatientDropdownLabel,
+      "show-labels": false,
+      "internal-search": true,
+      "clear-on-select": true,
+      "close-on-select": true,
+      "allow-empty": false,
+      "placeholder": "Type to Search..."
+    },
+    on: {
+      "input": _vm.patientChanged,
+      "search-change": _vm.patientSearched
+    },
+    scopedSlots: _vm._u([
+      ["option", function(props) {
+        return [_c('div', {
+          attrs: {
+            "id": props.option.id
+          }
+        }, [_vm._v(_vm._s(props.option.lastName) + ", " + _vm._s(props.option.firstName)), _c('br'), _vm._v("DOB: " + _vm._s(_vm._f("prettyDate")(props.option.dob))), _c('br'), _vm._v("SSN: " + _vm._s(props.option.ssn))])]
+      }]
+    ]),
+    model: {
+      value: (_vm.patientState.patient),
+      callback: function($$v) {
+        _vm.patientState.patient = $$v
+      }
+    }
+  }, [_c('span', {
+    slot: "noResult"
+  }, [_vm._v("No Patients Found.  "), _c('button', {
+    staticClass: "btn btn-info btn-sm",
+    on: {
+      "click": _vm.newPatient
+    }
+  }, [_vm._v("New Patient")])])])], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "form-group col-lg-6 col-auto"
+  }, [_c('label', {
+    staticClass: "labelAbove",
+    attrs: {
+      "for": "firstNameField"
+    }
+  }, [_vm._v("First Name")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.patientState.patient.firstName),
+      expression: "patientState.patient.firstName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "firstNameField",
+      "type": "text",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.patientState.patient.firstName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.patientState.patient.firstName = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-lg-6 col-auto"
+  }, [_c('label', {
+    staticClass: "labelAbove",
+    attrs: {
+      "for": "lastNameField"
+    }
+  }, [_vm._v("Last Name")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.patientState.patient.lastName),
+      expression: "patientState.patient.lastName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "lastNameField",
+      "type": "text",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.patientState.patient.lastName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.patientState.patient.lastName = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "form-group col-lg-4 col-auto"
+  }, [_c('label', {
+    staticClass: "labelAbove",
+    attrs: {
+      "for": "ssnField"
+    }
+  }, [_vm._v("SSN")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.patientState.patient.ssn),
+      expression: "patientState.patient.ssn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "ssnField",
+      "type": "text",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.patientState.patient.ssn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.patientState.patient.ssn = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-lg-4 col-auto"
+  }, [_c('label', {
+    staticClass: "labelAbove",
+    attrs: {
+      "for": "dobField"
+    }
+  }, [_vm._v("DOB")]), _vm._v(" "), _c('div', {
+    staticClass: "datefield text-nowrap",
+    attrs: {
+      "id": "dobField"
+    }
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.computedDobMonth),
+      expression: "computedDobMonth",
+      modifiers: {
+        "number": true
+      }
+    }],
+    attrs: {
+      "id": "month",
+      "type": "text",
+      "maxlength": "2",
+      "placeholder": "MM",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.computedDobMonth)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.computedDobMonth = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
+      }
+    }
+  }), _vm._v("/\n                        "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.computedDobDay),
+      expression: "computedDobDay",
+      modifiers: {
+        "number": true
+      }
+    }],
+    attrs: {
+      "id": "day",
+      "type": "text",
+      "maxlength": "2",
+      "placeholder": "DD",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.computedDobDay)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.computedDobDay = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
+      }
+    }
+  }), _vm._v(" /\n                        "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.computedDobYear),
+      expression: "computedDobYear",
+      modifiers: {
+        "number": true
+      }
+    }],
+    attrs: {
+      "id": "year",
+      "type": "text",
+      "maxlength": "4",
+      "placeholder": "YYYY",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.computedDobYear)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.computedDobYear = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-lg-4 col-auto"
+  }, [_c('label', {
+    staticClass: "labelAbove",
+    attrs: {
+      "for": "mrnField"
+    }
+  }, [_vm._v("MRN")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.patientState.mrn),
+      expression: "patientState.mrn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "mrnField",
+      "type": "text",
+      "disabled": !this.allowEditSave
+    },
+    domProps: {
+      "value": (_vm.patientState.mrn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.patientState.mrn = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-6 col-auto"
+  }, [_c('button', {
+    staticClass: "btn btn-info w-100",
+    on: {
+      "click": function($event) {
+        _vm.uploadDocument('PatientConsent')
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-paperclip"
+  }), _vm._v("\n                        Attach Consent\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-6 col-auto"
+  }, [(this.allowEditSave) ? _c('button', {
+    staticClass: "btn btn-info w-100",
+    on: {
+      "click": _vm.savePatient
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-save"
+  }), _vm._v("\n                        Save Patient\n                    ")]) : _vm._e()])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card-header card-header-primary"
+  }, [_c('span', {
+    staticClass: "patientDetailsLabel"
+  }, [_vm._v("Patient/Subject Details")]), _vm._v(" "), _c('div', {
+    staticClass: "float-right text-white config-info"
+  }, [_vm._v("To prevent duplicate entries, please search before entering a new record.")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-73927d5f", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 685:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid pl-0 pr-0"
+  }, [_c('div', {
+    staticClass: "card card-accent-primary card-compact"
+  }, [_c('div', {
+    staticClass: "card-header card-compact"
+  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('router-link', {
+    staticClass: "page-link bg-gray-light font-weight-bold",
+    attrs: {
+      "to": {
+        name: 'Edit Accession',
+        params: {
+          id: _vm.accession.id,
+          orgNameKey: _vm.organization.nameKey
+        }
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-edit"
+  }), _vm._v(" Edit "), _c('span', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")]), _vm._v(" # " + _vm._s(_vm.accession.id) + " - " + _vm._s(_vm._f("localeDate")(_vm.accession.createdDate)) + "\n            ")]) : _c('div', {
+    staticClass: "font-weight-bold"
+  }, [_vm._v("\n                Samples Received on " + _vm._s(_vm._f("localeDate")(_vm.accession.createdDate)) + "\n            ")])], 1), _vm._v(" "), _c('div', {
+    staticClass: "card-block card-compact"
+  }, [_c('div', {
+    staticClass: "row m-0"
+  }, [_c('div', {
+    staticClass: "col-6 m-0 p-0"
+  }, [_c('div', {
+    staticClass: "card card-compact card-no-outer-border"
+  }, [_c('div', {
+    staticClass: "card-header"
+  }, [_vm._v("General")]), _vm._v(" "), _c('div', {
+    staticClass: "card-block wrap-unset"
+  }, [_c('div', {
+    staticClass: "row m-0"
+  }, [_c('div', {
+    staticClass: "col-auto mr-1"
+  }, [_c('label', {
+    staticClass: "label-black",
+    attrs: {
+      "for": 'accClient' + _vm.accession.id + _vm.accession.clientId
+    }
+  }, [_vm._m(0), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-auto",
+    attrs: {
+      "id": 'accClient' + _vm.accession.id + _vm.accession.clientId
+    }
+  }, [_c('div', {
+    staticClass: "m-0 p-0"
+  }, [_vm._v("\n                                        " + _vm._s(_vm.lookup('client', _vm.accession.clientId, this.labs).name) + "\n                                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "row m-0"
+  }, [_c('div', {
+    staticClass: "col-auto mr-1"
+  }, [(_vm.$route.name !== 'Specimen Catalog') ? _c('label', {
+    staticClass: "label-black",
+    attrs: {
+      "for": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
+    }
+  }, [_c('strong', [_vm._v("Received At")]), _vm._v(":\n                                    ")]) : _c('label', {
+    staticClass: "label-black",
+    attrs: {
+      "for": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
+    }
+  }, [_c('strong', [_vm._v("Location")]), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-auto",
+    attrs: {
+      "id": 'accLab' + _vm.accession.id + _vm.accession.orderingLabId
+    }
+  }, [_c('div', {
+    staticClass: "m-0 p-0"
+  }, [_vm._v("\n                                        " + _vm._s(_vm.lookup('lab', _vm.accession.orderingLabId, this.labs).name) + "\n                                        "), (_vm.$route.name === 'Specimen Catalog') ? _c('small', [_vm._v("(San Diego, CA)")]) : _vm._e()])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-6 m-0 p-0"
+  }, [_c('div', {
+    staticClass: "card card-compact card-no-outer-border"
+  }, [_c('div', {
+    staticClass: "card-header"
+  }, [_vm._v("Specimens/Cases")]), _vm._v(" "), _c('div', {
+    staticClass: "card-block wrap-unset"
+  }, [_c('div', {
+    staticClass: "row m-0"
+  }, [_c('div', {
+    staticClass: "col-auto mr-1"
+  }, [_c('label', {
+    staticClass: "label-black",
+    attrs: {
+      "for": 'accSpecimenCount' + _vm.accession.id
+    }
+  }, [_vm._m(1), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-auto",
+    attrs: {
+      "id": 'accSpecimenCount' + _vm.accession.id
+    }
+  }, [_c('div', {
+    staticClass: "m-0 p-0"
+  }, [_vm._v("\n                                        " + _vm._s(_vm.accession.specimens.length) + "\n                                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "row m-0"
+  }, [_c('div', {
+    staticClass: "col-auto mr-1"
+  }, [_c('label', {
+    staticClass: "label-black",
+    attrs: {
+      "for": 'accCaseCount' + _vm.accession.id
+    }
+  }, [_vm._m(2), _vm._v(":\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-auto",
+    attrs: {
+      "id": 'accCaseCount' + _vm.accession.id
+    }
+  }, [_c('div', {
+    staticClass: "m-0 p-0"
+  }, [_vm._v("\n                                        N/A\n                                    ")])])])])])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('strong', [_c('span', {
+    staticClass: "clientLabel"
+  }, [_vm._v("Institution")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('strong', [_c('span', {
+    staticClass: "specimensLabel"
+  }, [_vm._v("Specimens")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('strong', [_c('span', {
+    staticClass: "casesLabel"
+  }, [_vm._v("Cases")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7465ba8f", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 686:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid p-lg-1 p-md-0 p-sm-0",
+    attrs: {
+      "id": "accessioningMain"
+    }
+  }, [_c('div', {
+    staticClass: "modal",
+    attrs: {
+      "id": "loadingModal",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "myModalLabel",
+      "aria-hidden": "true"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog modal-info",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "modal-header"
+  }, [_vm._v("\n                    Stand By\n                ")]), _vm._v(" "), _c('div', {
+    staticClass: "modal-body text-center"
+  }, [_c('h4', [_c('i', {
+    staticClass: "fa fa-spinner fa-spin"
+  }), _vm._v(" " + _vm._s(_vm.accessionState.currentAction) + "\n                        "), _c('span', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")]), _vm._v(" "), (_vm.accessionState.currentAction != 'New') ? _c('span', [_vm._v(" ID " + _vm._s(_vm.$route.params.id))]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  })])])]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('div', [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xl-2 col-lg-3 col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "card card-inverse card-primary"
+  }, [_c('div', {
+    staticClass: "card-block"
+  }, [(_vm.accessionState.isNew) ? _c('div', {
+    staticClass: "row"
+  }, [_vm._m(0)]) : _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('i', {
+    staticClass: "icon-chemistry font-2xl mr-1 float-left"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "text-uppercase font-weight-bold font-xs"
+  }, [_c('span', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")]), _vm._v(" ID " + _vm._s(_vm.accessionState.accession.id))]), _vm._v("\n                                        " + _vm._s(_vm._f("prettyDate")(_vm.accessionState.accession.createdDate)) + "\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "dropdown w-100 mt-1"
+  }, [_c('button', {
+    staticClass: "btn btn-info dropdown-toggle w-100",
+    attrs: {
+      "enabled": _vm.validateSave(),
+      "type": "button",
+      "id": "saveAccessionDropdown",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-save font-2xl float-left"
+  }), _vm._v("\n                                                Save\n                                            ")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-menu dropdown-menu-right",
+    attrs: {
+      "aria-labelledby": "saveAccessionDropdown"
+    }
+  }, [_c('div', {
+    staticClass: "dropdown-item-info",
+    on: {
+      "click": _vm.saveAccession
+    }
+  }, [_vm._v("Save and Launch")]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item-info",
+    on: {
+      "click": _vm.saveAccession
+    }
+  }, [_vm._v("Save and Hold")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "dropdown w-100 mt-1"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-menu dropdown-menu-right",
+    attrs: {
+      "aria-labelledby": "printDropdown"
+    }
+  }, [_c('div', {
+    staticClass: "dropdown-item-info",
+    on: {
+      "click": _vm.printAccession
+    }
+  }, [_vm._v("Print "), _c('span', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")])]), _vm._v(" "), _c('div', {
+    staticClass: "dropdown-item-info",
+    on: {
+      "click": _vm.printLabels
+    }
+  }, [_vm._v("Print Labels")])])])])])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xl-5 col-lg-9 col-12"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "card-block"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "clientLabel labelAbove",
+    attrs: {
+      "for": "clientName"
+    }
+  }, [_vm._v("Institution")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
+    attrs: {
+      "id": "clientName",
+      "options": _vm.accessionState.clients,
+      "track-by": "id",
+      "label": "name",
+      "searchable": true,
+      "close-on-select": true,
+      "placeholder": "Type to Search..."
+    },
+    model: {
+      value: (_vm.client),
+      callback: function($$v) {
+        _vm.client = $$v
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('label', {
+    staticClass: "facilityLabel labelAbove",
+    attrs: {
+      "for": "facilityName"
+    }
+  }, [_vm._v("Facility")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
+    attrs: {
+      "id": "facilityName",
+      "options": this.facilities,
+      "track-by": "id",
+      "label": "name",
+      "searchable": true,
+      "close-on-select": true,
+      "placeholder": "Select..."
+    },
+    model: {
+      value: (_vm.facility),
+      callback: function($$v) {
+        _vm.facility = $$v
+      }
+    }
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "labLabel labelAbove",
+    attrs: {
+      "for": "labName"
+    }
+  }, [_vm._v("Received At")]), _vm._v(" "), (_vm.accessionState.loaded) ? _c('multiselect', {
+    attrs: {
+      "id": "labName",
+      "options": _vm.accessionState.labs,
+      "track-by": "id",
+      "label": "name",
+      "searchable": true,
+      "close-on-select": true,
+      "placeholder": "Type to Search..."
+    },
+    model: {
+      value: (_vm.lab),
+      callback: function($$v) {
+        _vm.lab = $$v
+      }
+    }
+  }) : _vm._e()], 1)])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xl-5 col-12"
+  }, [(_vm.accessionState.loaded && _vm.organization.href != null) ? _c('Patient', {
+    attrs: {
+      "prop_patientId": _vm.accessionState.isNew ? 0 : _vm.accessionState.accession.patientId,
+      "prop_mrn": _vm.accessionState.isNew ? '' : _vm.accessionState.accession.mrn,
+      "prop_organization": this.organization,
+      "prop_user": this.user,
+      "prop_patients": this.accessionState.patients
+    },
+    on: {
+      "new": _vm.patient_changed,
+      "changed": _vm.patient_changed
+    }
+  }) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [(_vm.accessionState.loaded) ? _c('Specimens', {
+    attrs: {
+      "specimens": _vm.accessionState.accession.specimens,
+      "organization": _vm.organization
+    },
+    on: {
+      "changed": _vm.specimens_changed
+    }
+  }) : _vm._e()], 1)])]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-12"
+  }, [_c('i', {
+    staticClass: "icon-chemistry font-2xl mr-1 float-left"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "text-uppercase font-weight-bold font-xs"
+  }, [_vm._v("New "), _c('span', {
+    staticClass: "accessionLabel"
+  }, [_vm._v("Accession")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "btn btn-info dropdown-toggle w-100",
+    attrs: {
+      "type": "button",
+      "id": "printDropdown",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-print font-2xl float-left"
+  }), _vm._v("\n                                                Print\n                                            ")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card-header card-header-primary"
+  }, [_c('span', {
+    staticClass: "clientDetailsLabel"
+  }, [_vm._v("Accession Details")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7fa4cfd4", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 687:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "center-block"
+  }, [_c('div', {
+    staticClass: "col-auto"
+  }, [(_vm.user.hasMessages) ? _c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-header"
+  }, [_vm._v("\n                    Mailbox " + _vm._s(_vm.user.fullName) + "\n                ")]), _vm._v(" "), _c('div', {
+    staticClass: "card-block"
+  }, [_c('table', {
+    staticClass: "table table-striped"
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.user.customData.messages), function(message) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(_vm._f("prettyDate")(message.timeStamp)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.from))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(message.text))])])
+  }))])])]) : _c('div', {
+    staticClass: "card card-inverse card-info text-center"
+  }, [_c('div', {
+    staticClass: "card-block"
+  }, [_vm._v("\n                    No messages.\n                    "), _c('footer', [_vm._v("TODO:  Figure out why this only shows messages when opened by router link from main.  Hint: use vue tools in chrome, vuex shows an uncommitted getUser....")])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Date")]), _vm._v(" "), _c('th', [_vm._v("From")]), _vm._v(" "), _c('th', [_vm._v("Subject")]), _vm._v(" "), _c('th', [_vm._v("Message")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-95d7e6ce", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 688:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7236,328 +7548,268 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-cf978c6a", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-fb7b146a", module.exports)
   }
-}
-
-/***/ }),
-
-/***/ 673:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container container-table"
-  }, [_c('div', {
-    staticClass: "row vertical-10p"
-  }, [_c('div', {
-    staticClass: "container"
-  }, [_c('img', {
-    staticClass: "center-block logo",
-    attrs: {
-      "src": __webpack_require__(578)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "text-center col-sm-6 col-sm-offset-3"
-  }, [_c('h1', [_vm._v("You are lost.")]), _vm._v(" "), _c('h4', [_vm._v("This page doesn't exist.")]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "exact": "",
-      "to": "/"
-    }
-  }, [_vm._v("Take me home.")])], 1)])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-d66b7486", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 674:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('footer', {
-    staticClass: "app-footer"
-  }, [_c('div', {
-    staticClass: "copyright"
-  }, [_vm._v("Copyright © " + _vm._s(_vm.year) + " "), _c('strong', [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, [_vm._v(_vm._s(_vm.organization.name))])]), _vm._v(".  All rights reserved.")]), _vm._v(" "), _c('div', {
-    staticClass: "powered-by"
-  }, [_vm._v("Powered By Clinica Cloud Platform")])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-f68dcc9e", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 677:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(567);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("26027bf5", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1af05ece\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mailbox.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1af05ece\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mailbox.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 678:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(568);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("d1ee3ddc", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1ec4ebb6\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Setting.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1ec4ebb6\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Setting.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 679:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(569);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("6e7daa88", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4c3529a0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tables.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4c3529a0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tables.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 680:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(570);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("2d9b68d8", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4da0d858\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Accessioning.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4da0d858\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Accessioning.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 681:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(571);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("795e7d74", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-6a867329\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClientAdmin.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-6a867329\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClientAdmin.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 682:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(572);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("61207406", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-765e9c36\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Worklist.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-765e9c36\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Worklist.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 683:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(573);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("8a66cfac", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-7c6f53a3\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tasks.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-7c6f53a3\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tasks.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 684:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(574);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("74eb55a0", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-b139a0b8\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Main.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-b139a0b8\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Main.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 685:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(575);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(31)("2766f838", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-d66b7486\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./404.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-d66b7486\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./404.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
 }
 
 /***/ }),
 
 /***/ 690:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/* (ignored) */
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(577);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("d97f6ea8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-07f7af29\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClientAdmin.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-07f7af29\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClientAdmin.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
 /***/ 691:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(265);
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(578);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("c1140444", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1ed481bd\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./404.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-1ed481bd\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./404.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 693:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(580);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("293e7f13", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-364365a0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tables.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-364365a0\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tables.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 694:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(581);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("13322d8c", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-39a997a3\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tasks.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-39a997a3\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tasks.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 695:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(582);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("05259766", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4856ce25\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Setting.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-4856ce25\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Setting.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 696:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(583);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("519a9b98", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-5ea073a4\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Main.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-5ea073a4\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Main.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 697:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(584);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("c8d82b0e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-643fede5\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Worklist.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-643fede5\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Worklist.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 699:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(586);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("d6021cd6", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-7fa4cfd4\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Accessioning.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-7fa4cfd4\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Accessioning.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 700:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(587);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("b41fae82", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-95d7e6ce\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mailbox.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?{\"id\":\"data-v-95d7e6ce\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mailbox.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 704:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 705:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(272);
 
 
 /***/ })
 
-},[691]);
+},[705]);

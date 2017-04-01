@@ -4,7 +4,7 @@
 
             <div class="animated fadeIn">
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-6 col-lg-3">
                         <div class="card">
                             <div class="card-block p-1 clearfix">
                                 <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-6 col-lg-3">
                         <div class="card">
                             <div class="card-block p-1 clearfix">
                                 <i class="fa fa-laptop bg-info p-1 font-2xl mr-1 float-left"></i>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-6 col-lg-3">
                         <div class="card">
                             <div class="card-block p-1 clearfix">
                                 <i class="fa fa-moon-o bg-warning p-1 font-2xl mr-1 float-left"></i>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-6 col-lg-3">
                         <div class="card">
                             <div class="card-block p-1 clearfix">
                                 <i class="fa fa-bell bg-danger p-1 font-2xl mr-1 float-left"></i>
@@ -121,7 +121,7 @@
                 </div>
                 <!--/.row-->
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header card-header-inverse card-header-info">
                                 <div class="font-weight-bold">
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header card-header-inverse card-header-success">
                                 <div class="font-weight-bold">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header card-header-inverse card-header-warning">
                                 <div class="font-weight-bold">
@@ -292,7 +292,7 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header card-header-inverse card-header-danger">
                                 <div class="font-weight-bold">
@@ -356,10 +356,10 @@
                         <div class="card">
                             <div class="card-block">
                                 <div class="row">
-                                    <div class="col-sm-5">
+                                    <div class="col-5">
                                         <h3 class="card-title clearfix mb-0">Traffic &amp; Sales</h3>
                                     </div>
-                                    <div class="col-sm-7">
+                                    <div class="col-7">
                                         <button type="button" class="btn btn-outline-primary float-right ml-1"><i class="icon-cloud-download"></i> &nbsp; Download</button>
                                         <fieldset class="form-group float-right">
                                             <div class="input-group float-right" style="width:240px;">
@@ -373,9 +373,9 @@
                                 </div>
                                 <hr class="m-0">
                                 <div class="row">
-                                    <div class="col-sm-12 col-lg-4">
+                                    <div class="col-12 col-lg-4">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout callout-info">
                                                     <small class="text-muted">New Clients</small>
                                                     <br>
@@ -386,7 +386,7 @@
                                                 </div>
                                             </div>
                                             <!--/.col-->
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout callout-danger">
                                                     <small class="text-muted">Recuring Clients</small>
                                                     <br>
@@ -501,9 +501,9 @@
                                         </ul>
                                     </div>
                                     <!--/.col-->
-                                    <div class="col-sm-6 col-lg-4">
+                                    <div class="col-6 col-lg-4">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout callout-warning">
                                                     <small class="text-muted">Pageviews</small>
                                                     <br>
@@ -514,7 +514,7 @@
                                                 </div>
                                             </div>
                                             <!--/.col-->
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout callout-success">
                                                     <small class="text-muted">Organic</small>
                                                     <br>
@@ -610,9 +610,9 @@
                                         </ul>
                                     </div>
                                     <!--/.col-->
-                                    <div class="col-sm-6 col-lg-4">
+                                    <div class="col-6 col-lg-4">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout">
                                                     <small class="text-muted">CTR</small>
                                                     <br>
@@ -623,7 +623,7 @@
                                                 </div>
                                             </div>
                                             <!--/.col-->
-                                            <div class="col-sm-6">
+                                            <div class="col-6">
                                                 <div class="callout callout-primary">
                                                     <small class="text-muted">Bounce Rate</small>
                                                     <br>

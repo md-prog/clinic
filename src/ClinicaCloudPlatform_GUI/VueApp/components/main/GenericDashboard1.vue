@@ -8,7 +8,7 @@
         <h4><i class="icon fa fa-check"></i> CoPilot is open source!</h4>
         Click on icon to check out it out on github. <a href='https://github.com/misterGF/CoPilot' target='_blank'><i class='fa fa-github fa-2x'></i></a>
       </div>-->
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box'>
           <span class='info-box-icon bg-aqua'><i class='ion ion-ios-gear-outline'></i></span>
 
@@ -21,7 +21,7 @@
         <!-- /.info-box -->
       </div>
       <!-- /.col -->
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box'>
           <span class='info-box-icon bg-red'><i class='fa fa-google-plus'></i></span>
 
@@ -38,7 +38,7 @@
       <!-- fix for small devices only -->
       <div class='clearfix visible-sm-block'></div>
 
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box'>
           <span class='info-box-icon bg-green'><i class='ion ion-ios-cart-outline'></i></span>
 
@@ -51,7 +51,7 @@
         <!-- /.info-box -->
       </div>
       <!-- /.col -->
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box'>
           <span class='info-box-icon bg-yellow'><i class='ion ion-ios-people-outline'></i></span>
 
@@ -72,14 +72,14 @@
         <div class="card-header with-border">
           <h3 class="card-title"></h3>
           <div class="card-block">
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-6 col-xs-12">
               <p class="text-center">
                 <strong>Web Traffic Overview</strong>
               </p>
               <canvas id="trafficBar" ></canvas>
             </div>
             <hr class="visible-xs-block">
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-6 col-xs-12">
               <p class="text-center">
                 <strong>Language Overview</strong>
               </p>
@@ -94,7 +94,7 @@
 
     <!-- Main row -->
     <div class='row'>
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box bg-yellow'>
           <span class='info-box-icon'><i class='ion ion-ios-pricetag-outline'></i></span>
 
@@ -112,7 +112,7 @@
           <!-- /.info-box-content -->
         </div>
       </div>
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box bg-green'>
           <span class='info-box-icon'><i class='ion ion-ios-heart-outline'></i></span>
 
@@ -130,7 +130,7 @@
           <!-- /.info-box-content -->
         </div>
       </div>
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box bg-red'>
           <span class='info-box-icon'><i class='ion ion-ios-cloud-download-outline'></i></span>
 
@@ -148,7 +148,7 @@
           <!-- /.info-box-content -->
         </div>
       </div>
-      <div class='col-md-3 col-sm-6 col-xs-12'>
+      <div class='col-md-3 col-6 col-xs-12'>
         <div class='info-box bg-aqua'>
           <span class='info-box-icon'><i class='ion-ios-chatbubble-outline'></i></span>
 
