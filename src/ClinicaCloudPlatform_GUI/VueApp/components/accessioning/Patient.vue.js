@@ -12,7 +12,11 @@ module.exports = {
     },
     data: function ()
     {
-        return {patientState: patientData.patientState};
+        return {
+            patientState: patientData.patientState,
+            allowEditSave: false,
+            detailsCollapsed: true
+        };
     },
     props: {
         prop_patientId: Number,
@@ -67,6 +71,19 @@ module.exports = {
             }
         },
 
+        patientSearched: {
+            get: function(){
+                return this.patientState.patientsSearched;
+            },
+            set: function(value){
+                this.patientState.patientsSearched = value;
+            }
+        },
+
+        searchBoxWidth: function () {
+            return this.allowEditSave || this.patientSearched ? 'col-11' : 'col-12';
+        }
+
         //computedProp_patients:
         //{
         //    get: function() {
@@ -105,10 +122,6 @@ module.exports = {
                 return 'Name: ' + patient.firstName + ' ' + patient.lastName + ', DOB: ' + this.dateFormat(patient.dob) + ', SSN: ' + patient.ssn;
         },
 
-        allowEditSave:function(){
-            return patientState.patientsSearched;
-        },
-
         dateFormat: function(date) {
             return this.$options.filters.MMDDYYYY(date)
         },
@@ -117,11 +130,9 @@ module.exports = {
             return `and ${count} additional Patients`;
         },
 
-        patientSearched: function (searchQuery, id) {
-            this.patientState.patientsSearched = true;
-        },
-
         patientChanged: function (value, dropDownId, doReload) {
+            this.allowEditSave = true;
+            this.patientSearched = true;
             this.$emit('changed', value.id, doReload);
         },
 
@@ -129,6 +140,13 @@ module.exports = {
         //    var dobDt = new Date(dob);
         //    return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
         //},
+
+        addNewPatient: function() {
+            this.allowEditSave = true;
+            if(this.patientState === null || (this.patientState.patient != null && this.patientState.patient.id !== -1)) {
+                this.newPatient();
+            }
+        },
 
         newPatient: function () {
             this.patientState.patient = {

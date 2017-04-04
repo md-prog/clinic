@@ -6702,3 +6702,53 @@ th {
 /*.col-auto .float-right {
     float: unset;
 }*/
+
+.row-center {
+    align-items: center;
+}
+
+.tooltipSource {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltipSource .tooltiptext {
+    opacity: 0;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    transition: opacity 0.5s;
+ 
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    bottom: 100%;
+    left: 50%; 
+    margin-left: -60px;
+}
+
+.tooltipSource .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltipSource:hover .tooltiptext {
+    opacity: 0.7;
+}
+
+/* Test transitions for expandable panel */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
