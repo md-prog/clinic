@@ -46,9 +46,9 @@
                                     <td data-title="ID" v-else>{{specimen.externalSpecimenID}}</td>
 
                                     <td data-title="Barcode" v-if="specimen === currentSpecimen">
-                                        <input type="text" placeholder="[Auto-generated if empty]" />
+                                        <input type="text" placeholder="[Auto-generated if empty]" v-model="specimen.barcodeNumber"/>
                                     </td>
-                                    <td data-title="Barcode" v-else></td>
+                                    <td data-title="Barcode" v-else>{{specimen.barcodeNumber}}</td>
 
                                     <td data-title="Type" v-if="specimen === currentSpecimen">
                                         <multiselect placeholder="Select Type"

@@ -7,7 +7,7 @@
         </div>
         <div class="card-block p-0 text-nowrap">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row mt-1 mb-1">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">

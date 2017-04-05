@@ -45,6 +45,7 @@ namespace ClinicaCloudPlatform.DAL.Data
 
         public DbSet<Accession> Accessions { get; set; }
         public DbSet<Batch> Batches { get; set; }
+        public DbSet<Barcode> Barcodes{ get; set; }
         public DbSet<Case> Cases { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Comment> Comments { get; set; }

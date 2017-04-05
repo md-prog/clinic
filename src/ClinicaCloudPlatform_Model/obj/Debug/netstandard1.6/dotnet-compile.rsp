@@ -71,9 +71,11 @@ C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\Facility
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\Lab.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\PanelResult.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\Patient.cs
+C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\SaveRequestBarcode.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\SaveResponseAccession.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\SaveResponseCase.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\SaveResponseGeneric.cs
+C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\SaveResponseSpecimen.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\Specimen.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\TestResult.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_Model\ApiModels\_ApiModelBaseClass.cs

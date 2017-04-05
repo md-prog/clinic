@@ -153,5 +153,7 @@
 "C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170310165151_npgsqlchg4.Designer.cs"
 "C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170310171813_whydoihavetonamemigrations.cs"
 "C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170310171813_whydoihavetonamemigrations.Designer.cs"
+"C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170404193714_barcodechanges.cs"
+"C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170404193714_barcodechanges.Designer.cs"
 "C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\ArsMachinaLIMSContextModelSnapshot.cs"
 "C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Properties\AssemblyInfo.cs"
