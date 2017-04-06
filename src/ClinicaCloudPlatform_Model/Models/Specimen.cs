@@ -5,7 +5,7 @@ namespace ClinicaCloudPlatform.Model.Models
     public class Specimen : _LimsBaseClass
     {
         public Guid ParentSpecimenGuid { get; set; }
-        public string ExternalSpecimenID { get; set; }
+        public string ExternalID { get; set; }
         public string Code { get; set; }
         public string Type { get; set; }
         public string TypeCode { get; set; }

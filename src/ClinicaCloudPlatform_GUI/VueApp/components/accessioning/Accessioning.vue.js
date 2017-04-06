@@ -171,13 +171,22 @@ module.exports = {
 
         afterLoad: function(vm){
             if(!vm.accessionState.isNew)
-                vm.postSave(vm);
+                vm.setHistoryItems(vm);
             vm.$set(vm.accessionState, 'loaded', true); 
             vm.$nextTick(function() { vm.finalizeView(); });
         },
             
-        postSave: function(vm){                
+        postSave: function(vm, response){    
+            response.data.specimensInfo.forEach(function(s){
+                var spec = vm.accessionState.accession.specimens.find(function(s1){
+                    return s1.guid === s.guid;
+                });
+                vm.$set(spec, 'barcodeNumber', s.barcodeNumber);
+            });            
             vm.setHistoryItems(vm);
+            vm.$set(vm.accessionState,'loaded', true);
+            vm.$set(vm.accessionState,'isNew', false);
+            vm.$nextTick(function() { vm.finalizeView(); });
         },
 
         setHistoryItems: function(vm){
@@ -281,11 +290,10 @@ module.exports = {
             axios.post('/api/accessioning', {
                 accession: vm.accessionState.accession,
                 orgCustomData: vm.organization.customData,
+                orgNameKey: vm.organization.nameKey,
                 userFullName: vm.user.fullName,
                 userHref: vm.user.href}).then(response=>{
-                    vm.$set(vm.accessionState,'loaded', true);
-                    vm.$set(this.accessionState,'isNew', false);
-                    this.postSave(vm);
+                    this.postSave(vm, response);
                 });
         },
 

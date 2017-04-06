@@ -9,7 +9,7 @@
                             <i class="fa fa-plus-circle"></i> Add Specimen
                         </button>
                         <div class="dropdown-menu" aria-labelledby="addSpecBtn">
-                            <div class="dropdown-item" v-for="spec in organizationSpecimenTypes" v-on:click="addSpecimen(spec)">{{spec.type}}</div>
+                            <div class="dropdown-item" v-for="spec in organizationSpecimenTypes" v-on:click="addSpecimen(spec, '')">{{spec.type}}</div>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                                     <!--<th>Received Date</th>-->
                                 </tr>
                             </thead>
-                            <tbody v-for="specimen in specimens">
+                            <tbody v-for="specimen in specimens" v-if="showSpecimen(specimen)">
                                 <!--hopefully multiple tbodies won't be an issue - allowed in the html spec-->
                                 <tr>
                                     <td>
@@ -41,14 +41,14 @@
                                     <td data-title="Specimen #">{{specimen.id}}</td>
 
                                     <td data-title="ID" v-if="specimen === currentSpecimen">
-                                        <input type="text" v-model="specimen.externalSpecimenID" />
+                                        <input type="text" v-model="specimen.externalId" />
                                     </td>
-                                    <td data-title="ID" v-else>{{specimen.externalSpecimenID}}</td>
+                                    <td data-title="ID" v-else>{{specimen.externalId}}</td>
 
                                     <td data-title="Barcode" v-if="specimen === currentSpecimen">
-                                        <input type="text" placeholder="[Auto-generated if empty]" />
+                                        <input type="text" placeholder="[Auto-generated if empty]" v-model="specimen.barcodeNumber"/>
                                     </td>
-                                    <td data-title="Barcode" v-else></td>
+                                    <td data-title="Barcode" v-else>{{specimen.barcodeNumber}}</td>
 
                                     <td data-title="Type" v-if="specimen === currentSpecimen">
                                         <multiselect placeholder="Select Type"
@@ -91,16 +91,17 @@
                                     <td data-title="Collected" v-else>{{specimen.collectionDate | localeDate}}</td>
 
                                     <td data-title="Qty" v-if="specimen === currentSpecimen">
-                                        <input type="number" value="2" />
+                                        <input type="number" v-model="currentGroupQuantity" />
                                     </td>
-                                    <td data-title="Qty" v-else><button class="btn btn-info btn-sm">2 like this - show all</button></td>
+                                    <td data-title="Qty" v-else-if="groupQuantity(specimen) > 1"><button class="btn btn-info btn-sm">{{groupQuantity(specimen)}} like this - show all</button></td>
+                                    <td data-title="Qty" v-else>1</td>
                                 </tr>
                                 <tr class="ignore-no-more-tables" v-if="specimen === currentSpecimen">
                                     <td colspan="9" class="bg-faded">
                                         <div class="ml-1 mb-1 text-center">
                                             <span class="specimenLabel">Specimen</span>:
                                             {{specimen.id === -1 ? '(NEW)' : '# ' + specimen.id}}
-                                            | {{(specimen.externalSpecimenID === "" || specimen.externalSpecimenID === null) ? '(No ID Set)' : specimen.externalSpecimenID}}
+                                            | {{(specimen.externalId === "" || specimen.externalId === null) ? '(No ID Set)' : specimen.externalId}}
                                             | Code: {{specimen.code}}
                                         </div>
                                         <div v-bind:id="'collapse'+specimen.guid" class="row collapse m-0 p-0" role="tabpanel" v-bind:aria-labelledby="'heading'+specimen.guid">

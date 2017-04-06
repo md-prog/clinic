@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 namespace MvcConfig
 {
     public class CustomViewLocationExpander : IViewLocationExpander

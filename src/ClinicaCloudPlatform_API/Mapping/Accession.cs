@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace ClinicaCloudPlatform.API.Mapping
 {
@@ -32,11 +32,11 @@ namespace ClinicaCloudPlatform.API.Mapping
                     Guid = s.Guid,
                     Code = s.Code,
                     ParentSpecimenGuid = s.ParentSpecimenGuid,
-                    ExternalSpecimenId = s.ExternalSpecimenID,
+                    ExternalId = s.ExternalID,
                     Type = new Model.ApiModels.SpecimenType() { Type = s.Type, Code = s.TypeCode },
                     Transport = new Model.ApiModels.SpecimenTransport() { Name = s.Transport, Code = s.TransportCode },
                     CollectionDate = s.CollectionDate,
-                    ReceivedDate = s.ReceivedDate,
+                    ReceivedDate = s.ReceivedDate,                    
                     CustomData = JObject.Parse(s.CustomData ?? "{}"),
                 }),
                 Cases = !Options.IncludeCases ? null : DbAcc.Cases.Select(c => new Model.ApiModels.Case

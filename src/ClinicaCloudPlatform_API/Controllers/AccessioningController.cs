@@ -140,6 +140,7 @@ namespace ClinicaCloudPlatform.API.Controllers
             try { accession = JsonConvert.DeserializeObject<Accession>(accJson.GetValue("accession").ToString()); }
             catch (Exception ex) { throw new FormatException("Error casting request body as Accession, did JSON change?", ex); }
 
+            var orgNameKey = AccessionState.orgNameKey.ToString();
             var userFullName = AccessionState.userFullName.ToString();
             var userHref = AccessionState.userHref.ToString();
 
@@ -165,14 +166,14 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbAcc.OrderingLab = context.Find<Model.Models.Lab>(accession.OrderingLabId);
                 dbAcc.Patient = context.Find<Model.Models.Patient>(accession.PatientId);
 
-                ProcessSpecimens(userFullName, userHref, accession, context, dbAcc);
+                var specimenResponses = ProcessSpecimens(orgNameKey, userFullName, userHref, accession, context, dbAcc);
 
-                ProcessCases(userFullName, userHref, accession, AccessionState.orgCustomData, context, dbAcc);
+                var caseResponses = ProcessCases(userFullName, userHref, accession, AccessionState.orgCustomData, context, dbAcc);
 
                 context.SaveChanges();
 
                 //configure response object
-                return GenerateSaveAccessionResponse(accession, dbAcc);
+                return GenerateSaveAccessionResponse(accession, specimenResponses, caseResponses, dbAcc);
             }
         }
 

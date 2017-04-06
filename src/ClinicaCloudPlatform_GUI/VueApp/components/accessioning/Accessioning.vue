@@ -50,7 +50,7 @@
                                                     <i class="fa fa-save font-2xl float-left"></i>
                                                     Save
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="saveAccessionDropdown">
+                                                <div class="dropdown-menu dropdown-menu-info dropdown-menu-right" aria-labelledby="saveAccessionDropdown">
                                                     <div class="dropdown-item-info" v-on:click="saveAccession">Save and Launch</div>
                                                     <div class="dropdown-item-info" v-on:click="saveAccession">Save and Hold</div>
                                                 </div>
@@ -69,7 +69,7 @@
                                                     <i class="fa fa-print font-2xl float-left"></i>
                                                     Print
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="printDropdown">
+                                                <div class="dropdown-menu dropdown-menu-info dropdown-menu-right" aria-labelledby="printDropdown">
                                                     <div class="dropdown-item-info" v-on:click="printAccession">Print <span class="accessionLabel">Accession</span></div>
                                                     <div class="dropdown-item-info" v-on:click="printLabels">Print Labels</div>
                                                 </div>

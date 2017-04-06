@@ -4,19 +4,25 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace ClinicaCloudPlatform.API.Controllers
 {
     public partial class AccessioningController
     {
-        private static void ProcessSpecimens(string UserFullName, string UserHref, Accession accession,
+        private static IEnumerable<SaveResponseSpecimen> ProcessSpecimens(string OrgNameKey, string UserFullName, string UserHref, Accession accession,
             ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
+            var responses = new List<SaveResponseSpecimen>();
 
             dbAcc.Specimens = new List<Model.Models.Specimen>();
 
             foreach (var specimen in accession.Specimens)
             {
+                var response = new SaveResponseSpecimen();
+                response.Guid = specimen.Guid;
+
+                bool newSpecimen = false;
                 var dbSpec = context.Find<Model.Models.Specimen>(specimen.Id);
                 if (dbSpec == null)
                 {
@@ -24,13 +30,14 @@ namespace ClinicaCloudPlatform.API.Controllers
                     dbSpec.CreatedFullName = UserFullName;
                     dbSpec.CreatedHref = UserHref;
                     dbAcc.Specimens.Add(dbSpec);
+                    newSpecimen = true;
                 }
 
                 dbSpec.Category = specimen.Category;
                 dbSpec.Code = specimen.Code;
                 dbSpec.CollectionDate = specimen.CollectionDate;
                 dbSpec.CustomData = specimen.CustomData.ToString();
-                dbSpec.ExternalSpecimenID = specimen.ExternalSpecimenId;
+                dbSpec.ExternalID = specimen.ExternalId;
                 dbSpec.ParentSpecimenGuid = specimen.ParentSpecimenGuid;
                 dbSpec.ReceivedDate = specimen.ReceivedDate;
                 dbSpec.Transport = specimen.Transport.Name;
@@ -38,20 +45,46 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbSpec.Type = specimen.Type.Type;
                 dbSpec.TypeCode = specimen.Type.Code;
 
-                if (!(context.Entry(dbSpec).State == Microsoft.EntityFrameworkCore.EntityState.Unchanged))
+                if (context.Entry(dbSpec).State != Microsoft.EntityFrameworkCore.EntityState.Unchanged)
                 {
                     dbSpec.ModifiedFullName = UserFullName;
                     dbSpec.ModifiedHref = UserHref;
                 }
+
+                //process barcodes for specimens only, for now
+                var barcodeRequest = new SaveRequestBarcode()
+                {
+                    AccessionGuid = accession.Guid,
+                    NewBarcode = newSpecimen,
+                    Number = specimen.BarcodeNumber,
+                    OrgNameKey = OrgNameKey,
+                    SpecimenGuids = new List<Guid>() { specimen.Guid },
+                    userFullName = UserFullName,
+                    userHref = UserHref
+                };
+                response.BarcodeNumber = new BarcodeController().SaveBarcode(JObject.FromObject(barcodeRequest));
+
+                responses.Add(response);
             }
+            return responses;
         }
 
-        private static void ProcessCases(string UserFullName, string UserHref, Accession accession, dynamic orgCustomData, ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
+        private static IEnumerable<SaveResponseCase> ProcessCases(string UserFullName, string UserHref, Accession accession, dynamic orgCustomData, ArsMachinaLIMSContext context, Model.Models.Accession dbAcc)
         {
             dbAcc.Cases = new List<Model.Models.Case>();
 
+            var responses = new List<SaveResponseCase>();
+
             foreach (Case _case in accession.Cases)
             {
+                var response = new SaveResponseCase();
+                response.Guid = _case.Guid;
+
+                //since db save is at accession level, might as well just leave these at that level for now (generate save response method)
+                //response.PanelResultsInfo = new List<SaveResponseGeneric>();
+                //response.SpecimensInfo = new List<SaveResponseSpecimen>();
+                //response.TestResultsInfo = new List<SaveResponseGeneric>();
+
                 var dbCase = context.Cases
                     .Include(c => c.Specimens)
                     .Include(c => c.ProcessingLab)
@@ -105,6 +138,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                 else
                     dbCase.CaseNumber = _case.CaseNumber;
 
+                response.CaseNumber = dbCase.CaseNumber;
+
                 dbCase.AnalysisLab = context.Find<Model.Models.Lab>(_case.AnalysisLabId);
                 dbCase.CustomData = _case.CustomData;
 
@@ -150,40 +185,41 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbCase.Type = _case.Type;
 
                 if (context.ChangeTracker.Entries<Model.Models.Case>().Any(c =>
-                 c.State == Microsoft.EntityFrameworkCore.EntityState.Modified ||
-                 c.State == Microsoft.EntityFrameworkCore.EntityState.Added))
+                 c.State == EntityState.Modified ||
+                 c.State == EntityState.Added))
                 {
                     dbCase.ModifiedFullName = UserFullName;
                     dbCase.ModifiedHref = UserHref;
                 }
-
+                responses.Add(response);
             }
+            return responses;
         }
 
-        private static SaveResponseAccession GenerateSaveAccessionResponse(Accession accession, Model.Models.Accession dbAcc)
+        private static SaveResponseAccession GenerateSaveAccessionResponse(Accession accession, 
+            IEnumerable<SaveResponseSpecimen> specimenResponses, IEnumerable<SaveResponseCase> caseResponses, 
+            Model.Models.Accession dbAcc)
         {
             var response = new SaveResponseAccession();
             response.Guid = dbAcc.Guid;
             response.Id = dbAcc.Id;
 
-            response.SpecimensInfo = new List<SaveResponseGeneric>();
+            response.SpecimensInfo = new List<SaveResponseSpecimen>();
             response.CasesInfo = new List<SaveResponseCase>();
 
-            foreach (var dbSpec in dbAcc.Specimens)
+            foreach(var specResponse in specimenResponses)
             {
-                response.SpecimensInfo.Add(new SaveResponseGeneric() { Id = dbSpec.Id, Guid = dbSpec.Guid });
+                specResponse.Id = dbAcc.Specimens.SingleOrDefault(s => s.Guid == specResponse.Guid)?.Id ?? -1;
+                response.SpecimensInfo.Add(specResponse);
             }
-
-            foreach (var dbCase in dbAcc.Cases)
+            foreach (var caseResponse in caseResponses)
             {
-                var _case = accession.Cases.Single(c => c.Guid == dbCase.Guid);
-                var responseCaseInfo = new SaveResponseCase();
-                responseCaseInfo.Guid = dbAcc.Guid;
-                responseCaseInfo.Id = dbAcc.Id;
-                responseCaseInfo.PanelResultsInfo = _case.PanelResults.Select(p => new SaveResponseGeneric() { Id = p.Id, Guid = p.Guid });
-                responseCaseInfo.TestResultsInfo = _case.TestResults.Select(p => new SaveResponseGeneric() { Id = p.Id, Guid = p.Guid });
-                responseCaseInfo.SpecimensInfo = response.SpecimensInfo.Where(s => _case.SpecimenGuids.Contains(s.Guid));
-                response.CasesInfo.Add(responseCaseInfo);
+                var _case = accession.Cases.Single(c => c.Guid == caseResponse.Guid);
+                caseResponse.Id = dbAcc.Id;
+                caseResponse.PanelResultsInfo = _case.PanelResults.Select(p => new SaveResponseGeneric() { Id = p.Id, Guid = p.Guid });
+                caseResponse.TestResultsInfo = _case.TestResults.Select(p => new SaveResponseGeneric() { Id = p.Id, Guid = p.Guid });
+                caseResponse.SpecimensInfo = response.SpecimensInfo.Where(s => _case.SpecimenGuids.Contains(s.Guid));
+                response.CasesInfo.Add(caseResponse);
             }
 
             return response;
