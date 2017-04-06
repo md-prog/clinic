@@ -19,26 +19,26 @@
         </div>
         <div v-if="accessionState.loaded">
             <div class="row">
-                <div class="col-xl-2 col-sm-3">
+                <div class="col-xl-2 col-lg-3 col-12">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-12">
                             <div class="card card-inverse card-primary">
                                 <div class="card-block">
                                     <div v-if="accessionState.isNew" class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-12">
                                             <i class="icon-chemistry font-2xl mr-1 float-left"></i>
                                             <div class="text-uppercase font-weight-bold font-xs">New <span class="accessionLabel">Accession</span></div>
                                         </div>
                                     </div>
                                     <div v-else class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-12">
                                             <i class="icon-chemistry font-2xl mr-1 float-left"></i>
                                             <div class="text-uppercase font-weight-bold font-xs"><span class="accessionLabel">Accession</span> ID {{accessionState.accession.id}}</div>
                                             {{accessionState.accession.createdDate | prettyDate}}
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-12">
                                             <div class="dropdown w-100 mt-1">
                                                 <button v-bind:enabled="validateSave()"
                                                         class="btn btn-info dropdown-toggle w-100"
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-12">
                                             <div class="dropdown w-100 mt-1">
                                                 <button class="btn btn-info dropdown-toggle w-100"
                                                         type="button"
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5 col-sm-9">
+                <div class="col-xl-5 col-lg-9 col-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <span class="clientDetailsLabel">Accession Details</span>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5 col-sm-12">
+                <div class="col-xl-5 col-12">
                     <Patient v-if="accessionState.loaded && organization.href != null"
                              :prop_patientId="accessionState.isNew ? 0 : accessionState.accession.patientId"
                              :prop_mrn="accessionState.isNew ? '' : accessionState.accession.mrn"
@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-12">
                     <Specimens v-if="accessionState.loaded" :specimens="accessionState.accession.specimens"
                                :organization="organization"
                                v-on:changed="specimens_changed">

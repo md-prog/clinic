@@ -73,7 +73,7 @@
           <div class="card-block">
             <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-6">
                   <div id="example1_length" class="dataTables_length">
 
                   </div>
@@ -81,7 +81,7 @@
               </div>
 
               <div class="row">
-                <div class="col-sm-12">
+                <div class="col-12">
                   <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
                     <thead>
                       <tr role="row">
