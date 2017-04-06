@@ -6392,6 +6392,27 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     color: #fff;
 }
 
+.dropdown-menu-info{
+    background-color: $brand-info !important;
+}
+
+.dropdown-item-info { //not working?
+    background-color: $brand-info !important;
+    color: #fff !important;
+
+    &.active, &:active {
+        color: #fff !important;
+        background-color: $brand-info !important;
+    }
+
+    &:focus, &:hover {
+        color: #fff;
+        background-color: darken($brand-info, 10) !important;
+    }
+
+    @extend .dropdown-item;
+}
+
 input[type="text"] {
     padding-left: .3rem;
 }

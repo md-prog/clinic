@@ -159,5 +159,7 @@ C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\201703101
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170310171813_whydoihavetonamemigrations.Designer.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170404193714_barcodechanges.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170404193714_barcodechanges.Designer.cs
+C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170406193213_renameexternalspecimenid.cs
+C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\20170406193213_renameexternalspecimenid.Designer.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Migrations\ArsMachinaLIMSContextModelSnapshot.cs
 C:\Source\ClinicaCloudPlatform\src\ClinicaCloudPlatform_DAL\Properties\AssemblyInfo.cs

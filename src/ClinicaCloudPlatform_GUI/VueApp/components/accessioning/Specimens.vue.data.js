@@ -3,6 +3,7 @@ module.exports = {
     specimensState: {
         loaded: false,
         isNew: false,
-        isLoading: false
+        isLoading: false,
+        expandCurrentGroup: false
     }
 }

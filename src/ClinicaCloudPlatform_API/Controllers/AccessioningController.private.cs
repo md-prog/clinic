@@ -37,7 +37,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbSpec.Code = specimen.Code;
                 dbSpec.CollectionDate = specimen.CollectionDate;
                 dbSpec.CustomData = specimen.CustomData.ToString();
-                dbSpec.ExternalSpecimenID = specimen.ExternalSpecimenId;
+                dbSpec.ExternalID = specimen.ExternalId;
                 dbSpec.ParentSpecimenGuid = specimen.ParentSpecimenGuid;
                 dbSpec.ReceivedDate = specimen.ReceivedDate;
                 dbSpec.Transport = specimen.Transport.Name;
@@ -58,7 +58,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     NewBarcode = newSpecimen,
                     Number = specimen.BarcodeNumber,
                     OrgNameKey = OrgNameKey,
-                    SpecimenGuid = specimen.Guid,
+                    SpecimenGuids = new List<Guid>() { specimen.Guid },
                     userFullName = UserFullName,
                     userHref = UserHref
                 };
@@ -185,8 +185,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbCase.Type = _case.Type;
 
                 if (context.ChangeTracker.Entries<Model.Models.Case>().Any(c =>
-                 c.State == Microsoft.EntityFrameworkCore.EntityState.Modified ||
-                 c.State == Microsoft.EntityFrameworkCore.EntityState.Added))
+                 c.State == EntityState.Modified ||
+                 c.State == EntityState.Added))
                 {
                     dbCase.ModifiedFullName = UserFullName;
                     dbCase.ModifiedHref = UserHref;

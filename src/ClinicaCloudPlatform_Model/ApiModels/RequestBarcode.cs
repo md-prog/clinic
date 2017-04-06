@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace ClinicaCloudPlatform.Model.ApiModels
 {
-    public class SaveRequestBarcode
+    public class RequestBarcode
     {
         public string OrgNameKey { get; set; }
-        public bool NewBarcode { get; set; }
         public string Number { get; set; }
 
         public IEnumerable<Guid> SpecimenGuids { get; set; }

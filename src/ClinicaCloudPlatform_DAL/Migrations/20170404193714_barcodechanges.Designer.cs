@@ -699,7 +699,7 @@ namespace ClinicaCloudPlatform.DAL.Migrations
                     b.Property<string>("CustomData")
                         .HasAnnotation("Npgsql:ColumnType", "jsonb");
 
-                    b.Property<string>("ExternalSpecimenID");
+                    b.Property<string>("ExternalID");
 
                     b.Property<Guid>("Guid");
 
