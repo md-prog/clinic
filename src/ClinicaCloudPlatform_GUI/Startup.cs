@@ -38,10 +38,10 @@ namespace ClinicaCloudPlatform.GUI
         {
             services.AddStormpath();
 
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.ViewLocationExpanders.Add(new CustomViewLocationExpander());
-            });
+            //services.Configure<RazorViewEngineOptions>(options =>
+            //{
+            //    options.ViewLocationExpanders.Add(new CustomViewLocationExpander());
+            //});
 
             services.AddMvc()
                 .AddApplicationPart(typeof(AccessioningController).GetTypeInfo().Assembly) //plugin....
