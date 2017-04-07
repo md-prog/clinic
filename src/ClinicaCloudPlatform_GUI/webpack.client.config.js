@@ -1,7 +1,6 @@
 ﻿const path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-const SplitByPathPlugin = require('webpack-split-by-path');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const glob = require('glob');
 
