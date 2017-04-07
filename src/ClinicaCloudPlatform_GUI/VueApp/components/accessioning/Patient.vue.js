@@ -82,6 +82,10 @@ module.exports = {
 
         searchBoxWidth: function () {
             return this.allowEditSave || this.patientSearched ? 'col-11' : 'col-12';
+        },
+
+        expandPanelArrow: function () {
+            return this.detailsCollapsed ? 'fa-chevron-down' : 'fa-chevron-up';
         }
 
         //computedProp_patients:
@@ -140,6 +144,10 @@ module.exports = {
         //    var dobDt = new Date(dob);
         //    return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
         //},
+
+        toggleDetailsVisibility: function() {
+            this.detailsCollapsed = !this.detailsCollapsed;
+        },
 
         addNewPatient: function() {
             this.allowEditSave = true;

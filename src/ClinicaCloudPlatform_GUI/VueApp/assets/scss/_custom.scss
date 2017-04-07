@@ -6745,10 +6745,22 @@ th {
     opacity: 0.7;
 }
 
-/* Test transitions for expandable panel */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.labelCollapisblePanel {
+  min-width: 95%;
+  background-color: #f7f7f9;
+  color: #000;
+  font-size: .9rem;
+  font-weight: 600;
+  padding-left: .3rem; }
+
+.collapse-transition-enter-active, .collapse-transition-leave-active {
+    max-height: 1000px;
+    overflow-y: hidden;
+    transition: max-height 0.5s ease-in-out;
+    /*transition: all .3s ease*/
 }
-.fade-enter, .fade-leave-to {
-  opacity: 0
+
+.collapse-transition-enter, .collapse-transition-leave-to {
+  max-height: 0
+  /*opacity: 0*/
 }

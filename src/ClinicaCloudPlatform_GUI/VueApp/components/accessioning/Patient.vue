@@ -52,8 +52,12 @@
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
-              <button class="btn btn-info" v-on:click="this.detailsCollapsed = !this.detailsCollapsed">Patient Details</button>
-              <transition name="fade">
+              <div class="label labelAbove cursor-pointer" v-on:click="toggleDetailsVisibility">
+                <label class="labelCollapisblePanel cursor-pointer">Patient Details</label>
+                <i class="fa" v-bind:class="expandPanelArrow"></i>
+              </div>
+              <br />
+              <transition name="collapse-transition">
                 <div class="row" v-show="!this.detailsCollapsed">
                     <div class="form-group col-lg-4 col-auto">
                         <label for="ssnField" class="labelAbove">SSN</label>
@@ -74,7 +78,7 @@
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
-                </transition>
+              </transition>
                 <div class="row">
                     <div class="col-lg-6 col-auto">
                         <button class="btn btn-info w-100"
