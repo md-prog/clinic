@@ -10,5 +10,6 @@ namespace ClinicaCloudPlatform.Model.ApiModels
         public string FullName { get; set; }
         public DateTime DOB { get; set; }
         public string SSN { get; set; }
+        public dynamic CustomData { get; set; }
     }
 }
