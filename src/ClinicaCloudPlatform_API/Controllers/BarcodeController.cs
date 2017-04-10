@@ -16,22 +16,29 @@ namespace ClinicaCloudPlatform.API.Controllers
     public class BarcodeController : Controller
     {
 
-        [HttpGet("{number}")]
-        public dynamic Get(string BarcodeNumber)
+        [HttpGet("{orgNameKey}/{number}")]
+        public dynamic Get(string BarcodeNumber, string OrgNameKey)
         {
-            throw new NotImplementedException();
+            using (var context = new ArsMachinaLIMSContext())
+            {
+                var barcodes = context.Barcodes.Where(bc => bc.Number == BarcodeNumber).ToList();
+                return barcodes.Where(bc =>
+                    JObject.Parse(bc.CustomData ?? "{}")["orgNameKey"].Value<string>() == OrgNameKey)
+                    .Select(bc => new { Number = bc.Number, CustomData = JObject.Parse(bc.CustomData) }).FirstOrDefault();
+            }
         }
 
 
-        [HttpGet("lookup/{barcodeRequest}")]
-        public dynamic Get(dynamic BarcodeRequest)
+        [HttpPost("lookup")]
+        public dynamic Get([FromBody]dynamic BarcodeRequest)
         {
             dynamic retVal;
             RequestBarcode barcodeRequest;
             var bcJson = ((JObject)BarcodeRequest);
             try { barcodeRequest = bcJson.ToObject<RequestBarcode>(); }
             catch (Exception ex) { throw new FormatException("Error casting request body as RequestBarcode, did JSON change?", ex); }
-            using (var context = new ArsMachinaLIMSContext(barcodeRequest.userFullName, barcodeRequest.userHref))
+
+            using (var context = new ArsMachinaLIMSContext())
             {
                 if (barcodeRequest.AccessionGuid != Guid.Empty)
                 {
@@ -40,18 +47,17 @@ namespace ClinicaCloudPlatform.API.Controllers
                         throw new Exception("Accession not found.");
 
                     retVal = context.Barcodes.Where(bc =>
-                        (JObject.Parse(bc.CustomData)["accessionId"] == null ? 0 :
-                            JObject.Parse(bc.CustomData)["accessionId"].Value<int>()) == acc.Id)
-                            .Select(bc => new { Number = bc.Number, CustomData = bc.CustomData }).ToList();
+                        GetAccessionGuid(JObject.Parse(bc.CustomData ?? "{}")) == barcodeRequest.AccessionGuid)
+                            .Select(bc => new { Number = bc.Number, CustomData = JObject.Parse(bc.CustomData) }).ToList();
                 }
-                else if(barcodeRequest.SpecimenGuids?.Count() > 0)
+                else if (barcodeRequest.SpecimenGuids?.Count() > 0)
                 {
                     //TODO lookup by specimen
-                    retVal = new { Number = "", CustomData = "{}" };
+                    retVal = new { Number = "", CustomData = new JObject() };
                 }
                 else
                 {
-                    retVal = new { Number = "", CustomData = "{}" };
+                    retVal = new { Number = "", CustomData = new JObject() };
                 }
             }
             return retVal;
@@ -62,8 +68,10 @@ namespace ClinicaCloudPlatform.API.Controllers
         {
             SaveRequestBarcode barcodeRequest;
             var bcJson = ((JObject)SaveBarcodeRequest);
+
             try { barcodeRequest = bcJson.ToObject<SaveRequestBarcode>(); }
             catch (Exception ex) { throw new FormatException("Error casting request body as SaveRequestBarcode, did JSON change?", ex); }
+
             using (var context = new ArsMachinaLIMSContext(barcodeRequest.userFullName, barcodeRequest.userHref))
             {
                 Barcode dbBarcode = null;
@@ -83,17 +91,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     dbBarcode = matchingOrgBarcodes.Single().Value;
 
                 if (dbBarcode == null)
-                {
-                    dbBarcode = new Barcode();
-                    context.Barcodes.Add(dbBarcode);
-                    if (!String.IsNullOrEmpty(barcodeRequest.Number))
-                        dbBarcode.Number = barcodeRequest.Number;
-                    else //save, then set the barcode string to its ID if not provided by user
-                    {
-                        context.SaveChanges();
-                        dbBarcode.Number = dbBarcode.Id.ToString();
-                    }
-                }
+                    dbBarcode = newBarcode(barcodeRequest, context);
 
                 if (string.IsNullOrEmpty(dbBarcode.CustomData))
                     dbBarcode.CustomData = "{}";
@@ -103,54 +101,13 @@ namespace ClinicaCloudPlatform.API.Controllers
                 if (customData.GetValue("orgNameKey") == null)
                     customData.Add("orgNameKey", barcodeRequest.OrgNameKey);
 
-                if (barcodeRequest.AccessionGuid == Guid.Empty)
-                    throw new Exception("Accession ID must be supplied.");
-                else
-                {
-                    var accId = context.Accessions.FirstOrDefault(s => s.Guid == barcodeRequest.AccessionGuid)?.Id;
-                    if (accId != null)
-                    {
-                        var existingAccIdToken = customData.GetValue("accessionId");
-                        if (existingAccIdToken != null)
-                        {
-                            int existingAccId = (int)existingAccIdToken;
-                            if (existingAccId != accId)
-                                throw new Exception("Barcode exists for a different accession.");
-                        }
-                        else
-                            customData.Add("accessionId", accId);
-                    }
-                }
+                SetAccessionGuids(barcodeRequest, customData);
 
-                var specIds = customData["specimenIds"]?.Value<List<int>>();
-                if (specIds == null)
-                    specIds = new List<int>();
-                foreach (var specimenGuid in barcodeRequest.SpecimenGuids)
-                {
-                    if (specimenGuid != Guid.Empty)
-                    {
-                        var specId = context.Specimens.FirstOrDefault(s => s.Guid == specimenGuid)?.Id;
-                        if (specId != null)
-                            specIds.Add((int)specId);
-                    }
-                }
-                customData["specimenIds"] = JToken.FromObject(specIds);
+                SetSpecimenGuids(barcodeRequest, customData);
 
                 if (barcodeRequest.CaseGuid != Guid.Empty)
                 {
-                    var caseId = context.Cases.FirstOrDefault(s => s.Guid == barcodeRequest.CaseGuid)?.Id;
-                    if (caseId != null)
-                    {
-                        var existingCaseIdToken = customData.GetValue("caseId");
-                        if (existingCaseIdToken != null)
-                        {
-                            int existingCaseId = (int)existingCaseIdToken;
-                            if (existingCaseId != caseId)
-                                throw new Exception("Barcode exists for a different case.");
-                        }
-                        else
-                            customData.Add("caseId", caseId);
-                    }
+                    //TODO
                 }
 
                 dbBarcode.CustomData = customData.ToString();
@@ -159,6 +116,66 @@ namespace ClinicaCloudPlatform.API.Controllers
 
                 return dbBarcode.Number;
             }
+        }
+
+        private static Barcode newBarcode(SaveRequestBarcode barcodeRequest, ArsMachinaLIMSContext context)
+        {
+            Barcode dbBarcode = new Barcode();
+            context.Barcodes.Add(dbBarcode);
+            if (!String.IsNullOrEmpty(barcodeRequest.Number))
+                dbBarcode.Number = barcodeRequest.Number;
+            else //save, then set the barcode string to its ID if not provided by user
+            {
+                context.SaveChanges();
+                dbBarcode.Number = dbBarcode.Id.ToString();
+            }
+
+            return dbBarcode;
+        }
+
+        private static Guid GetAccessionGuid(JObject customData)
+        {
+            var retVal = Guid.Empty;
+            Guid.TryParse(customData["accessionGuid"]?.Value<string>(), out retVal);
+            return retVal;
+        }
+
+        private static void SetAccessionGuids(SaveRequestBarcode barcodeRequest, JObject customData)
+        {
+            if (barcodeRequest.AccessionGuid == Guid.Empty)
+                throw new Exception("Accession ID must be supplied.");
+            else
+            {
+                Guid existingAccGuidToken;
+                if (customData.GetValue("accessionGuid") != null && Guid.TryParse(customData.GetValue("accessionGuid").Value<string>(), out existingAccGuidToken))
+                {
+                    var existingAccGuid = existingAccGuidToken;
+                    if (existingAccGuid != barcodeRequest.AccessionGuid)
+                        throw new Exception("Barcode exists for a different accession.");
+                }
+                else
+                    customData.Add("accessionGuid", barcodeRequest.AccessionGuid);
+            }
+        }
+
+        private static void SetSpecimenGuids(SaveRequestBarcode barcodeRequest, JObject customData)
+        {
+            var invalidList = false;
+            List<Guid> specGuids = null;
+
+            try { specGuids = customData["specimenGuids"]?.Value<List<Guid>>(); }
+            catch { invalidList = true; }
+
+            if (invalidList || specGuids == null)
+                specGuids = new List<Guid>();
+
+            foreach (var specimenGuid in barcodeRequest.SpecimenGuids)
+            {
+                if (specimenGuid != Guid.Empty)
+                    specGuids.Add(specimenGuid);
+            }
+
+            customData["specimenGuids"] = JToken.FromObject(specGuids);
         }
     }
 }

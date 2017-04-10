@@ -45,7 +45,7 @@ const routes= [
         meta: {title: 'Sample Management'},
         children: [
             {
-                path: 'accessioning/:id/:orgNameKey',
+                path: 'accessioning/:guid/:orgNameKey',
                 component: Accessioning,
                 name: 'Edit Accession',
                 description: 'Edit sample/accession',

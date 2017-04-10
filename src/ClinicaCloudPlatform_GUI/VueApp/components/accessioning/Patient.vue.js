@@ -20,8 +20,8 @@ module.exports = {
     props: {
         prop_patientId: Number,
         prop_mrn: String,
-        prop_user: Object,
-        prop_organization: Object,
+        user: Object,
+        organization: Object,
         prop_patients: Array
     },
     computed: {
@@ -93,7 +93,7 @@ module.exports = {
     created: function()
     {
         if(this.prop_patientId > 0){
-            this.setPatient(this.prop_organization, this.prop_patientId, this.prop_mrn);
+            this.setPatient(this.organization, this.prop_patientId, this.prop_mrn);
         }
         else
             this.newPatient();
@@ -194,9 +194,9 @@ module.exports = {
             //vm.$delete(vm.patientState.patient, 'dobString');
             axios.post('/api/patient', {
                 patient: vm.patientState.patient,
-                orgCustomData: vm.prop_organization.customData,
-                userFullName: vm.prop_user.fullName,
-                userHref: vm.prop_user.href}).then(response=>{
+                orgCustomData: vm.organization.customData,
+                userFullName: vm.user.fullName,
+                userHref: vm.user.href}).then(response=>{
                     vm.$set(vm.patientState.patient, 'id', response.data.id);
                     vm.$set(vm.patientState.patient, 'guid', response.data.guid);
                     this.patientChanged(vm.patientState.patient, response.data.id, true);

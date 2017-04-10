@@ -54,8 +54,8 @@ namespace ClinicaCloudPlatform.API.Controllers
             }
         }
 
-        [HttpGet("{Id}/{orgNameKey}")]
-        public dynamic Get(int Id, string OrgNameKey)
+        [HttpGet("{guid}/{orgNameKey}")]
+        public dynamic Get(Guid AccessionGuid, string OrgNameKey)
         {
             using (var context = new ArsMachinaLIMSContext())
             {
@@ -83,7 +83,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     .Include(a => a.Cases)
                     .ThenInclude(c => c.Specimens)
                     .Include(a => a.Specimens)
-                    .First(a => a.Id == Id);
+                    .First(a => a.Guid == AccessionGuid);
 
                 Accession accession = Mapping.Accession.GetAccessionApiModel(DbAcc,
                     new Mapping.AccessionMapOptions()
