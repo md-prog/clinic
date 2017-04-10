@@ -6725,7 +6725,7 @@ th {
     position: absolute;
     z-index: 1;
     width: 120px;
-    bottom: 100%;
+    bottom: 110%;
     left: 50%; 
     margin-left: -60px;
 }
@@ -6754,7 +6754,7 @@ th {
   padding-left: .3rem; }
 
 .collapse-transition-enter-active, .collapse-transition-leave-active {
-    max-height: 1000px;
+    max-height: 500px;
     overflow-y: hidden;
     transition: max-height 0.5s ease-in-out;
     /*transition: all .3s ease*/
