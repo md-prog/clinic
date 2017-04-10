@@ -6723,3 +6723,65 @@ th {
 /*.col-auto .float-right {
     float: unset;
 }*/
+
+.row-center {
+    align-items: center;
+}
+
+.tooltipSource {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltipSource .tooltiptext {
+    opacity: 0;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    transition: opacity 0.5s;
+ 
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    bottom: 110%;
+    left: 50%; 
+    margin-left: -60px;
+}
+
+.tooltipSource .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltipSource:hover .tooltiptext {
+    opacity: 0.7;
+}
+
+.labelCollapisblePanel {
+  min-width: 95%;
+  background-color: #f7f7f9;
+  color: #000;
+  font-size: .9rem;
+  font-weight: 600;
+  padding-left: .3rem; }
+
+.collapse-transition-enter-active, .collapse-transition-leave-active {
+    max-height: 500px;
+    overflow-y: hidden;
+    transition: max-height 0.5s ease-in-out;
+    /*transition: all .3s ease*/
+}
+
+.collapse-transition-enter, .collapse-transition-leave-to {
+  max-height: 0
+  /*opacity: 0*/
+}

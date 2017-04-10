@@ -14,7 +14,8 @@ module.exports = {
     {
         return {
             patientState: patientData.patientState,
-            isOverAddPatient: false
+            allowEditSave: false,
+            detailsCollapsed: true
         };
     },
     props: {
@@ -70,7 +71,7 @@ module.exports = {
             }
         },
 
-        allowEditSave: {
+        patientSearched: {
             get: function(){
                 return this.patientState.patientsSearched;
             },
@@ -78,6 +79,14 @@ module.exports = {
                 this.patientState.patientsSearched = value;
             }
         },
+
+        searchBoxWidth: function () {
+            return this.allowEditSave || this.patientSearched ? 'col-11' : 'col-12';
+        },
+
+        expandPanelArrow: function () {
+            return this.detailsCollapsed ? 'fa-chevron-down' : 'fa-chevron-up';
+        }
 
         //computedProp_patients:
         //{
@@ -127,6 +136,7 @@ module.exports = {
 
         patientChanged: function (value, dropDownId, doReload) {
             this.allowEditSave = true;
+            this.patientSearched = true;
             this.$emit('changed', value.id, doReload);
         },
 
@@ -135,27 +145,13 @@ module.exports = {
         //    return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
         //},
 
-        listTouched: function(value, id) {
-            var a = 1;
-            if(this.isOverAddPatient)
-                this.addNewPatient();
-        },
-
-        selectedFromList: function(selected, id) {
-            return;
-        },
-
-        mouseEvent: function(e) {
-            this.isOverAddPatient = true;
-        },
-
-        mouseLeave: function(e) {
-            this.isOverAddPatient = false;
+        toggleDetailsVisibility: function() {
+            this.detailsCollapsed = !this.detailsCollapsed;
         },
 
         addNewPatient: function() {
             this.allowEditSave = true;
-            if(this.patientState.patient.id !== -1) {
+            if(this.patientState === null || (this.patientState.patient != null && this.patientState.patient.id !== -1)) {
                 this.newPatient();
             }
         },

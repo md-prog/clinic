@@ -99,7 +99,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     LastName = DbAcc.Patient.LastName,
                     FirstName = DbAcc.Patient.FirstName,
                     DOB = DbAcc.Patient.DOB,
-                    SSN = DbAcc.Patient.SSN
+                    SSN = DbAcc.Patient.SSN,
+                    CustomData = JObject.Parse(DbAcc.Patient.CustomData ?? "{}")
                 };
 
                 var client = new Client()

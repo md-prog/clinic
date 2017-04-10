@@ -8,8 +8,8 @@
             <div class="form-group">
                 <!--v-if="typeof(this.patient) != 'undefined'">-->
                 <label for="patientName" class="patientLabel labelAbove">Patient</label>
-                <div class="row">
-                    <div class="col-12">
+                <div class="row row-center">
+                    <div v-bind:class="searchBoxWidth">
                         <multiselect id="patientName"
                                       :options="this.prop_patients"
                                       track-by="id"
@@ -22,18 +22,23 @@
                                       :close-on-select="true"
                                       :allow-empty="true"
                                       placeholder="Type to Search..."
-                                      @input="patientChanged"
-                                      @close="listTouched"
-                                      @select="selectedFromList"
+                                      v-on:input="patientChanged"
+                                      v-on:search-change="patientSearched = true"
                                       v-model="patientState.patient">
-                          <span slot="noResult">No Patients Found. </span>
-                          <span slot="afterList">
-                            <button class="btn btn-info btn-sm" v-on:click="addNewPatient" @mouseenter="mouseEvent" @mouseleave="mouseLeave">New Patient</button></span>
+                            <span slot="noResult">No Patients Found.</span>
                             <template slot="option" scope="props">
                                 <div :id="props.option.id">{{props.option.lastName}}, {{props.option.firstName}}<br />DOB: {{props.option.dob | prettyDate}}<br />SSN: {{props.option.ssn}}</div>
                             </template>
                         </multiselect>
                     </div>
+                  <div class="col-1 col-auto px-0" v-show="this.allowEditSave || this.patientSearched">
+                    <div class="tooltipSource">
+                    <button class="btn-sm btn-info " v-on:click="addNewPatient">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                    <span class="tooltiptext">Add Patient</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-auto">
@@ -47,7 +52,13 @@
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
-                <div class="row">
+              <div class="label labelAbove cursor-pointer" v-on:click="toggleDetailsVisibility">
+                <label class="labelCollapisblePanel cursor-pointer">Patient Details</label>
+                <i class="fa" v-bind:class="expandPanelArrow"></i>
+              </div>
+              <br />
+              <transition name="collapse-transition">
+                <div class="row" v-show="!this.detailsCollapsed">
                     <div class="form-group col-lg-4 col-auto">
                         <label for="ssnField" class="labelAbove">SSN</label>
                         <input id="ssnField" type="text" v-model="patientState.patient.ssn" class="form-control"
@@ -67,6 +78,7 @@
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
                 </div>
+              </transition>
                 <div class="row">
                     <div class="col-lg-6 col-auto">
                         <button class="btn btn-info w-100"
