@@ -44,13 +44,17 @@ module.exports = {
 
         lookupSpecimenByBarcode: function(vm, specimenBarcodeValue)
         {
-            axios.get('api/Barcode/' + vm.organization.nameKey + '/' + specimenBarcodeValue).then(response =>
+            axios.get('/api/Barcode/' + specimenBarcodeValue + '/' + vm.organization.nameKey).then(response =>
                 vm.$set(vm.dashboardState, 'barcode', response.data)
                 ).then(function(){ //temp
                     var guid = vm.dashboardState.barcode.customData.accessionGuid;
-                    axios.get('/api/Accessioning/' + guid + '/' + vm.organization.nameKey).then(response=>
-                        vm.$set(vm.dashboardState, 'currentSpecimen', response.data.specimens[0])
-                        )
+                    axios.get('/api/Accessioning/' + guid + '/' + vm.organization.nameKey).then(function(response){
+                        if(response.data.accession.specimens.length > 0)
+                        {
+                            vm.$set(vm.dashboardState, 'currentSpecimen', 
+                                response.data.accession.specimens.find(function(s) {
+                                    return (typeof vm.dashboardState.barcode.customData.specimenGuids ==='undefined' || vm.dashboardState.barcode.customData.specimenGuids.length===0) ? true : s.guid === vm.dashboardState.barcode.customData.specimenGuids[0]}));
+                        }});
                 }).catch(err => {console.log(err)});
         }
     }

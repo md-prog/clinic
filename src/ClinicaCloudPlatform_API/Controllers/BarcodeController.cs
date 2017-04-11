@@ -16,7 +16,7 @@ namespace ClinicaCloudPlatform.API.Controllers
     public class BarcodeController : Controller
     {
 
-        [HttpGet("{orgNameKey}/{number}")]
+        [HttpGet("{barcodeNumber}/{orgNameKey}")]
         public dynamic Get(string BarcodeNumber, string OrgNameKey)
         {
             using (var context = new ArsMachinaLIMSContext())

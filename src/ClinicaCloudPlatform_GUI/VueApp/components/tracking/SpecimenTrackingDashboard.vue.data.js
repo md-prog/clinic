@@ -1,4 +1,10 @@
 ﻿module.exports =
     {
-        dashboardState: {}
+        dashboardState: {
+            barcode: {
+                accessionGuid: null,
+                specimenGuids: [],
+                caseGuid: null
+            }
+        }
     };
