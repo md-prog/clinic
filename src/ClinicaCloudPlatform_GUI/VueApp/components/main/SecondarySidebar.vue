@@ -29,7 +29,7 @@
                 <div v-if="typeof historyItems !== 'undefined' && historyItems.length > 0">
                     <div v-for="item in orderBy(historyItems, 'timeStamp', -1)">
                         <div class="message">
-                            <router-link exact class="dropdown-item" :to="{name: 'Edit Accession', params: {orgNameKey: organization.nameKey, id: item.id}}">
+                            <router-link exact class="dropdown-item" :to="{name: 'Edit Accession', params: {orgNameKey: organization.nameKey, guid: item.guid}}">
                                 <div>
                                     <small class="text-muted">{{item.title}}</small>
                                     <small class="text-muted float-right mt-q">

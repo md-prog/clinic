@@ -1,8 +1,8 @@
 ﻿<template>
     <div class="container-fluid pl-0 pr-0">
         <div class="card card-accent-primary card-compact">
-            <div class="card-header card-compact">                
-                <router-link v-if="$route.name!=='Specimen Catalog'" class="page-link bg-gray-light font-weight-bold" :to="{ name: 'Edit Accession', params: { id: accession.id, orgNameKey: organization.nameKey }}">
+            <div class="card-header card-compact">             
+                <router-link v-if="$route.name!=='Specimen Catalog'" class="page-link bg-gray-light font-weight-bold" :to="{ name: 'Edit Accession', params: { guid: accession.guid, orgNameKey: organization.nameKey }}">
                     <i class="fa fa-edit"></i> Edit <span class="accessionLabel">Accession</span> # {{accession.id}} - {{accession.createdDate | localeDate}}
                 </router-link> 
                 <div v-else class="font-weight-bold">

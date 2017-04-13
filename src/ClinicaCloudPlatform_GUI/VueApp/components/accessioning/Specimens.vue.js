@@ -26,7 +26,8 @@ module.exports =
     ],
     props: {
         specimens: Array,
-        organization: Object
+        organization: Object,
+        barcodes: Array
     },
     data: function ()
     {
@@ -121,23 +122,37 @@ module.exports =
     },
     mounted: function(){
         this.toolTips();
-},
+    },
+    watch: {
+        'barcodes': function(val){
+            var vm = this;
+            val.forEach(function(bc)
+            {
+                if(typeof bc.customData.specimenGuids === 'undefined')
+                    return;
+                vm.specimens.forEach(function(s){
+                    if(bc.customData.specimenGuids.indexOf(s.guid) > -1)
+                        vm.$set(s,'barcodeNumber', bc.number);
+                });                
+            });            
+        }
+    },
 
-methods:{
+    methods:{
 
-    //not working!
+        //not working!
         toolTips: function() {this.$nextTick(function(){$('[data-toggle="tooltip"]').tooltip();});},
 
-    //component event - supposedly not supposed to modify properties but this seems to work
+        //component event - supposedly not supposed to modify properties but this seems to work
         changed: function() {this.$emit('changed', this.specimens);},
 
-    //have to consider using a plugin vuex store or similar so a plugin can access global data
+        //have to consider using a plugin vuex store or similar so a plugin can access global data
         cacheCivicGenes: function(genes) {
             var vm = this;
             vm.$set(vm, 'civicGenesCache', genes);
-},
+        },
 
-    currentSpecimenTypeTransportChanged: function(){
+        currentSpecimenTypeTransportChanged: function(){
             var spec = this.currentSpecimen;
             var type = this.organizationSpecimenTypes.find(function(t){return t.code === spec.type.code;});
             var transport = this.getSpecimenTransports(type.code).find(function(t){return t.code === spec.transport.code;});
@@ -145,28 +160,28 @@ methods:{
                 spec.code = type.code;
             else
                 spec.code = type.code + '-' + transport.code;
-},
+        },
 
-    showSpecimen:function(specimen)
-    {
+        showSpecimen:function(specimen)
+        {
             var vm = this;
             if(typeof specimen.customData.groupGuid === 'undefined')
                 return true;
             if(vm.specimensState.expandCurrentGroup && specimen.customData.groupGuid === currentSpecimen.customData.groupGuid)
                 return true;
             return vm.isGroupLeader(specimen);
-},
+        },
 
-    isGroupLeader: function(specimen){
+        isGroupLeader: function(specimen){
             var vm = this;
             var groupIndex = vm.specimens.findIndex(function(s)
             {
                 return s.customData.groupGuid === specimen.customData.groupGuid;
             });
             return vm.specimens.indexOf(specimen) === groupIndex;
-},
+        },
 
-    groupQuantity: function(specimen){
+        groupQuantity: function(specimen){
             var vm = this;
             var count = 0;
 
@@ -176,37 +191,37 @@ methods:{
             for(var i = 0; i < vm.specimens.length; ++i){
                 if(vm.specimens[i].customData.groupGuid == specimen.customData.groupGuid)
                     count++;
-    }
+            }
             return count;
-},
+        },
 
-    copySpecimen: function(specimen){
+        copySpecimen: function(specimen){
             var vm = this;
             var newSpecimen = cloneDeep(specimen);
             newSpecimen.id = -1;
             newSpecimen.guid = uuidV1();
             vm.specimens.push(newSpecimen);
-},
+        },
 
-    addSpecimen: function(type){
+        addSpecimen: function(type){
             var vm = this;
 
             var newSpec = {
-                    guid: uuidV1(),                
-                    id: -1,
-                    parentSpecimenGuid: '00000000-0000-0000-0000-000000000000',
-                    type: {type: type.type, code: type.code},
-                    code: type.code, //temp
-                    transport: {name: null, code: null},
-                    externalId: null,
-                    customData: {
-                            groupGuid: uuidV1(),
-            },
-                    collectionDate: new Date((new Date()-1)).toJSON(),
-                    receivedDate: new Date().toJSON(),
-                    category: null
+                guid: uuidV1(),                
+                id: -1,
+                parentSpecimenGuid: '00000000-0000-0000-0000-000000000000',
+                type: {type: type.type, code: type.code},
+                code: type.code, //temp
+                transport: {name: null, code: null},
+                externalId: null,
+                customData: {
+                    groupGuid: uuidV1(),
+                },
+                collectionDate: new Date((new Date()-1)).toJSON(),
+                receivedDate: new Date().toJSON(),
+                category: null
                 //attributesAreSet: false
-    }
+            }
 
             vm.setSpecimenAttributes(newSpec);
 
@@ -217,9 +232,9 @@ methods:{
             vm.$nextTick(function() {
                 vm.setExpandedSpecimen(true);
             });
-},
+        },
 
-    specimenClicked: function(specimen){
+        specimenClicked: function(specimen){
             var expand = false;
             var vm = this;
             if(specimen.guid === vm.specimensState.editingSpecimenGuid){
@@ -229,13 +244,13 @@ methods:{
                 vm.$set(vm.specimensState, 'editingSpecimenGuid', specimen.guid);
                 vm.setSpecimenAttributes(specimen);
                 expand = true;
-    }
+            }
             vm.$nextTick(function() {
                 vm.setExpandedSpecimen(expand);}
             );
-},
+        },
 
-    setExpandedSpecimen: function(expandCurrent){
+        setExpandedSpecimen: function(expandCurrent){
             var vm = this;
             vm.specimens.forEach(function(s){
                 var specCollapse = $('#collapse'+s.guid);
@@ -246,28 +261,28 @@ methods:{
                     specCollapse.collapse('hide');
             });
 
-        //do this while we're here
+            //do this while we're here
             $('.dateTimePicker').daterangepicker({
                 "singleDatePicker": true,
                 "timePicker": true,
                 "timePicker24Hour": true,
-                    locale: {
-                            format: 'MM/DD/YYYY h:mm'
-            }
+                locale: {
+                    format: 'MM/DD/YYYY h:mm'
+                }
             });
-}
+        }
 
-    //expandCurrentSpecimen: function(){
-    //    $('#collapse'+this.currentSpecimen.guid).collapse('show');
-    //},
+        //expandCurrentSpecimen: function(){
+        //    $('#collapse'+this.currentSpecimen.guid).collapse('show');
+        //},
 
-    //collapseNonCurrentSpecimens: function() {
-    //    var vm = this;
-    //    this.specimens.forEach(function(s){
-    //        if(vm.currentSpecimen === null || s.guid !== vm.currentSpecimen.guid)
-    //            $('#collapse'+s.guid).collapse('hide');
-    //    });
-    //}
+        //collapseNonCurrentSpecimens: function() {
+        //    var vm = this;
+        //    this.specimens.forEach(function(s){
+        //        if(vm.currentSpecimen === null || s.guid !== vm.currentSpecimen.guid)
+        //            $('#collapse'+s.guid).collapse('hide');
+        //    });
+        //}
 
-}
+    }
 };

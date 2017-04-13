@@ -39,7 +39,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     MiddleName = p.MiddleName,
                     FullName = string.Format("{0} {1} {2}", p.FirstName, p.MiddleName, p.LastName),
                     DOB = p.DOB,
-                    SSN = p.SSN
+                    SSN = p.SSN,
+                    CustomData = JObject.Parse(p.CustomData ?? "{}")
                 });
             }
         }
@@ -58,7 +59,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     LastName = p.LastName,
                     FirstName = p.FirstName,
                     DOB = p.DOB,
-                    SSN = p.SSN
+                    SSN = p.SSN,
+                    CustomData = JObject.Parse(p.CustomData ?? "{}")
                 });
 
                 //filter via json
@@ -109,6 +111,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbPatient.FirstName = patient.FirstName;
                 dbPatient.SSN = patient.SSN;
                 dbPatient.DOB = patient.DOB;
+                dbPatient.CustomData = patient.CustomData.ToString();
 
                 context.SaveChanges();
                 

@@ -14,14 +14,15 @@ module.exports = {
     {
         return {
             patientState: patientData.patientState,
-            isOverAddPatient: false
+            allowEditSave: false,
+            detailsCollapsed: true
         };
     },
     props: {
         prop_patientId: Number,
         prop_mrn: String,
-        prop_user: Object,
-        prop_organization: Object,
+        user: Object,
+        organization: Object,
         prop_patients: Array
     },
     computed: {
@@ -70,7 +71,7 @@ module.exports = {
             }
         },
 
-        allowEditSave: {
+        patientSearched: {
             get: function(){
                 return this.patientState.patientsSearched;
             },
@@ -78,6 +79,14 @@ module.exports = {
                 this.patientState.patientsSearched = value;
             }
         },
+
+        searchBoxWidth: function () {
+            return this.allowEditSave || this.patientSearched ? 'col-11' : 'col-12';
+        },
+
+        expandPanelArrow: function () {
+            return this.detailsCollapsed ? 'fa-chevron-down' : 'fa-chevron-up';
+        }
 
         //computedProp_patients:
         //{
@@ -93,7 +102,7 @@ module.exports = {
     created: function()
     {
         if(this.prop_patientId > 0){
-            this.setPatient(this.prop_organization, this.prop_patientId, this.prop_mrn);
+            this.setPatient(this.organization, this.prop_patientId, this.prop_mrn);
         }
         else
             this.newPatient();
@@ -127,6 +136,7 @@ module.exports = {
 
         patientChanged: function (value, dropDownId, doReload) {
             this.allowEditSave = true;
+            this.patientSearched = true;
             this.$emit('changed', value.id, doReload);
         },
 
@@ -135,27 +145,13 @@ module.exports = {
         //    return (dobDt.getMonth() + 1) + '/' + dobDt.getDay() + '/' + dobDt.getFullYear();
         //},
 
-        listTouched: function(value, id) {
-            var a = 1;
-            if(this.isOverAddPatient)
-                this.addNewPatient();
-        },
-
-        selectedFromList: function(selected, id) {
-            return;
-        },
-
-        mouseEvent: function(e) {
-            this.isOverAddPatient = true;
-        },
-
-        mouseLeave: function(e) {
-            this.isOverAddPatient = false;
+        toggleDetailsVisibility: function() {
+            this.detailsCollapsed = !this.detailsCollapsed;
         },
 
         addNewPatient: function() {
             this.allowEditSave = true;
-            if(this.patientState.patient.id !== -1) {
+            if(this.patientState === null || (this.patientState.patient != null && this.patientState.patient.id !== -1)) {
                 this.newPatient();
             }
         },
@@ -194,9 +190,9 @@ module.exports = {
             //vm.$delete(vm.patientState.patient, 'dobString');
             axios.post('/api/patient', {
                 patient: vm.patientState.patient,
-                orgCustomData: vm.prop_organization.customData,
-                userFullName: vm.prop_user.fullName,
-                userHref: vm.prop_user.href}).then(response=>{
+                orgCustomData: vm.organization.customData,
+                userFullName: vm.user.fullName,
+                userHref: vm.user.href}).then(response=>{
                     vm.$set(vm.patientState.patient, 'id', response.data.id);
                     vm.$set(vm.patientState.patient, 'guid', response.data.guid);
                     this.patientChanged(vm.patientState.patient, response.data.id, true);

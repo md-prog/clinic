@@ -10,7 +10,7 @@
                         <h4>
                             <i class="fa fa-spinner fa-spin"></i> {{accessionState.currentAction}}
                             <span class="accessionLabel">Accession</span>
-                            <span v-if="accessionState.currentAction != 'New'"> ID {{$route.params.id}}</span>
+                            <span v-if="accessionState.currentAction != 'New' && accessionState.loaded"> ID {{accessionState.accession.id}}</span>
                         </h4>
                     </div>
                     <div class="modal-footer"></div>
@@ -121,8 +121,8 @@
                     <Patient v-if="accessionState.loaded && organization.href != null"
                              :prop_patientId="accessionState.isNew ? 0 : accessionState.accession.patientId"
                              :prop_mrn="accessionState.isNew ? '' : accessionState.accession.mrn"
-                             :prop_organization="this.organization"
-                             :prop_user="this.user"
+                             :organization="this.organization"
+                             :user="this.user"
                              :prop_patients="this.accessionState.patients"
                              v-on:new="patient_changed"
                              v-on:changed="patient_changed" />
@@ -130,7 +130,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <Specimens v-if="accessionState.loaded" :specimens="accessionState.accession.specimens"
+                    <Specimens v-if="accessionState.loaded" 
+                               :specimens="accessionState.accession.specimens"
+                               :barcodes="accessionState.barcodes"
                                :organization="organization"
                                v-on:changed="specimens_changed">
                     </Specimens>

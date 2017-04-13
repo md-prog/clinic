@@ -1,8 +1,4 @@
-﻿
-//var loadInProgress = false;
-
-//import { mapGetters, mapActions} from 'vuex';
-import axios from 'axios'
+﻿import axios from 'axios'
 import Multiselect from 'vue-multiselect';
 import accessionData from './Accessioning.vue.data.js';
 import filter from '../../assets/js/setFilter.js';
@@ -30,14 +26,12 @@ module.exports = {
 
     data: function ()
     {
-        return {accessionState: accessionData.accessionState};
+        return {
+            accessionState: accessionData.accessionState
+        };
     },
 
-    ///vue computed properties
-
     computed: {
-        //loaded: function() { return this.accessionState.loaded;},
-        //isNew: function() { return this.accessionState.isNew;},
         client: {
             get: function(){
                 var cId = this.accessionState.accession.clientId;
@@ -85,63 +79,43 @@ module.exports = {
         },
     },
 
-    //end computed
-
-    //vue watchers
-
     watch:{
-        //loaded: function() {
-        //    if (this.loaded)
-        //    {
-        //        var vm = this;
-        //        vm.$nextTick(function() { this.finalizeView(); });
-        //    }
-        //},
         '$route': function () {
             var vm = this;
-            //if(vm.loaded) //don't do this if still loading... not sure why needed
             vm.initView();
         },
     },
-
-    //end watchers
-
-    //vue lifecycle events
 
     created: function() {
         this.initView();
     },
 
     mounted: function() {
-        //setupFormOverlays();
+        
     },
-
-    //end lifecycle events
-
-    //vue methods
 
     methods:{
 
         initView: function(){
-            var accId = 0
+            var accGuid = null;
             var vm = this;
 
             vm.$set(vm.accessionState, 'loaded', false);
             vm.$set(vm.accessionState, 'currentAction', 'Loading');
 
-            if (vm.$route.params.id == null)
+            if (vm.$route.params.guid == null)
                 vm.newAccession();
             else
             {
                 vm.$set(vm.accessionState, 'isNew', false);
-                accId = this.$route.params.id;
+                accGuid = vm.$route.params.guid;
             }
 
             vm.$nextTick(function() {$("#loadingModal").modal("show");});
 
-            if(vm.accessionState.isNew || vm.accessionState.accession.id != accId)
+            if(vm.accessionState.isNew || vm.accessionState.accession.guid != accGuid)
             {
-                vm.loadAll(this.$route.params.id, vm.$route.params.orgNameKey);
+                vm.loadAll(vm.$route.params.guid, vm.$route.params.orgNameKey);
             }
             else
             {
@@ -174,6 +148,7 @@ module.exports = {
                 vm.setHistoryItems(vm);
             vm.$set(vm.accessionState, 'loaded', true); 
             vm.$nextTick(function() { vm.finalizeView(); });
+            vm.getBarcodes(vm.organization.nameKey);
         },
             
         postSave: function(vm, response){    
@@ -191,6 +166,7 @@ module.exports = {
 
         setHistoryItems: function(vm){
             var accId = vm.accessionState.accession.id;
+            var accGuid = vm.accessionState.accession.guid;
             var accTimestamp = vm.accessionState.accession.createdDate;
             var subject = vm.patient.lastName;
             var specimens = vm.accessionState.accession.specimens.map(function(s) {return s.type.type});
@@ -205,7 +181,8 @@ module.exports = {
 
             vm.$emit('viewEditItem', 
                 vm.$route.meta.title, 
-                accId, 'Accession # ' + accId, 
+                accGuid, 
+                'Accession # ' + accId, 
                 subject, 
                 specimens.join(', '), 
                 accTimestamp);
@@ -246,21 +223,35 @@ module.exports = {
 
         //data
 
-        getAccessionOrNew: function(id, orgNameKey)
+        getAccessionOrNew: function(guid, orgNameKey)
         {
-            if(this.accessionState.isNew)
-                return {"data": {"accession": this.accessionState.accession}}; //use the default empty template
+            var vm = this;            
+            if(vm.accessionState.isNew)
+            {
+                guid = uuidV1();
+                vm.$set(this.accessionState.accession, 'guid', guid);
+                return {"data": {"accession": vm.accessionState.accession}}; //use the default empty template
+            }
             else
-                return axios.get('/api/Accessioning/' + id + '/' + orgNameKey)
+                return axios.get('/api/Accessioning/' + guid + '/' + orgNameKey)
+           
         },
 
-        loadAll: function(id, orgNameKey){
+        getBarcodes: function(orgNameKey){
+            var vm = this;
+            axios.post('/api/Barcode/lookup', {orgNameKey: orgNameKey, accessionGuid: vm.accessionState.accession.guid})
+            .then(response =>
+                vm.$set(vm.accessionState, 'barcodes', response.data)
+            ).catch(err => {console.log(err)});;
+        },
+
+        loadAll: function(guid, orgNameKey){
             var vm = this;
             axios.all([
-                vm.getAccessionOrNew(id, orgNameKey),
+                vm.getAccessionOrNew(guid, orgNameKey),
                 axios.get('/api/Client/' + orgNameKey),
                 axios.get('/api/Patient/' + orgNameKey),
-                axios.get('/api/Lab/' + orgNameKey),
+                axios.get('/api/Lab/' + orgNameKey),               
             ]).then(axios.spread(function (accResponse, clientResponse, patientResponse, labResponse) {
                 vm.$set(vm.accessionState, 'accession', accResponse.data.accession);
                 vm.$set(vm.accessionState, 'clients', clientResponse.data);
@@ -294,7 +285,7 @@ module.exports = {
                 userFullName: vm.user.fullName,
                 userHref: vm.user.href}).then(response=>{
                     this.postSave(vm, response);
-                });
+                }).catch(err => {console.log(err)});;
         },
 
         newAccession: function(){
@@ -303,23 +294,6 @@ module.exports = {
             vm.$set(this.accessionState, 'accession', this.accessionState.accessionTemplate);
             vm.$set(this.accessionState,'isNew', true);
         },
-
-        //debounce(
-        //asyncGetClients: function(org){
-        //    this.accessionState.isLoadingClientsAsync = true;
-        //    axios.get('/api/Accessioning/Clients/' + org.nameKey).then( response => {
-        //        Object.assign(this.accessionState.clients, response.data);
-        //        this.accessionState.isLoadingClientsAsync = false;
-        //    }).catch(err=> {console.log(err)});
-        //},
-
-        //client data
-
-        //getClient: function(org, id){
-        //    axios.get('/api/Accessioning/Clients/' + org.nameKey + '/' + id).then( response => {
-        //        this.accessionState.clients.push(response.data);
-        //    }).catch(err=> {console.log(err)});
-        //},
 
     }
 };

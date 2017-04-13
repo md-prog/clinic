@@ -13,8 +13,6 @@ namespace ClinicaCloudPlatform.Model.ApiModels
         public Guid AccessionGuid { get; set; }
 
         public Guid CaseGuid { get; set; }
-
-        public string userHref { get; set; }
-        public string userFullName { get; set; }
+        
     }
 }

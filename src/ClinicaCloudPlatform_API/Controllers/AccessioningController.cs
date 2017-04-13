@@ -54,9 +54,12 @@ namespace ClinicaCloudPlatform.API.Controllers
             }
         }
 
-        [HttpGet("{Id}/{orgNameKey}")]
-        public dynamic Get(int Id, string OrgNameKey)
+        [HttpGet("{accessionGuid}/{orgNameKey}")]
+        public dynamic Get(string AccessionGuid, string OrgNameKey)
         {
+            Guid accGuid = Guid.Empty;
+            Guid.TryParse(AccessionGuid, out accGuid);
+
             using (var context = new ArsMachinaLIMSContext())
             {
                 //EF at its crappiest
@@ -83,7 +86,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                     .Include(a => a.Cases)
                     .ThenInclude(c => c.Specimens)
                     .Include(a => a.Specimens)
-                    .First(a => a.Id == Id);
+                    .First(a => a.Guid == accGuid);
 
                 Accession accession = Mapping.Accession.GetAccessionApiModel(DbAcc,
                     new Mapping.AccessionMapOptions()
@@ -99,7 +102,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     LastName = DbAcc.Patient.LastName,
                     FirstName = DbAcc.Patient.FirstName,
                     DOB = DbAcc.Patient.DOB,
-                    SSN = DbAcc.Patient.SSN
+                    SSN = DbAcc.Patient.SSN,
+                    CustomData = JObject.Parse(DbAcc.Patient.CustomData ?? "{}")
                 };
 
                 var client = new Client()
