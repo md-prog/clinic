@@ -13,7 +13,7 @@
             <tbody>
                 <tr v-for="row in worklist">
                     <td>
-                        <AccessionInfo :organization="organization" :accession="row" :labs="state.labs" :clients="state.clients" :patients="state.patients" :doctors="state.doctors">
+                        <AccessionInfo :organization="organization" :accession="row" :labs="labs" :clients="clients" :patients="patients" :doctors="doctors">
                         </AccessionInfo>
                         <!--<router-link :to="{ name: 'Edit Accession', params: { id: row.id, orgNameKey: organization.nameKey }}">
                             Edit <span class="accessionLabel">Accession</span> { {row.id} }

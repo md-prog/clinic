@@ -17,7 +17,11 @@ module.exports = {
     },
     mixins: [customDataHelpersMixin],
     props: {
-        organization: Object
+        organization: Object,
+        clients: Array,
+        labs: Array,
+        patients: Array,
+        doctors: Array
     },
     data: function () {
         return {
@@ -57,24 +61,12 @@ module.exports = {
         loadData: function(org, config){
             var vm = this;
             var worklistUrl = '/api/Worklist/' + org.nameKey + '/' + config.start + '/' + config.end + '/' + urlencode(JSON.stringify(config.options));
-
-            axios.all([
-                axios.get(worklistUrl),
-                axios.get('/api/Client/' + org.nameKey),
-                axios.get('/api/Lab/' + org.nameKey),
-                axios.get('/api/Doctor/' + org.nameKey),
-                axios.get('/api/Patient/' + org.nameKey),
-            ]).then(axios.spread(function (worklistResponse, clientResponse, labResponse, doctorResponse, patientResponse) {
-                    
+            
+            axios.get(worklistUrl).then(function (worklistResponse) {                    
                 vm.$set(vm, 'worklist', worklistResponse.data);
-                vm.$set(vm.state, 'clients', clientResponse.data);
-                vm.$set(vm.state, 'labs', clientResponse.data);
-                vm.$set(vm.state, 'doctors', clientResponse.data);
-                vm.$set(vm.state, 'patients', clientResponse.data);
-                //apply after last data load
                 vm.applyDataTables();
             }
-                )).catch(err => {console.log(err)});
+            ).catch(err => {console.log(err)});
         }, 
         setWorklistConfig: function(org)
         {

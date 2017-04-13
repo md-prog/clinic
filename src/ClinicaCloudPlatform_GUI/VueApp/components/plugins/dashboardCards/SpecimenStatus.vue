@@ -1,9 +1,10 @@
 ﻿<template>
-    <div class="card">
+    <div class="card card-accent-info">
         <div class="card-header">
-            Specimen {{this.specimen.externalId === '' ? '# ' + this.specimen.id : this.specimen.externalId}} Status
-            <div class="tag tag-info float-right" v-if="currentWorkflow.available">Available</div>
-            <button class="btn btn-sm btn-info">Edit</button>
+            <div class="row">
+                <div class="col-6">Specimen {{this.specimen.externalId === '' ? '# ' + this.specimen.id : this.specimen.externalId}} Status</div>
+                <div class="col-6"><div class="tag tag-info float-right" v-if="currentWorkflow.available">Available</div></div>
+            </div>
         </div>
         <div class="card-block p-0 text-nowrap">
             <div class="container-fluid">
