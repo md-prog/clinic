@@ -121,7 +121,31 @@ Vue.mixin({
                 newVal = [];
 
             return newVal;
+        },
+
+        /*
+        *
+        *   PATIENT CUSTOM DATA SECTION
+        *
+        */
+        
+        getPatientDemographicDetails: function () {
+            return this.organization.customData.patientAttributes[0].patientDemographicDetails;
+        },
+
+        updatePatientDetails: function(){
+            //TO DO
+        },
+
+        currentPatientDetailValue: function(detailName, expectsSingle){
+            var retVal = [];//TO DO
+            return retVal;
+        },
+
+        updatePatientDetailValue: function (attributeName, attributeValue, singleToMultiple) {
+            // TO DO
         }
+
     },
     computed:{
         organizationSpecimenTypes: function () {

@@ -77,6 +77,66 @@
                         <input id="mrnField" type="text" v-model="patientState.mrn" class="form-control"
                                v-bind:disabled="!this.allowEditSave" />
                     </div>
+                  <br />
+                  <!--Demographic Section -->
+                  <div v-for="att in getPatientDemographicDetails()" class="form-group">
+                    <label v-bind:for="att.name+'_'+att.type" class="labelAbove">{{att.label}}</label>
+                    <div class="input-group">
+
+                      <input v-if="att.type==='smallText'" type="text" v-bind:id="att.name+'_'+att.type" v-bind:value="att.value" v-on:change="updatePatientDetails" />
+
+                      <input v-if="att.type==='integer'" type="number" v-bind:id="att.name+'_'+att.type" v-bind.number:value="att.value" v-on:change="updatePatientDetails" />
+
+                      <div v-if="att.type==='single-small'" v-bind:id="att.name+'_'+att.type" class="btn-group pl-1" data-toggle="buttons">
+                        <label v-for="option in att.options"
+                               v-bind:class="option.id === currentPatientDetailValue(att.name, true).id ? 'btn btn- btn-radio active' : 'btn btn-radio'"
+                               v-on:click="updatePatientDetailValue(att.name, option, true)">
+                          <input type="radio" autocomplete="off" name="option" v-bind:id="option.id"
+                                 v-bind:checked="option.id === currentPatientDetailValue(att.name, true).id"
+                                 v-on:change="updatePatientDetailValue(att.name, option, false)" />
+                          {{option.name}}
+                        </label>
+                      </div>
+
+                      <div v-if="att.type==='multiple-small'" v-bind:id="att.name+'_'+att.type" class="btn-group pl-1" data-toggle="buttons">
+                        <label v-for="option in att.options" class="btn btn-radio"
+                               v-bind:class="currentPatientDetailValue(att.name, false).find(function(v) {option.id === v.id}) ? 'btn btn-radio active' : 'btn btn-radio'"
+                               v-on:click="updatePatientDetailValue(att.name, option, true)">
+                          <input type="checkbox" autocomplete="off" name="option" v-bind:id="option.id"
+                                 v-bind:checked="currentPatientDetailValue(att.name, false).find(function(v) {option.id === v.id})"
+                                 v-on:change="updatePatientDetailValue(att.name, option, true)" />
+                          {{option.name}}
+                        </label>
+                      </div>
+
+                      <multiselect v-if="att.type==='single-large'"
+                                   v-bind:id="att.name+'_'+att.type"
+                                   deselect-label="Can't remove this value"
+                                   track-by="id" label="name"
+                                   placeholder="Select one" :options="att.options" :searchable="false" :allow-empty="true"
+                                   v-bind:value="currentPatientDetailValue(att.name, true)"
+                                   v-on:input="updatePatientDetails">
+                      </multiselect>
+                      
+
+                      <multiselect v-if="att.type==='multiple-large'"
+                                   v-bind:id="att.name+'_'+att.type"
+                                   track-by="id" label="name"
+                                   placeholder="Select one or more" :options="att.options" :searchable="true"
+                                   :multiple="true" :allow-empty="true"
+                                   v-bind:value="currentPatientDetailValue(att.name, false)"
+                                   v-on:input="updatePatientDetails">
+                      </multiselect>
+
+                      <span v-if="att.informationTooltip != null" class="input-group-addon-clean-small-icon"
+                            data-toggle="tooltip" data-placement="top" v-bind:title="att.informationToolTip">
+                        <a v-if="att.informationSource != null" v-bind:href="att.informationSource" target="_new">
+                          <i class="fa fa-info"></i>
+                        </a>
+                        <i v-else="" class="fa fa-info"></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </transition>
                 <div class="row">

@@ -3,6 +3,8 @@
     import axios from 'axios';
 //import debounce from 'lodash/debounce';
 
+import customDataHelpersMixin from '../../mixins/customDataHelpers.js';
+
 const uuidV1 = require('uuid/v1');
 
 module.exports = {
