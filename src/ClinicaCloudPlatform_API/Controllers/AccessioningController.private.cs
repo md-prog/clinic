@@ -17,6 +17,9 @@ namespace ClinicaCloudPlatform.API.Controllers
 
             dbAcc.Specimens = new List<Model.Models.Specimen>();
 
+            var groupGuids = new List<Guid>();
+            var previousBarcode = string.Empty;
+
             foreach (var specimen in accession.Specimens)
             {
                 var response = new SaveResponseSpecimen();
@@ -45,24 +48,33 @@ namespace ClinicaCloudPlatform.API.Controllers
                 dbSpec.Type = specimen.Type.Type;
                 dbSpec.TypeCode = specimen.Type.Code;
 
-                if (context.Entry(dbSpec).State != Microsoft.EntityFrameworkCore.EntityState.Unchanged)
+                if (context.Entry(dbSpec).State != EntityState.Unchanged)
                 {
                     dbSpec.ModifiedFullName = UserFullName;
                     dbSpec.ModifiedHref = UserHref;
                 }
 
-                //process barcodes for specimens only, for now
-                var barcodeRequest = new SaveRequestBarcode()
+                Guid currentGroupGuid;
+                Guid.TryParse(specimen.CustomData.groupGuid.ToString(), out currentGroupGuid);
+                if (!groupGuids.Contains(currentGroupGuid))
                 {
-                    AccessionGuid = accession.Guid,
-                    NewBarcode = newSpecimen,
-                    Number = specimen.BarcodeNumber,
-                    OrgNameKey = OrgNameKey,
-                    SpecimenGuids = new List<Guid>() { specimen.Guid },
-                    userFullName = UserFullName,
-                    userHref = UserHref
-                };
-                response.BarcodeNumber = new BarcodeController().SaveBarcode(JObject.FromObject(barcodeRequest));
+                    //process barcodes for specimens only, for now
+                    var barcodeRequest = new SaveRequestBarcode()
+                    {
+                        AccessionGuid = accession.Guid,
+                        NewBarcode = newSpecimen,
+                        Number = specimen.BarcodeNumber,
+                        OrgNameKey = OrgNameKey,
+                        SpecimenGuids = new List<Guid>() { specimen.Guid },
+                        userFullName = UserFullName,
+                        userHref = UserHref
+                    };
+                    response.BarcodeNumber = new BarcodeController().SaveBarcode(JObject.FromObject(barcodeRequest));
+                    previousBarcode = response.BarcodeNumber;
+                    groupGuids.Add(currentGroupGuid);
+                }
+                else
+                    response.BarcodeNumber = previousBarcode;                             
 
                 responses.Add(response);
             }

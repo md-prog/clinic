@@ -2,8 +2,30 @@
     <div class="card card-accent-info">
         <div class="card-header">
             <div class="row">
-                <div class="col-6">Specimen {{this.specimen.externalId === '' ? '# ' + this.specimen.id : this.specimen.externalId}} Status</div>
-                <div class="col-6"><div class="tag tag-info float-right" v-if="currentWorkflow.available">Available</div></div>
+                <div class="col-4">
+                    <span class="specimenLabel">Specimen</span> Status
+                </div>
+                <div class="col-6">
+                    <div class="dropdown float-right">
+                        <button class="btn btn-info btn-sm dropdown-toggle"
+                                id="selectSpecimenBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{(specimen.externalId === '' ? '# ' + specimen.id : specimen.externalId) + ' - ' + specimen.type.type + ' (n Available)'}}
+                        </button>
+                        <ul class="dropdown-menu bg-info" aria-labelledby="addSpecBtn">
+                            <li v-for="group in specimenGroups">
+                                <span class="dropdown-item-info">
+                                    {{(group.primarySpecimen.externalId === '' ? '# ' + group.primarySpecimen.id : group.primarySpecimen.externalId) + ' - ' + group.primarySpecimen.type.type + ' (n Available)'}}
+                                </span>
+                                <ul>
+                                    <li class="dropdown-item-info" v-for="specimen in group.specimens" v-if="group.primarySpecimen.guid !== specimen.guid">
+                                        {{(specimen.externalId === '' ? '# ' + specimen.id : specimen.externalId) + ' - ' + specimen.type.type + ' (Available)'}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-2"><div class="tag tag-info float-right" v-if="currentWorkflow.available">Available</div></div>
             </div>
         </div>
         <div class="card-block p-0 text-nowrap">
@@ -17,7 +39,7 @@
                                          v-bind:style="'width:' + this.getWorkflowPercent(currentWorkflow.steps, currentWorkflow.currentStep) + '%'"
                                          v-bind:aria-valuenow="getWorkflowPercent(currentWorkflow.steps, currentWorkflow.currentStep)"
                                          aria-valuemin="0"
-                                         aria-valuemax="100">{{currentWorkflow.currentStep}} {{currentWorkflow.stepStarted | localeDate}}</div>
+                                         aria-valuemax="100">{{currentWorkflow.currentStep}}{{currentWorkflow.stepStarted | localeDate}}</div>
                                 </div>
                             </div>
                         </div>

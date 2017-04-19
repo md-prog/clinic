@@ -50,10 +50,10 @@ module.exports = {
 
         lookupSpecimenByBarcode: function(vm, specimenBarcodeValue)
         {
-            axios.get('/api/Barcode/' + specimenBarcodeValue + '/' + vm.organization.nameKey).then(response =>
-                vm.$set(vm.dashboardState, 'barcode', response.data)
+            axios.get('/api/Barcode/' + specimenBarcodeValue + '/' + vm.organization.nameKey).then(barcodeResponse =>
+                vm.$set(vm.dashboardState, 'barcode', barcodeResponse.data)
                 ).then(function() { //temp
-                    var guid = vm.dashboardState.barcode.customData.accessionGuid;
+                    var guid = vm.dashboardState.barcode.accessionGuid;
                     axios.get('/api/Accessioning/' + guid + '/' + vm.organization.nameKey).then(function(response){
                         vm.setAccession(vm, response.data.accession);
                         vm.setCurrentLab(vm, response.data.accession);

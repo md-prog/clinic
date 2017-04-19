@@ -11,9 +11,7 @@
             <div class="col-auto p-1">
                 <div class="row">
                     <div class="col-12">
-                        <SpecimenStatus v-if="dashboardPlugins.indexOf('SpecimenStatus') >= 0 && typeof dashboardState.currentSpecimen !== 'undefined'"
-                                        :specimen="dashboardState.currentSpecimen">
-                        </SpecimenStatus>
+
                     </div>
                 </div>
                 <div class="row"></div>
@@ -25,7 +23,8 @@
                     <div class="col-12">
                         <SpecimenStatus 
                             v-if="dashboardPlugins.indexOf('SpecimenStatus') >= 0 && typeof dashboardState.currentSpecimen !== 'undefined'" 
-                            :specimen="dashboardState.currentSpecimen">
+                            :specimen="dashboardState.currentSpecimen"
+                            :specimens="dashboardState.accession.specimens">
                         </SpecimenStatus>
                     </div>
                 </div>
