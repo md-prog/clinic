@@ -118,6 +118,8 @@ module.exports =
         vm.specimens.forEach(function(specimen) {
             if(specimen.guid === '00000000-0000-0000-0000-000000000000')
                 specimen.guid = uuidV1();
+            if(vm.isGroupLeader(specimen) && (typeof specimen.customData.groupGuid === 'undefined' || specimen.customData.groupGuid === '00000000-0000-0000-0000-000000000000'))
+                vm.$set(specimen.customData, 'groupGuid', uuidV1());
         });
     },
     mounted: function(){
@@ -207,7 +209,7 @@ module.exports =
             var vm = this;
 
             var newSpec = {
-                guid: uuidV1(),                
+                guid: uuidV1(),
                 id: -1,
                 parentSpecimenGuid: '00000000-0000-0000-0000-000000000000',
                 type: {type: type.type, code: type.code},

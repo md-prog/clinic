@@ -9,9 +9,10 @@ using ClinicaCloudPlatform.Model.Models;
 namespace ClinicaCloudPlatform.DAL.Migrations
 {
     [DbContext(typeof(ArsMachinaLIMSContext))]
-    partial class ArsMachinaLIMSContextModelSnapshot : ModelSnapshot
+    [Migration("20170419193631_barcodeaccession")]
+    partial class barcodeaccession
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

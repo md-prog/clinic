@@ -2,7 +2,7 @@
 import accessionInfoState from './AccessionInfo.vue.data.js';
 
 import customDataHelpersMixin from '../../mixins/customDataHelpers.js';
-import worklistLookupMixin from '../../mixins/worklistLookup.js';
+import entityLookupMixin from '../../mixins/entityLookup.js';
 
 module.exports = {
     name: "AccessionInfo",
@@ -15,7 +15,7 @@ module.exports = {
         doctors: Array
     },
     components: {},
-    mixins: [customDataHelpersMixin, worklistLookupMixin],
+    mixins: [customDataHelpersMixin, entityLookupMixin],
     methods:{
         loadLookupData: function(){
             axios.all([

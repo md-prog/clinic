@@ -53,7 +53,11 @@ module.exports = {
               test: /\.js$/,
               loader: 'babel-loader',
               include: __dirname,
-              exclude: /node_modules/
+              exclude: /node_modules/,
+              query: {
+                  'plugins': ['lodash'],
+                  'presets': [['env', { 'targets': { 'node': 4 } }]]
+              }
           },
             { test: /\.json$/, loader: 'json-loader', query: { silent: true } },
             {

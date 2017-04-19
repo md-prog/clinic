@@ -24,7 +24,7 @@ namespace ClinicaCloudPlatform.API.Controllers
                 var barcodes = context.Barcodes.Where(bc => bc.Number == BarcodeNumber).ToList();
                 return barcodes.Where(bc =>
                     JObject.Parse(bc.CustomData ?? "{}")["orgNameKey"].Value<string>() == OrgNameKey)
-                    .Select(bc => new { Number = bc.Number, CustomData = JObject.Parse(bc.CustomData) }).FirstOrDefault();
+                    .Select(bc => new { AccessionGuid = bc.AccessionGuid, Number = bc.Number, CustomData = JObject.Parse(bc.CustomData) }).FirstOrDefault();
             }
         }
 
@@ -42,12 +42,8 @@ namespace ClinicaCloudPlatform.API.Controllers
             {
                 if (barcodeRequest.AccessionGuid != Guid.Empty)
                 {
-                    var acc = context.Accessions.FirstOrDefault(a => a.Guid == barcodeRequest.AccessionGuid);
-                    if (acc == null)
-                        throw new Exception("Accession not found.");
-
                     retVal = context.Barcodes.Where(bc =>
-                        GetAccessionGuid(JObject.Parse(bc.CustomData ?? "{}")) == barcodeRequest.AccessionGuid)
+                        bc.AccessionGuid == barcodeRequest.AccessionGuid)
                             .Select(bc => new { Number = bc.Number, CustomData = JObject.Parse(bc.CustomData) }).ToList();
                 }
                 else if (barcodeRequest.SpecimenGuids?.Count() > 0)
@@ -101,7 +97,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                 if (customData.GetValue("orgNameKey") == null)
                     customData.Add("orgNameKey", barcodeRequest.OrgNameKey);
 
-                SetAccessionGuids(barcodeRequest, customData);
+                dbBarcode.AccessionGuid = barcodeRequest.AccessionGuid;
+                //SetAccessionGuids(barcodeRequest, customData);
 
                 SetSpecimenGuids(barcodeRequest, customData);
 
@@ -121,9 +118,10 @@ namespace ClinicaCloudPlatform.API.Controllers
         private static Barcode newBarcode(SaveRequestBarcode barcodeRequest, ArsMachinaLIMSContext context)
         {
             Barcode dbBarcode = new Barcode();
+            dbBarcode.AccessionGuid = barcodeRequest.AccessionGuid;
             context.Barcodes.Add(dbBarcode);
             if (!String.IsNullOrEmpty(barcodeRequest.Number))
-                dbBarcode.Number = barcodeRequest.Number;
+                dbBarcode.Number = barcodeRequest.Number;          
             else //save, then set the barcode string to its ID if not provided by user
             {
                 context.SaveChanges();
@@ -133,30 +131,30 @@ namespace ClinicaCloudPlatform.API.Controllers
             return dbBarcode;
         }
 
-        private static Guid GetAccessionGuid(JObject customData)
-        {
-            var retVal = Guid.Empty;
-            Guid.TryParse(customData["accessionGuid"]?.Value<string>(), out retVal);
-            return retVal;
-        }
+        //private static Guid GetAccessionGuid(JObject customData)
+        //{
+        //    var retVal = Guid.Empty;
+        //    Guid.TryParse(customData["accessionGuid"]?.Value<string>(), out retVal);
+        //    return retVal;
+        //}
 
-        private static void SetAccessionGuids(SaveRequestBarcode barcodeRequest, JObject customData)
-        {
-            if (barcodeRequest.AccessionGuid == Guid.Empty)
-                throw new Exception("Accession ID must be supplied.");
-            else
-            {
-                Guid existingAccGuidToken;
-                if (customData.GetValue("accessionGuid") != null && Guid.TryParse(customData.GetValue("accessionGuid").Value<string>(), out existingAccGuidToken))
-                {
-                    var existingAccGuid = existingAccGuidToken;
-                    if (existingAccGuid != barcodeRequest.AccessionGuid)
-                        throw new Exception("Barcode exists for a different accession.");
-                }
-                else
-                    customData.Add("accessionGuid", barcodeRequest.AccessionGuid);
-            }
-        }
+        //private static void SetAccessionGuids(SaveRequestBarcode barcodeRequest, JObject customData)
+        //{
+        //    if (barcodeRequest.AccessionGuid == Guid.Empty)
+        //        throw new Exception("Accession ID must be supplied.");
+        //    else
+        //    {
+        //        Guid existingAccGuidToken;
+        //        if (customData.GetValue("accessionGuid") != null && Guid.TryParse(customData.GetValue("accessionGuid").Value<string>(), out existingAccGuidToken))
+        //        {
+        //            var existingAccGuid = existingAccGuidToken;
+        //            if (existingAccGuid != barcodeRequest.AccessionGuid)
+        //                throw new Exception("Barcode exists for a different accession.");
+        //        }
+        //        else
+        //            customData.Add("accessionGuid", barcodeRequest.AccessionGuid);
+        //    }
+        //}
 
         private static void SetSpecimenGuids(SaveRequestBarcode barcodeRequest, JObject customData)
         {

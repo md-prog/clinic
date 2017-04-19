@@ -1,7 +1,6 @@
 ﻿    import accessionDetailState from './WorklistAccessionDetail.vue.data.js';
-
     import customDataHelpersMixin from '../../assets/js/mixins/customDataHelpers.js';
-    import worklistLookupMixin from '../../assets/js/mixins/worklistLookup.js';
+    import entityLookupMixin from '../../mixins/entityLookup.js';
 
     module.exports = {
         name: "WorklistAccessionDetail",
@@ -14,7 +13,7 @@
             doctors: Array
         },
         components: {},
-        mixins: [customDataHelpersMixin, worklistLookupMixin],
+        mixins: [customDataHelpersMixin, entityLookupMixin],
         data: function ()
         {
             return {
