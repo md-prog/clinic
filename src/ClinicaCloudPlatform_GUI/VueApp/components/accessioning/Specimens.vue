@@ -171,7 +171,7 @@
                                                                                 v-on:genesRetrieved="cacheCivicGenes"></CivicGeneSelectionPlugin>
 
                                                                         <span v-if="att.informationTooltip != null" class="input-group-addon-clean-small-icon"
-                                                                              data-toggle="tooltip" data-placement="top" v-bind:title="att.informationToolTip">
+                                                                              data-toggle="tooltip" data-placement="top" v-bind:title="att.informationTooltip"> <!-- Just a typo. Should be working now ;) -->
                                                                             <a v-if="att.informationSource != null" v-bind:href="att.informationSource" target="_new">
                                                                                 <i class="fa fa-info"></i>
                                                                             </a>
