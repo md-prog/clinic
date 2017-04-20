@@ -52,7 +52,8 @@ namespace ClinicaCloudPlatform.API.Controllers
                     PanelDefinitions = customData["panelDefinitions"],
                     TestDefinitions = customData["testDefinitions"],
                     SpecimenDefinitions = customData["specimenDefinitions"],
-                    SpecimenAccessionSections = customData["specimenAccessionSections"]
+                    SpecimenAccessionSections = customData["specimenAccessionSections"],
+                    PatientAttributes = customData["patientAttributes"]
                 }
             };
 

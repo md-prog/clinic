@@ -3,6 +3,8 @@
     import axios from 'axios';
 //import debounce from 'lodash/debounce';
 
+import customDataHelpersMixin from '../../mixins/customDataHelpers.js';
+
 const uuidV1 = require('uuid/v1');
 
 module.exports = {
@@ -119,6 +121,8 @@ module.exports = {
         //});
     },
     methods: {
+        toolTips: function() {this.$nextTick(function(){$('[data-toggle="tooltip"]').tooltip();});},
+
         customPatientDropdownLabel: function (patient) {
             if(patient.id == -1)
                 return "Type to Search";
@@ -137,6 +141,7 @@ module.exports = {
         patientChanged: function (value, dropDownId, doReload) {
             this.allowEditSave = true;
             this.patientSearched = true;
+            this.setPatientDemographics(this.patientState.patient);
             this.$emit('changed', value.id, doReload);
         },
 
@@ -168,6 +173,7 @@ module.exports = {
                 "ssn": ''
             };
             this.patientState.mrn = "";
+            this.setPatientDemographics(this.patientState.patient);
             this.$emit('new', -1);
         },
 
@@ -178,6 +184,7 @@ module.exports = {
                 this.$set(this.patientState, 'patient', currentPatient);
                 //done in compute - this.$set(this.patientState.patient, 'dobString', this.getDobString(this.patientState.patient.dob));
                 this.$set(this.patientState, 'mrn', mrn);
+                this.setPatientDemographics(currentPatient);
             }
             else
                 this.newPatient();
