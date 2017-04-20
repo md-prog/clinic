@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="col-auto" v-bind:id="'accClient' + accession.id + accession.clientId">
                                         <div class="m-0 p-0">
-                                            {{lookup('client',accession.clientId,this.labs).name}}
+                                            {{lookup('client',accession.clientId,this.clients).name}}
                                         </div>
                                     </div>
                                 </div>

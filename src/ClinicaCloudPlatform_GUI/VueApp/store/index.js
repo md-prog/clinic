@@ -2,6 +2,7 @@
 import Vuex from 'vuex'
 import userModule from './modules/user/store'
 import organizationModule from './modules/organization/store'
+import lookupDataModule from './modules/lookupData/store'
 import historyModule from './modules/history/store'
 
 Vue.use(Vuex)
@@ -11,6 +12,7 @@ const store = new Vuex.Store({
         user: userModule,
         organization: organizationModule,
         history: historyModule,
+        lookupData: lookupDataModule
     },
 
     mutations: {

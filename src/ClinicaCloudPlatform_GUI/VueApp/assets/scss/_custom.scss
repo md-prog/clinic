@@ -6352,6 +6352,10 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     width: 100%;
 }
 
+.multiselect{
+    z-index: 99999;
+}
+
 .multiselect__input {
     width: 100%;
 }
@@ -6390,6 +6394,16 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     background: $brand-warning !important;
     content: attr(data-deselect);
     color: #fff;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
 }
 
 .dropdown-menu-info{

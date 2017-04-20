@@ -4,6 +4,7 @@ module.exports = {
     name: 'SpecimenStatus',
     props: {
         specimen: Object,
+        specimens: Array,
         organization: Object
     },
     data: function ()
@@ -13,6 +14,25 @@ module.exports = {
             currentWorkflow: specimenStatusData.currentWorkflow
         };
     },
+    computed:
+        {
+            specimenGroups: {
+                get: function()
+                {
+                    var vm = this;
+                    var groups = [];
+                    vm.specimens.forEach(function(s)
+                    {
+                        var group = groups.find(g=>g.groupGuid === s.customData.groupGuid);
+                        if(typeof group === 'undefined')
+                            groups.push({groupGuid: s.customData.groupGuid, specimens: [s], primarySpecimen: s});
+                        else if(group.groupGuid === s.customData.groupGuid)
+                            group.specimens.push(s);
+                    });
+                    return groups;
+                }
+            }
+        },
     methods:
         {
             getDueDate: function(tatHours, started)
