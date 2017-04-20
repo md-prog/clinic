@@ -133,17 +133,86 @@ Vue.mixin({
             return this.organization.customData.patientAttributes[0].patientDemographicDetails;
         },
 
-        updatePatientDetails: function(){
-            //TO DO
+        setPatientDemographics: function (patient) {
+            if (patient.detailsAreSet)
+                return;
+
+            var vueVm = this;
+            var patientDetails = vueVm.organization.customData.patientAttributes[0].patientDemographicDetails;
+
+            for(let detail of patientDetails) {
+
+                if (typeof patient.customData === "undefined") {
+                    vueVm.$set(patient, "customData", {});
+                }
+
+                if (patient.customData === null) {
+                    vueVm.$set(patient, "customData", {});
+                }
+
+                if (typeof patient.customData.details === "undefined") {
+                    vueVm.$set(patient.customData, "details", []);
+                }
+
+                if (typeof patient.customData.details.find(function (a) { return a.name === detail.name; }) === "undefined") {
+                    if (detail.type === 'multiple-large' || detail.type === 'multiple-small')
+                        patient.customData.details.push({ name: detail.name, value: [{ id: "", name: "" }] });
+                    else
+                        patient.customData.details.push({ name: detail.name, value: { id: "", name: "" } });
+                }
+
+                vueVm.$set(patient, "detailsAreSet", true);
+
+            }
+            this.$nextTick(function () { this.toolTips(); });
+        },
+
+        updatePatientDetails: function(value, id) {
+            var idParams = id.split('_');
+            var detailName = idParams[0];
+            var detailType = idParams[1];
+
+            var multiple = detailType === 'multiple-large' || detailType === 'multiple-small';
+
+            this.updatePatientDetailValue(detailName, value, multiple);
         },
 
         currentPatientDetailValue: function(detailName, expectsSingle){
-            var retVal = [];//TO DO
-            return retVal;
+            var originallySingle = false;
+            var value = null;
+            
+            if(typeof this.patientState.patient.customData.details !== 'undefined')
+            {
+                var detail = this.patientState.patient.customData.details.find(function (a) { return a.name === detailName });
+                if(typeof detail !== 'undefined' && typeof detail.value !== 'undefined')
+                    value = detail.value;
+            }
+            if (!Array.isArray(value)){
+                originallySingle =true;
+                value = [value];
+            }
+            var newVal = [];
+            value.forEach(function (val) {
+                if (val !== null && typeof(val) === 'object')
+                {
+                    newVal.push(val);
+                }
+            });
+            if ((expectsSingle || originallySingle) && newVal.length > 0)
+                newVal = newVal[0];
+            else if(newVal.length === 1 && newVal[0].id === '') //the default value, which isn't needed for multi-select types
+                newVal = [];
+
+            return newVal;
         },
 
-        updatePatientDetailValue: function (attributeName, attributeValue, singleToMultiple) {
-            // TO DO
+        updatePatientDetailValue: function (detailName, value, singleToMultiple) {
+            var detail = this.patientState.patient.customData.details.find(function (d) { return d.name === detailName });
+            if (singleToMultiple) {
+                var newSet = new Set(Array.isArray(value) ? value : [].concat(value));
+                value = Array.from(newSet);
+            }
+            this.$set(detail, "value", value);
         }
 
     },
