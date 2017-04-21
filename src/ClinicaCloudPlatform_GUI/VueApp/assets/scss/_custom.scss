@@ -6352,8 +6352,12 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     width: 100%;
 }
 
-.multiselect{
-    z-index: 99999;
+.multiselect__option{
+    z-index: 1001;
+}
+
+.multiselect__content{
+    z-index: 1001;
 }
 
 .multiselect__input {
