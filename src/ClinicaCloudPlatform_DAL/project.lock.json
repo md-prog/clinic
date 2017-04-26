@@ -2814,12 +2814,12 @@
       "type": "package",
       "path": "Microsoft.AspNet.JsonPatch/1.0.0-rc1-final",
       "files": [
+        "Microsoft.AspNet.JsonPatch.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.JsonPatch.nuspec",
         "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.dll",
         "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.xml",
         "lib/net451/Microsoft.AspNet.JsonPatch.dll",
-        "lib/net451/Microsoft.AspNet.JsonPatch.xml",
-        "microsoft.aspnet.jsonpatch.1.0.0-rc1-final.nupkg.sha512",
-        "microsoft.aspnet.jsonpatch.nuspec"
+        "lib/net451/Microsoft.AspNet.JsonPatch.xml"
       ]
     },
     "Microsoft.AspNetCore.Hosting.Abstractions/1.1.1": {
@@ -3029,12 +3029,12 @@
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Design/1.1.1",
       "files": [
+        "Microsoft.EntityFrameworkCore.Design.1.1.1.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.Design.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Design.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.1.1.1.nupkg.sha512",
-        "microsoft.entityframeworkcore.design.nuspec"
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/1.1.1": {
@@ -3042,12 +3042,12 @@
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Relational/1.1.1",
       "files": [
+        "Microsoft.EntityFrameworkCore.Relational.1.1.1.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.Relational.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.1.1.1.nupkg.sha512",
-        "microsoft.entityframeworkcore.relational.nuspec"
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational.Design/1.1.1": {
@@ -3055,12 +3055,12 @@
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Relational.Design/1.1.1",
       "files": [
+        "Microsoft.EntityFrameworkCore.Relational.Design.1.1.1.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.Relational.Design.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.Design.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.Design.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.xml",
-        "microsoft.entityframeworkcore.relational.design.1.1.1.nupkg.sha512",
-        "microsoft.entityframeworkcore.relational.design.nuspec"
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.Tools/1.1.0": {
@@ -3068,10 +3068,10 @@
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Tools/1.1.0",
       "files": [
+        "Microsoft.EntityFrameworkCore.Tools.1.1.0.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.Tools.nuspec",
         "lib/net451/_._",
         "lib/netstandard1.3/_._",
-        "microsoft.entityframeworkcore.tools.1.1.0.nupkg.sha512",
-        "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PowerShell2.psd1",
         "tools/EntityFrameworkCore.PowerShell2.psm1",
         "tools/EntityFrameworkCore.psd1",
@@ -3204,11 +3204,11 @@
       "type": "package",
       "path": "Microsoft.NETCore.App/1.1.1",
       "files": [
+        "Microsoft.NETCore.App.1.1.1.nupkg.sha512",
+        "Microsoft.NETCore.App.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
-        "lib/netcoreapp1.0/_._",
-        "microsoft.netcore.app.1.1.1.nupkg.sha512",
-        "microsoft.netcore.app.nuspec"
+        "lib/netcoreapp1.0/_._"
       ]
     },
     "Microsoft.NETCore.DotNetHost/1.1.0": {
@@ -3476,10 +3476,10 @@
       "type": "package",
       "path": "Npgsql.EntityFrameworkCore.PostgreSQL/1.1.0",
       "files": [
+        "Npgsql.EntityFrameworkCore.PostgreSQL.1.1.0.nupkg.sha512",
+        "Npgsql.EntityFrameworkCore.PostgreSQL.nuspec",
         "lib/net451/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
-        "lib/netstandard1.3/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
-        "npgsql.entityframeworkcore.postgresql.1.1.0.nupkg.sha512",
-        "npgsql.entityframeworkcore.postgresql.nuspec"
+        "lib/netstandard1.3/Npgsql.EntityFrameworkCore.PostgreSQL.dll"
       ]
     },
     "Remotion.Linq/2.1.1": {

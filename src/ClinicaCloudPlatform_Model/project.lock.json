@@ -1332,12 +1332,12 @@
       "type": "package",
       "path": "Microsoft.AspNet.JsonPatch/1.0.0-rc1-final",
       "files": [
+        "Microsoft.AspNet.JsonPatch.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.JsonPatch.nuspec",
         "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.dll",
         "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.xml",
         "lib/net451/Microsoft.AspNet.JsonPatch.dll",
-        "lib/net451/Microsoft.AspNet.JsonPatch.xml",
-        "microsoft.aspnet.jsonpatch.1.0.0-rc1-final.nupkg.sha512",
-        "microsoft.aspnet.jsonpatch.nuspec"
+        "lib/net451/Microsoft.AspNet.JsonPatch.xml"
       ]
     },
     "Microsoft.CSharp/4.0.1-beta-23516": {
